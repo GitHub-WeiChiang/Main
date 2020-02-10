@@ -1,0 +1,16 @@
+/**
+ * 
+ * @author ChiangWei
+ * @date 2020/02/10
+ *
+ */
+
+public class DarkRoast extends Beverage {
+	public DarkRoast() {
+		description = "Dark Roast Coffee";
+	}
+ 
+	public double cost() {
+		return .99;
+	}
+}
