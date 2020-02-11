@@ -12,3 +12,4 @@
 ### * 策略模式 StrategyPattern
 ### * 觀察者模式 ObserverPattern
 ### * 裝飾者模式 DecoratorPattern
+### * 工廠方法模式 FactoryMethodPattern
