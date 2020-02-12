@@ -5,6 +5,7 @@
 ### * 多用合成，少用繼承。
 ### * 設計時，盡量讓需要互動的物件之間關係鬆綁。
 ### * 類別應該開放，以便擴充；應該關閉，禁止修改。
+### * 依賴抽象類別，不要依賴具象類別。
 <br />
 
 設計模式
@@ -13,3 +14,4 @@
 ### * 觀察者模式 ObserverPattern
 ### * 裝飾者模式 DecoratorPattern
 ### * 工廠方法模式 FactoryMethodPattern
+### * 抽象工廠模式 AbstractFactoryPattern
