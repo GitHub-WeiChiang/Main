@@ -16,3 +16,4 @@
 ### * 工廠方法模式 FactoryMethodPattern
 ### * 抽象工廠模式 AbstractFactoryPattern
 ### * 獨體模式 SingletonPattern
+### * 命令模式 CommandPattern
