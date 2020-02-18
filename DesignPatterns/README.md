@@ -17,3 +17,4 @@
 ### * 抽象工廠模式 AbstractFactoryPattern
 ### * 獨體模式 SingletonPattern
 ### * 命令模式 CommandPattern
+### * 轉接器模式 AdapterPattern
