@@ -24,3 +24,4 @@
 ### * 表象模式 FacadePattern
 ### * 樣板方法模式 TemplateMethodPattern
 ### * 反覆器模式 IteratorPattern
+### * 合成模式 CompositePattern
