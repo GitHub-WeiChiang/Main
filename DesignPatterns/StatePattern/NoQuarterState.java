@@ -1,7 +1,7 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/2/25/
+ * @date 2020/2/25
  *
  */
 
@@ -9,8 +9,8 @@ public class NoQuarterState implements State {
 	GumballMachine gumballMachine;
 	
 	public NoQuarterState(GumballMachine gumballMachine) {
-        this.gumballMachine = gumballMachine;
-    }
+		this.gumballMachine = gumballMachine;
+	}
  
 	public void insertQuarter() {
 		System.out.println("You inserted a quarter");
@@ -23,7 +23,7 @@ public class NoQuarterState implements State {
  
 	public void turnCrank() {
 		System.out.println("You turned, but there's no quarter");
-	 }
+	}
  
 	public void dispense() {
 		System.out.println("You need to pay first");

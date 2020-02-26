@@ -8,11 +8,11 @@
 public class SoldOutState implements State {
 	GumballMachine gumballMachine;
 	 
-    public SoldOutState(GumballMachine gumballMachine) {
-        this.gumballMachine = gumballMachine;
-    }
+	public SoldOutState(GumballMachine gumballMachine) {
+		this.gumballMachine = gumballMachine;
+	}
     
-    public void insertQuarter() {
+	public void insertQuarter() {
 		System.out.println("You can't insert a quarter, the machine is sold out");
 	}
  
