@@ -8,11 +8,11 @@
 public class WinnerState implements State {
 	GumballMachine gumballMachine;
 	 
-	public WinnerState(GumballMachine gumballMachine) {
-		this.gumballMachine = gumballMachine;
-	}
+    public WinnerState(GumballMachine gumballMachine) {
+        this.gumballMachine = gumballMachine;
+    }
     
-	public void insertQuarter() {
+    public void insertQuarter() {
 		System.out.println("Please wait, we're already giving you a Gumball");
 	}
  
