@@ -52,26 +52,26 @@ public class GumballMachine {
 	}
 	
 	public State getSoldOutState() {
-        return soldOutState;
-    }
+		return soldOutState;
+	}
 
-    public State getNoQuarterState() {
-        return noQuarterState;
-    }
+	public State getNoQuarterState() {
+		return noQuarterState;
+	}
 
-    public State getHasQuarterState() {
-        return hasQuarterState;
-    }
+	public State getHasQuarterState() {
+		return hasQuarterState;
+	}
 
-    public State getSoldState() {
-        return soldState;
-    }
+	public State getSoldState() {
+		return soldState;
+	}
     
-    public State getWinnerState() {
-        return winnerState;
-    }
+	public State getWinnerState() {
+		return winnerState;
+	}
     
-    public int getCount() {
+	public int getCount() {
 		return count;
 	}
     
