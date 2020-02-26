@@ -26,3 +26,4 @@
 ### * 反覆器模式 IteratorPattern
 ### * 合成模式 CompositePattern
 ### * 狀態模式 StatePattern
+### * 代理人模式 Proxy Pattern
