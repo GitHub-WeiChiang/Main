@@ -74,6 +74,21 @@ public class SinglyLinkedLists<E> {
 		return str;
 	}
 	
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		if (getClass() != o.getClass()) return false;
+		SinglyLinkedLists other = (SinglyLinkedLists)o;
+		if (size != other.size) return false;
+		Node walkA = head;
+		Node walkB = other.head;
+		while (walkA != null) {
+			if (!walkA.getElement().equals(walkB.getElement())) return false;
+			walkA = walkA.getNext();
+			walkB = walkB.getNext();
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		SinglyLinkedLists<Character> singlyLinkedLists = new SinglyLinkedLists<>();
 		for (int i = 0; i < 5; i++) singlyLinkedLists.addLast((char)('A' + i));
@@ -84,5 +99,13 @@ public class SinglyLinkedLists<E> {
 		System.out.println(singlyLinkedLists);
 		singlyLinkedLists.addFirst('Z');
 		System.out.println(singlyLinkedLists);
+		
+		SinglyLinkedLists<Character> singlyLinkedListsA = new SinglyLinkedLists<>();
+		for (int i = 0; i < 5; i++) singlyLinkedListsA.addLast((char)('A' + i));
+		SinglyLinkedLists<Character> singlyLinkedListsB = new SinglyLinkedLists<>();
+		for (int i = 0; i < 5; i++) singlyLinkedListsB.addLast((char)('A' + i));
+		System.out.println(singlyLinkedListsA.equals(singlyLinkedListsB));
+		for (int i = 0; i < 5; i++) singlyLinkedListsB.addLast((char)('A' + i));
+		System.out.println(singlyLinkedListsA.equals(singlyLinkedListsB));
 	}
 }
