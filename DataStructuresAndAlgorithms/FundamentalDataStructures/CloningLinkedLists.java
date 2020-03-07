@@ -1,11 +1,11 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/3/4
+ * @date 2020/3/7
  *
  */
 
-public class SinglyLinkedLists<E> {
+public class CloningLinkedLists<E> implements Cloneable {
 	private static class Node<E> {
 		private E element;
 		private Node<E> next;
@@ -21,7 +21,7 @@ public class SinglyLinkedLists<E> {
 	private Node<E> head = null;
 	private Node<E> tail = null;
 	private int size = 0;
-	public SinglyLinkedLists() {}
+	public CloningLinkedLists() {}
 	
 	public int size() {
 		return size;
@@ -74,15 +74,28 @@ public class SinglyLinkedLists<E> {
 		return str;
 	}
 	
-	public static void main(String[] args) {
-		SinglyLinkedLists<Character> singlyLinkedLists = new SinglyLinkedLists<>();
-		for (int i = 0; i < 5; i++) singlyLinkedLists.addLast((char)('A' + i));
-		System.out.println(singlyLinkedLists);
-		singlyLinkedLists.removeFirst();
-		singlyLinkedLists.removeFirst();
-		singlyLinkedLists.removeFirst();
-		System.out.println(singlyLinkedLists);
-		singlyLinkedLists.addFirst('Z');
-		System.out.println(singlyLinkedLists);
+	public CloningLinkedLists<E> clone() throws CloneNotSupportedException {
+		CloningLinkedLists<E> other = (CloningLinkedLists<E>)super.clone();
+		if (size > 0) {
+			other.head = new Node<>(head.getElement(), null);
+			Node<E> walk = head.getNext();
+			Node<E> otherTail = other.head;
+			while (walk != null) {
+				Node<E> newest = new Node<>(walk.getElement(), null);
+				otherTail.setNext(newest);
+				otherTail = newest;
+				walk = walk.getNext();
+			}
+		}
+		return other;
+	}
+	
+	public static void main(String[] args) throws CloneNotSupportedException {
+		CloningLinkedLists<Integer> cloningLinkedListsA = new CloningLinkedLists<>();
+		cloningLinkedListsA.addFirst(1);
+		CloningLinkedLists<Integer> cloningLinkedListsB = cloningLinkedListsA.clone();
+		System.out.println(cloningLinkedListsA.first());
+		System.out.println(cloningLinkedListsB.first());
+		System.out.println(cloningLinkedListsA.head == cloningLinkedListsB.head);
 	}
 }

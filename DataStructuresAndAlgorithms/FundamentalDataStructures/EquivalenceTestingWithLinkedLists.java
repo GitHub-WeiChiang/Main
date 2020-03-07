@@ -1,11 +1,11 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/3/4
+ * @date 2020/3/7
  *
  */
 
-public class SinglyLinkedLists<E> {
+public class EquivalenceTestingWithLinkedLists<E> {
 	private static class Node<E> {
 		private E element;
 		private Node<E> next;
@@ -21,7 +21,7 @@ public class SinglyLinkedLists<E> {
 	private Node<E> head = null;
 	private Node<E> tail = null;
 	private int size = 0;
-	public SinglyLinkedLists() {}
+	public EquivalenceTestingWithLinkedLists() {}
 	
 	public int size() {
 		return size;
@@ -74,15 +74,28 @@ public class SinglyLinkedLists<E> {
 		return str;
 	}
 	
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		if (getClass() != o.getClass()) return false;
+		EquivalenceTestingWithLinkedLists other = (EquivalenceTestingWithLinkedLists)o;
+		if (size != other.size) return false;
+		Node walkA = head;
+		Node walkB = other.head;
+		while (walkA != null) {
+			if (!walkA.getElement().equals(walkB.getElement())) return false;
+			walkA = walkA.getNext();
+			walkB = walkB.getNext();
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
-		SinglyLinkedLists<Character> singlyLinkedLists = new SinglyLinkedLists<>();
-		for (int i = 0; i < 5; i++) singlyLinkedLists.addLast((char)('A' + i));
-		System.out.println(singlyLinkedLists);
-		singlyLinkedLists.removeFirst();
-		singlyLinkedLists.removeFirst();
-		singlyLinkedLists.removeFirst();
-		System.out.println(singlyLinkedLists);
-		singlyLinkedLists.addFirst('Z');
-		System.out.println(singlyLinkedLists);
+		EquivalenceTestingWithLinkedLists<Character> singlyLinkedListsA = new EquivalenceTestingWithLinkedLists<>();
+		for (int i = 0; i < 5; i++) singlyLinkedListsA.addLast((char)('A' + i));
+		EquivalenceTestingWithLinkedLists<Character> singlyLinkedListsB = new EquivalenceTestingWithLinkedLists<>();
+		for (int i = 0; i < 5; i++) singlyLinkedListsB.addLast((char)('A' + i));
+		System.out.println(singlyLinkedListsA.equals(singlyLinkedListsB));
+		for (int i = 0; i < 5; i++) singlyLinkedListsB.addLast((char)('A' + i));
+		System.out.println(singlyLinkedListsA.equals(singlyLinkedListsB));
 	}
 }
