@@ -6,10 +6,6 @@
  */
 
 public class Repeat {
-	public static void main(String[] args) {
-		
-	}
-	
 	public static String repeat1(char c, int n) {
 		String answer = "";
 		for (int j=0; j < n; j++) answer += c;
@@ -17,8 +13,8 @@ public class Repeat {
 	}
 	
 	public static String repeat2(char c, int n) {
-		StringBuilder sb = new StringBuilder( );
+		StringBuilder sb = new StringBuilder();
 		for (int j=0; j < n; j++) sb.append(c);
-		return sb.toString( );
+		return sb.toString();
 	}
 }

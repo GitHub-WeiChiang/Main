@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * 
  * @author ChiangWei
@@ -7,11 +5,9 @@ import java.util.Arrays;
  *
  */
 
+import java.util.Arrays;
+
 public class ElementUniqueness {
-	public static void main(String[] args) {
-		
-	}
-	
 	public static boolean unique1(int[] data) {
 		int n = data.length;
 		for (int j=0; j < n-1; j++) {
