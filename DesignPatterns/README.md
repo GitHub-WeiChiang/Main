@@ -27,3 +27,8 @@
 ### * 合成模式 CompositePattern
 ### * 狀態模式 StatePattern
 ### * 代理人模式 Proxy Pattern
+<br />
+
+參考書籍
+=====
+### * 深入淺出設計模式 (Head First Design Patterns)
