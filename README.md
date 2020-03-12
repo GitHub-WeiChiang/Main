@@ -1,8 +1,8 @@
+Resume
+=====
+<br />
+
 Contents
 =====
 ### * DesignPattern
 ### * DataStructuresAndAlgorithms
-<br />
-
-Resume
-=====
