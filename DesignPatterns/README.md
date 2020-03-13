@@ -29,6 +29,6 @@
 ### * 代理人模式 Proxy Pattern
 <br />
 
-參考書籍
+Reference
 =====
 ### * 深入淺出設計模式 (Head First Design Patterns)
