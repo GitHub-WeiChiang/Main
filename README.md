@@ -7,8 +7,8 @@ Chiang, Wei / 蔣維
 ### Address: Sanxia Dist., New Taipei City, Taiwan
 Education
 -----
-### * National Taipei University of Technology, 2019 ~ now
-	#### * Graduate Institute of Computer Science and Information Engineering
+* ### National Taipei University of Technology, 2019 ~ now
+	* #### Graduate Institute of Computer Science and Information Engineering
 <br />
 
 Contents
