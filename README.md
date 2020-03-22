@@ -1,6 +1,5 @@
 Resume
 =====
-
 <br />
 
 Chiang, Wei / 蔣維
@@ -10,7 +9,6 @@ Chiang, Wei / 蔣維
 ### Address: Sanxia Dist., New Taipei City, Taiwan
 Education
 -----
-
 <br />
 
 Contents
