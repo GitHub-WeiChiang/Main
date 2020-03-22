@@ -15,5 +15,5 @@ Education
 
 Contents
 =====
-* ### DesignPattern
-* ### DataStructuresAndAlgorithms
+### * DesignPattern
+### * DataStructuresAndAlgorithms
