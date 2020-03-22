@@ -8,9 +8,9 @@ Chiang, Wei / 蔣維
 Education
 -----
 * ### National Taipei University of Technology, 2019 ~ now
-	* #### Graduate Institute of Computer Science and Information Engineering
+	* ### Graduate Institute of Computer Science and Information Engineering
 * ### Takming University of Science and Technology, 2015 ~ 2019
-	* #### Department of Information Technology
+	* ### Department of Information Technology
 <br />
 
 Contents
