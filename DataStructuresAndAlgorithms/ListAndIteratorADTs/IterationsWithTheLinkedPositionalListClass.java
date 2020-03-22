@@ -1,25 +1,86 @@
 /**
  * 
  * @author ChiangWei
- * @param <E>
- * @date 2020/3/19
+ * @date 2020/3/22
  *
  */
 
-public class DoublyLinkedListImplementation<E> implements PositionalList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class IterationsWithTheLinkedPositionalListClass<E> implements PositionalList<E>, Iterable<E> {
 	public static void main(String[] args) {
-		DoublyLinkedListImplementation<Integer> dlli = new DoublyLinkedListImplementation<>();
+		IterationsWithTheLinkedPositionalListClass<Integer> dlli = new IterationsWithTheLinkedPositionalListClass<>();
 		Position<Integer> tempPos;
-		dlli.addFirst(0);
+		dlli.addFirst(2);
 		tempPos = dlli.first();
 		tempPos = dlli.addAfter(tempPos, 1);
-		tempPos = dlli.addAfter(tempPos, 2);
+		tempPos = dlli.addAfter(tempPos, 0);
 		
-		tempPos = dlli.first();
-		while (tempPos != null) {
-			System.out.println(tempPos.getElement());
-			tempPos = dlli.after(tempPos);
+		for (Position<Integer> i: dlli.positions()) {
+			System.out.println(i.getElement());
 		}
+		
+		for (Integer i: dlli) {
+			System.out.println(i);
+		}
+		
+		Iterator<Integer> iterator = dlli.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+	}
+	
+	private class PositionIterator implements Iterator<Position<E>> {
+		private Position<E> cursor = first();
+		private Position<E> recent = null;
+		
+		public boolean hasNext() {
+			return cursor != null;
+		}
+		
+		public Position<E> next() throws NoSuchElementException {
+			if (cursor == null) throw new NoSuchElementException("nothing left");
+			recent = cursor;
+			cursor = after(cursor);
+			return recent;
+		}
+		
+		public void remove() throws IllegalStateException {
+			if (recent == null) throw new IllegalStateException("nothing to remove");
+			IterationsWithTheLinkedPositionalListClass.this.remove(recent);
+			recent = null;
+		}
+	}
+	
+	private class PositionIterable implements Iterable<Position<E>> {
+		public Iterator<Position<E>> iterator() {
+			return new PositionIterator();
+		}
+	}
+	
+	public Iterable<Position<E>> positions() {
+		return new PositionIterable();
+	}
+	
+	private class ElementIterator implements Iterator<E> {
+		Iterator<Position<E>> posIterator = new PositionIterator();
+		
+		public boolean hasNext() {
+			return posIterator.hasNext();
+		}
+		
+		public E next() {
+			return posIterator.next().getElement();
+		}
+		
+		public void remove() {
+			posIterator.remove();
+		}
+	}
+	
+	public Iterator<E> iterator() {
+		return new ElementIterator();
 	}
 	
 	private static class Node<E> implements Position<E> {
@@ -63,7 +124,7 @@ public class DoublyLinkedListImplementation<E> implements PositionalList<E> {
 	private Node<E> trailer;
 	private int size = 0;
 	
-	public DoublyLinkedListImplementation() {
+	public IterationsWithTheLinkedPositionalListClass() {
 		header = new Node<>(null, null, null);
 		trailer = new Node<>(null, header, null);
 		header.setNext(trailer);
