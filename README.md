@@ -1,7 +1,5 @@
 Resume
 =====
-<br />
-
 Chiang, Wei / 蔣維
 -----
 ### Email: albert0425369@gmail.com
@@ -9,6 +7,8 @@ Chiang, Wei / 蔣維
 ### Address: Sanxia Dist., New Taipei City, Taiwan
 Education
 -----
+### > National Taipei University of Technology, 2019 ~ now
+#### Graduate Institute of Computer Science and Information Engineering
 <br />
 
 Contents
