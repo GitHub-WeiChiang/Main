@@ -5,6 +5,7 @@ DataStructuresAndAlgorithms
 ### * Recursion
 ### * StacksQueuesAndDeques
 ### * ListAndIteratorADTs
+### * Trees
 <br />
 
 Reference
