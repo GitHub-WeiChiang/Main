@@ -20,7 +20,9 @@ Experience
 	* ### Code and program structure modification
 	* ### Presentation and report of a book sharing meeting on the theme of Design Pattern
 * ### TMUST, Department of Information Technology | Teaching Assistant / TA, 2016/09 ~ 2017/12
-	
+	* ### Course Title: Programming(Ⅰ), Programming(ⅠⅠ)
+	* ### Programming Language: C, C#
+	* ### Work Content: After-school tutoring, Set questions for final exam
 <br />
 
 Contents
