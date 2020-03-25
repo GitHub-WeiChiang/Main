@@ -29,3 +29,4 @@ Contents
 =====
 ### * DesignPattern
 ### * DataStructuresAndAlgorithms
+### * QualifyingExaminationAndCertificate
