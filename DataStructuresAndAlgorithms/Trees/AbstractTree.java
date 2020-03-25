@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * 
  * @author ChiangWei
@@ -43,5 +45,29 @@ public abstract class AbstractTree<E> implements Tree<E> {
 			h = Math.max(h, 1 + height(c));
 		}
 		return h;
+	}
+	
+	private class ElementIterator implements Iterator<E> {
+		Iterator<Position<E>> posIterator = positions().iterator();
+		
+		public boolean hasNext() {
+			return posIterator.hasNext();
+		}
+		
+		public E next() {
+			return posIterator.next().getElement();
+		}
+		
+		public void remove() {
+			posIterator.remove();
+		}
+	}
+	
+	public Iterator<E> iterator() {
+		return null;
+	}
+	
+	public Iterable<Position<E>> positions() {
+		return null;
 	}
 }

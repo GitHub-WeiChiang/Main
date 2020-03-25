@@ -164,12 +164,4 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 		node.setParent(node);
 		return temp;
 	}
-
-	public Iterator<E> iterator() {
-		return null;
-	}
-
-	public Iterable<Position<E>> positions() {
-		return null;
-	}
 }
