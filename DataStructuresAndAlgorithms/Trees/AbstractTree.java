@@ -64,7 +64,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 	}
 	
 	public Iterator<E> iterator() {
-		return null;
+		return new ElementIterator();
 	}
 	
 	public Iterable<Position<E>> positions() {
