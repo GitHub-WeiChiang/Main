@@ -1,11 +1,15 @@
-import java.util.Iterator;
-
 /**
  * 
  * @author ChiangWei
  * @date 2020/3/23
  *
  */
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public abstract class AbstractTree<E> implements Tree<E> {
 	public boolean isInternal(Position<E> p) {
@@ -67,7 +71,47 @@ public abstract class AbstractTree<E> implements Tree<E> {
 		return new ElementIterator();
 	}
 	
+	private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
+		snapshot.add(p);
+		for (Position<E> c : children(p)) {
+			preorderSubtree(c, snapshot);
+		}
+	}
+	
+	public Iterable<Position<E>> preorder() {
+		List<Position<E>> snapshot = new ArrayList<>();
+		if (!isEmpty()) preorderSubtree(root(), snapshot);
+		return snapshot;
+	}
+	
+	private void postorderSubtree(Position<E> p, List<Position<E>> snapshot) {
+		for (Position<E> c : children(p)) {
+			postorderSubtree(c, snapshot);
+		}
+		snapshot.add(p);
+	}
+	
+	public Iterable<Position<E>> postorder() {
+		List<Position<E>> snapshot = new ArrayList<>();
+		if (!isEmpty()) postorderSubtree(root(), snapshot);
+		return snapshot;
+	}
+	
+	public Iterable<Position<E>> breadthfirst() {
+		List<Position<E>> snapshot = new ArrayList<>();
+		if (!isEmpty()) {
+			Queue<Position<E>> fringe = new LinkedList<>();
+			fringe.add(root());
+			while (!fringe.isEmpty()) {
+				Position<E> p = fringe.poll();
+				snapshot.add(p);
+				for (Position<E> c : children(p)) fringe.add(c);
+			}
+		}
+		return snapshot;
+	}
+	
 	public Iterable<Position<E>> positions() {
-		return null;
+		return preorder();
 	}
 }
