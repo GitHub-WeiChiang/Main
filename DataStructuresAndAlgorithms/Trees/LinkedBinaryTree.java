@@ -1,11 +1,12 @@
-import java.util.Iterator;
-
 /**
  * 
  * @author ChiangWei
  * @date 2020/3/24
  *
  */
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 	protected static class Node<E> implements Position<E> {
@@ -163,5 +164,29 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 		node.setRight(null);
 		node.setParent(node);
 		return temp;
+	}
+	
+	private static String spaces(int d) {
+		String str = "";
+		for (int i = 0; i < d; i++) str +=" ";
+		return str;
+	}
+	
+	public static <E> void printPreorderIndent(Tree<E> T, Position<E> p, int d) {
+		System.out.println(spaces(2 * d) + p.getElement( ));
+		for (Position<E> c : T.children(p)) printPreorderIndent(T, c, d + 1);
+	}
+	
+	public static <E> void printPreorderLabeled(Tree<E> T, Position<E> p, ArrayList<Integer> path) {
+		int d = path.size();
+		System.out.print(spaces(2 * d));
+		for (int j = 0; j < d; j++) System.out.print(path.get(j) + (j == d - 1 ? " " : "."));
+		System.out.println(p.getElement());
+		path.add(1);
+		for (Position<E> c : T.children(p)) {
+			printPreorderLabeled(T, c, path);
+			path.set(d, 1 + path.get(d));
+		}
+		path.remove(d);
 	}
 }
