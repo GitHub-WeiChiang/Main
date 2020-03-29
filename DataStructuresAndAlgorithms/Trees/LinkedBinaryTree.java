@@ -189,4 +189,44 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 		}
 		path.remove(d);
 	}
+	
+	public static int diskSpace(Tree<Integer> T, Position<Integer> p) {
+		int subtotal = p.getElement( );
+		for (Position<Integer> c : T.children(p)) subtotal += diskSpace(T, c);
+		return subtotal;
+	}
+	
+	public static <E> void parenthesize(Tree<E> T, Position<E> p) {
+		System.out.print(p.getElement());
+		if (T.isInternal(p)) {
+			boolean firstTime = true;
+			for (Position<E> c : T.children(p)) {
+				System.out.print((firstTime ? " (" : ", ")); 
+				firstTime = false;
+				parenthesize(T, c);
+			}
+			System.out.print(")");
+		}
+	}
+	
+	public static void main(String[] args) {
+		LinkedBinaryTree<String> lbs = new LinkedBinaryTree<>();
+		Position a = lbs.addRoot("A");
+		Position b = lbs.addLeft(a, "B");
+		lbs.addLeft(b, "Bbl");
+		lbs.addRight(b, "Bbr");
+		lbs.addRight(a, "C");
+		LinkedBinaryTree.printPreorderIndent(lbs, a, 0);
+		LinkedBinaryTree.printPreorderLabeled(lbs, a, new ArrayList<>());
+		
+		LinkedBinaryTree<Integer> lbi = new LinkedBinaryTree<>();
+		a = lbi.addRoot(1);
+		b = lbi.addLeft(a, 2);
+		lbi.addLeft(b, 3);
+		lbi.addRight(b, 4);
+		lbi.addRight(a, 5);
+		System.out.println(LinkedBinaryTree.diskSpace(lbi, a));
+		
+		LinkedBinaryTree.parenthesize(lbs, lbs.root);
+	}
 }
