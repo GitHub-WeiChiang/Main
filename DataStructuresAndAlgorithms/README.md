@@ -6,6 +6,7 @@ DataStructuresAndAlgorithms
 ### * StacksQueuesAndDeques
 ### * ListAndIteratorADTs
 ### * Trees
+### * PriorityQueues
 <br />
 
 Reference
