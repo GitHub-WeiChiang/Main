@@ -7,6 +7,7 @@ DataStructuresAndAlgorithms
 ### * ListAndIteratorADTs
 ### * Trees
 ### * PriorityQueues
+### * MapsHashTablesAndSkipLists
 <br />
 
 Reference
