@@ -8,6 +8,7 @@ DataStructuresAndAlgorithms
 ### * Trees
 ### * PriorityQueues
 ### * MapsHashTablesAndSkipLists
+### * SearchTrees
 <br />
 
 Reference
