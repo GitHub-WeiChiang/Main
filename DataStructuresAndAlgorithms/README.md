@@ -9,6 +9,7 @@ DataStructuresAndAlgorithms
 ### * PriorityQueues
 ### * MapsHashTablesAndSkipLists
 ### * SearchTrees
+### * TextProcessing
 <br />
 
 Reference
