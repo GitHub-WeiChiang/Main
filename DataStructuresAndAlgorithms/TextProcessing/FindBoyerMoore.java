@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class FindBoyerMoore {
 	public static void main(String[] args) {
-		System.out.println(FindBrute.findBrute(new String("ABABABAB").toCharArray(), new String("ABABABAB").toCharArray()));
-		System.out.println(FindBrute.findBrute(new String("ABABABCB").toCharArray(), new String("CB").toCharArray()));
-		System.out.println(FindBrute.findBrute(new String("ABABABAB").toCharArray(), new String("AD").toCharArray()));
+		System.out.println(FindBoyerMoore.findBoyerMoore(new String("ABABABAB").toCharArray(), new String("ABABABAB").toCharArray()));
+		System.out.println(FindBoyerMoore.findBoyerMoore(new String("ABABABCB").toCharArray(), new String("CB").toCharArray()));
+		System.out.println(FindBoyerMoore.findBoyerMoore(new String("ABABABAB").toCharArray(), new String("AD").toCharArray()));
 	}
 
 	public static int findBoyerMoore(char[] text, char[] pattern) {
