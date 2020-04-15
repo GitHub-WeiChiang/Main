@@ -10,6 +10,7 @@ DataStructuresAndAlgorithms
 ### * MapsHashTablesAndSkipLists
 ### * SearchTrees
 ### * TextProcessing
+### * SortingAndSelection
 <br />
 
 Reference
