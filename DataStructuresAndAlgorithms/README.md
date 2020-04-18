@@ -1,5 +1,7 @@
 DataStructuresAndAlgorithms
 =====
+### * JavaPrimer
+### * ObjectOrientedDesign
 ### * FundamentalDataStructures
 ### * AlgorithmAnalysis
 ### * Recursion
