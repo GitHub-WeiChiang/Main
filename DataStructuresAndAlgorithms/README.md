@@ -12,6 +12,7 @@ DataStructuresAndAlgorithms
 ### * TextProcessing
 ### * SortingAndSelection
 ### * GraphAlgorithms
+### * MemoryManagementAndRangeTree
 <br />
 
 Reference
