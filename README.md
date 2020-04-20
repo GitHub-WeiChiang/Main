@@ -27,6 +27,6 @@ Experience
 
 Contents
 =====
-### * DesignPattern
-### * DataStructuresAndAlgorithms
+### * DesignPatternsInJava
+### * DataStructuresAndAlgorithmsInJava
 ### * QualifyingExaminationAndCertificate
