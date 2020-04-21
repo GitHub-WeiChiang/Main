@@ -30,4 +30,3 @@ Contents
 ### * DesignPatternsInJava
 ### * DataStructuresAndAlgorithmsInJava
 ### * QualifyingExaminationAndCertificate
-### * EthereumBlockchainTransactionImplementation
