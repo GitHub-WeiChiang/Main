@@ -30,4 +30,35 @@
     * ### 以太坊引入交易與交易池概念。交易指的是一個帳戶向另一個帳戶發送被簽名的數據包的過程。交易池存放通過節點驗證的交易，這些交易會放在礦工挖出的新區塊中。
     * ### 以太坊 Event (事件) 指的是和以太坊虛擬機提供的日誌接口，當事件被調用時，對應的日誌信息被保存在日誌文件中。
 * ### 網絡層: 基於 P2P 網絡，每個節點既有客戶端角色也有服務端角色。
-* ### 協議層: 
+* ### 協議層: 供系統個模塊相互調用，主要有 HTTP、RPC、LES、ETH、Whisper 協議等。
+    * ### 以太坊基於 HTTP Client 實現對 HTTP 的支持，實現 GET、POST 等 HTTP 方法。外部程序通過 JSON RPC 調用以太坊的 API 時須通過 RPC (遠程過程調用協議)。
+    * ### Whisper 協議用於 DApp 間通信。
+    * ### LES (Ligth Ethereum Sub-protocol)，允許以太坊節點同步獲取區塊時僅下載區塊的頭部，需要時再獲取區塊的吉他部分。
+* ### 共識層: POW (Proof of Work)、POS (Proof of Stake) 算法。
+* ### 合約層: 
+    * ### 分為兩層，底層為 EVM (Ethereum Virtual Machine, 以太坊虛擬機)，上層的智能合約運行於 EVM 中。
+    * ### 智能合約是運行在以太坊上的代碼統稱，一個智能合約包含數據和代碼兩部分。
+    * ### 智能合約系統將約定或合同代碼化，由特定事件驅動觸發執行。
+    * ### 原理上適用於對安全性、信任性、長期性的約定或合同場景。
+    * ### 以太坊默認智能合約程式語言為 Solidity。
+* ### 應用層: DApp (Decentralized Application, 分布是應用)、以太坊錢包等多種衍生應用。
+2.3 Hyperledger 架構
+-----
+* ### 推進區塊鏈數字技術和交易驗證的開源項目，目標為推進區塊鏈及分布式記帳系統的跨行業發展與協作。
+* ### Hyperledger Fabric 為分布式記帳解決方案平台，以模塊化體系結構為基礎，提供高度彈性、靈活性與可擴展性。支持不同組件的可插拔實現，適應整個經濟生態系統中存在的複雜性。
+* ### Hyperledger Fabric 提供一種獨特的彈性和可擴展的體系結構，不同於其它區塊練解決方案。超級帳本是企業級應用快速構建的起點。
+* ### Hyperledger Fabric 的版本
+    * ### 0.6 版: Peer 節點集眾多功能於一身，模塊化與可拓展性較差。
+    * ### 1.0 版: Peer 節點可分為 peers 節點和 orderers 節點。
+        * ### peers 節點用於維護狀態 (State) 和 帳本 (Ledger)。
+        * ### orderers 節點負責對帳本中的各條交易達成共識。
+* ### 認證節點 (Endorsin Peers)，為特殊的 peers 節點，負責同時執行鏈碼 (Chaincode) 和交易的認證 (Endorsing Transactions)。
+* ### Hyperledger 系統架構
+    * ### 應用層: Client
+    * ### 合約層: ChainCode
+    * ### 共識層: Kafka、SBTF
+    * ### 網絡層: P2P 網絡
+    * ### 通道層: Channel、Channel、Channel
+    * ### 數據層: 交易 Transaction、狀態 State、Ledger 帳本
+    * ### 儲存層: 文件系統、LevelDB、CouchDB
+* ### 儲存層: 
