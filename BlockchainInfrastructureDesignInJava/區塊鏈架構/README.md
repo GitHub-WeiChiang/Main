@@ -141,3 +141,8 @@
     * ### |--------------------------|--------------------------|
     * ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
     * ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<聯盟超級節點> <聯盟監控和管理>
+* ### 聯盟鏈
+    * ### 由一個超級節點和若干個普通節點組成。
+    * ### 超級節點除具備普通節點的功能外，還具備在聯盟中實施成員管理、權限管理、數據監控等工作。
+    * ### 相較於完全去中心化的公鏈，聯盟鏈為部份去中心化。
+    * ### 聯盟的鏈為去中心化，但聯盟的管理是中心化的。
