@@ -1,7 +1,5 @@
 DataStructuresAndAlgorithms
 =====
-### * JavaPrimer
-### * ObjectOrientedDesign
 ### * FundamentalDataStructures
 ### * AlgorithmAnalysis
 ### * Recursion
@@ -13,8 +11,6 @@ DataStructuresAndAlgorithms
 ### * SearchTrees
 ### * TextProcessing
 ### * SortingAndSelection
-### * GraphAlgorithms
-### * MemoryManagementAndRangeTree
 <br />
 
 Reference
