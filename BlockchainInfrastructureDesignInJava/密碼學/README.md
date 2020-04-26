@@ -17,20 +17,3 @@
 	* ### 不可逆加密: 加密過程無需密鑰，輸入明文後由系統直接經過加密算法處理成密文，加密後的數據無法解密，必須重新輸入密文，並再次經過相同不可逆加密算法處理，若得到相同加密密文並被系統重新識別，才能真正解密。
 		* ### RSA 算法、MD5 算法、SHS 算法。
 * ### Java 中 Cipher 類主要提供加密和解密功能， public class Cipher extends Object，構成 Java Cryptographic Extension(JCE) 框架核心。
-	* ### Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
-	* ### Cipher 類中常用的常量:
-		* ### ENCRYPT_MODE: 加密模式。
-		* ### DECRYPT_MODE: 解密模式。
-		* ### WRAP_MODE: 為密鑰包裝模式。
-		* ### UNWRAP_MODE: 為密鑰解包裝模式。
-		* ### PUBLIC_KEY: 要解包的密鑰為公鑰。
-		* ### PRIVATE_KEY: 要解包的密鑰為私鑰。
-		* ### SECRET_KEY: 鑰解包的密鑰為秘密密鑰。
-	* ### Cipher 建構式
-		* ### protected Cipher (CipherSpi cipherSpi, Provider provider, String transformation)
-	* ### 核心方法
-		1. ### public static final Cipher getInstance(String transformation)
-		2. ### public static final Cipher getInstance(String transformation, String provider)
-		3. ### public static final Cipher getInstance(String transformation, Provider provider)
-		4. ### public final Provider getProvider()
-		5. ### public final String 
