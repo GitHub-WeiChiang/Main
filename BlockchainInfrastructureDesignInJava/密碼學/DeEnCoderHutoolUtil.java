@@ -33,6 +33,54 @@ import cn.hutool.crypto.symmetric.AES;
 // DES全稱為Data Encryption Standard，即數據加密標準，是一種使用密鑰加密的塊算法Java中默認實現為：DES/CBC/PKCS5Padding
 import cn.hutool.crypto.symmetric.DES;
 
+// 基於 Hutool 工具類的加密解密類
 public class DeEnCoderHutoolUtil {
-
+	// 構建 RSA 對象
+	private static RSA rsa = new RSA();
+	// 獲得私鑰
+	private static PrivateKey privateKey = rsa.getPrivateKey();
+	// 獲得公鑰
+	private static PublicKey publicKey = rsa.getPublicKey();
+	
+	/**
+	 * function RSA 加密通用方法: 不對稱加密解密
+	 * 
+	 * @param originalContent: 明文
+	 * @return 密文
+	 */
+	public static String rsaEncrypt(String originalContent) {
+		// 明文為空時
+		if (Strings.isNullOrEmpty(originalContent)) {
+			return null;
+		}
+		
+		// 公鑰加密，之後私鑰解密
+		return rsa.encryptBase64(originalContent, KeyType.PublicKey);
+	}
+	
+	/**
+	 * function RSA 解密通用方法: 不對稱加密解密
+	 * 
+	 * @param ciphertext 密文
+	 * @return 明文
+	 */
+	public static String rsaDecrypt(String ciphertext) {
+		// 密文為空時
+		if (Strings.isNullOrEmpty(ciphertext)) {
+			return null;
+		}
+		
+		return rsa.decryptStr(ciphertext, KeyType.PrivateKey);
+	}
+	
+	/**
+	 * function DES 加密通用方法: 對稱加密解密
+	 * 
+	 * @param originalContent: 明文
+	 * @param key 加密密鑰
+	 * @return 密文
+	 */
+//	public static String desEncrypt(String originalContent, String key) {
+//		
+//	}
 }
