@@ -5,7 +5,6 @@
  *
  */
 
-import java.io.IOException;
 // This class provides a cryptographically strong random number generator (RNG).
 import java.security.SecureRandom;
 
@@ -22,6 +21,7 @@ import javax.crypto.spec.DESKeySpec;
 import org.testng.util.Strings;
 
 // This class consists exclusively of static methods for obtaining encoders and decoders for the Base64 encoding scheme.
+// Base64是一種能將任意Binary資料用64種字元組合成字串的方法，而這個Binary資料和字串資料彼此之間是可以互相轉換的，十分方便。在實際應用上，Base64除了能將Binary資料可視化之外，也常用來表示資料加密過後的內容。
 import java.util.Base64;
 // This class implements an encoder for encoding byte data using the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
 import java.util.Base64.Encoder;
@@ -100,17 +100,45 @@ public class DeEnCoderCipherUtil {
 		// step2: 基於密鑰數據創建DESKeySpec對象
 		DESKeySpec desKeySpec = new DESKeySpec(key);
 		
-		// step3: 創建密鑰工廠，將DESKeySpec轉換成SecretKey對象來保存對稱加密
+		// step3: 創建密鑰工廠，將DESKeySpec轉換成SecretKey對象來保存對稱密鑰
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(CIPHER_MODE);
-		SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
+		SecretKey securetKey = keyFactory.generateSecret(desKeySpec);
 		
 		// step4: Cipher對象實際完成加密操作，指定其支持指定的加密和解密算法
 		Cipher cipher = Cipher.getInstance(CIPHER_MODE);
 		
 		// step5: 用密鑰初始化Cipher對象，ENCRYPT_MODE表示加密模式
-		cipher.init(Cipher.ENCRYPT_MODE, secretKey, secureRandom);
+		cipher.init(Cipher.ENCRYPT_MODE, securetKey, secureRandom);
 		
 		// 返回密文
 		return cipher.doFinal(originalContent);
+	}
+	
+	/**
+	 * function 字節解密方法
+	 * 
+	 * @param ciphertextByte 字節密文
+	 * @param key 解密密鑰(同加密密鑰)byte數組
+	 * @return 明文byte數組
+	 */
+	private static byte[] decrypt(byte[] ciphertextByte, byte[] key) throws Exception {
+		// step1: 生成可信任的隨機數源
+		SecureRandom secureRandom = new SecureRandom();
+		
+		// step2: 從原始密鑰數據創建DESKeySpec對象
+		DESKeySpec desKeySpec = new DESKeySpec(key);
+		
+		// step3: 創建密鑰工廠，將DESKeySpec轉換成SecretKey對象來保存對稱密鑰
+		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(CIPHER_MODE);
+		SecretKey securetKey = keyFactory.generateSecret(desKeySpec);
+		
+		// step4: Cipher對象實際完成解密操作，指定其支持響應的加密和解密算法
+		Cipher cipher = Cipher.getInstance(CIPHER_MODE);
+		
+		// step5: 用密鑰初始化Cipher對象，DECRYPT_MODE表示解密模式
+		cipher.init(Cipher.DECRYPT_MODE, securetKey, secureRandom);
+		
+		// 返回明文
+		return cipher.doFinal(ciphertextByte);
 	}
 }
