@@ -32,6 +32,8 @@ import cn.hutool.crypto.symmetric.AES;
 // DES加密算法實現
 // DES全稱為Data Encryption Standard，即數據加密標準，是一種使用密鑰加密的塊算法Java中默認實現為：DES/CBC/PKCS5Padding
 import cn.hutool.crypto.symmetric.DES;
+// 對稱算法類型
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 
 // 基於 Hutool 工具類的加密解密類
 public class DeEnCoderHutoolUtil {
@@ -80,7 +82,42 @@ public class DeEnCoderHutoolUtil {
 	 * @param key 加密密鑰
 	 * @return 密文
 	 */
-//	public static String desEncrypt(String originalContent, String key) {
-//		
-//	}
+	public static String desEncrypt(String originalContent, String key) {
+		// 明文或加密密鑰為空時
+		if (Strings.isNullOrEmpty(originalContent) || Strings.isNullOrEmpty(key)) {
+			return null;
+		}
+		
+		// 還可以隨機生成密鑰
+		// byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue()).getEncoded();
+		
+		// 構建
+		DES des = SecureUtil.des(key.getBytes());
+		
+		// 加密
+		return des.encryptHex(originalContent);
+	}
+	
+	/**
+	 * function DES 解密通用方法: 對稱加密解密
+	 * 
+	 * @param ciphertext 密文
+	 * @param key DES 解密密鑰(同加密密鑰)
+	 * @return 明文
+	 */
+	public static String desDecrypt(String ciphertext, String key) {
+		// 密文或解密密鑰為空時
+		if (Strings.isNullOrEmpty(ciphertext) || Strings.isNullOrEmpty(key)) {
+			return null;
+		}
+		
+		// 還可以隨機生成密鑰
+		// byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue()).getEncoded();
+		
+		// 構建
+		DES des = SecureUtil.des(key.getBytes());
+		
+		// 解密
+		return des.decryptStr(ciphertext);
+	}
 }
