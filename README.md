@@ -29,5 +29,5 @@ Contents
 =====
 ### * DesignPatternsInJava
 ### * DataStructuresAndAlgorithmsInJava
-### * QualifyingExaminationAndCertificate
+### * CertificateAndQualifyingExamination
 ### * BlockchainInfrastructureDesignInJava
