@@ -3,7 +3,7 @@ CertificateAndQualifyingExamination
 Certificate
 -----
 * ### Oracle Certified Expert, Java Platform, EE 6 Web Component Developer
-    * #### Date: March 29, 2019
+    * ##### Date: March 29, 2019
     * #### Reference: 深入淺出 Servlets 與 JSP (Head First Servlets and JSP, 2/e)
 * ### Oracle Certified Professional, Java SE 7 Programmer
     * #### Date: May 08, 2018
