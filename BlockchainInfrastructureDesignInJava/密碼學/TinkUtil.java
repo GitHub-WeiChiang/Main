@@ -35,6 +35,16 @@ import com.google.crypto.tink.JsonKeysetReader;
 import com.google.crypto.tink.integration.gcpkms.GcpKmsClient;
 // An implementation of KmsClient for AWS KMS.
 import com.google.crypto.tink.integration.awskms.AwsKmsClient;
+// Digital Signatures provide functionality of signing data and verification of the signatures.
+import com.google.crypto.tink.PublicKeySign;
+// Digital Signatures provide functionality of signing data and verification of the signatures.
+import com.google.crypto.tink.PublicKeyVerify;
+// 用於獲取數位簽章的加簽 primitive 實例
+import com.google.crypto.tink.signature.PublicKeySignFactory;
+// 用於獲取數位簽章的驗簽 primitive 實例
+import com.google.crypto.tink.signature.PublicKeyVerifyFactory;
+// Pre-generated KeyTemplate for PublicKeySign and PublicKeyVerify.
+import com.google.crypto.tink.signature.SignatureKeyTemplates;
 // An abstract representation of file and directory pathnames.
 import java.io.File;
 
@@ -134,6 +144,46 @@ public class TinkUtil {
 		try {
 			String keysetFilename = "my_keyset.json";
 			KeysetHandle keysetHandle = CleartextKeysetHandle.read(JsonKeysetReader.withFile(new File(keysetFilename)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 對稱密鑰加密，獲得和使用 AEAD
+	public void aeadAES(byte[] plaintext, byte[] aad) {
+		try {
+			// 1. 創建 AES 對應的 keysetHandle
+			KeysetHandle keysetHandle = KeysetHandle.generateNew(AeadKeyTemplates.AES128_GCM);
+			// 2. 獲取私鑰
+			Aead aead = AeadFactory.getPrimitive(keysetHandle);
+			// 3. 用私鑰加密明文
+			byte[] ciphertext = aead.encrypt(plaintext, aad);
+			
+			// 解秘密文
+			byte[] decrypted = aead.decrypt(ciphertext, aad);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 數位簽章的簽名與驗證
+	public void signatures(byte[] data) {
+		try {
+			// 簽名
+			// 1. 創建 ESCSA 對應的 KeysetHandle 對象
+			KeysetHandle privateKeysetHandle = KeysetHandle.generateNew(SignatureKeyTemplates.ECDSA_P256);
+			// 2. 獲取私鑰
+			PublicKeySign signer = PublicKeySignFactory.getPrimitive(privateKeysetHandle);
+			// 3. 用私鑰簽名
+			byte[] signature = signer.sign(data);
+			
+			// 驗證
+			// 1. 獲取公鑰對應的 KeysetHandle 對象
+			KeysetHandle publicKeysetHandle = privateKeysetHandle.getPublicKeysetHandle();
+			// 2. 獲取私鑰
+			PublicKeyVerify verifier = PublicKeyVerifyFactory.getPrimitive(publicKeysetHandle);
+			// 3. 使用私鑰校驗簽名
+			verifier.verify(signature, data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
