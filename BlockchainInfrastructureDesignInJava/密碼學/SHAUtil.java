@@ -38,4 +38,14 @@ public class SHAUtil {
 		}
 		return encdeStr;
 	}
+	
+	/**
+	 * 利用 Hutool 的工具類實現 SHA - 256 加密
+	 * 
+	 * @param originalStr 加密前的報文
+	 * @return String 加密後的報文
+	 */
+	public static String sha256BasedHutool(String originalStr) {
+		return DigestUtil.sha256Hex(originalStr);
+	}
 }
