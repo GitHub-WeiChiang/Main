@@ -61,7 +61,7 @@ public class MerkleTree {
 		
 		int length = leafList.size();
 		for (int i = 0; i < length - 1; i += 2) {
-			TreeNode parent = createParentNode(leafList.get(i), leafList.get(i + i));
+			TreeNode parent = createParentNode(leafList.get(i), leafList.get(i + 1));
 			parents.add(parent);
 		}
 		
