@@ -53,3 +53,20 @@ P2P 網絡構建
 	* ### DHT 的節點是動態的，在節點中，通過加密散列函數，對象的名字或關鍵詞就可以被映射為 128 bit 或 160 bit 的散列值。
 * ### 比特幣系統的網絡結構是最容易理解、最容易實現的一種形式。
 * ### 以太坊網絡引入了分布式散列表、異或距離、二叉前綴樹、K - 桶等，結構更為複雜，實現也更困難，但在節點路由上速度遠快於比特幣，本質上屬於空間換取時間的做法。
+* ### Java 領域網絡編程或遠程通信技術 (基礎)
+	* ### Socket
+	* ### RMI (Remote Method Invocaation, 遠程方法調用)
+	* ### RPC (Remote Procedure Call, 遠程過程調用)
+	* ### Apache Mina (基於 TCP / IP、UDP/IP 協議的通信架構)
+	* ### Hessian (輕量級 remoting onhttp 工具)
+	* ### JMS (Java Message Service, Java 消息服務)
+	* ### Netty (JBOSS 提供的一個 Java 版網絡服務器和客戶端程序開發框架)
+	* ### WebService (如: HTTP)
+* ### Java 領域網絡編程或遠程通信技術 (新)
+	* ### WebSocket (HTML5 中的新協議)
+	* ### Vert.x (基於 JVM、輕量級、高興能的應用平台)
+	* ### t - io (基於 Java Aio 的網絡編程框架，號稱可以讓天下沒有難開發的網絡編程)
+	* ### J - IM (使用 Java 編寫，基於 t - io 開發的輕量級、高性能網絡框架)
+	* ### http - kit
+	* ### netty - socketio (基於全異步 Java 服務器)
+	* ### async - http - client

@@ -31,4 +31,3 @@ Contents
 ### * DataStructuresAndAlgorithmsInJava
 ### * CertificateAndQualifyingExamination
 ### * BlockchainInfrastructureDesignInJava
-### * PrinciplesOfOod
