@@ -51,7 +51,7 @@
 -----
 * ### touch images/.keep
 
-有些檔案我不想放在 Git 裡面... (若檔案先前已存在，透過 git rm --cached 強制清除，或透過 SOURCETREE -> File Status Bottom (Commit) -> Stop Tracking 後 add 並 commit)
+有些檔案我不想放在 Git 裡面... (若檔案先前已存在，透過 git rm --cached 強制清除，或透過 SOURCETREE -> File Status Bottom (Commit) -> Stop Tracking，最後 add 並 commit)
 -----
 * ### touch .gitignore
 
