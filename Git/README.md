@@ -29,7 +29,31 @@
 * ### git log --oneline --since="9am" --until="12am" --after="2017-01"
 * ### SOURCETREE -> WORKSPACE -> Search
 
+如何在 Git 裡刪除檔案或變更檔名 ?
+-----
+* ### rm welcome.html, git add welcome.html
+* ### git rm welcome.html
+* ### SOURCETREE -> WORKSPACE -> File Status -> file(右鍵) -> Remove
+* ### mv hello.html world.html, git status, git add --all
+* ### git mv welcome.html
 
+修改 Commit 紀錄
+-----
+* ### git commit --amend -m "Welcome To Facebook"
+* ### SOURCETREE -> File Status Bottom (Commit) -> Commit Options -> Amend last commit
+
+追加檔案到最近一次的 Commit
+-----
+* ### git status, git add newFile.html, git commit --amend --no-edit
+* ### SOURCETREE -> File Status Bottom (Commit) -> Commit Options -> Amend last commit
+
+新增目錄 ?
+-----
+* ### touch images/.keep
+
+有些檔案我不想放在 Git 裡面... (若檔案先前已存在，透過 git rm --cached 強制清除，或透過 SOURCETREE -> File Status Bottom (Commit) -> Stop Tracking 後 add 並 commit)
+-----
+* ### touch .gitignore
 
 Reference
 =====
