@@ -85,7 +85,49 @@
 * ### git reset HEAD^
 * ### git reset 85e7e30
 * ### 備註: Commit 拆出來的檔案 -> --mixed 丟回工作目錄、soft 丟回站存區、hard 直接丟掉。
+* ### SOURCETREE -> WORKSPACE -> History -> commit -> reset current branch to this commit
+
+不小心使用 hard 模式 Rest 了某個 Commit，救得回來嗎 ?
+-----
+* ### git reflog, git reset e12d8ef --hard
+
+可以只 Commit 一個檔案的部分內容嗎 ?
+-----
+* ### git add -p index.html
+* ### SOURCETREE -> WORKSPACE -> File Status -> select file -> select line -> Stage lines
+
+為甚麼我的分支都沒有「小耳朵」 ?
+-----
+* ### git merge cat --no--ff
+* ### SOURCETREE -> WORKSPACE -> BRANCHES -> merge -> Create a new commit even if fast-forward is possible
+
+不小心把還沒合併的分支砍掉了，救得回來嗎 ?
+-----
+* ### git branch newBranceName b174a5a
+* ### SOURCETREE -> Branch -> check Specified commit
+* ### 備註: git reflog
+
+怎麼取消 rebase ?
+-----
+* ### git reflog, git rest b174a5a --hard
+* ### git rest ORIG_HEAD --hard
+
+我可以從過去的某個 Commit 再長一個新的分支出來嗎 ?
+-----
+* ### git branch branchName 657fce
+* ### git checkout -b branchName 657fce
+* ### SOURCETREE -> WORKSPACE -> History -> select commit (Right-click) -> Branch...
+
+修改歷史訊息
+-----
+* ### git rebase -i bb0c9c2, replace "pick" to "r"
+* ### SOURCETREE -> WORKSPACE -> History -> select commit (Right-click) -> Rebase children of bb0c9c2 interactively... -> Description (Right-click) -> Edir message
+
+把多個 Commit 合併成一個 Commit
+-----
+* ### git log --oneline, git rebase -i bb0c9c2, replace "pick" to "squash"
+* ### SOURCETREE -> WORKSPACE -> History -> select commit (Right-click) -> Rebase children of bb0c9c2 interactively... -> Description (Right-click) -> Squash with previous commit
 
 Reference
 =====
-### * 為你自己學 Git
+### * [為你自己學 Git](https://gitbook.tw/)
