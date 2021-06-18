@@ -1,3 +1,4 @@
+<!-- 
 Resume
 =====
 Chiang, Wei / 蔣維
@@ -24,6 +25,7 @@ Experience
 	* ### Programming Language: C, C#
 	* ### Work Content: After-school tutoring, Set questions for final exam
 <br />
+-->
 
 Contents
 =====
