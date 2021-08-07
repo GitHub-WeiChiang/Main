@@ -1,4 +1,4 @@
-BlockchainInfrastructureDesignInJava
+Blockchain
 =====
 ### * 區塊鏈簡介
 ### * 區塊鏈架構
