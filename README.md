@@ -1,6 +1,6 @@
 Contents
 =====
-### * DesignPatterns
-### * DataStructuresAndAlgorithms
-### * Blockchain
+### * DesignPatterns (Java)
+### * DataStructuresAndAlgorithms (Java)
+### * Blockchain (Java)
 ### * Git
