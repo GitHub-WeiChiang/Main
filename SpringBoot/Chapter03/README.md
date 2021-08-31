@@ -2,7 +2,7 @@
 =====
 ### * 頂部菜單 [Project] --> [Clean]
 ### * 右鍵預打包專案 [Maven] --> [Update Project]
-### * 右鍵預打包專案 [Run As] --> [Maven build](第二個)
+### * 右鍵預打包專案 [Run As] --> [Maven build] (選擇第二個)
 ### * 在 Goals 欄位填入 package
 ### * 勾選 Skip Tests
 ### * run
