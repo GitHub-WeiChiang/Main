@@ -5,6 +5,7 @@ SpringBoot
 ### * Chapter05 分層開發 Web 應用程式
 ### * Chapter06 響應式程式設計
 ### * Chapter07 Spring Boot 進階
+### * Chapter08 用 ORM 操作 SQL 資料庫
 <br />
 
 Reference
