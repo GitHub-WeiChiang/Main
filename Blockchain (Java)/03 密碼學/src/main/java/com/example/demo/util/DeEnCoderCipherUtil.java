@@ -7,29 +7,30 @@
 
 package com.example.demo.util;
 
-//This class provides a cryptographically strong random number generator (RNG).
+// This class provides a cryptographically strong random number generator (RNG).
 import java.security.SecureRandom;
 
-//This class provides the functionality of a cryptographic cipher for encryption and decryption. It forms the core of the Java Cryptographic Extension (JCE) framework.
+// This class provides the functionality of a cryptographic cipher for encryption and decryption. It forms the core of the Java Cryptographic Extension (JCE) framework.
 import javax.crypto.Cipher;
-//This interface contains no methods or constants. Its only purpose is to group (and provide type safety for) secret keys
+// This interface contains no methods or constants. Its only purpose is to group (and provide type safety for) secret keys
 import javax.crypto.SecretKey;
-//This class represents a factory for secret keys.
+// This class represents a factory for secret keys.
 import javax.crypto.SecretKeyFactory;
-//This class specifies a DES key.
+// This class specifies a DES key.
 import javax.crypto.spec.DESKeySpec;
 
-//Testing framework for Java
+// Testing framework for Java
 import org.testng.util.Strings;
 
-//This class consists exclusively of static methods for obtaining encoders and decoders for the Base64 encoding scheme.
-//Base64 是一種能將任意 Binary 資料用 64 種字元組合成字串的方法，而這個 Binary 資料和字串資料彼此之間是可以互相轉換的，十分方便。在實際應用上，Base64 除了能將 Binary 資料可視化之外，也常用來表示資料加密過後的內容。
+// This class consists exclusively of static methods for obtaining encoders and decoders for the Base64 encoding scheme.
+// Base64 是一種能將任意 Binary 資料用 64 種字元組合成字串的方法，而這個 Binary 資料和字串資料彼此之間是可以互相轉換的，十分方便。在實際應用上，Base64 除了能將 Binary 資料可視化之外，也常用來表示資料加密過後的內容。
 import java.util.Base64;
-//This class implements an encoder for encoding byte data using the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
+// This class implements an encoder for encoding byte data using the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
 import java.util.Base64.Encoder;
-//This class implements a decoder for decoding byte data using the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
+// This class implements a decoder for decoding byte data using the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
 import java.util.Base64.Decoder;
 
+// 基於 Cipher 實現的加密和解密工具
 public class DeEnCoderCipherUtil {
 	// 加密、解密模式
 	private final static String CIPHER_MODE = "DES";
