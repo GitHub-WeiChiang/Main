@@ -1,17 +1,18 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/5/10
+ * @date 2022/03/30
  *
  */
+
+package com.example.demo.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Â²¤Æªº Merkle ¾ğ®Ú¸`ÂIÂø´ê­È­pºâ
+// ç°¡åŒ–çš„ Merkle æ¨¹æ ¹ç¯€é»é›œæ¹Šå€¼è¨ˆç®—
 public class SimpleMerkleTree {
-	
-	// «ö Merkle ¾ğ«ä·Q­pºâ¸ò¸`ÂI«¢§Æ­È
+	// æŒ‰ Merkle æ¨¹æ€æƒ³è¨ˆç®—è·Ÿç¯€é»å“ˆå¸Œå€¼
 	public static String getTreeNodeHash(List<String> hashList) {
 		if(hashList == null || hashList.size() == 0) {
 			return null;
@@ -24,7 +25,7 @@ public class SimpleMerkleTree {
 		return hashList.get(0);
 	}
 	
-	// «ö Merkle ¾ğ«ä·Q­pºâ¸ò¸`ÂI«¢§Æ­È
+	// æŒ‰ Merkle æ¨¹æ€æƒ³è¨ˆç®—è·Ÿç¯€é»å“ˆå¸Œå€¼
 	public static List<String> getMerkleNodeList(List<String> contentList) {
 		List<String> merkleNodeList = new ArrayList<String>();
 		
@@ -34,20 +35,19 @@ public class SimpleMerkleTree {
 		
 		int index = 0, length = contentList.size();
 		while (index < length) {
-			// Àò¨ú¥ª«Ä¤l¸`ÂI¼Æ¾Ú
+			// ç²å–å·¦å­©å­ç¯€é»æ•¸æ“š
 			String left = contentList.get(index++);
 			
-			// Àò¨ú¥k«Ä¤l¸`ÂI¼Æ¾Ú
+			// ç²å–å³å­©å­ç¯€é»æ•¸æ“š
 			String right = "";
 			if (index < length) {
 				right = contentList.get(index++);
 			}
 			
-			// ­pºâ¥ª¥k«Ä¤l¸`ÂIªº¤÷¸`ÂI«¢§Æ­È
+			// è¨ˆç®—å·¦å³å­©å­ç¯€é»çš„çˆ¶ç¯€é»å“ˆå¸Œå€¼
 			String sha2HexValue = SHAUtil.sha256BasedHutool(left + right);
 			merkleNodeList.add(sha2HexValue);
 		}
 		return merkleNodeList;
 	}
-	
 }

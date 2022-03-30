@@ -1,46 +1,47 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/5/10
+ * @date 2022/03/30
  *
  */
+
+package com.example.demo.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// MerkleTree «Øºc¡B¥Í¦¨®Ú¸`ÂI«¢§Æ­Èªº¤u¨ãÃş
+// MerkleTree å»ºæ§‹ã€ç”Ÿæˆæ ¹ç¯€é»å“ˆå¸Œå€¼çš„å·¥å…·é¡
 public class MerkleTree {
-	
 	// TreeNode List
 	private List<TreeNode> list;
-	// ®Úµ²ÂI
+	// æ ¹çµé»
 	private TreeNode root;
 	
-	// ºc³y¨ç¼Æ
+	// æ§‹é€ å‡½æ•¸
 	public MerkleTree(List<String> contents) {
 		createMerkleTree(contents);
 	}
 	
-	// «Øºc Merkle Tree
+	// å»ºæ§‹ Merkle Tree
 	private void createMerkleTree(List<String> contents) {
-		// ¿é¤J¬°ªÅ«h¤£¶i¦æ¥ô¦ó³B²z
+		// è¼¸å…¥ç‚ºç©ºå‰‡ä¸é€²è¡Œä»»ä½•è™•ç†
 		if (contents == null || contents.size() == 0) {
 			return;
 		}
 		
-		// ªì©l¤Æ
+		// åˆå§‹åŒ–
 		list = new ArrayList<>();
 		
-		// ®Ú¾Ú¼Æ¾Ú³Ğ«Ø¸­¤l¸`ÂI
+		// æ ¹æ“šæ•¸æ“šå‰µå»ºè‘‰å­ç¯€é»
 		List<TreeNode> leafList = createLeafList(contents);
 		list.addAll(leafList);
 		
-		// ³Ğ«Ø¤÷¸`ÂI
+		// å‰µå»ºçˆ¶ç¯€é»
 		List<TreeNode> parents = createParentList(leafList);
 		list.addAll(parents);
 		
-		// ´`Àô³Ğ«Ø¦U¯Å¤÷¸`ÂI¦Ü®Ú¸`ÂI
+		// å¾ªç’°å‰µå»ºå„ç´šçˆ¶ç¯€é»è‡³æ ¹ç¯€é»
 		while (parents.size() > 1) {
 			List<TreeNode> temp = createParentList(parents);
 			list.addAll(temp);
@@ -50,11 +51,11 @@ public class MerkleTree {
 		root = parents.get(0);
 	}
 	
-	// ³Ğ«Ø¤÷¸`ÂI¦Cªí
+	// å‰µå»ºçˆ¶ç¯€é»åˆ—è¡¨
 	private List<TreeNode> createParentList(List<TreeNode> leafList) {
 		List<TreeNode> parents = new ArrayList<>();
 		
-		// ªÅÀËÅç
+		// ç©ºæª¢é©—
 		if (leafList == null || leafList.size() == 0) {
 			return parents;
 		}
@@ -65,7 +66,7 @@ public class MerkleTree {
 			parents.add(parent);
 		}
 		
-		// ©_¼Æ­Ó¸`ÂI®É¡A³æ¿W³B²z³Ì«á¤@­Ó¸`ÂI
+		// å¥‡æ•¸å€‹ç¯€é»æ™‚ï¼Œå–®ç¨è™•ç†æœ€å¾Œä¸€å€‹ç¯€é»
 		if (length % 2 != 0) {
 			TreeNode parent = createParentNode(leafList.get(length - 1), null);
 			parents.add(parent);
@@ -74,36 +75,36 @@ public class MerkleTree {
 		return parents;
 	}
 	
-	// ³Ğ«Ø¤÷¸`ÂI
+	// å‰µå»ºçˆ¶ç¯€é»
 	private TreeNode createParentNode(TreeNode left, TreeNode right) {
 		TreeNode parent = new TreeNode();
 		
 		parent.setLeft(left);
 		parent.setRight(right);
 		
-		// ¦pªG right ¬°ªÅ¡A³d¤÷¸`ÂIªº«¢§Æ­È¬° left ªº«¢§Æ­È
+		// å¦‚æœ right ç‚ºç©ºï¼Œè²¬çˆ¶ç¯€é»çš„å“ˆå¸Œå€¼ç‚º left çš„å“ˆå¸Œå€¼
 		String hash = left.getHash();
 		if (right != null) {
 			hash = SHAUtil.sha256BasedHutool(left.getHash() + right.getHash());
 		}
-		// hash ¦r¬q©M data ¦r¬q¦P­È
+		// hash å­—æ®µå’Œ data å­—æ®µåŒå€¼
 		parent.setData(hash);
 		parent.setHash(hash);
 		
 		if (right != null) {
-			parent.setName("(" + left.getName() + "©M" + right.getName() + "ªº¤÷¸`ÂI)");
+			parent.setName("(" + left.getName() + "å’Œ" + right.getName() + "çš„çˆ¶ç¯€é»)");
 		} else {
-			parent.setName("(Ä~©Ó¸`ÂI{" + left.getName() + "}¦¨¬°¤÷¸`ÂI)");
+			parent.setName("(ç¹¼æ‰¿ç¯€é»{" + left.getName() + "}æˆç‚ºçˆ¶ç¯€é»)");
 		}
 		
 		return parent;
 	}
 	
-	// ºc«Ø¸­¤l¸`ÂI¦Cªí
+	// æ§‹å»ºè‘‰å­ç¯€é»åˆ—è¡¨
 	private List<TreeNode> createLeafList(List<String> contents) {
 		List<TreeNode> leafList = new ArrayList<>();
 		
-		// ªÅÀËÅç
+		// ç©ºæª¢é©—
 		if (contents == null || contents.size() == 0) {
 			return leafList;
 		}
@@ -116,7 +117,7 @@ public class MerkleTree {
 		return leafList;
 	}
 	
-	// ¹M¾ú¾ğ
+	// éæ­·æ¨¹
 	public void traverseTreeNodes() {
 		Collections.reverse(list);
 		TreeNode root = list.get(0);
@@ -154,5 +155,4 @@ public class MerkleTree {
 	public void setRoot(TreeNode root) {
 		this.root = root;
 	}
-	
 }

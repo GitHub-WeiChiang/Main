@@ -1,33 +1,35 @@
 /**
  * 
  * @author ChiangWei
- * @date 2020/5/10
+ * @date 2022/03/30
  *
  */
 
-// ¾ğ¸`ÂI©w¸q
+package com.example.demo.util;
+
+// æ¨¹ç¯€é»å®šç¾©
 public class TreeNode {
-	// ¤G¤e¾ğªº¥ª«Ä¤l
+	// äºŒå‰æ¨¹çš„å·¦å­©å­
 	private TreeNode left;
-	// ¤G¤e¾ğªº¥k«Ä¤l
+	// äºŒå‰æ¨¹çš„å³å­©å­
 	private TreeNode right;
-	// ¤G¤e¾ğ¤¤«Ä¤l¸`ÂIªº¼Æ¾Ú
+	// äºŒå‰æ¨¹ä¸­ç¯€é»çš„æ•¸æ“š
 	private String data;
-	// ¤G¤e¾ğ¤¤«Ä¤l¸`ÂIªº¼Æ¾Ú¹ïÀ³ªº«¢§Æ­È¡A¦¹³B±Ä¥Î SHA - 256 ºâªk³B²z
+	// äºŒå‰æ¨¹ä¸­ç¯€é»çš„æ•¸æ“šå°æ‡‰çš„å“ˆå¸Œå€¼ï¼Œæ­¤è™•æ¡ç”¨ SHA - 256 ç®—æ³•è™•ç†
 	private String hash;
-	// ¸`ÂI¦WºÙ
+	// ç¯€é»åç¨±
 	private String name;
 	
-	// ºc³y¨ç¼Æ 1
+	// æ§‹é€ å‡½æ•¸ 1
 	public TreeNode() {
 		
 	}
 	
-	// ºc³y¨ç¼Æ 2
+	// æ§‹é€ å‡½æ•¸ 2
 	public TreeNode(String data) {
 		this.data = data;
 		this.hash = SHAUtil.sha256BasedHutool(data);
-		this.name = "[¸`ÂI: " + data + "]";
+		this.name = "[ç¯€é»: " + data + "]";
 	}
 	
 	public String getName() {
