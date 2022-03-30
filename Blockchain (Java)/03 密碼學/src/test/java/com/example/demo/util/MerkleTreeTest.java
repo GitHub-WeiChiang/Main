@@ -15,7 +15,7 @@ import org.testng.Assert;
 
 public class MerkleTreeTest {
 	@Test
-	void MerkleTreeTest() {
+	void testMerkleTree() {
 		// case1: List<String> contents = null;
 		List<String> contents = null;
 		Assert.assertEquals(new MerkleTree(contents).getList(), null);
