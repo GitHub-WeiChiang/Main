@@ -29,6 +29,12 @@ a = ClassVaribale()
 print(type(a))
 print(a.name)
 ```
+* ### 在 Python 中一切都是物件，類是元類 metaclass 的一個實例。
+	* ### obj (is instance of) class (is instance of) metaclass。
+* ### type 與 object 的關係
+	* ### type 是一個 metaclass，而且是一個默認的 metaclass。也就是說，type 是 object 的類型，object 是 type 的一個實例。
+	* ### type 是 object 的一個子類，繼承 object 的所有屬性和行為。
+	* ### type 還是一個 callable，即實現了 \_\_call\_\_ 方法，可以當成一個函數來使用。
 <br />
 
 Reference
