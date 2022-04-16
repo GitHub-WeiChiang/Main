@@ -20,6 +20,15 @@
 * ### \_\_new\_\_ 是構造函數，需要返回一個實例。
 * ### \_\_init\_\_ 不允許有返回值。
 * ### \_\_init\_\_ 的參數除 self 外需與 \_\_new\_\_ 除 cls 外其餘參數一致或等效。
+* ### type()
+	* ### 查看變數或物件的類型。
+	* ### 創建一個 (class)。
+```
+ClassVaribale = type('ClassA', (object, ), dict(name = "type test"))
+a = ClassVaribale()
+print(type(a))
+print(a.name)
+```
 <br />
 
 Reference
