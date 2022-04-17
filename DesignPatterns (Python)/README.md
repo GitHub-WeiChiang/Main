@@ -1,6 +1,6 @@
 設計模式
 =====
-* ### test
+* ### 監聽模式 (Observer Pattern)
 <br />
 
 補充
