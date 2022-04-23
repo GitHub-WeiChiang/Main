@@ -1,8 +1,6 @@
 __author__ = "ChiangWei"
 __date__ = "2022/04/17"
 
-# --------------------------------------------------
-
 # from abc import ABCMeta, abstractmethod
 
 # class WaterHeater:
@@ -51,8 +49,6 @@ __date__ = "2022/04/17"
 # heater.setTemperature(40)
 # heater.setTemperature(60)
 # heater.setTemperature(100)
-
-# --------------------------------------------------
 
 from abc import ABCMeta, abstractmethod
 
