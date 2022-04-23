@@ -1,6 +1,7 @@
 設計模式
 =====
 * ### 監聽模式 (Observer Pattern)
+* ### 狀態模式 (State Pattern)
 <br />
 
 補充
