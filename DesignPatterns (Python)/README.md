@@ -44,7 +44,6 @@ print(a.name)
 	* ### class.\_\_init\_\_ 對返回的實例物件 obj 進行初始化，如一些狀態和屬性的設置。
 	* ### 返回一個使用者真正需要使用的物件 obj。
 	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns%20(Python)/%E7%89%A9%E4%BB%B6%E7%9A%84%E5%89%B5%E5%BB%BA%E9%81%8E%E7%A8%8B.jpg)
-* ### [Python UnboundLocalError](https://www.kawabangga.com/posts/2245)
 <br />
 
 Reference
