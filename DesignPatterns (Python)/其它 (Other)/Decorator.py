@@ -80,3 +80,28 @@ def sayHiAndPrintArg(arg):
     print(arg)
 
 sayHiAndPrintArg('World')
+
+# 裝飾器修飾類別
+class ClassDecorator:
+    def __init__(self, func):
+        self._numOfCall = 0
+        self._func = func
+
+    def __call__(self, *args, **kwargs):
+        self._numOfCall += 1
+        obj = self._func(*args, **kwargs)
+        print("創建 %s 的第 %d 個實例: %s" % (self._func.__name__, self._numOfCall, id(obj)))
+        return obj
+
+@ClassDecorator
+class MyClass:
+    def __init__(self, name):
+        self._name = name
+
+    def getName(self):
+        return self._name
+
+tony = MyClass("Tony")
+karry = MyClass("Karry")
+print(id(tony))
+print(id(karry))
