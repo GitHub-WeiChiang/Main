@@ -3,6 +3,7 @@
 * ### 監聽模式 (Observer Pattern)
 * ### 狀態模式 (State Pattern)
 * ### 仲介模式 (Mediator Pattern)
+* ### 裝飾模式 (Decorator Pattern)
 <br />
 
 補充
