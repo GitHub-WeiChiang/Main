@@ -6,6 +6,7 @@ Python
 * ### Chapter04 流程語法與函式
 * ### Chapter05 從模組到類別
 * ### Chapter06 類別的繼承
+* ### Chapter07 例外處理
 <br />
 
 Reference
