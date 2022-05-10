@@ -8,6 +8,7 @@ Python
 * ### Chapter06 類別的繼承
 * ### Chapter07 例外處理
 * ### Chapter08 open() 與 io 模組
+* ### Chapter09 資料結構
 <br />
 
 Reference
