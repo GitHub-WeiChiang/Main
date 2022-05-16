@@ -1,6 +1,7 @@
 __author__ = "ChiangWei"
 __date__ = "2022/5/10"
 
+
 class Point:
     def __init__(self, x: int, y: int) -> None:
         self.x = x
@@ -19,6 +20,7 @@ class Point:
 
     def __repr__(self):
         return 'Point({}, {})'.format(self.x, self.y)
+
 
 p1 = Point(1, 1)
 p2 = Point(2, 2)
