@@ -20,3 +20,6 @@ Chapter09
 * ### 應避免過度設計資料結構，Tuple 要比物件好 (namedtuple)，簡單的欄位會比 Getter / Setter 函式要好。
 * ### 若需要在建立 dict 時保有最初鍵值加入的順序，可使用 collections 模組的 OrderedDict。
 * ### defaultdict 的第一個參數為 default_factory 屬性提供初始值，默認為 None，可為一個不存在的鍵提供默認值，從而避免 KeyError 異常。
+* ### 若想在自定義實作中實現 [] 取值，需實作 \_\_getitem\_\_()，實現 [] 設值則實作 \_\_setitem\_\_()，透過 del 與 [] 刪除實作 \_\_delitem\_\_()。
+* ### 可自定義 \_\_len\_\_() 方法計算群集長度並傳回。
+* ### collections.abc 模組提供實作群集的基礎類別，可用於繼承，且其提供一些基本的共用實作。
