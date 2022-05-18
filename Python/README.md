@@ -9,6 +9,7 @@ Python
 * ### Chapter07 例外處理
 * ### Chapter08 open() 與 io 模組
 * ### Chapter09 資料結構
+* ### Chapter10 資料永續與交換
 <br />
 
 Reference
