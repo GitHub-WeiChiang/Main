@@ -6,6 +6,7 @@
 * ### 裝飾模式 (Decorator Pattern)
 * ### 單例模式 (Singleton Pattern)
 * ### 克隆模式 (Clone Pattern)
+* ### 命令模式 (Command Pattern)
 <br />
 
 補充
