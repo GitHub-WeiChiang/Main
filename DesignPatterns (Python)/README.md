@@ -5,6 +5,7 @@
 * ### 仲介模式 (Mediator Pattern)
 * ### 裝飾模式 (Decorator Pattern)
 * ### 單例模式 (Singleton Pattern)
+* ### 克隆模式 (Clone Pattern)
 <br />
 
 補充
