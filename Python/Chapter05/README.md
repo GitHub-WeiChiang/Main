@@ -17,7 +17,7 @@ Chapter05
 * ### @property 可以將 class 的方法轉換為只能讀取的屬性。
 * ### 可以使用 @xxx.setter 與 @xxx.deleter 標註對應的設值與刪除值方法。
 * ### 定義類別時，希望某個方法不被拿來作為綁定方法，可以使用 @staticmethod 加以標註。
-* ### 類別中的方法若標註 @classmethod，那麼第一個參數衣錠是接受所在類別的 type 實例。
+* ### 類別中的方法若標註 @classmethod，那麼第一個參數一定是接受所在類別的 type 實例。
 * ### @staticmethod: 是一種靜態函數，不需要建立物件即可使用，也因此無法存取物件資料，只能對傳入的參數做處理。
 * ### @classmethod: 綁定在類別上，不需要建立物件即可呼叫，因 classmethod 利用 cls 把自己綁定在類別上，所以 classmethod 可以透過 cls 來呼叫類別內的成員，而 staticmethod 只能操作傳入的參數。
 * ### 每個物件本身，都會有個 \_\_dict\_\_ 屬性，當中紀錄類別或實例所擁有的特性。

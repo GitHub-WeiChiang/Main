@@ -10,6 +10,14 @@ __date__ = "2022/04/25"
 呼叫 printWorld 時其實是呼叫 wrapper()，
 所以會先印出 Hello 在執行方法 printWorld。
 
+裝飾器實現的單例模式，
+不適用於以 multiprocessing 進行的多執行序環境，
+因 multiprocessing 庫雖實現了類似 thread 的 API 接口，
+但其透過 pickle 序列化部分地實現了變量共享，
+被裝飾器裝飾後的類別 (不一定要是實現單例的裝飾器) 或函式，
+將無法順利進行序列化，
+會引發_pickle.PicklingError: Can't pickle <class 'xxx'>: it's not the same object as xxx 例外。
+
 *args 與 **kwargs，可以接受任何參數。
 '''
 
@@ -25,9 +33,9 @@ def printWorld():
 
 printWorld()
 
-# 當裝飾器所裝的函式需要輸入參數
 print()
 
+# 當裝飾器所裝的函式需要輸入參數
 def printHelloArg(func):
     def wrapper(arg):
         print('Hello')
@@ -41,9 +49,9 @@ def printArg(arg):
 printArg('World')
 printArg('Kitty')
 
-# 複雜的函式參數
 print()
 
+# 複雜的函式參數
 def printHelloCompArg(func):
     def wrapper(*args, **kwargs):
         print('Hello')
@@ -62,9 +70,9 @@ def printCompArg2(arg1, arg2):
 printCompArg1('World')
 printCompArg2('Kitty', 'Danny')
 
-# 加上參數的裝飾器
 print()
 
+# 加上參數的裝飾器
 def printArgArg(arg):
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -80,6 +88,8 @@ def sayHiAndPrintArg(arg):
     print(arg)
 
 sayHiAndPrintArg('World')
+
+print()
 
 # 裝飾器修飾類別
 class ClassDecorator:
