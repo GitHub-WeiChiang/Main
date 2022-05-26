@@ -70,3 +70,6 @@ Chapter11
     * ### match() 函數指在開頭判斷接下來字串是否符合。
     * ### findall() 函數以清單傳回各分組。
     * ### sub() 函數用於字串取代。
+* ### os.path 模組支援路徑組合、相對路徑轉絕對路徑與取得檔案所在目錄路徑等，避免應用程式與作業系統相依問題。
+* ### URL (Uniform Resource Locator)，路徑。
+* ### URI (Uniform Resource Identifier)，資源實際位置。
