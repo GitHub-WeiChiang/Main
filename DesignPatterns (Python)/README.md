@@ -7,6 +7,7 @@
 * ### 單例模式 (Singleton Pattern)
 * ### 克隆模式 (Clone Pattern)
 * ### 命令模式 (Command Pattern)
+* ### 職責模式 (Chain of Responsibility Pattern)
 <br />
 
 補充
