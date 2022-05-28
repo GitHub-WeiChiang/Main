@@ -9,6 +9,7 @@
 * ### 命令模式 (Command Pattern)
 * ### 職責模式 (Chain of Responsibility Pattern)
 * ### 代理模式 (Proxy Pattern)
+* ### 面板模式 (Facade Pattern)
 <br />
 
 補充
