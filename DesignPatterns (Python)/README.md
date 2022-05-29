@@ -12,6 +12,7 @@
 * ### 面板模式 (Facade Pattern)
 * ### 反覆運算模式 (Iterator Pattern)
 * ### 組合模式 (Composite Pattern)
+* ### 其它 (Other)
 <br />
 
 補充
