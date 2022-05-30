@@ -11,6 +11,7 @@ Python
 * ### Chapter09 資料結構
 * ### Chapter10 資料永續與交換
 * ### Chapter11 常用內建模組
+* ### Chapter12 除錯、測試與效能
 <br />
 
 Note
