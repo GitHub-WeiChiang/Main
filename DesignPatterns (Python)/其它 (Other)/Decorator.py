@@ -16,7 +16,7 @@ __date__ = "2022/04/25"
 但其透過 pickle 序列化部分地實現了變量共享，
 被裝飾器裝飾後的類別 (不一定要是實現單例的裝飾器) 或函式，
 將無法順利進行序列化，
-會引發_pickle.PicklingError: Can't pickle <class 'xxx'>: it's not the same object as xxx 例外。
+會引發 _pickle.PicklingError: Can't pickle <class 'xxx'>: it's not the same object as xxx 例外。
 
 *args 與 **kwargs，可以接受任何參數。
 '''
