@@ -49,3 +49,13 @@ if __name__ == "__main__":
     threading.Thread(target=server).start()
     threading.Thread(target=client).start()
 ```
+* ### 多核心處理器有機會將任務分配到各個核心中平行 (Parallel) 運作，取得更好的效率。
+* ### subprocess 模組可以在執行 Python 程式的過程中產生新的子行程。
+* ### multiprocessing 模組可以使用類似 threading 模組的 API 介面執行子行程。
+* ### 為了讓子行程執行時，讓 Python 直譯器安全地匯入 main 模組，if \_\_name\_\_ == "\_\_main\_\_" 的測試是必要的。
+* ### 建議在使用 multiprocessing 模組時，最好的方式是不要共享狀態，實現真正的平行處理 (特別是在計算密集式的任務)，以獲取更好的效率。
+* ### multiprocessing.Queue 是執行緒與行程安全的，實作了必要的鎖定機制。
+* ### concurrent.futures 模組提供了執行緒或行程的高階封裝，便於實現非同步 (Asynchronous) 的任務。
+    * ### 輸入輸出密集式任務，可以使用 ThreadPoolExecutor。
+    * ### 計算密集式任務，可以使用 ProcessPoolExecutor。
+* ### 獨立於程式主流成的任務、事件生成及處理事件的方式，稱為非同步。
