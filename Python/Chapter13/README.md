@@ -58,4 +58,4 @@ if __name__ == "__main__":
 * ### concurrent.futures 模組提供了執行緒或行程的高階封裝，便於實現非同步 (Asynchronous) 的任務。
     * ### 輸入輸出密集式任務，可以使用 ThreadPoolExecutor。
     * ### 計算密集式任務，可以使用 ProcessPoolExecutor。
-* ### 獨立於程式主流成的任務、事件生成及處理事件的方式，稱為非同步。
+* ### 獨立於程式主流程的任務、事件生成及處理事件的方式，稱為非同步。
