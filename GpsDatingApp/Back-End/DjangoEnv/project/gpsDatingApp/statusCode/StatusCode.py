@@ -1,0 +1,80 @@
+from enum import IntEnum
+
+class StatusCode(IntEnum):
+    # Successful responses
+    # http status code, 200
+    SUCCESS = 200,
+
+    # --------------------------------------------------
+
+    # Client errors
+    # http status code, 400–451
+    HTTP_REQUEST_PARAMETER_ERROR = 400,
+
+    ACCOUNT_DOES_NOT_EXIST = 401,
+    VERIFY_CODE_NOT_EXIST_OR_EXPIRE = 401,
+    ACCESS_TOKEN_NOT_EXIST_OR_EXPIRE = 401,
+    REFRESH_TOKEN_NOT_EXIST_OR_EXPIRE = 401,
+    FRIEND_NOT_EXIST = 401,
+
+    RECAPTCHA_VERIFY_ERROR = 403,
+    VERIFY_CODE_ERROR = 403,
+    ACCESS_TOKEN_NOT_INCORRUPTIBLE = 403,
+    REFRESH_TOKEN_NOT_INCORRUPTIBLE = 403,
+    ACCESS_TOKEN_INVALID = 403,
+    REFRESH_TOKEN_INVALID = 403,
+    GOOGLE_SIGN_IN_TOKEN_ERROR = 403,
+
+    HTTP_REQUEST_METHODS_ERROR = 405,
+
+    DATA_ALREADY_EXISTS = 409,
+    ACCESS_TOKEN_NOT_EXPIRE = 409,
+
+    EMAIL_FORMAT_ERROR = 422,
+    FILE_TYPE_ERROR = 422,
+    FILE_SIZE_EXCEED = 422,
+    VAR_VALUE_ILLEGAL = 422,
+
+    # customize status code, 460-499
+    HTTP_REQUEST_BODY_TYPE_ERROR = 460,
+
+    VERIFY_CODE_ERROR_EXCESSIVE = 461,
+
+    PARAMETER_SETTING_BUSINESS_LOGIC_ERROR = 462,
+
+    PARAMETER_LEN_ERROR = 463,
+
+    ALREADY_COMPLETED_FIRST_SETTING = 464,
+
+    GAME_STATE_ERROR = 465,
+
+    EMAIL_ALREADY_EXISTS = 466,
+
+    VERIFY_CODE_ALREADY_EXISTS = 467,
+
+    # --------------------------------------------------
+
+    # Server errors
+    # http status code, 500-511
+    DATABASE_ACCESS_EXCEPTION = 500,
+
+    EMAIL_DELIVER_FAIL = 502,
+
+    # customize status code, 520-599
+    UNDER_MAINTENANCE = 599,
+
+    # --------------------------------------------------
+
+    # WebSocket
+    # customize status code, 4000-4999
+    CHAT_WS_REQUEST_PARAMETER_ERROR = 4400,
+
+    GAME_WS_VERIFY_CODE_NOT_EXIST = 4401,
+    CHAT_WS_VERIFY_CODE_NOT_EXIST = 4401,
+
+    GAME_WS_VERIFY_CODE_ERROR = 4403,
+    CHAT_WS_VERIFY_CODE_ERROR = 4403,
+
+    WS_DP_BODY_TYPE_ERROR = 4460,
+    
+    HB_INR_TIME_OUT = 4461,

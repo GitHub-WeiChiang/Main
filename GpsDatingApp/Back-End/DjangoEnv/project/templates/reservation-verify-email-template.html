@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Max Compatibility (IE6+) -->
+    <body
+        style="
+            width: 100% !important;
+            background-color: #f6f6f6 !important;
+            text-align: center;
+            margin: 0;
+            padding: 24px 0;
+        "
+    >
+        <div
+            role="rootContainer"
+            style="
+                display: inline-block;
+                width: 100%;
+                max-width: 600px;
+                padding: 24px 8px 8px;
+                background: #eaae9b;
+
+                background: -moz-linear-gradient(-119deg, #eaae9b, #b4c3d0);
+                background: -webkit-linear-gradient(-119deg, #eaae9b, #b4c3d0);
+                background: linear-gradient(-119deg, #eaae9b, #b4c3d0);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaae9b',endColorstr='#b4c3d0',GradientType=1);
+                border-radius: 16px;
+                box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+            "
+        >
+            <div role="logoContent" style="width: 100%; text-align: center">
+                <!-- temporarily -->
+                <img
+                    width="125"
+                    height="125"
+                    src="https://chance.chancedot.io/media/logo/logo.png"
+                    crossorigin="anonymous"
+                    alt="chance logo"
+                />
+            </div>
+            <div role="margin" style="padding: 16px 0"></div>
+            <div
+                role="divider"
+                style="width: 100%; border-top: 1px solid rgb(112, 112, 112)"
+            ></div>
+            <div role="margin" style="padding: 16px 0"></div>
+            <div role="emailMainTitle">
+                <!-- main title -->
+                <h2 style="color: #000000 !important">
+                    歡迎您事前預約 chance.圈圈<br />還差一步就可以完成事前預約
+                </h2>
+            </div>
+            <div role="emailValidationCodeContent" style="padding: 16px 0">
+                <div>
+                    <h3 style="color: #000000 !important">
+                        以下為您的預約驗證碼：
+                    </h3>
+                </div>
+                <div>
+                    <h2 style="color: #000000 !important">{{ verifyCode }}</h2>
+                </div>
+            </div>
+            <div role="mentionContent" style="color: #000000 !important">
+                <div style="font-size: 12px; padding-bottom: 24px">
+                    請注意：若非本人操作之行為，請忽略此封郵件。
+                </div>
+                <br />
+                盡情享受在 chance.圈圈 的交友旅程吧！
+            </div>
+            <div
+                role="divider"
+                style="
+                    width: 100%;
+                    border-bottom: 1px solid rgb(112, 112, 112);
+                    padding-top: 32px;
+                "
+            ></div>
+            <div
+                role="serviceContent"
+                style="padding-top: 32px; color: #000000 !important"
+            >
+                歡迎加入粉絲團<br />
+                <a
+                    href="https://www.facebook.com/Chancedating-106857048183145/"
+                >
+                    Facebook 粉絲團
+                </a>
+            </div>
+            <div role="serviceContent">
+                <a href="https://www.instagram.com/chance.dating/"
+                    >Instagram 粉絲團</a
+                >
+            </div>
+            <div role="appWebsite" style="color: #000000 !important">
+                更多好玩、有趣的最新消息都在<br />
+                <a href="https://chance.chancedot.io">chance.圈圈 官方網站</a>
+            </div>
+            <div
+                role="copyrightContent"
+                style="padding: 24px 0; color: #000000 !important"
+            >
+                chance.圈圈@copyright
+            </div>
+        </div>
+    </body>
+</html>

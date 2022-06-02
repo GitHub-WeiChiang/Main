@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image upload test</title>
+        <style>
+            label {
+                display: block;
+                font: 1rem 'Fira Sans', sans-serif;
+            }
+
+            input,
+            label {
+                margin: 0.4rem 0;
+            }
+            img {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <label for="avatar">Choose a profile picture:</label>
+        <input type="file" id="avatar" name="avatar" />
+        <button id="uploadBtn">Upload</button>
+        <img id="preview" src="/" alt="preview image" />
+
+        <script>
+            ((document, window) => {
+                // HTML elment ref
+                const avatarInput = document.querySelector('#avatar');
+                const uploadBtn = document.querySelector('#uploadBtn');
+                const previewImg = document.querySelector('#preview');
+
+                // image data
+                let imageFile = null;
+
+                // file input change handler
+                avatarInput.addEventListener('change', (event) => {
+                    const inputElement = event.target;
+                    const url = inputElement.value;
+                    const ext = url
+                        .substring(url.lastIndexOf('.') + 1)
+                        .toLowerCase();
+                    if (
+                        inputElement.files &&
+                        inputElement.files[0] &&
+                        (ext == 'gif' ||
+                            ext == 'png' ||
+                            ext == 'jpeg' ||
+                            ext == 'heic' ||
+                            ext == 'jpg')
+                    ) {
+                        const reader = new FileReader();
+
+                        imageFile = inputElement.files[0];
+
+                        reader.onload = (event) => {
+                            previewImg.setAttribute('src', event.target.result);
+                        };
+                        reader.readAsDataURL(inputElement.files[0]);
+                    } else {
+                        previewImg.setAttribute('src', '/');
+                        alert('invalid file type. accept: gif, png, jpeg, jpg, heic');
+                    }
+                });
+
+                // API info
+                const POST = 'post';
+                const LOCAL_HOST = 'http://127.0.0.1:8000';
+
+                const fetches = ((host) => {
+                    return (URL, fetchOpts) =>
+                        fetch(`${host}${URL}`, fetchOpts).then((response) =>
+                            response.json()
+                        );
+                })(LOCAL_HOST);
+
+                function postImage(file) {
+                    const formData = new FormData();
+
+                    formData.append('image', file);
+
+                    return fetches(`/heic/to/jpg`, {
+                        method: POST,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: formData,
+                    });
+                }
+
+                // button click handler
+                uploadBtn.addEventListener('click', async (event) => {
+                    if (imageFile) {
+                        try {
+                            const response = await postImage(imageFile);
+
+                            console.log(response);
+                            alert(
+                                'file upload successed, see response in console tab.'
+                            );
+                        } catch (error) {
+                            console.log(error);
+                            alert('file upload failed.');
+                        }
+                    } else {
+                        alert('image file empty.');
+                    }
+                });
+            })(document, window);
+        </script>
+    </body>
+</html>
