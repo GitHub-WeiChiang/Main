@@ -59,3 +59,4 @@ if __name__ == "__main__":
     * ### 輸入輸出密集式任務，可以使用 ThreadPoolExecutor。
     * ### 計算密集式任務，可以使用 ProcessPoolExecutor。
 * ### 獨立於程式主流程的任務、事件生成及處理事件的方式，稱為非同步。
+* ### 在定義函式加上 async 關鍵字，呼叫該函示不會馬上執行，還是傳回 coroutine 物件。
