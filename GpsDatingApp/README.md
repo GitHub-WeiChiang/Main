@@ -27,6 +27,3 @@ Tech Stack
 * ### GitLab
 * ### SourceTree
 * ### NSSM
-Tech Stack
------
-* ### [chance. 圈圈](https://youtube.com/playlist?list=PLRyxGT6X5Kt2HRZrOWHPtsvQz_fM4fF8M)
