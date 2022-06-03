@@ -1,0 +1,4 @@
+KEY	BRIGHT
+401405 (interacts with) 650659	TRUE
+650659 (interacts with) 999999	TRUE
+617629 (interacts with) 401405	TRUE

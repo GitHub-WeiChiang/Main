@@ -1,0 +1,17 @@
+Key	Amount
+780789 (interacts with) 420429	9949
+420429 (interacts with) 999999	48170
+530539 (interacts with) 420429	6973
+999001 (interacts with) 530539	6973
+999001 (interacts with) 725729	6125
+710719 (interacts with) 420429	6153
+725729 (interacts with) 420429	6125
+999001 (interacts with) 720724	6005
+999001 (interacts with) 460466	21331
+999001 (interacts with) 710719	6153
+720724 (interacts with) 420429	6005
+410414 (interacts with) 999999	8894
+460466 (interacts with) 410414	11229
+460466 (interacts with) 420429	10102
+999001 (interacts with) 420429	14413
+999001 (interacts with) 780789	9949
