@@ -13,6 +13,7 @@
 * ### 反覆運算模式 (Iterator Pattern)
 * ### 組合模式 (Composite Pattern)
 * ### 構建模式 (Builder Pattern)
+* ### 適配模式 (Wrapper Pattern)
 * ### 其它 (Other)
 <br />
 
