@@ -9,3 +9,4 @@ Contents
 ### * DesignPatterns (Python)
 ### * GpsDatingApp
 ### * DiseaseTrajectoryAnalyticsAndRelativeRisk
+### * NetworkPlanningAndManagementStudyGuide
