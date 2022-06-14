@@ -39,6 +39,12 @@ NetworkPlanningAndManagementStudyGuide
 * 晚期碰撞 Late Collision
 * 橋接器 Bridge
 * 記憶體 RAM
+* 駭客 Hacker
+* 灌爆 Overflow
+* Mac 表洪水攻擊 MAC Address Table Flooding Attack
+* 端口安全 Port - Security
+* 存取控制串列 Access Control List
+* 端口存取控制串列 Port - ACL
 <br />
 
 Reference
