@@ -45,6 +45,24 @@ NetworkPlanningAndManagementStudyGuide
 * 端口安全 Port - Security
 * 存取控制串列 Access Control List
 * 端口存取控制串列 Port - ACL
+* 動態 Dynamic
+* 靜態 Static
+* 存活時間 Age Time
+* 全雙工 Full Duplex
+* 半雙工 Half Duplex
+* 自動協商 Auto
+* 乙太網路 Ethernet
+* 高速乙太網路 Fast Ethernet
+* 十億位元乙太網路 Gigabit Ethernet
+* 儲存轉送 Store - And - Forward
+* 截穿轉送 Cut - Through
+* 無碎片轉發 Fragment - Free
+* 廣播資料 Broadcast Message
+* 廣播區域 Broadcast Domain
+* 網路區域 Network Segment
+* 繞送 Routing
+* 路由表 Routing Table
+* 預設閘道 Default Gateway
 <br />
 
 Reference
