@@ -14,6 +14,7 @@
 * ### 組合模式 (Composite Pattern)
 * ### 構建模式 (Builder Pattern)
 * ### 適配模式 (Wrapper Pattern)
+* ### 策略模式 (Strategy Pattern)
 * ### 其它 (Other)
 <br />
 
