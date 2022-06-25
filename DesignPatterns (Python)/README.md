@@ -16,6 +16,7 @@
 * ### 適配模式 (Wrapper Pattern)
 * ### 策略模式 (Strategy Pattern)
 * ### 工廠模式 (Factory Pattern)
+* ### 備忘模式 (Memento Pattern)
 * ### 其它 (Other)
 <br />
 
