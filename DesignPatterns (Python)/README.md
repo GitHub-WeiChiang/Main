@@ -17,6 +17,7 @@
 * ### 策略模式 (Strategy Pattern)
 * ### 工廠模式 (Factory Pattern)
 * ### 備忘模式 (Memento Pattern)
+* ### 享元模式 (Flyweight Pattern)
 * ### 其它 (Other)
 <br />
 
