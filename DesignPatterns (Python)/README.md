@@ -18,6 +18,7 @@
 * ### 工廠模式 (Factory Pattern)
 * ### 備忘模式 (Memento Pattern)
 * ### 享元模式 (Flyweight Pattern)
+* ### 存取模式 (Visitor Pattern)
 * ### 其它 (Other)
 <br />
 
