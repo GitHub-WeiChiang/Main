@@ -19,6 +19,7 @@
 * ### 備忘模式 (Memento Pattern)
 * ### 享元模式 (Flyweight Pattern)
 * ### 存取模式 (Visitor Pattern)
+* ### 範本模式 (Template Method Pattern)
 * ### 其它 (Other)
 <br />
 
