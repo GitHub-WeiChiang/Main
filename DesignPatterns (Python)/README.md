@@ -21,6 +21,7 @@
 * ### 存取模式 (Visitor Pattern)
 * ### 範本模式 (Template Method Pattern)
 * ### 橋接模式 (Bridge Pattern)
+* ### 解釋模式 (Interpreter Pattern)
 * ### 其它 (Other)
 <br />
 
