@@ -89,6 +89,7 @@
 	* ### 開放封閉原則 Open Close Principle: Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
 		```
 		from abc import ABCMeta, abstractmethod
+
 		class Animal(metaclass=ABCMeta):
 			def __init__(self, name):
 			self._name = name
@@ -130,7 +131,218 @@
 				for animal in self.__animals:
 					animal.moving()
 		```
-	* ### 
+	* ### 里氏替換原則 Liskov Substitution Principle: Functions that use pointers to base classes must be able to use objects of derived classes without knowing it.
+		```
+		class Monkey(TerrestrialAnimal):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def climbing(self):
+				print(self._name + "在爬樹，動作靈活輕盈...")
+
+		class Zoo:
+			def __init__(self):
+				self.__animals =[]
+
+			def addAnimal(self, animal):
+				self.__animals.append(animal)
+
+			def displayActivity(self):
+				print("觀察每一種動物的活動方式:")
+				for animal in self.__animals:
+					animal.moving()
+
+			def monkeyClimbing(self, monkey):
+				monkey.climbing()
+		```
+	* ### 介面隔離原則 Interface Segregation Principle: Clients should not be forced to depend upon interfaces that they don't use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one submodule.
+		```
+		from abc import ABCMeta, abstractmethod
+		
+		class Animal(metaclass=ABCMeta):
+			def __init__(self, name):
+				self._name = name
+
+			def getName(self):
+				return self._name
+
+			@abstractmethod
+			def feature(self):
+				pass
+
+			@abstractmethod
+			def moving(self):
+				pass
+
+		class IRunnable(metaclass=ABCMeta):
+			@abstractmethod
+			def running(self):
+				pass
+
+		class IFlyable(metaclass=ABCMeta):
+			@abstractmethod
+			def flying(self):
+				pass
+
+		class INatatory(metaclass=ABCMeta):
+			@abstractmethod
+			def swimming(self):
+				pass
+
+		class MammalAnimal(Animal, IRunnable):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def feature(self):
+				print(self._name + "的生理特徵：恆溫，胎生，哺乳。")
+
+			def running(self):
+				print("在陸上跑...")
+
+			def moving(self):
+				print(self._name + "的活動方式：", end="")
+				self.running()
+
+		class BirdAnimal(Animal, IFlyable):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def feature(self):
+				print(self._name + "的生理特徵：恆溫，卵生，前肢成翅。")
+
+			def flying(self):
+				print("在天空飛...")
+
+			def moving(self):
+				print(self._name + "的活動方式：", end="")
+				self.flying()
+
+		class FishAnimal(Animal, INatatory):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def feature(self):
+				print(self._name + "的生理特徵：流線型體型，用鰓呼吸。")
+
+			def swimming(self):
+				print("在水里遊...")
+
+			def moving(self):
+				print(self._name + "的活動方式：", end="")
+				self.swimming()
+
+		class Bat(MammalAnimal, IFlyable):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def running(self):
+				print("行走功能已經退化。")
+
+			def flying(self):
+				print("在天空飛...", end="")
+
+			def moving(self):
+				print(self._name + "的活動方式：", end="")
+				self.flying()
+				self.running()
+
+		class Swan(BirdAnimal, IRunnable, INatatory):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def running(self):
+				print("在陸上跑...", end="")
+
+			def swimming(self):
+				print("在水里游...", end="")
+
+			def moving(self):
+				print(self._name + "的活動方式：", end="")
+				self.running()
+				self.swimming()
+				self.flying()
+
+		class CrucianCarp(FishAnimal):
+			def __init__(self, name):
+				super().__init__(name)
+		```
+	* ### 依賴倒置原則 Dependence Inversion Principle: High level modules should not depend on low level modules; both should depend on abstractions. Abstractions should not depend on details. Details should depend upon abstractions.
+		```
+		from abc import ABCMeta, abstractmethod
+		
+		class Animal(metaclass=ABCMeta):
+			def __init__(self, name):
+				self._name = name
+
+			def eat(self, food):
+				if(self.checkFood(food)):
+					print(self._name + "進食" + food.getName())
+				else:
+					print(self._name + "不吃" + food.getName())
+
+			@abstractmethod
+			def checkFood(self, food):
+				pass
+
+		class Dog(Animal):
+			def __init__(self):
+				super().__init__("狗")
+
+			def checkFood(self, food):
+				return food.category() == "肉類"
+
+		class Swallow(Animal):
+			def __init__(self):
+				super().__init__("燕子")
+
+			def checkFood(self, food):
+				return food.category() == "昆蟲"
+
+		class Food(metaclass=ABCMeta):
+			def __init__(self, name):
+				self._name = name
+
+			def getName(self):
+				return self._name
+
+			@abstractmethod
+			def category(self):
+				pass
+
+			@abstractmethod
+			def nutrient(self):
+				pass
+
+		class Meat(Food):
+			def __init__(self):
+				super().__init__("肉")
+
+			def category(self):
+				return "肉類"
+
+			def nutrient(self):
+				return "蛋白質、脂肪"
+
+		class Worm(Food):
+			def __init__(self):
+				super().__init__("蟲")
+
+			def category(self):
+				return "昆蟲"
+
+			def nutrient(self):
+				return "蛋白質、微量元素"
+		```
+* ### LoD (Law of Demeter) 原則: Each unit should have only limited knowledge about other units: only units "closely" related to the current unit. Only talk to your immediate friends, don't talk to strangers.
+* ### KISS (Keep It Simple and Stupid) 原則: Keep It Simple and Stupid.
+* ### DRY (Don't Repeat Yourself) 原則: .
+* ### YAGNI (You Aren't Gonna Need It) 原則: You aren't gonna need it, don't implement something until it is necessary.
+* ### Rule Of Three 原則。
+* ### CQS (Command - Query Separation) 原則。
+* ### 重構與重寫不同。
+* ### 重構原因: 程式碼重複、結構混亂、無擴展性、強耦合、性能低。
+* ### 重構時機: 新增功能與錯誤修補時。
+* ### 重構方式: 重命名、函數重構、重新組織資料結構、設計模式導入。
 <br />
 
 Reference
