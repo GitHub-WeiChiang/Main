@@ -45,12 +45,12 @@
 * ### type()
 	* ### 查看變數或物件的類型。
 	* ### 創建一個 (class)。
-```
-ClassVaribale = type('ClassA', (object, ), dict(name = "type test"))
-a = ClassVaribale()
-print(type(a))
-print(a.name)
-```
+		```
+		ClassVaribale = type('ClassA', (object, ), dict(name = "type test"))
+		a = ClassVaribale()
+		print(type(a))
+		print(a.name)
+		```
 * ### 在 Python 中一切都是物件，類是元類 metaclass 的一個實例。
 	* ### obj (is instance of) class (is instance of) metaclass。
 * ### type 與 object 的關係
@@ -65,6 +65,72 @@ print(a.name)
 	* ### class.\_\_init\_\_ 對返回的實例物件 obj 進行初始化，如一些狀態和屬性的設置。
 	* ### 返回一個使用者真正需要使用的物件 obj。
 	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns%20(Python)/%E7%89%A9%E4%BB%B6%E7%9A%84%E5%89%B5%E5%BB%BA%E9%81%8E%E7%A8%8B.jpg)
+* ### 篩檢程式模式
+* ### 物件集區技術
+* ### 回檔機制
+* ### MVC 模式
+* ### SOLID 原則
+	* ### 單一職責原則 Single Responsibility Principle: A class should have only one reason to change.
+		```
+		class TerrestrialAnimal():
+			def __init__(self, name):
+				self.__name = name
+
+			def running(self):
+				print(self.__name + "在路上跑...")
+
+		class AquaticAnimal():
+			def __init__(self, name):
+				self.__name = name
+
+			def swimming(self):
+				print(self.__name + "在水裡游...")
+		```
+	* ### 開放封閉原則 Open Close Principle: Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+		```
+		from abc import ABCMeta, abstractmethod
+		class Animal(metaclass=ABCMeta):
+			def __init__(self, name):
+			self._name = name
+
+			@abstractmethod
+			def moving(self):
+				pass
+
+		class TerrestrialAnimal(Animal):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def moving(self):
+				print(self._name + "在路上跑...")
+
+		class AquaticAnimal(Animal):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def moving(self):
+				print(self._name + "在水裡游...")
+
+		class BirdAnimal(Animal):
+			def __init__(self, name):
+				super().__init__(name)
+
+			def moving(self):
+				print(self._name + "在天空飛...")
+
+		class Zoo:
+			def __init__(self):
+				self.__animals =[]
+
+			def addAnimal(self, animal):
+				self.__animals.append(animal)
+
+			def displayActivity(self):
+				print("觀察每一種動物的活動方式:")
+				for animal in self.__animals:
+					animal.moving()
+		```
+	* ### 
 <br />
 
 Reference
