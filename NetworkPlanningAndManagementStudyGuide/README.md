@@ -17,15 +17,15 @@ NetworkPlanningAndManagementStudyGuide
 | UDP | User Datagram Protocol | 使用者資料報協定 | L4 | - |
 | IPv4 | Internet Protocol version 4 | 網際網路通訊協定第四版 | L3 | - |
 | IPv6 | Internet Protocol version 6 | 網際網路通訊協定第六版 | L3 | - |
-| IPX | Internetwork Packet Exchange | 網際網路封包交換協定 | L3 | 淘汰 |
-| CLNP | Connectionless Network Protocol | 無連接網路協定 | L3 | 泛指無連接網路服務 (CLNS, Connectionless Network Service) 中的協定 |
-| Ethernet protocol | Ethernet protocol | 乙太網路協定 | L2 | Typical LAN technology |
+| IPX | Internetwork Packet Exchange | 網際網路封包交換協定 | L3 | 淘汰。 |
+| CLNP | Connectionless Network Protocol | 無連接網路協定 | L3 | 泛指 CLNS 中的協定。 |
+| Ethernet protocol | Ethernet protocol | 乙太網路協定 | L2 | Typical LAN technology. |
 | ICMP | Internet Control Message Protocol | 網際網路控制訊息協定 | L3 | - |
 | ARP | Address Resolution Protocol | 位址解析協定 | L3 | - |
-| GARP | Gratuitous Address Resolution Protocol | 無回報位址解析協定 | L3 | 送出封包中 SRC MAC & SRC IP & DES IP 為自己，DES MAC 為廣播 (用於偵測 IP 衝突、ARP 暫存更新與 MAC Table 更新) |
-| RARP | Reverse Address Resolution Protocol | 逆位址解析協定 | L3 | 被 DHCP 取代 |
-| CDP | Cisco Discovery Protocol | 思科發現協定 | L2 | Cisco 設備上預設啟動 |
-| LLDP | Link Layer Discovery Protocol | 鏈路層發現協定 | L2 | 設備上預設關閉 |
+| GARP | Gratuitous Address Resolution Protocol | 無回報位址解析協定 | L3 | IP 衝突偵測與 MAC 相關更新。 |
+| RARP | Reverse Address Resolution Protocol | 逆位址解析協定 | L3 | 被 DHCP 取代。 |
+| CDP | Cisco Discovery Protocol | 思科發現協定 | L2 | Cisco 設備上預設啟動。 |
+| LLDP | Link Layer Discovery Protocol | 鏈路層發現協定 | L2 | 設備上預設關閉。 |
 | null | null | null | null | - |
 <br />
 
