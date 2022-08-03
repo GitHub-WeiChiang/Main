@@ -25,7 +25,7 @@ NetworkPlanningAndManagementStudyGuide
 | GARP | Gratuitous Address Resolution Protocol | 無回報位址解析協定 | L3 | IP 衝突偵測與 MAC 相關更新。 |
 | RARP | Reverse Address Resolution Protocol | 逆位址解析協定 | L3 | 被 DHCP 取代。 |
 | CDP | Cisco Discovery Protocol | 思科發現協定 | L2 | Cisco 設備上預設啟動。 |
-| LLDP | Link Layer Discovery Protocol | 鏈路層發現協定 | L2 | 設備上預設關閉。 |
+| LLDP | Link Layer Discovery Protocol | 鏈路層發現協定 | L2 | Cisco 設備上預設關閉。 |
 | null | null | null | null | - |
 <br />
 
