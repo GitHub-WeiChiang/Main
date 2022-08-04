@@ -1,6 +1,6 @@
 NetworkPlanningAndManagementStudyGuide
 =====
-協定
+協定 (僅供參考)
 ---
 | 縮寫 | 英文 | 中文 | 層級 | 備註 |
 | --- | --- | --- | --- | --- |
@@ -26,6 +26,14 @@ NetworkPlanningAndManagementStudyGuide
 | RARP | Reverse Address Resolution Protocol | 逆位址解析協定 | L3 | 被 DHCP 取代。 |
 | CDP | Cisco Discovery Protocol | 思科發現協定 | L2 | Cisco 設備上預設啟動。 |
 | LLDP | Link Layer Discovery Protocol | 鏈路層發現協定 | L2 | Cisco 設備上預設關閉。 |
+| Routing Protocol | Routing Protocol | 路由協定 | L3 | - |
+| IGP | Interior Gateway Protocol | 內部閘道協定 | L3 | - |
+| EGP | Exterior Gateway Protocol | 外部閘道協定 | L3 | - |
+| RIP | Routing Information Protocol | 路由資訊協定 | L3 | Distance Vector. |
+| EIGRP | Enhanced Interior Gateway Routing Protocol | 增強型內部閘道路由協定 | L3 | Distance Vector. |
+| OSPF | Open Shortest Path First | 開放式最短路徑優先 | L3 | Link - State. |
+| IS - IS | Intermediate System to Intermediate System | 中間系統到中間系統 | L2 | Link - State. |
+| BGP | Border Gateway Protocol | 邊界閘道協定 | L5 | Path Vector. |
 | null | null | null | null | - |
 <br />
 
