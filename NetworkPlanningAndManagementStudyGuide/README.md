@@ -1,6 +1,6 @@
 NetworkPlanningAndManagementStudyGuide
 =====
-協定 (僅供參考)
+協定
 ---
 | 縮寫 | 英文 | 中文 | 層級 | 備註 |
 | --- | --- | --- | --- | --- |
@@ -35,6 +35,8 @@ NetworkPlanningAndManagementStudyGuide
 | IS - IS | Intermediate System to Intermediate System | 中間系統到中間系統 | L2 | Link - State. |
 | BGP | Border Gateway Protocol | 邊界閘道協定 | L5 | Path Vector. |
 | null | null | null | null | - |
+<br />
+![image](https://gitlab.com/ChiangWei/main/-/raw/master/NetworkPlanningAndManagementStudyGuide/Internet%20Protocol.png)
 <br />
 
 Reference
