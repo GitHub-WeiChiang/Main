@@ -51,6 +51,15 @@ OracleDatabase
             (ATTRIBUTE NAME 2) = @(ATTRIBUTE NAME 2);
     END
     ```
+* ### Database Performance Tuning
+    * ### Index 建立
+    * ### I/O 流量減少
+    * ### Stored Procedure
+* ### Stored Procedure 優點
+    * ### 減少流量
+    * ### 提升安全
+    * ### 效能優化
+    * ### 可以接受參數
 <br />
 
 Reference

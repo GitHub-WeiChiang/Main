@@ -1,4 +1,4 @@
-SpringBoot
+SpringBoot (Version 1, Eclipse)
 =====
 * ### Chapter03 使用開發工具
 * ### Chapter04 Spring Boot 基礎
