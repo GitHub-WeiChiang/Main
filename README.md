@@ -11,7 +11,7 @@ Contents
 ### * DataStructuresAndAlgorithms (Java)
 ### * Blockchain (Java)
 ### * Git
-### * SpringBoot (Version 1, Eclipse)
+### * SpringBoot
 ### * Python
 ### * DesignPatterns (Python)
 ### * GpsDatingApp
