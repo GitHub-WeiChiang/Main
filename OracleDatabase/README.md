@@ -60,6 +60,45 @@ OracleDatabase
     * ### 提升安全
     * ### 效能優化
     * ### 可以接受參數
+* ### Execute SQL Server Stored Procedure From Python
+```
+import pyodbc
+ 
+# Connection variables.
+server = 'ip'
+database = 'database name'
+username = 'user name'
+password = 'password'
+
+try:
+    # Connection string.
+    cnxn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + server + ";DATABASE=" + database + ";UID=" + username + ";PWD=" + password)
+    cursor = cnxn.cursor()
+ 
+    # Prepare the stored procedure execution script and parameter values.
+    storedProc = "Exec (PROCEDURE NAME) @(ATTRIBUTE NAME) = ?, @(ATTRIBUTE NAME) = ?"
+    params = ("ATTRIBUTE", "ATTRIBUTE")
+ 
+    # Execute Stored Procedure With Parameters.
+    cursor.execute(storedProc, params)
+ 
+    # Iterate the cursor.
+    row = cursor.fetchone()
+    while row:
+        # Print the row.
+        print(str(row[0]) + " : " + str(row[1] or '') )
+        row = cursor.fetchone()
+ 
+    # Close the cursor and delete it.
+    cursor.close()
+    del cursor
+ 
+    # Close the database connection.
+    cnxn.close()
+ 
+except Exception as e:
+    print("Error: %s" % e)
+```
 <br />
 
 Reference
