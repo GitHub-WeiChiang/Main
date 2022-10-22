@@ -1,5 +1,8 @@
 OracleDatabase
 =====
+* ### Oracle Database (19c)
+* ### SQL Developer
+* ### Data Modeler
 * ### SQL Server Management Studio (Stored Procedure)
     * ### Database -> Programmibility -> Stored Procedure
     ```

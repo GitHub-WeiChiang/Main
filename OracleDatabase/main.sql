@@ -1,3 +1,130 @@
+SELECT 
+    DECODE(grouping(department_name), 1, '全體部門', department_name),
+    DECODE(grouping(job_id), 1, '所有職務', job_id),
+    COUNT(*),
+    TO_CHAR(avg(salary), '999,999')
+FROM employees e, departments d
+WHERE 
+    d.department_id = e.department_id
+    AND
+    d.department_id in (20, 30)
+GROUP BY ROLLUP (department_name, job_id)
+ORDER BY 1, 2;
+
+SELECT
+    decode(
+        GROUPING(department_id),
+        1, '全體部門合計',
+        0, department_id
+    ),
+    to_char(SUM(salary), '999,999')
+FROM employees
+GROUP BY ROLLUP(department_id)
+ORDER BY department_id;
+
+SELECT department_id, job_id, manager_id, SUM(salary)
+FROM employees
+WHERE department_id in (20, 30) 
+GROUP BY GROUPING SETS(
+    (department_id, job_id),
+    (job_id, manager_id)
+)
+ORDER BY department_id, manager_id, job_id;
+
+SELECT department_id, job_id, SUM(salary)
+FROM employees
+WHERE department_id in(20, 30)
+GROUP BY CUBE(department_id, job_id)
+ORDER BY department_id;
+
+SELECT department_id, SUM(salary)
+FROM employees
+GROUP BY CUBE(department_id)
+ORDER BY department_id;
+
+SELECT department_id, job_id, SUM(salary)
+FROM employees
+GROUP BY ROLLUP(department_id, job_id)
+ORDER BY department_id, job_id;
+
+SELECT department_id, SUM(salary)
+FROM employees
+GROUP BY ROLLUP(department_id)
+ORDER BY department_id;
+
+SELECT
+    department_id,
+    TO_CHAR(MAX(salary), '99,999'),
+    TO_CHAR(MIN(salary), '99,999'),
+    TO_CHAR(AVG(salary), '99,999.9'),
+    TO_CHAR(MEDIAN(salary), '99,999.9'),
+    TO_CHAR(STDDEV(salary), '99,999.9'),
+    TO_CHAR(VARIANCE(salary), '999,999,999.9')
+FROM employees
+GROUP BY department_id;
+
+SELECT
+    employee_id,
+    department_id,
+    hire_date,
+    FIRST_VALUE(hire_date) OVER (
+        PARTITION BY department_id
+        ORDER BY hire_date
+    ),
+    hire_date - FIRST_VALUE(hire_date) OVER (
+        PARTITION BY department_id
+        ORDER BY hire_date
+    )
+FROM employees
+WHERE department_id IN (20, 30)
+ORDER BY 2, 5;
+
+SELECT
+    department_id,
+    employee_id,
+    salary,
+    LEAD(salary, 1, 0) OVER (
+        PARTITION BY department_id
+        ORDER BY salary
+        DESC NULLS LAST
+    ),
+    LAG(salary, 1, 0) OVER (
+        PARTITION BY department_id
+        ORDER BY salary
+        DESC NULLS LAST
+    )
+FROM employees
+WHERE department_id IN (20, 30)
+ORDER BY 1, 3 DESC;
+
+SELECT
+    employee_id,
+    department_id,
+    salary,
+    RANK() OVER (
+        PARTITION BY department_id
+        ORDER BY salary DESC NULLS LAST
+    ) RANK,
+    DENSE_RANK() OVER (
+        PARTITION BY department_id
+        ORDER BY salary DESC NULLS LAST
+    ) DENSE_RANK
+FROM employees
+WHERE department_id in(30,50)
+ORDER BY 2, RANK;
+
+SELECT
+    DEPARTMENT_ID,
+    EMPLOYEE_ID,
+    TO_CHAR(HIRE_DATE, 'yyyy-mm-dd'),
+    ROW_NUMBER() OVER (
+        PARTITION BY DEPARTMENT_ID
+        ORDER BY HIRE_DATE
+    )
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID IN (20, 30)
+ORDER BY 1, 3;
+
 SELECT DEPARTMENT_ID, EMPLOYEE_ID, COUNT(*) OVER (PARTITION BY DEPARTMENT_ID)
 FROM EMPLOYEES
 WHERE DEPARTMENT_ID IN (20, 30);
