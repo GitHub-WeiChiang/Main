@@ -1,8 +1,8 @@
 OracleDatabase
 =====
-* ### Oracle Database (19c)
-* ### SQL Developer
-* ### Data Modeler
+* ### Oracle Database (19c), 資料庫軟體。
+* ### SQL Developer, 圖形整合發展軟體。
+* ### Data Modeler, 建模工具軟體。
 * ### SQL Server Management Studio (Stored Procedure)
     * ### Database -> Programmibility -> Stored Procedure
     ```
@@ -102,6 +102,14 @@ try:
 except Exception as e:
     print("Error: %s" % e)
 ```
+* ### Schema, 泛指 Table、View、Index、Row 等, 是形式描述語言的一種結構 (不包含資料)。
+* ### DDL, Data Definition Language, 無需 commit (CREATE、DROP)。
+* ### DML, Data Manipulation Language, 需 commit (SELECT、INSERT、UPDATE、DELETE)。
+* ### DCL, Data Control Language, 授權相關。
+* ### TCL, Transaction Control Language (SAVEPOINT、ROLLBACK)。
+* ### 實體關聯圖 ERD (Entity Relation Diagram)。
+* ### 鳥爪模型 (Crow's Foot Model)。
+* ### 順向工程: ERD to SQL。
 <br />
 
 Reference
