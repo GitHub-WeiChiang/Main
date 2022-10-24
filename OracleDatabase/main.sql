@@ -1,3 +1,64 @@
+WITH
+    A AS (
+        SELECT department_id, ROUND(AVG(salary)) avg_sal
+        FROM employees
+        GROUP BY department_id
+        ORDER BY 1
+    ),
+    B AS (
+        SELECT department_id, employee_id, last_name || first_name name, salary
+        FROM employees
+        ORDER BY 1
+    )
+SELECT a.department_id, b.employee_id, b.name, b.salary, a.avg_sal
+FROM A JOIN B ON (a.department_id = b.department_id) AND (b.salary > a.avg_sal);
+
+SELECT DEPARTMENT_ID, DEPARTMENT_NAME
+FROM DEPARTMENTS D
+WHERE EXISTS (
+    SELECT *
+    FROM EMPLOYEES
+    WHERE DEPARTMENT_ID = D.DEPARTMENT_ID
+)
+ORDER BY DEPARTMENT_ID;
+
+SELECT department_id, employee_id, last_name || first_name, salary
+FROM employees e
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees
+    WHERE department_id = e.department_id
+)
+ORDER BY department_id;
+
+SELECT LAST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY > ALL (
+    SELECT DISTINCT SALARY
+    FROM EMPLOYEES
+    WHERE JOB_ID = 'IT_PROG'
+);
+
+SELECT FIRST_NAME, SALARY
+FROM EMPLOYEES
+WHERE MANAGER_ID = (
+    SELECT MANAGER_ID
+    FROM EMPLOYEES
+    WHERE FIRST_NAME = 'Neena'
+) AND SALARY >= (
+    SELECT SALARY
+    FROM EMPLOYEES
+    WHERE FIRST_NAME = 'Neena'
+) AND FIRST_NAME <> 'Neena';
+
+SELECT EMPLOYEE_ID, FIRST_NAME, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE (MANAGER_ID, DEPARTMENT_ID) = (
+    SELECT MANAGER_ID, DEPARTMENT_ID
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = 104
+) AND EMPLOYEE_ID <> 104;
+
 SELECT 
     DECODE(grouping(department_name), 1, '全體部門', department_name),
     DECODE(grouping(job_id), 1, '所有職務', job_id),
