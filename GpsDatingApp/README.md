@@ -7,7 +7,7 @@ Tech Stack
 * ### OOP
 * ### Design Patterns
 * ### Multithreading
-* ### MySQL (WampServer、Amazon Lightsail)
+* ### MySQL (WampServer、Amazon LightSail)
 * ### MySQLWorkbench
 * ### ORM
 * ### Redis
