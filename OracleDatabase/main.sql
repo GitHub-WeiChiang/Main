@@ -1,3 +1,140 @@
+SELECT REGEXP_SUBSTR(
+    'http://www.abc123.com/products',
+    'http://([[:alnum:]]+\.?){3,4}/?')
+FROM DUAL;
+
+SELECT REGEXP_SUBSTR(
+    '新北市, 新莊區, 中正路 510 號, 電話 (02)2905-2000',
+    ',[^,]+',
+    1,
+    3
+)
+FROM DUAL;
+
+SELECT street_address
+FROM locations
+WHERE REGEXP_INSTR(street_address, '[^[:alpha:]]') = 1;
+
+SELECT
+    employee_id,
+    last_name,
+    REGEXP_REPLACE(
+        phone_number,
+        '([[:digit:]]{3})\.([[:digit:]]{3})\.([[:digit:]]{4})',
+        '(\1) \2-\3'
+    )
+FROM employees
+WHERE department_id in (20, 30);
+
+SELECT first_name, last_name
+FROM employees
+WHERE REGEXP_LIKE(first_name, '^Ste(v|ph)en$');
+
+SELECT 'TRUE'
+FROM dual
+WHERE REGEXP_LIKE('Alex', '[^Ale|ax.r$]');
+
+WITH A AS (
+    select department_id, count(*)
+    from employees
+    group by department_id
+    order by 1
+),
+B AS (
+    SELECT department_id
+    FROM A
+    MINUS
+    SELECT department_id
+    FROM employees
+    WHERE manager_id is null
+)
+SELECT d.department_id, d.department_name, d.manager_id, e.last_name, e.first_name
+FROM departments d JOIN employees e
+ON (d.department_id = e.department_id)
+WHERE d.department_id in (
+    SELECT department_id
+    FROM B
+) 
+AND (e.employee_id = d.manager_id);
+
+WITH A AS (
+    SELECT employee_id
+    FROM employees
+    MINUS
+    SELECT DISTINCT employee_id
+    FROM job_history
+    ORDER BY 1
+)
+SELECT employee_id, department_id, last_name, job_id
+FROM employees
+WHERE employee_id in (
+    SELECT employee_id
+    FROM A
+);
+
+SELECT location_id, city
+FROM locations
+INTERSECT
+SELECT location_id, city
+FROM locations JOIN departments USING(location_id);
+
+SELECT employee_id, last_name, job_id
+FROM employees
+INTERSECT
+SELECT employee_id, e.last_name, j.job_id
+FROM job_history j JOIN employees e Using (employee_id);
+
+SELECT 2 COL1, 'Y' COL2
+FROM DUAL
+UNION
+SELECT 1, 'X'
+FROM DUAL
+UNION
+SELECT 3, NULL
+FROM DUAL
+ORDER BY 2;
+
+SELECT EMPLOYEE_ID
+FROM EMPLOYEES
+WHERE JOB_ID = 'SA_MAN'
+UNION
+SELECT EMPLOYEE_ID
+FROM JOB_HISTORY
+WHERE JOB_ID = 'SA_MAN';
+
+SELECT EMPLOYEE_ID, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 50
+ORDER BY DEPARTMENT_ID
+UNION
+SELECT EMPLOYEE_ID, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 90
+UNION
+SELECT EMPLOYEE_ID, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 10;
+
+SELECT employee_id, job_id, hire_date, TO_DATE(null), department_id
+FROM employees
+UNION ALL
+SELECT employee_id, job_id, start_date, end_date, department_id
+FROM job_history
+ORDER BY 1, 3 DESC;
+
+SELECT employee_id, job_id, hire_date, TO_DATE(null)
+FROM employees 
+UNION
+SELECT employee_id, job_id, start_date, end_date
+FROM job_history
+ORDER BY 1, 3 DESC;
+
+SELECT employee_id, job_id
+FROM employees
+UNION
+SELECT employee_id, job_id
+FROM job_history;
+
 WITH
     A AS (
         SELECT department_id, ROUND(AVG(salary)) avg_sal
