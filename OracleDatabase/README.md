@@ -110,6 +110,34 @@ except Exception as e:
 * ### 實體關聯圖 ERD (Entity Relation Diagram)。
 * ### 鳥爪模型 (Crow's Foot Model)。
 * ### 順向工程: ERD to SQL。
+* ### 交易的開始與結束
+    * ### 執行 COMMIT 或 ROLLBACK 命令。
+    * ### 執行一個 DDL 或 DCL。
+    * ### 用戶退離 SQL Developer。
+    * ### 系統當機。
+* ### COMMIT: 確認異動資料，寫入硬碟，執行前皆可透過 ROLLBACK 反悔。
+* ### ROLLBACK: 取消當前異動。
+* ### SAVEPOINT: 標記 ROLLBACK 倒回點。
+* ### 交易自動 COMMIT
+    * ### 一個 DDL 或 DCL 命令。
+    * ### 正常退出 SQL Developer。
+* ### 交易自動 ROLLBACK
+    * ### SQL Developer 異常關閉。
+    * ### 系統當機。
+* ### 交易確認前的狀態
+    * ### 交易在主記憶體資料緩衝區內進行，可被復原。
+    * ### 其他用戶 SELECT 所查詢的是尚未 COMMIT 資料。
+    * ### 當前用戶 SELECT 所查詢的是緩衝區內資料。
+    * ### 受交易影響的資料列會被鎖住，其他人同時間無法針對該資料列進行異動。
+* ### 交易確認後的狀態
+    * ### 新資料將覆蓋舊資料。
+    * ### 異動資料被永久寫入硬碟。
+    * ### 所有被授權用戶皆可查詢異動結果。
+    * ### 系統釋放鎖住的資料列。
+    * ### 所有 SAVEPOINT 被清除。
+* ### 倒回注意事項
+    * ### 單一的一個 DML 命令執行發生錯誤，只有受該命令影響的資料列會被倒回。
+    * ### Oracle Server 在 DDL 命令前後均會自動執行隱性 COMMIT，故無法再進行 ROLLBACK。
 <br />
 
 Reference

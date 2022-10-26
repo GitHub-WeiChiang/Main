@@ -1,3 +1,59 @@
+UPDATE employees
+SET (job_id, salary) = (
+    select job_id, salary
+    from employees
+    where employee_id = 100
+)
+WHERE employee_id = 999;
+
+UPDATE employees
+SET job_id = (
+        select job_id 
+        from employees
+        where employee_id = 100
+    ),
+    salary = (
+        select salary
+        from employees    
+        where employee_id = 100
+    )
+WHERE employee_id = 999;
+
+UPDATE departments
+SET manager_id = 200
+WHERE department_id = 999;
+
+INSERT INTO emps (employee_id, last_name, email, job_id, hire_date) 
+SELECT employee_id, last_name, email, job_id, hire_date
+FROM employees
+WHERE employee_id > 200;
+
+DROP TABLE emps;
+
+CREATE TABLE emps
+AS
+SELECT *
+FROM employees
+WHERE employee_id > 9999;
+
+INSERT INTO employees
+VALUES (
+    999,
+    '丞晞',
+    '辜',
+    'albert0425369@gmail.com',
+    '02.12345678',
+    TO_DATE('29-07-2021', 'DD-MM-YYYY'),
+    'SA_MAN',
+    30000,
+    NULL,
+    100,
+    30
+);
+
+INSERT INTO departments (department_id, department_name)
+VALUES (999, 'Public Relation');
+
 SELECT REGEXP_SUBSTR(
     'http://www.abc123.com/products',
     'http://([[:alnum:]]+\.?){3,4}/?')
