@@ -64,6 +64,9 @@ NetworkPlanningAndManagementStudyGuide
 <br />
 ![image](https://gitlab.com/ChiangWei/main/-/raw/master/NetworkPlanningAndManagementStudyGuide/Internet%20Protocol.png)
 <br />
+* ### EMS (Element Management System，網元管理系統)，是管理特定類型的一個或多個電信 NE (Network Element，網路單元) 的系統。
+* ### NMS (Network Management System，網路管理系統)，也稱為綜合網管系統，可以同時對多種專業網進行管理，也可以同時管理由多個廠家設備構成的電信網路。
+<br />
 
 Reference
 =====
