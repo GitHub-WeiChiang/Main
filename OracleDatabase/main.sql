@@ -1,3 +1,99 @@
+UPDATE students s
+SET
+    s.stu_address.street_address = 'xxx',
+    s.stu_address.postal_code = 'xxx'
+WHERE student_id = 'xxx';
+
+SELECT
+    student_id,
+    stu_name,gender,
+    s.stu_address.city,
+    s.stu_address.district,
+    s.stu_address.street_address,
+    phone_number
+FROM STUDENTS s
+ORDER BY 1;
+
+INSERT INTO students (
+    student_id,
+    stu_name,
+    gender,
+    STU_ADDRESS,
+    phone_number
+)
+VALUES (
+    'xxx',
+    'xxx',
+    'xxx',
+    HR.STU_ADDRESS_TYP('xxx','xxx','xxx','xxx','xxx'),
+    'xxx'
+);
+
+CREATE TABLE STUDENTS(
+    STUDENT_ID CHAR(10) CONSTRAINT STU_PK PRIMARY KEY,
+    STU_NAME VARCHAR2(20) NOT NULL,
+    GENDER CHAR(4),
+    STU_ADDRESS STU_ADDRESS_TYP,
+    PHONE_NUMBER VARCHAR2(30)
+);
+
+CREATE OR REPLACE TYPE "STU_ADDRESS_TYP" AS OBJECT(
+    STREET_ADDRESS VARCHAR2(50),
+    POSTAL_CODE VARCHAR2(10),
+    CITY VARCHAR2(30),
+    DISTRICT VARCHAR2(10),
+    COUNTRY_ID CHAR(3)
+);
+
+SELECT
+    customer_id,
+    cust_last_name || cust_first_name,
+    c.cust_address.postal_code,
+    c.cust_address.street_address
+FROM customers c
+WHERE customer_id < 111;
+
+DESCRIBE CUST_ADDRESS_TYP;
+
+DROP INDEX PRODUCT_NAME_IDX;
+
+CREATE INDEX PRODUCT_NAME_IDX
+ON PRODUCT_INFORMATION (PRODUCT_NAME);
+
+CREATE OR REPLACE VIEW CLERK_VU AS
+SELECT EMPLOYEE_ID, LAST_NAME, DEPARTMENT_ID, JOB_ID, SALARY
+FROM EMPS
+WHERE JOB_ID LIKE '%CLERK';
+WITH CHECK OPTION;
+
+UPDATE CLERK_VU
+SET JOB_ID = 'PU_MAN'
+WHERE EMPLOYEE_ID = 125;
+
+SELECT *
+FROM CLERK_VU;
+
+CREATE OR REPLACE VIEW CLERK_VU AS
+SELECT EMPLOYEE_ID, LAST_NAME, DEPARTMENT_ID, JOB_ID, SALARY
+FROM EMPS
+WHERE JOB_ID LIKE '%CLERK';
+
+CREATE TABLE EMPS AS
+SELECT *
+FROM EMPLOYEES;
+
+SELECT employee_seq.CURRVAL
+FROM DUAL;
+
+SELECT employee_seq.NEXTVAL
+FROM DUAL;
+
+CREATE SEQUENCE employee_seq
+START WITH 100
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 FLASHBACK TABLE T1 TO RESTORE POINT DATA_107;
 
 DROP RESTORE POINT DATA_107;
