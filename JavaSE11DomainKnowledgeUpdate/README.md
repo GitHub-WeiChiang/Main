@@ -1,6 +1,5 @@
 JavaSE11DomainKnowledgeUpdate
 =====
-* ### null
 <br />
 
 Note
