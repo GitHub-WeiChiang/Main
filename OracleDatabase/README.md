@@ -154,6 +154,11 @@ except Exception as e:
     * ### 需要經常更新的資料表。
     * ### 小資料量資料表。
     * ### 預期檢索資料量經常 > 4% 的大量資料表。
+* ### Oracle 資料庫存取權限
+    * ### 系統權限 System Privilege，如登入資料庫或建立資料表。
+    * ### 物件權限 Object Privilege，如對某資料表進行 SELECT。
+    * ### 角色權限 Role Privilege，System Privilege + Object Privilege, 組合包。
+* ### 檢索控制資訊 (資料字典): 資料字典 (Data Dictionary) 貯存資料庫邏輯、物理結構和正在進行操作的相關資料之 meta 數據。具體的說，Oracle 資料庫的資料字典是由基本表格和使用者可存取的資料字典視觀表組成 (如可透過其查詢用戶、用戶狀態與帳號過期時間等)。
 <br />
 
 Reference
