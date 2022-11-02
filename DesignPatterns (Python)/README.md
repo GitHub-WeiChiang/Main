@@ -29,7 +29,7 @@
 =====
 * ### 關聯 (Association): ClassA 中並沒有資料型態為 ClassB 的屬性，但有使用到 ClassB 的屬性或方法。
 * ### 聚合 (Aggregation): ClassA 中有資料型態為 ClassB 的屬性，但其 ClassB 的實例是從外部取得，非內部生成。
-* ### 組合 (Composition): ClassA 中有資料型態為 ClassB 的屬性，且為 ClassA 自己內部生成。
+* ### 組合 (Composition): ClassA 中有資料型態為 ClassB 的屬性，且為 ClassA 自己內部生成，也就是說，當 ClassA 消失時，ClassB 也會不見。
 * ### Python3 中所有類別都繼承 object 類別。
 * ### 存取權限
 	* ### \_\_foo\_\_: 定義的是特殊方法，一般是系統定義名字，類似 \_\_init\_\_()。
