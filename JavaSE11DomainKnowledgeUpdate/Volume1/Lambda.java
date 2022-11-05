@@ -47,9 +47,9 @@ public class Lambda {
 		Void li7 = a -> System.out.println(a);
 		li7.func(2);
 		
-		Lambda.generic(Integer.valueOf("2"),a -> System.out.println(a));
-		Lambda.generic(Float.valueOf("2"),a -> System.out.println(a));
-		Lambda.generic(String.valueOf(2),a -> System.out.println(a));
+		Lambda.generic(Integer.valueOf("2"), a -> System.out.println(a));
+		Lambda.generic(Float.valueOf("2"), a -> System.out.println(a));
+		Lambda.generic(String.valueOf(2), a -> System.out.println(a));
 	}
 	
 	public static void generic(Object obj, Generic<Object> g) {
