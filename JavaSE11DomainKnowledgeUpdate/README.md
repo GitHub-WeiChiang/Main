@@ -12,6 +12,9 @@ Note
 * ### var: Java 10 加入，正式名稱為區域型別推斷 (local variable type inference)，只能套用在區域變數，由右側變數值推斷型別，可用於 lambda、迴圈和 try-with-resources 等區塊。
 * ### var 只可用於區域變數宣告。
 * ### var 可用於簡化程式碼。
+* ### Java SE 7 interface: 只有 public abstract method (無方法內容)。
+* ### Java SE 8 interface: 新增 public default, public static (要實作方法內容)。
+* ### Java SE 9 interface: 新增 private, private static (要實作方法內容)。
 <br />
 
 Reference
