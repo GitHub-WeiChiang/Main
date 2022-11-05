@@ -3,6 +3,8 @@ JavaSE11DomainKnowledgeUpdate
 * ### Volume1
     * ### var
     * ### interface
+    * ### Functional Interface
+    * ### Lambda
 <br />
 
 Note
@@ -12,12 +14,22 @@ Note
 * ### Java SE 11 已將 JRE 併入 JDK。
 * ### UMLet: UML Tool for Fast UML Diagrams.
 * ### Integer.valueOf() vs Integer.parseInt(): valueOf() returns an Integer object while Integer, parseInt() returns a primitive int. Both String and integer can be passed a parameter to Integer, valueOf() whereas only a String can be passed as parameter to Integer.
-* ### var: Java 10 加入，正式名稱為區域型別推斷 (local variable type inference)，只能套用在區域變數，由右側變數值推斷型別，可用於 lambda、迴圈和 try-with-resources 等區塊。
-* ### var 只可用於區域變數宣告。
-* ### var 可用於簡化程式碼。
-* ### Java SE 7 interface: 只有 public abstract method (無方法內容)。
-* ### Java SE 8 interface: 新增 public default, public static (要實作方法內容)。
-* ### Java SE 9 interface: 新增 private, private static (要實作方法內容)。
+* ### var: SE 10 加入，正式名稱為區域型別推斷 (local variable type inference)，只能套用在區域變數，由右側變數值推斷型別，可用於 lambda、迴圈和 try-with-resources 等區塊。
+    * ### var 只可用於區域變數宣告。
+    * ### var 可用於簡化程式碼。
+* ### interface
+    * ### SE 7: 只有 public abstract method (無方法內容)。
+    * ### SE 8: 新增 public default, public static (要實作方法內容)。
+    * ### SE 9: 新增 private, private static (要實作方法內容)。
+    * ### 方法宣告可以是 abstract or default。
+    * ### 存取修飾可以是 public or private。
+    * ### 若某類別所繼承父類別與實作之介面有相同方法，父類別優先權較高 (該方法在父類別中存取修飾字需為 public)。
+    * ### 若某類別實作多個介面中有相同之方法則會導致編譯失敗 (可以透過實作該方法解決編譯失敗問題)。
+* ### SE 8 推出 Functional Interface，該介面只可有一個抽象方法，透過 @FunctionalInterface 標記。
+* ### Lambda (Lambda expressions are a new and important feature included in Java SE 8)
+    * ### 目的為使用匿名方法。
+    * ### 無需述明方法名稱、參數與回傳型別。
+    * ### 簡化 Functional Interface 的實作內容。
 <br />
 
 Reference
