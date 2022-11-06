@@ -5,6 +5,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### interface
     * ### Functional Interface
     * ### Lambda
+* ### Volume2
 <br />
 
 Note
@@ -30,6 +31,12 @@ Note
     * ### 目的為使用匿名方法。
     * ### 無需述明方法名稱、參數與回傳型別。
     * ### 簡化 Functional Interface 的實作內容。
+* ### 泛型類別註記
+    * ### <T>: Type.
+    * ### <E>: Element.
+    * ### <K>: Key.
+    * ### <V>: Value.
+* ### Deque: Double Ended Queue.
 <br />
 
 Reference
