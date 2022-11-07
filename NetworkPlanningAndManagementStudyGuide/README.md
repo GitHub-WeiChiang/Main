@@ -68,6 +68,10 @@ NetworkPlanningAndManagementStudyGuide
 
 * ### EMS (Element Management System，網元管理系統)，是管理特定類型的一個或多個電信 NE (Network Element，網路單元) 的系統。
 * ### NMS (Network Management System，網路管理系統)，也稱為綜合網管系統，可以同時對多種專業網進行管理，也可以同時管理由多個廠家設備構成的電信網路。
+* ### API vs. SNMP vs. CLI
+    * ### There are a variety of ways to communicate, configure, and manage network devices. The first way of managing network equipment is through the console. The console is a command-line environment that network admins connect to through a remote connection. Though SSH is commonly used today, that remote connection can be made through the Telnet or SSH protocols.
+    * ### SNMP is another way to communicate with network devices. SNMP is more universal than console commands. SNMP has a limited ability to perform configurations, though, and is commonly used to collect metrics for networks instead. These metrics are collected and displayed by management information bases.
+    * ### Finally, network engineers can also use APIs. Again, APIs are specific to each vendor, though common languages like OpenConfig attempt to make those APIs more universal. Network admins can create a much more automated, scalable, and robust network by using vendor APIs.
 <br />
 
 Reference
