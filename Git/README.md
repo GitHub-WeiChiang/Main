@@ -134,7 +134,11 @@ Pull Request 流程
 * ### Clone 回來修改
 * ### 執行 Commit
 * ### Push 回自己的專案
-* ### 發 PR 給原作者
+* ### 發 PR 給原作者ß
+
+怎麼跟上當初 fork 專案的進度
+-----
+* ### [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)
 
 Reference
 =====
