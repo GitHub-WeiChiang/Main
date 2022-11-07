@@ -6,6 +6,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### Functional Interface
     * ### Lambda
 * ### Volume2
+    * ### of()
 <br />
 
 Note
@@ -37,6 +38,8 @@ Note
     * ### <K>: Key.
     * ### <V>: Value.
 * ### Deque: Double Ended Queue.
+* ### SE 9 導入 of() 建立 immutable 物件 (List.of(), Set.of(), Map.of())，類似 Arrays.asList("1", "2", ...)。
+* ### SE 10 導入 copyOf() 建立 immutable 的副本物件 (List.copyOf(), Set.copyOf(), Map.copyOf())。
 <br />
 
 Reference
