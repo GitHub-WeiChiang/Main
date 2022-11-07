@@ -128,6 +128,14 @@
 * ### git log --oneline, git rebase -i bb0c9c2, replace "pick" to "squash"
 * ### SOURCETREE -> WORKSPACE -> History -> select commit (Right-click) -> Rebase children of bb0c9c2 interactively... -> Description (Right-click) -> Squash with previous commit
 
+Pull Request 流程
+-----
+* ### 複製 (Fork) 專案
+* ### Clone 回來修改
+* ### 執行 Commit
+* ### Push 回自己的專案
+* ### 發 PR 給原作者
+
 Reference
 =====
 ### * 為你自己學 Git
