@@ -7,6 +7,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### Lambda
 * ### Volume2
     * ### of()
+    * ### copyOf()
 <br />
 
 Note
