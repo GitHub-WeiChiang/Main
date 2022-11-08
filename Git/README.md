@@ -142,4 +142,4 @@ Pull Request 流程
 
 Reference
 =====
-### * 為你自己學 Git
+* ### 為你自己學 Git

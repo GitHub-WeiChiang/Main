@@ -45,5 +45,5 @@ Note
 
 Reference
 =====
-### * OCP：Java SE 11 Developer 認證指南 (上) -- 物件導向設計篇
-### * OCP：Java SE 11 Developer 認證指南 (下) -- API 剖析運用篇
+* ### OCP：Java SE 11 Developer 認證指南 (上) -- 物件導向設計篇
+* ### OCP：Java SE 11 Developer 認證指南 (下) -- API 剖析運用篇

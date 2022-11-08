@@ -63,4 +63,4 @@ Note
 
 Reference
 =====
-### * Python 3.7 技術手冊
+* ### Python 3.7 技術手冊

@@ -5,10 +5,10 @@
 
 樣板方法模式應用
 =====
-### * compareTo(Object object) 方法的覆寫
+* ### compareTo(Object object) 方法的覆寫
 <br />
 
 掛鉤應用 Hook
 =====
-### * Swing 視窗程式中可覆寫的 paint() 方法 （來自於 JFrame 類別）
-### * Applet 類別中可覆寫的 init()、start()、stop()、destroy()、paint() 方法 （來自於 Applet 類別）
+* ### Swing 視窗程式中可覆寫的 paint() 方法 （來自於 JFrame 類別）
+* ### Applet 類別中可覆寫的 init()、start()、stop()、destroy()、paint() 方法 （來自於 Applet 類別）

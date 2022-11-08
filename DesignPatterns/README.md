@@ -1,7 +1,7 @@
 DesignPatterns
 =====
-### * Java
-### * Python
+* ### Java
+* ### Python
 <br />
 
 Design Pattern 應用紀錄
