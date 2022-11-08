@@ -17,7 +17,7 @@ Contents
 ### * SystemsDesign
 <br />
 
-Design Pattern 應用紀錄
+Design Pattern 工作應用紀錄
 =====
 * ### 整合網管
     * ### Singleton (應用廣泛)
