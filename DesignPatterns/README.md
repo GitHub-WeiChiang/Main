@@ -13,7 +13,7 @@ Design Pattern 應用紀錄
     * ### Command (半自動化網管配置)
 * ### 交友軟體
     * ### Singleton (應用廣泛)
-    * ### State (配對流程)
+    * ### State (配對流程狀態控制)
     * ### DAO (關聯資料庫存取)
     * ### Facade (關聯資料庫存取、交友管理)
     * ### Builder (圖檔處理)
