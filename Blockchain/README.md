@@ -1,4 +1,4 @@
-Blockchain (Java)
+Blockchain
 =====
 * ### 01 區塊鏈簡介
 * ### 02 區塊鏈架構

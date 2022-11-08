@@ -1,4 +1,4 @@
-DataStructuresAndAlgorithms (Java)
+DataStructuresAndAlgorithms
 =====
 ### * FundamentalDataStructures
 ### * AlgorithmAnalysis
