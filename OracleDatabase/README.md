@@ -190,7 +190,7 @@ except Exception as e:
         WHERE ... = @... OPTION(OPTIMIZE FOR UNKNOWN)
     END
     ```
-    * ### Local Variable: 2008 之前的版本適用，透過 Local Variable 承接參數，亦可達到與 OPTIMIZE FOR UNKNOWN 一樣的效果，若使用於不均勻資料效能將非常低落。
+    * ### Local Variable: 2008 之前的版本適用，透過 Local Variable 承接參數，亦可達到與 OPTIMIZE FOR UNKNOWN 一樣的效果，亦不可用於不均勻資料。
     ```
     CREATE PROCEDURE ...(variable)
     AS
