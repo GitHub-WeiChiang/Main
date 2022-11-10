@@ -159,6 +159,49 @@ except Exception as e:
     * ### 物件權限 Object Privilege，如對某資料表進行 SELECT。
     * ### 角色權限 Role Privilege，System Privilege + Object Privilege, 組合包。
 * ### 檢索控制資訊 (資料字典): 資料字典 (Data Dictionary) 貯存資料庫邏輯、物理結構和正在進行操作的相關資料之 meta 數據。具體的說，Oracle 資料庫的資料字典是由基本表格和使用者可存取的資料字典視觀表組成 (如可透過其查詢用戶、用戶狀態與帳號過期時間等)。
+* ### 參數探測 (Parameter Sniffing): SQL Server 為避免 Cache 中有許多重覆的執行計畫，當語法是參數化且沒有任何的 Plan 在 Cache 中，會根據當時的參數產生一份最恰當的執行計畫，爾後除非 recompile stored procedure，否則就會一直重用這份執行計畫。
+    * ### 讓 Plan 可以重複使用，避免每次執行 Stored Procedure 都必須耗費 CPU 編譯其語法來選擇其演算法。
+    * ### 若第一次執行所選擇的是資料分布非常極端的情況，可能造成之後在執行此 Stored Procedure 時效能低落。
+* ### 如何解決 Parameter Sniffing 問題
+    * ### Recompile: 極少執行，但每次所進行查詢的資料量差異極大 (可針對整個 Procedure 層級或個別的 WHERE 查詢子句)。
+    ```
+    CREATE PROCEDURE ...
+    WITH RECOMPILE
+    AS
+    BEGIN
+        查詢區塊
+    END
+
+    --
+
+    CREATE PROCEDURE ...
+    AS
+    BEGIN
+        ...
+        WHERE ... = @... OPTION(RECOMPILE)
+    END
+    ```
+    * ### OPTIMIZE FOR UNKNOWN: 面對頻繁執行的情況，將查詢子句的參數設定為未知，使 Query Optimizer 在編譯時針對未知參數賦予中庸值，若使用於不均勻資料效能將非常低落 (適用 2008 之後的版本)。
+    ```
+    CREATE PROCEDURE ...
+    AS
+    BEGIN
+        ...
+        WHERE ... = @... OPTION(OPTIMIZE FOR UNKNOWN)
+    END
+    ```
+    * ### Local Variable: 2008 之前的版本適用，透過 Local Variable 承接參數，亦可達到與 OPTIMIZE FOR UNKNOWN 一樣的效果，若使用於不均勻資料效能將非常低落。
+    ```
+    CREATE PROCEDURE ...(variable)
+    AS
+    BEGIN
+        DECLARE ...(local variable)
+        SET ...(local variable) = ...(variable)
+        ...
+        WHERE ... = ...(local variable)
+    END
+    ```
+    * ### 為每個獨特的情況寫一個 Stored Procedure: 適合頻繁查詢，且追求每次查詢都能有近乎完美效能的解法 (如果能夠清楚掌握每次查詢的特性)。
 <br />
 
 Reference
