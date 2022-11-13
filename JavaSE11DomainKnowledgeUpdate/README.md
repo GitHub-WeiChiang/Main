@@ -47,6 +47,7 @@ Note
 * ### 執行緒預設為 non-daemon，non-daemon 執行緒都結束 JVM 才會結束，反之 daemon 執行緒無法影響 JVM 不結束。
 * ### @Deprecated 代表這個方法要被淘汰，不要再使用勒。
 * ### 被 read lock 的方法其它執行緒不能 write lock 但可以一直 read lock，被 write lock 的方法其它執行緒請走開。
+* ### Java will utilize the underlying OS threads to do the actual job of executing the code on different CPUs, if running on a multi-CPU machine.
 <br />
 
 Reference
