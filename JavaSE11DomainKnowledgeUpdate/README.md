@@ -48,6 +48,13 @@ Note
 * ### @Deprecated 代表這個方法要被淘汰，不要再使用勒。
 * ### 被 read lock 的方法其它執行緒不能 write lock 但可以一直 read lock，被 write lock 的方法其它執行緒請走開。
 * ### Java will utilize the underlying OS threads to do the actual job of executing the code on different CPUs, if running on a multi-CPU machine.
+* ### Apache Derby
+    * ### Java 開發。
+    * ### 輕量級。
+    * ### 支持 JDBC 和 ANSI SQL。
+    * ### 有 Table 與 View。
+    * ### 支援 BLOB 和 CLOB 資料類型。
+    * ### 支援預存程序。
 <br />
 
 Reference
