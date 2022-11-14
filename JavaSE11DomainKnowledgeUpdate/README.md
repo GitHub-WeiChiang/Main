@@ -14,7 +14,8 @@ JavaSE11DomainKnowledgeUpdate
 Note
 =====
 * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/JavaSE11DomainKnowledgeUpdate/%E5%9F%B7%E8%A1%8C%E7%B7%92%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F%E6%B5%81%E7%A8%8B%E5%9C%96.jpg)
-* ### sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+* ### install
+    * ### sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 * ### Java SE 11 已將 JRE 併入 JDK。
 * ### UMLet: UML Tool for Fast UML Diagrams.
 * ### Integer.valueOf() vs Integer.parseInt(): valueOf() returns an Integer object while Integer, parseInt() returns a primitive int. Both String and integer can be passed a parameter to Integer, valueOf() whereas only a String can be passed as parameter to Integer.
@@ -57,6 +58,12 @@ Note
     * ### 有 Table 與 View。
     * ### 支援 BLOB 和 CLOB 資料類型。
     * ### 支援預存程序。
+* ### MySQL 安裝與執行
+    * ### brew install mysql
+    * ### brew install --cask mysqlworkbench
+    * ### brew services start mysql
+    * ### brew services stop mysql
+    * ### mysqladmin -u root -p --ssl-mode=required password
 <br />
 
 Reference
