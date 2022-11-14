@@ -8,6 +8,7 @@ JavaSE11DomainKnowledgeUpdate
 * ### Volume2
     * ### of()
     * ### copyOf()
+    * ### Arrays.asList()
 <br />
 
 Note
@@ -33,6 +34,7 @@ Note
     * ### 目的為使用匿名方法。
     * ### 無需述明方法名稱、參數與回傳型別。
     * ### 簡化 Functional Interface 的實作內容。
+    * ### Lambda 可以快速的建立並回傳一個實作功能性介面 (Functional Interface) 的類別物件實例。
 * ### 泛型類別註記
     * ### <T>: Type.
     * ### <E>: Element.
