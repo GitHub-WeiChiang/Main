@@ -64,6 +64,7 @@ Note
     * ### brew services start mysql
     * ### brew services stop mysql
     * ### mysqladmin -u root -p --ssl-mode=required password
+    * ### 下載並匯入 IDEA: JDBC Driver for MySQL (Connector/J)
 <br />
 
 Reference
