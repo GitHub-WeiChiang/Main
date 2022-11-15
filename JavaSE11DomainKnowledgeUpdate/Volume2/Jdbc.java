@@ -25,6 +25,13 @@ public class Jdbc {
             Jdbc.showData(rs);
             System.out.println();
             Jdbc.showRow(rs);
+            System.out.println();
+
+            String query2 = "SELECT * FROM BASIC WHERE id = ?";
+            PreparedStatement pStmt = con.prepareStatement(query2);
+            pStmt.setInt(1, 2);
+            ResultSet rs2 = pStmt.executeQuery();
+            Jdbc.showData(rs2);
         } catch (SQLException se) {
             System.out.println("SQL State: " + se.getSQLState());
             System.out.println("Error Code in DB: " + se.getErrorCode());

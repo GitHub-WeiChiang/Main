@@ -71,15 +71,39 @@ Note
     * ### 通過設置 fetch size 可以改變每次和數據庫交互所提取出來的記錄行總數。
     * ### Fetch 相當於讀緩存，默認 Fetch Size 值是 10。
     * ### 緩存因不會有網路消耗，效率相對較高，但需要注意 Fetch Size 值越高則佔用內存越高，要避免出現 OOM (Out of Memory) 錯誤。
-    * ### 需要在獲得檢索結果集之前，設置 fetch size。
+    * ### fetch size 需要在獲得檢索結果集之前設置。
     ```
     Connection con = DriverManager.getConnection(url, name, password);
     Statement stmt = con.createStatement();
 
     stmt.setFetchSize(1000);
-    
+
     ResultSet rs = stmt.executeQuery(query);
     ```
+* ### 資料庫會針對收到的 SQL 語句編譯，產生執行計畫 (execution plan)，若想讓執行計畫重複使用可以透過繫結變數 (bind variables) 方式執行，且可同時避免 SQL injection。
+* ### JDBC 的交易
+    * ### 預設為 auto commit。
+    ```
+    con.setAutoCommit(false);
+    con.commit();
+    con.rollback();
+    ```
+* ### SE 7 導入新版 RowSetProvider 和 RowSetFactory。
+```
+RowSetFactory rsf = RowSetProvider.newFactory();
+JdbcRowSet jrs = rsf.createJdbcRowSet();
+
+jrs.setUrl(url);
+jrs.setUsername(username);
+jrs.setPassword(password);
+jrs.setCommand(sql);
+
+jrs.execute();
+
+while (jrs.next()) {
+    ...
+}
+```
 <br />
 
 Reference
