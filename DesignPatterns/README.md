@@ -18,13 +18,4 @@ Design Pattern 應用紀錄
     * ### DAO (關聯資料庫存取)
     * ### Facade (關聯資料庫存取、交友管理)
     * ### Builder (圖檔處理)
-* ### 讀書會
-    * ### Builder
-    * ### Command
-    * ### Singleton
-    * ### Strategy
-    * ### Bridge
-    * ### Facade
-    * ### Mediator
-    * ### Adapter
 <br />
