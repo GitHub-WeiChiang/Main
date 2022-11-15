@@ -9,6 +9,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### of()
     * ### copyOf()
     * ### Arrays.asList()
+    * ### JDBC
 <br />
 
 Note
@@ -65,6 +66,20 @@ Note
     * ### brew services stop mysql
     * ### mysqladmin -u root -p --ssl-mode=required password
     * ### 下載並匯入 IDEA: JDBC Driver for MySQL (Connector/J)
+* ### JDBC fetch number 優化 - fetch size
+    * ### JDBC 默認每執行一次檢索，會從游標中提取 10 行記錄。
+    * ### 通過設置 fetch size 可以改變每次和數據庫交互所提取出來的記錄行總數。
+    * ### Fetch 相當於讀緩存，默認 Fetch Size 值是 10。
+    * ### 緩存因不會有網路消耗，效率相對較高，但需要注意 Fetch Size 值越高則佔用內存越高，要避免出現 OOM (Out of Memory) 錯誤。
+    * ### 需要在獲得檢索結果集之前，設置 fetch size。
+    ```
+    Connection con = DriverManager.getConnection(url, name, password);
+    Statement stmt = con.createStatement();
+
+    stmt.setFetchSize(1000);
+    
+    ResultSet rs = stmt.executeQuery(query);
+    ```
 <br />
 
 Reference
