@@ -7,22 +7,47 @@ public class Jdbc {
     public static String password = "!QAZ2wsx";
 
     public static void main(String[] args) {
-        try {
-            Connection con = DriverManager.getConnection(url, name, password);
-            Statement stmt = con.createStatement();
+        String query = "SELECT * FROM BASIC";
 
-            String query = "SELECT * FROM BASIC";
+        try (
+                Connection con = DriverManager.getConnection(url, name, password);
+                Statement stmt = con.createStatement();
+                /*
+                 * SELECT: executeQuery(sql) -> ResultSet
+                 * INSERT, UPDATE, DELETE, ...: executeUpdate(sql) -> int
+                 */
+                ResultSet rs = stmt.executeQuery(query)
+        ) {
+            DatabaseMetaData dbm = con.getMetaData();
+            System.out.println("Support for Entry-level SQL-92 standard: " + dbm.supportsANSI92EntryLevelSQL());
+            System.out.println();
 
-            ResultSet rs = stmt.executeQuery(query);
+            Jdbc.showData(rs);
+            System.out.println();
+            Jdbc.showRow(rs);
+        } catch (SQLException se) {
+            System.out.println("SQL State: " + se.getSQLState());
+            System.out.println("Error Code in DB: " + se.getErrorCode());
+            System.out.println("Message: " + se.getMessage());
+        }
+    }
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+    public static void showRow(ResultSet rs) throws SQLException {
+        int num = rs.getMetaData().getColumnCount();
 
-                System.out.println(id + " " + name);
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e);
+        for (int i = 0; i < num; i++) {
+            String str1 = rs.getMetaData().getColumnName(i + 1);
+            String str2 = rs.getMetaData().getColumnTypeName(i + 1);
+            System.out.println(str1 + ": " + str2);
+        }
+    }
+
+    public static void showData(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+
+            System.out.println(id + " " + name);
         }
     }
 }
