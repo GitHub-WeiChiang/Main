@@ -11,6 +11,7 @@ Design Pattern 應用紀錄
     * ### Facade (時序資料庫存取)
     * ### Decorator (簡化 Singleton)
     * ### Command (半自動化網管配置)
+    * ### Builder (Cisco IOS 命令構建)
 * ### 交友軟體
     * ### Singleton (應用廣泛)
     * ### State (配對流程狀態控制)
@@ -18,6 +19,8 @@ Design Pattern 應用紀錄
     * ### Facade (關聯資料庫存取、交友管理)
     * ### Builder (圖檔處理)
 * ### 讀書會
+    * ### Builder
+    * ### Command
     * ### Singleton
     * ### Strategy
     * ### Bridge
