@@ -57,14 +57,14 @@
 	* ### type 是一個 metaclass，而且是一個默認的 metaclass。也就是說，type 是 object 的類型，object 是 type 的一個實例。
 	* ### type 是 object 的一個子類，繼承 object 的所有屬性和行為。
 	* ### type 還是一個 callable，即實現了 \_\_call\_\_ 方法，可以當成一個函數來使用。
-	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns%20(Python)/type%20%E8%88%87%20object%20%E7%9A%84%E9%97%9C%E4%BF%82.jpg)
+	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns/Python/type%20%E8%88%87%20object%20%E7%9A%84%E9%97%9C%E4%BF%82.jpg)
 * ### 物件的創建過程
 	* ### metaclass.\_\_init\_\_ 進行一些初始化的操作 (如全域變數的初始化)。
 	* ### metaclass.\_\_call\_\_ 創建實例，在創建的過程中會呼叫 class 的 \_\_new\_\_ 和 \_\_init\_\_ 方法。
 	* ### class.\_\_new\_\_ 進行具體的產生實體操作，並返回一個實例物件 obj。
 	* ### class.\_\_init\_\_ 對返回的實例物件 obj 進行初始化，如一些狀態和屬性的設置。
 	* ### 返回一個使用者真正需要使用的物件 obj。
-	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns%20(Python)/%E7%89%A9%E4%BB%B6%E7%9A%84%E5%89%B5%E5%BB%BA%E9%81%8E%E7%A8%8B.jpg)
+	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/DesignPatterns/Python/%E7%89%A9%E4%BB%B6%E7%9A%84%E5%89%B5%E5%BB%BA%E9%81%8E%E7%A8%8B.jpg)
 * ### 篩檢程式模式
 * ### 物件集區技術
 * ### 回檔機制
