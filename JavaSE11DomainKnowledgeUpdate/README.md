@@ -12,6 +12,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### JDBC
     * ### Lambda
     * ### Optional&lt;T&gt;
+    * ### StreamAPI
 <br />
 
 Note
@@ -113,6 +114,14 @@ while (jrs.next()) {
     * ### 供應型 (supplier): 提供物件。
 * ### 若 Lambda 內容只是呼叫另一個方法，如同委派 (delegation)，可將其表示簡化為方法參照 (method reference)。
 * ### SE 8 支援泛型的 Optional&lt;T&gt;。
+* ### SE 8 在介面 Collection 中新增宣告為 default 的 stream() 方法，具備許多可以使用方法鏈結 (method chaining) 的方法，使語法流暢 (fluent) 化。
+    * ### filter(): 對集合物件成員使用 Predicate 介面的 test() 方法進行篩選，符合的才可以往下流。
+    * ### forEach(): 使流入的集合物件逐一操作 Consumer 介面的 accept() 方法。
+* ### 管線操作 (pipeline operations) 的分段
+    * ### 來源 (Source): Collection Object, File, Stream Object.
+    * ### 中間作業 (Intermediate Operation): 零個以上。
+    * ### 終端作業 (Terminal Operation): Only one.
+    * ### 短路型終端作業 (Short-Circuit Terminal Operation): Only one.
 <br />
 
 Reference
