@@ -10,6 +10,8 @@ JavaSE11DomainKnowledgeUpdate
     * ### copyOf()
     * ### Arrays.asList()
     * ### JDBC
+    * ### Lambda
+    * ### Optional<T>
 <br />
 
 Note
@@ -110,6 +112,7 @@ while (jrs.next()) {
     * ### 功能型 (function): 型別轉換。
     * ### 供應型 (supplier): 提供物件。
 * ### 若 Lambda 內容只是呼叫另一個方法，如同委派 (delegation)，可將其表示簡化為方法參照 (method reference)。
+* ### SE 8 支援泛型的 Optional<T>。
 <br />
 
 Reference
