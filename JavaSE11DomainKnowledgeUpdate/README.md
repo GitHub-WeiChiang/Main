@@ -11,7 +11,7 @@ JavaSE11DomainKnowledgeUpdate
     * ### Arrays.asList()
     * ### JDBC
     * ### Lambda
-    * ### Optional<T>
+    * ### Optional&lt;T&gt;
 <br />
 
 Note
@@ -40,10 +40,10 @@ Note
     * ### 簡化 Functional Interface 的實作內容。
     * ### Lambda 可以快速的建立並回傳一個實作功能性介面 (Functional Interface) 的類別物件實例。
 * ### 泛型類別註記
-    * ### <T>: Type.
-    * ### <E>: Element.
-    * ### <K>: Key.
-    * ### <V>: Value.
+    * ### &lt;T&gt;: Type.
+    * ### &lt;E&gt;: Element.
+    * ### &lt;K&gt;: Key.
+    * ### &lt;V&gt;: Value.
 * ### Deque: Double Ended Queue.
 * ### SE 9 導入 of() 建立 immutable 物件 (List.of(), Set.of(), Map.of())，類似 Arrays.asList("1", "2", ...)。
 * ### SE 10 導入 copyOf() 建立 immutable 的副本物件 (List.copyOf(), Set.copyOf(), Map.copyOf())。
@@ -112,7 +112,7 @@ while (jrs.next()) {
     * ### 功能型 (function): 型別轉換。
     * ### 供應型 (supplier): 提供物件。
 * ### 若 Lambda 內容只是呼叫另一個方法，如同委派 (delegation)，可將其表示簡化為方法參照 (method reference)。
-* ### SE 8 支援泛型的 Optional<T>。
+* ### SE 8 支援泛型的 Optional&lt;T&gt;。
 <br />
 
 Reference
