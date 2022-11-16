@@ -104,6 +104,12 @@ while (jrs.next()) {
     ...
 }
 ```
+* ### SE 8 在套件 java.util.function 下內建多種功能性介面，其中包含以下四種基礎型供使用。
+    * ### 判斷型 (predicate): 回傳 boolean。
+    * ### 消費型 (consumer): 回傳 void。
+    * ### 功能型 (function): 型別轉換。
+    * ### 供應型 (supplier): 提供物件。
+* ### 若 Lambda 內容只是呼叫另一個方法，如同委派 (delegation)，可將其表示簡化為方法參照 (method reference)。
 <br />
 
 Reference
