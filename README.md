@@ -12,7 +12,7 @@ Contents
 * ### NetworkPlanningAndManagementStudyGuide
 * ### Database
 * ### Docker
-* ### JavaSE11DomainKnowledgeUpdate
+* ### JavaSEDomainKnowledgeUpdate
 * ### SystemsDesign
 <br />
 
