@@ -122,6 +122,37 @@ while (jrs.next()) {
     * ### 中間作業 (Intermediate Operation): 零個以上。
     * ### 終端作業 (Terminal Operation): Only one.
     * ### 短路型終端作業 (Short-Circuit Terminal Operation): Only one.
+* ### HashMap 四大重點: 哈希函数、哈希衝突、擴容方案、線程安全。
+* ### 哈希函数
+    * ### 通過高 16 位與低 16 位進行異或運算來讓高位參與散列，提高散列效果。
+    * ### 控制數組的長度為 2 的整數次冪來簡化取模運算，提高性能。
+    * ### 通過控制初始化的數組長度為 2 的整數次冪、擴容為原來的 2 倍來控制數組長度一定為 2 的整數次冪。
+* ### 哈希衝突
+    * ### 採用鏈地址法，當發生衝突時會轉化為鏈表，當鏈表過長會轉化為紅黑樹提高效率。
+    * ### 對紅黑樹進行了限制，讓紅黑樹只有在極少數極端情況下進行抗壓。
+* ### 擴容方案
+    * ### 裝載因子決定了擴容的閾值，需要權衡時間與空間，一般情況下保持 0.75 不作改動。
+    * ### 擴容機制結合了數組長度為 2 的整數次冪的特點，以一種更高的效率完成數據遷移，同時避免頭插法造成鍊錶環。
+* ### 線程安全
+    * ### HashMap 並不能保證線程安全，在多線程並發訪問下會出現意想不到的問題，如數據丟失等。
+    * ### HashMap 1.8 採用尾插法進行擴容，防止出現鍊錶環導致的死循環問題。
+    * ### 解決並發問題的的方案有 Hashtable、Collections.synchronizeMap()、ConcurrentHashMap，其中最佳解決方案是 ConcurrentHashMap。
+    * ### 上述解決方案並不能完全保證線程安全。
+    * ### 快速失敗是 HashMap 迭代機制中的一種並發安全保證。
+    * ### Note: ConcurrentHashMap 通過降低鎖粒度 + CAS 的方式來提高效率。簡單來說，ConcurrentHashMap 鎖的並不是整個對象，而是一個數組的一個節點。
+* ### ConcurrentHashMap
+    * ### CAS (compare and swap) 和自旋鎖在 ConcurrentHashMap 應用地非常廣泛，在原始碼中我們會經常看到他們的身影，同時這也是 ConcurrentHashMap 的設計核心所在 (自旋鎖是利用 CAS 而設計的一種應用層面的鎖)。
+    * ### CAS 的思路並不複雜，當需要對變數進行自增時，先儲存一個變數副本，再對變數進行自增，然後把變數副本和變數本身進行比較，如果兩者相同，證明沒有發生併發衝突，修改變數的值；如果不同，說明變數在自增的過程中被修改了，把上述整個過程重新來一遍，直到修改成功為止 (比較賦值的操作作業系統會保證的原子性)。
+    ```
+    // 常見的 CAS 方法
+    .compareAndSwapInt();
+    .compareAndSwapLong();
+    .compareAndSwapObject();
+    ```
+    * ### CAS 在併發度過高的場景，若處理時間過長，會導致某些執行緒一直在迴圈自旋，浪費 cpu 資源。
+    * ### Hashtable 與 SynchronizeMap 採取的併發策略是對整個陣列物件加鎖，導致效能及其低下。
+    * ### JDK 1.7 前 ConcurrentHashMap 採用的是鎖分段策略來優化效能。
+    * ### JDK 1.8 後 ConcurrentHashMap 鎖的不是 segment，而是節點。
 <br />
 
 Reference
