@@ -72,6 +72,8 @@ NetworkPlanningAndManagementStudyGuide
     * ### There are a variety of ways to communicate, configure, and manage network devices. The first way of managing network equipment is through the console. The console is a command-line environment that network admins connect to through a remote connection. Though SSH is commonly used today, that remote connection can be made through the Telnet or SSH protocols.
     * ### SNMP is another way to communicate with network devices. SNMP is more universal than console commands. SNMP has a limited ability to perform configurations, though, and is commonly used to collect metrics for networks instead. These metrics are collected and displayed by management information bases.
     * ### Finally, network engineers can also use APIs. Again, APIs are specific to each vendor, though common languages like OpenConfig attempt to make those APIs more universal. Network admins can create a much more automated, scalable, and robust network by using vendor APIs.
+* ### Whats The Difference Between A Port And An Interface ?
+    * ### The port is where you plug in the physical cable connector. The interface is what you configure in the Cisco IOS, therefore is the software representation of the physical port.
 <br />
 
 Reference
