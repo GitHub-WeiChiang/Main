@@ -13,6 +13,7 @@ JavaSEDomainKnowledgeUpdate
     * ### Lambda
     * ### Optional&lt;T&gt;
     * ### StreamAPI
+    * ### StreamAPI2
 <br />
 
 Note
@@ -153,6 +154,7 @@ while (jrs.next()) {
     * ### Hashtable 與 SynchronizeMap 採取的併發策略是對整個陣列物件加鎖，導致效能及其低下。
     * ### JDK 1.7 前 ConcurrentHashMap 採用的是鎖分段策略來優化效能。
     * ### JDK 1.8 後 ConcurrentHashMap 鎖的不是 segment，而是節點。
+* ### 管線作業若沒有定義終端作業，peek() 將不會被啟動。
 <br />
 
 Reference
