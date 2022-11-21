@@ -50,4 +50,5 @@ Chapter04 設計網路限速器
     * ### 效能: 使用邊緣 (edge) 伺服器降低因地理原因造成延遲與運用終究一致性 (eventual consistency) 同步資料。
 * ### 監控: 限速器算法效率、限速器規則效率。
 * ### 硬性限制 (請求絕不可超過門檻) 與軟性限制 (請求可在短時間內超過門檻)。
+* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter04/SystemArchitectureDiagram.drawio.png)
 <br />
