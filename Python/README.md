@@ -65,6 +65,9 @@ Note
 	* ### 後單底線: 如果非得用保留字當變數名，加上去吧。
 	* ### 前雙底線: 我自己是用這個表示 private 啦。
 	* ### 前後雙底線: 這個方法是內建原有的，你可以覆寫它。
+* ### 關於底線 2 (Protected, Private Members)
+	* ### Python's convention to make an instance variable protected is to add a prefix _ (single underscore) to it. This effectively prevents it from being accessed unless it is from within a sub-class.
+	* ### The double underscore __ prefixed to a variable makes it private. It gives a strong suggestion not to touch it from outside the class.
 <br />
 
 Reference
