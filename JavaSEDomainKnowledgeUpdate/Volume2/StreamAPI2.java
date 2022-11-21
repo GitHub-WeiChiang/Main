@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -18,6 +15,45 @@ public class StreamAPI2 {
         StreamAPI2.testSorted();
         System.out.println();
         StreamAPI2.testComparing();
+        System.out.println();
+        StreamAPI2.flatMapDemo();
+    }
+
+    public static void flatMapDemo() {
+        class Item {
+            String name;
+
+            Item (String name) {
+                this.name = name;
+            }
+
+            public String toString() {
+                return this.name;
+            }
+        }
+
+        class Order {
+            String name;
+            List<Item> items = new ArrayList<>();
+
+            Order (String name) {
+                this.name = name;
+            }
+
+            public String toString() {
+                return this.name;
+            }
+        }
+
+        List<Order> orders = new ArrayList<>();
+        IntStream.range(1, 4).forEach(i -> orders.add(new Order("Order_" + i)));
+        orders.forEach(
+            order -> IntStream.range(1, 4).forEach(i -> order.items.add(new Item("Item_" + i)))
+        );
+
+        // long qty = orders.stream().flatMap(order -> order.items.stream()).count();
+        long qty = orders.stream().mapToLong(order -> order.items.size()).sum();
+        System.out.println(qty);
     }
 
     public static void testComparing() {

@@ -12,8 +12,9 @@ JavaSEDomainKnowledgeUpdate
     * ### JDBC
     * ### Lambda
     * ### Optional&lt;T&gt;
-    * ### StreamAPI
-    * ### StreamAPI2
+    * ### StreamAPI - 基礎
+    * ### StreamAPI2 - 中間作業
+    * ### StreamAPI3 - 終端作業
 <br />
 
 Note
