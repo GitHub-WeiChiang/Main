@@ -167,6 +167,17 @@ while (jrs.next()) {
     * ### 不一定比較快。
     * ### 拆解和合併是否適用該場景。
     * ### boxing / unboxing 會降低執行效率。
+* ### 標註型別 (Annotation) 功能
+    * ### 再不改變繼承結構下分類類別。
+    * ### 讓 metadata 維護工作變得容易。
+    * ### 將 metadata 標註在完全不同目標，即便是不相關的類別、實例變數或方法。
+    * ### 單純作為 marker。 
+* ### 常用內建標註型別
+    * ### @Override: 標註覆寫的方法。
+    * ### @FunctionalInterface: 宣告 Functional Interface。
+    * ### @Deprecated: 停用程式碼。
+    * ### @SuppressWarnings: 忽略警告。
+    * ### @SafeVarargs: 程序員認定帶有註釋的主體或者構造函數不會對其執行潛在的不安全操作。
 <br />
 
 Reference
