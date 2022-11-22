@@ -56,7 +56,7 @@ Note
 * ### 可以透過 volatile 關鍵字避免快取產生，但不產生快取並不等於執行序安全。
 * ### 終止執行序可以透過 interrupt() 方法。
 * ### 執行緒預設為 non-daemon，non-daemon 執行緒都結束 JVM 才會結束，反之 daemon 執行緒無法影響 JVM 不結束。
-* ### @Deprecated 代表這個方法要被淘汰，不要再使用勒。
+* ### \@Deprecated 代表這個方法要被淘汰，不要再使用勒。
 * ### 被 read lock 的方法其它執行緒不能 write lock 但可以一直 read lock，被 write lock 的方法其它執行緒請走開。
 * ### Java will utilize the underlying OS threads to do the actual job of executing the code on different CPUs, if running on a multi-CPU machine.
 * ### Apache Derby
@@ -174,10 +174,10 @@ while (jrs.next()) {
     * ### 單純作為 marker。 
 * ### 常用內建標註型別
     * ### \@Override: 標註覆寫的方法。
-    * ### @FunctionalInterface: 宣告 Functional Interface。
-    * ### @Deprecated: 停用程式碼。
+    * ### \@FunctionalInterface: 宣告 Functional Interface。
+    * ### \@Deprecated: 停用程式碼。
     * ### \@SuppressWarnings: 忽略警告。
-    * ### @SafeVarargs: 程序員認定帶有註釋的主體或者構造函數不會對其執行潛在的不安全操作。
+    * ### \@SafeVarargs: 程序員認定帶有註釋的主體或者構造函數不會對其執行潛在的不安全操作。
 <br />
 
 Reference
