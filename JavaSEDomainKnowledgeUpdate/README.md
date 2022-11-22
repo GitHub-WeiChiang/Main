@@ -173,10 +173,10 @@ while (jrs.next()) {
     * ### 將 metadata 標註在完全不同目標，即便是不相關的類別、實例變數或方法。
     * ### 單純作為 marker。 
 * ### 常用內建標註型別
-    * ### @Override: 標註覆寫的方法。
+    * ### \@Override: 標註覆寫的方法。
     * ### @FunctionalInterface: 宣告 Functional Interface。
     * ### @Deprecated: 停用程式碼。
-    * ### @SuppressWarnings: 忽略警告。
+    * ### \@SuppressWarnings: 忽略警告。
     * ### @SafeVarargs: 程序員認定帶有註釋的主體或者構造函數不會對其執行潛在的不安全操作。
 <br />
 
