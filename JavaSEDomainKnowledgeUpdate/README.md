@@ -15,6 +15,8 @@ JavaSEDomainKnowledgeUpdate
     * ### StreamAPI - 基礎
     * ### StreamAPI2 - 中間作業
     * ### StreamAPI3 - 終端作業
+    * ### StreamAPI4 - 短路型終端作業
+    * ### StreamAPI5 - 操作平行化
 <br />
 
 Note
@@ -156,6 +158,15 @@ while (jrs.next()) {
     * ### JDK 1.7 前 ConcurrentHashMap 採用的是鎖分段策略來優化效能。
     * ### JDK 1.8 後 ConcurrentHashMap 鎖的不是 segment，而是節點。
 * ### 管線作業若沒有定義終端作業，peek() 將不會被啟動。
+* ### 指令式編程 (Imperative Programming)。
+* ### 流暢式編程 (Streaming Programming)。
+* ### 管線操作變數必須是沒有狀態 (stateless)。
+* ### 對 Stream 發動平行處理可能讓結果不同。
+* ### 管線平行化處理，底層是使用 Fork / Join 框架。
+* ### 平行化處理注意事項
+    * ### 不一定比較快。
+    * ### 拆解和合併是否適用該場景。
+    * ### boxing / unboxing 會降低執行效率。
 <br />
 
 Reference
