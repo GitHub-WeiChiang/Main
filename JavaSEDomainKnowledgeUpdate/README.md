@@ -178,6 +178,46 @@ while (jrs.next()) {
     * ### \@Deprecated: 停用程式碼。
     * ### \@SuppressWarnings: 忽略警告。
     * ### \@SafeVarargs: 程序員認定帶有註釋的主體或者構造函數不會對其執行潛在的不安全操作。
+* ### SE 9 開始套件可以使用模組 (module) 進行分類，Java Platform Module System (JPMS)，用更高階層的觀點對程式碼進行分類 (module -> package -> class)。
+* ### JPMS 包含
+    * ### 模組的 JAR 檔案格式。
+    * ### 模組化 JDK 套件。
+    * ### 提供模組化相關指令列。
+* ### 模組化的效益
+    * ### 更好的存取控制。
+    * ### 更清晰的依賴管理。
+    * ### 自定義 Java 構建 (build) 內容。
+    * ### 提升效能。
+    * ### 避免套件重複。
+* ### module-info.java 宣告關鍵字
+    * ### exports (to): 導出套件為公開或指定給特定模組使用。
+    * ### requirse (transitive): 宣告當前模組的依賴，並可宣告依賴傳遞。
+    * ### uses: 該模組依賴一個服務 (service)，通常是介面 (interface)。
+    * ### provides (with): 該模組提供一個服務的實作。
+    * ### opens: An open module grants reflective access to all of its packages to other modules.
+* ### 安全的程式
+    * ### 限制存取 (private)。
+    * ### 限制繼承 (final)。
+    * ### 建立不可更改 (immutable) 物件。
+    * ### 善用 clone，注意淺層與深層複製 (shallow copy, deep copy)。
+    * ### PreparedStatement (bind variables) 可以避免 SQL injection。
+    * ### 輸入驗證 (白名單 or 黑名單)。
+    * ### 機敏資訊 (登入、付款與個人識別相關資訊) 盡量不要出現在以下項目
+        * ### toString()
+        * ### 日誌檔
+        * ### exception 的 stack trace
+        * ### System.out and System.err
+        * ### 寫入檔案
+    * ### 機敏資訊用 char[] 優於 String 的原因: 不會儲存在 string pool。
+    * ### 機敏資訊使用完後應適時覆蓋或指向 null。
+    * ### 機敏資訊若要序列化需先加密。
+    * ### 可以透過混淆器 (obfuscator) 編譯專案隱藏細節。
+    * ### 系統若沒有即時釋放資源，資源將隨著程式執行而莫名流失，稱為資訊滲漏 (resource leaking)。
+    * ### 讀取檔案前檢查檔案大小。
+    * ### Zip 炸彈 (zip bomb) 攻擊。
+    * ### 十億笑聲 (billion laughs) 攻擊: 遞迴 xml 定義。
+    * ### 避免溢位
+    * ### 執行 code review。
 <br />
 
 Reference
