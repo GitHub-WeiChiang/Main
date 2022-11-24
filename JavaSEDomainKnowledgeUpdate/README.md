@@ -218,6 +218,9 @@ while (jrs.next()) {
     * ### 十億笑聲 (billion laughs) 攻擊: 遞迴 xml 定義。
     * ### 避免溢位
     * ### 執行 code review。
+* ### Imperative vs. Functional
+    * ### In imperative programming we control not only what to do but also how to do it. For example, when using imperative programming to sum integers in a list. We have to decide how to iterate each element in the list. We can use for loop, for-each loop, or we can get an Interator object from list and use while loop. Then we also have to do the sum.
+    * ### The Streams API supports the functional programming by using lambda expression. What operations we want to perform on the stream elements are done typically by passing a lambda expressions. Operations on a stream produce a result without modifying the data source.
 <br />
 
 Reference
