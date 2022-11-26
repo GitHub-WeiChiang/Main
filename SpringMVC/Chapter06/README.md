@@ -6,4 +6,5 @@ Java Servlet
 * ### Servlet 存在於元件容器架構 (component container architecture) 中，也就是 web container，亦稱為 Servlet engine。
 * ### Web container 必須實作 Servlet 相關 api，負責來自前端 request 的初步處理，後選擇合適的 Servlet 去應對，web container 同時負責 Servlet 的生命週期。
 * ### Tomcat (是一個 web container) 實現了 Servlet 的支援。
+* ### 注意 Project > Properties > Libraries 中 JRE 是否選擇正確，並存在 servlet-api.jar (透過 Add External JARs... 導入)。
 <br />
