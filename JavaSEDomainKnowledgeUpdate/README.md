@@ -71,6 +71,7 @@ Note
     * ### brew install --cask mysqlworkbench
     * ### brew services start mysql
     * ### brew services stop mysql
+    * ### mysql -u root -p
     * ### mysqladmin -u root -p --ssl-mode=required password
     * ### 下載並匯入 IDEA: JDBC Driver for MySQL (Connector/J)
 * ### JDBC fetch number 優化 - fetch size
