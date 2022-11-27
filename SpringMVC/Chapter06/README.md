@@ -1,4 +1,4 @@
-Java Servlet
+Chapter06 Java Servlet
 =====
 * ### Servlet 存活於 web 的容器 (container) 中，web container 是一個獨立的 process，以 service 的方式持續存在。
 * ### 當有請求需執行 Servlet 時，web container 會建立相應的 thread 去執行。

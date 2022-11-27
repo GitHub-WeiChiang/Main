@@ -1,6 +1,7 @@
 SpringMVC
 =====
 * ### Chapter06 Java Servlet
+* ### Chapter07 Java Server Pages
 <br />
 
 Reference
