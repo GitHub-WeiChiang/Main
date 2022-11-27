@@ -159,6 +159,7 @@ except Exception as e:
     * ### 物件權限 Object Privilege，如對某資料表進行 SELECT。
     * ### 角色權限 Role Privilege，System Privilege + Object Privilege, 組合包。
 * ### 檢索控制資訊 (資料字典): 資料字典 (Data Dictionary) 貯存資料庫邏輯、物理結構和正在進行操作的相關資料之 meta 數據。具體的說，Oracle 資料庫的資料字典是由基本表格和使用者可存取的資料字典視觀表組成 (如可透過其查詢用戶、用戶狀態與帳號過期時間等)。
+* ### SQL Server uses a process called parameter sniffing when it executes stored procedures that have parameters.
 * ### 參數探測 (Parameter Sniffing): SQL Server 為避免 Cache 中有許多重覆的執行計畫，當語法是參數化且沒有任何的 Plan 在 Cache 中，會根據當時的參數產生一份最恰當的執行計畫，爾後除非 recompile stored procedure，否則就會一直重用這份執行計畫。
     * ### 讓 Plan 可以重複使用，避免每次執行 Stored Procedure 都必須耗費 CPU 編譯其語法來選擇其演算法。
     * ### 若第一次執行所選擇的是資料分布非常極端的情況，可能造成之後在執行此 Stored Procedure 時效能低落。
