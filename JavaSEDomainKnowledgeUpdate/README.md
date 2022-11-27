@@ -89,6 +89,7 @@ Note
     ResultSet rs = stmt.executeQuery(query);
     ```
 * ### 資料庫會針對收到的 SQL 語句編譯，產生執行計畫 (execution plan)，若想讓執行計畫重複使用可以透過繫結變數 (bind variables) 方式執行，且可同時避免 SQL injection。
+* ### 參數化查詢 (parameterized query 或 parameterized statement) 是指在設計與資料庫連結並存取資料時，在需要填入數值或資料的地方，使用參數 (parameter) 來給值，這個方法目前已被視為最有效可預防 SQL 注入攻擊的攻擊手法的防禦方式。除了安全因素，相比起拼接字串的 SQL 語句，參數化的查詢往往有效能優勢。因為參數化的查詢能讓不同的資料通過參數到達資料庫，從而公用同一條 SQL 語句。大多數資料庫會快取解釋 SQL 語句產生的位元組碼而省下重複解析的開銷。如果採取拼接字串的 SQL 語句，則會由於運算元據是 SQL 語句的一部分而非參數的一部分，而反覆大量解釋SQL語句產生不必要的開銷。
 * ### JDBC 的交易
     * ### 預設為 auto commit。
     ```

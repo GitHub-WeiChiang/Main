@@ -160,6 +160,7 @@ except Exception as e:
     * ### 角色權限 Role Privilege，System Privilege + Object Privilege, 組合包。
 * ### 檢索控制資訊 (資料字典): 資料字典 (Data Dictionary) 貯存資料庫邏輯、物理結構和正在進行操作的相關資料之 meta 數據。具體的說，Oracle 資料庫的資料字典是由基本表格和使用者可存取的資料字典視觀表組成 (如可透過其查詢用戶、用戶狀態與帳號過期時間等)。
 * ### SQL Server uses a process called parameter sniffing when it executes stored procedures that have parameters.
+* ### What is parameter sniffing in SQL Server? When we invoke a stored procedure for the first time the query optimizer generates an optimal execution plan for this stored procedure according to its input parameters.
 * ### 參數探測 (Parameter Sniffing): SQL Server 為避免 Cache 中有許多重覆的執行計畫，當語法是參數化且沒有任何的 Plan 在 Cache 中，會根據當時的參數產生一份最恰當的執行計畫，爾後除非 recompile stored procedure，否則就會一直重用這份執行計畫。
     * ### 讓 Plan 可以重複使用，避免每次執行 Stored Procedure 都必須耗費 CPU 編譯其語法來選擇其演算法。
     * ### 若第一次執行所選擇的是資料分布非常極端的情況，可能造成之後在執行此 Stored Procedure 時效能低落。
@@ -203,6 +204,11 @@ except Exception as e:
     END
     ```
     * ### 為每個獨特的情況寫一個 Stored Procedure: 適合頻繁查詢，且追求每次查詢都能有近乎完美效能的解法 (如果能夠清楚掌握每次查詢的特性)。
+* ### The Elephant and the Mouse, or, Parameter Sniffing in SQL Server
+    * ### SQL Server uses a process called parameter sniffing when it executes stored procedures that have parameters.
+    * ### When using literal values, SQL Server will compile each separately, and store a separate execution plan for each.
+* ### Literal Values 不會有 Parameter Sniffing 的事情發生，每一個查詢語句會對應一個獨立的執行計畫，也就是每次都需進行編譯。
+* ### Parameterized 的查詢語句，則會發生 Parameter Sniffing，所以需要注意效能調適。
 <br />
 
 Reference
