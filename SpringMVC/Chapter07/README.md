@@ -8,9 +8,9 @@ Chapter07 Java Server Pages
     * ### 違反關注分離 (separation of concerns)。
     * ### 違反單一責任制法則 (single responsibility principle)。
 * ### Spring MVC
-    * ### Model: Plain Old Java Object。
-    * ### View: HTML。
-    * ### Controller: Web Container。
+    * ### Model: Plain Old Java Object, POJO。
+    * ### View: JSP
+    * ### Controller: Servlet。
 * ### JSP 被淘汰原因: 行業趨勢強調前後端分離。
 * ### 使用 JSP 的痛點
     * ### 動態資源和靜態資源全部耦合在一起。
