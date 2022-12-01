@@ -1,3 +1,9 @@
+Contents
+=====
+* ### Database
+* ### Stored Procedure (從蒙圈到無限茫然)
+<br />
+
 Database
 =====
 * ### Oracle Database (19c), 資料庫軟體。
@@ -231,13 +237,19 @@ except Exception as e:
     * ### 為每個獨特的情況寫一個 Stored Procedure: 適合頻繁查詢，且追求每次查詢都能有近乎完美效能的解法 (如果能夠清楚掌握每次查詢的特性且資料表不易變動時可以使用，但理論上不建議使用)。
 * ### The Elephant and the Mouse, or, Parameter Sniffing in SQL Server
     * ### SQL Server uses a process called parameter sniffing when it executes stored procedures that "have parameters".
-    * ### When using literal values, SQL Server will compile each separately, and store a separate execution plan for each.
+    * ### When using "literal values", SQL Server will "compile each separately", and "store a separate execution plan for each".
+    * ### 如何判斷是同一句 literal values query ? 在 MySQL (版本 8.0 已徹底移除緩存功能) 還具備缓存功能時，查詢內容多一個空格或變一個大小寫都被認為是不同的語句，在這邊可能也是這樣判斷。
+* ### 執行計畫的生命週期
+    * ### The SQL Execution Plan will not be kept in the Plan cache forever, where the SQL Server Engine will remove the plan from the Plan Cache if the system requires more memory or the age of the plan, that depends on the number of times this plan is called.
+    * ### The system process that is responsible for cleaning these aged plans is called the Lazy Writer process.
 * ### 註記
     * ### Literal Values 不會有 Parameter Sniffing 的事情發生，每一個查詢語句會對應一個獨立的執行計畫，也就是每次都需進行編譯。
     * ### Parameterized 的查詢語句，則會發生 Parameter Sniffing，所以需要注意效能調適。
 * ### 問題
     * ### Q1: 若針對整個 Stored Procedure 層級進行 Recompile，預存程序是不是就沒意義了 ?
     * ### A1: 不完全正確，Stored Procedure 除了增加效能外還有其它優點，且可以將多項作業結合成單一的程序呼叫，所以並不會讓預存程序的使用變得沒有意義。
+    * ### Q2: 為什麼 MySQL 不推薦使用資料庫的除緩存功能甚至要徹底移除 ?
+    * ### A2: (1)自帶的緩存系統應用場景有限，因其要求SQL語句必須一模一樣。 (2)緩存失效頻繁，只要表的數據有任何修改，針對該表的所有緩存都會失效，導致對於更新頻繁的數據表而言，緩存命中率非常低。 (3)緩存功能應交給獨立的緩存服務執行較為合適。
 <br />
 
 Reference
