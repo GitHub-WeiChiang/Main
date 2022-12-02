@@ -7,12 +7,12 @@ Contents
 * ### SpringBoot
 * ### Python
 * ### GpsDatingApp
-* ### DiseaseTrajectoryAnalyticsAndRelativeRisk
+* ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
 * ### OnlineJudge
-* ### NetworkPlanningAndManagementStudyGuide
+* ### ComputerNetwork
 * ### Database
 * ### Docker
-* ### JavaSEDomainKnowledgeUpdate
+* ### Java
 * ### SystemsDesign
 * ### SpringMVC
 <br />
