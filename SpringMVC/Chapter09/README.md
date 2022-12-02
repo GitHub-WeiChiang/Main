@@ -29,7 +29,7 @@ Chapter09 Servlet 的執行環境
         <http-only>true</http-only>
     </cookie-config>
     ```
-* ## Cookie-Based Session Management
+* ### Cookie-Based Session Management
     * ### 容器使用 HttpSession 物件儲存 session 相關內容。
     * ### 容器在每次 session 開始前會產生 JSESSIONID 透過 cookie 儲存在用戶電腦。
     * ### 透過 getSession() 以 JSESSIONID 找出相應物件。
