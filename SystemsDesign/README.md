@@ -6,6 +6,7 @@ SystemsDesign
 * ### Chapter04 設計網路限速器
 * ### Chapter05 設計具有一致性的雜湊算法
 * ### Chapter06 設計鍵值儲存系統
+* ### Chapter07 設計可用於分散式系統的唯一 ID 生成器
 <br />
 
 Reference
