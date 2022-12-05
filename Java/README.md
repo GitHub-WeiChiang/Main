@@ -223,6 +223,13 @@ while (jrs.next()) {
 * ### Imperative vs. Functional
     * ### In imperative programming we control not only what to do but also how to do it. For example, when using imperative programming to sum integers in a list. We have to decide how to iterate each element in the list. We can use for loop, for-each loop, or we can get an Interator object from list and use while loop. Then we also have to do the sum.
     * ### The Streams API supports the functional programming by using lambda expression. What operations we want to perform on the stream elements are done typically by passing a lambda expressions. Operations on a stream produce a result without modifying the data source.
+* ### Java 方法覆寫規則
+    * ### 覆寫方法不能比被覆寫方法限制有更嚴格的訪問級別。
+    * ### 覆寫方法的方法簽名必須與被覆寫方法的相同，如果子類方法的簽名與父類方法簽名不同，那麼就是你認錯人了，那是覆載，不是覆寫。
+    * ### 覆寫方法的返回類型必須與被覆寫方法的返回類型相同。
+    * ### 覆寫方法不能拋出新的異常或者比被覆寫方法聲明的檢查異常更廣的檢查異常，但是可以拋出更少，更有限或者不拋出異常。
+    * ### 不能覆寫被標識為 final 的方法。
+    * ### 如果一個方法不能被繼承，則不能覆寫它。
 <br />
 
 Reference
