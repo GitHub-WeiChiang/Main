@@ -74,8 +74,19 @@ NetworkPlanningAndManagementStudyGuide
     * ### Finally, network engineers can also use APIs. Again, APIs are specific to each vendor, though common languages like OpenConfig attempt to make those APIs more universal. Network admins can create a much more automated, scalable, and robust network by using vendor APIs.
 * ### Whats The Difference Between A Port And An Interface ?
     * ### The port is where you plug in the physical cable connector. The interface is what you configure in the Cisco IOS, therefore is the software representation of the physical port.
-* ### "ip default-gateway" is to be used in L2 devices.
-* ### "ip default-network" would be used in L3 devices, but works slightly different from the usual static default route configured with "ip route 0.0.0.0 0.0.0.0 <next_hop>". Let's say you configure "ip default-network 172.31.0.0". Then, if the device already knows a route for 172.31.0.0, this route will be flagged as a default route candidate. "ip default-network" command is classful.
+* ### "ip default-gateway" vs. "ip default-network"
+    * ### "ip default-gateway" is to be used in L2 devices.
+    * ### "ip default-network" would be used in L3 devices, but works slightly different from the usual static default route configured with "ip route 0.0.0.0 0.0.0.0 <next_hop>". Let's say you configure "ip default-network 172.31.0.0". Then, if the device already knows a route for 172.31.0.0, this route will be flagged as a default route candidate. "ip default-network" command is classful.
+* ### The difference between VLANs and VLAN interfaces.
+    * ### A VLAN itself is not an interface. It is a division of the broadcast domain within an Ethernet segment.
+    * ### To initiate a VLAN in a network switch, this command can be used: "(config)#vlan 10".
+    * ### A VLAN interface is a logical interface that represents a VLAN in all Layer 3 activities the unit may participate in.
+    * ### A VLAN interface has an IP address that is used for any management operations, or as an IP next-hop for routes.
+    ```
+    (config)#Interface vlan 10
+    (config-vlan-10)#ip address 10.10.10.1 255.255.255.0
+    (config-vlan-10)#no shutdown
+    ```
 <br />
 
 Reference
