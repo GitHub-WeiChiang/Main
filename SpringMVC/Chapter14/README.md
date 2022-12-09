@@ -14,7 +14,7 @@ Chapter14 深入 Controller
 * ### 依賴注入: 依賴注入是指「被依賴物件透過外部注入至依賴物件的程式中使用」，也就是被依賴物件並不是在依賴物件的程式中使用 new 產生，而是從外部「注入(inject)」至依賴物件。
 * ### CDI (Contexts and Dependency Injection 上下文依賴注入)，是 Java 官方提供的依賴注入實現。
 * ### 依賴注入與CDI
-    * ### @Inject 注解
+    * ### \@Inject 注解
     ```
     // 字段依賴注入
     public class Simple {
