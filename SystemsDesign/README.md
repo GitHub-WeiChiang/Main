@@ -7,6 +7,8 @@ SystemsDesign
 * ### Chapter05 設計具有一致性的雜湊算法
 * ### Chapter06 設計鍵值儲存系統
 * ### Chapter07 設計可用於分散式系統的唯一 ID 生成器
+* ### Chapter08 設計短網址生成器
+* ### Chapter09 設計網路爬蟲
 <br />
 
 Reference
