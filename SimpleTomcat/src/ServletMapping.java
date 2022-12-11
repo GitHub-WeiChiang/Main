@@ -1,11 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletMappingConfig {
+public class ServletMapping {
 
     private final Map<String, SimpleServlet> servletMapping = new HashMap<>();
 
-    public ServletMappingConfig() {
+    public ServletMapping() {
         servletMapping.put("/java", new JavaServlet());
         servletMapping.put("/scala", new ScalaServlet());
     }

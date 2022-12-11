@@ -5,13 +5,13 @@ import java.net.Socket;
 
 public class SimpleTomcat {
 
-    private int port = 48763;
+    private final int port;
 
-    private final ServletMappingConfig servletMappingConfig;
+    private final ServletMapping servletMapping;
 
     public SimpleTomcat(int port) {
         this.port = port;
-        this.servletMappingConfig = new ServletMappingConfig();
+        this.servletMapping = new ServletMapping();
     }
 
     public void start() {
@@ -21,7 +21,9 @@ public class SimpleTomcat {
             while (true) {
                 Socket socket = serverSocket.accept();
 
+                // 低級字節流 (輸入流)
                 InputStream inputStream = socket.getInputStream();
+                // 低級字節流 (輸出流)
                 OutputStream outputStream = socket.getOutputStream();
 
                 SimpleRequest simpleRequest = new SimpleRequest(inputStream);
@@ -41,7 +43,7 @@ public class SimpleTomcat {
 
         if (url.equals("/favicon.ico")) return;
 
-        SimpleServlet simpleServlet = this.servletMappingConfig.getServlet(url);
+        SimpleServlet simpleServlet = this.servletMapping.getServlet(url);
         simpleServlet.service(simpleRequest, simpleResponse);
     }
 
