@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>WCD09</display-name>
+
+	<servlet>
+		<servlet-name>LifeCycleTest</servlet-name>
+		<servlet-class>course.c09.LifeCycleTestServlet</servlet-class>
+		<init-param>
+			<param-name>myParam</param-name>
+			<param-value>jim</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LifeCycleTest</servlet-name>
+		<url-pattern>/LifeCycleTest</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>perfFilter</filter-name>
+		<filter-class>course.c09.PerformanceFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>Log Entry Prefix</param-name>
+			<param-value>Performance: </param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>perfFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+		<servlet-name>FilterOrderTestServlet</servlet-name>
+		<servlet-class>course.c09.FilterOrderTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FilterOrderTestServlet</servlet-name>
+		<url-pattern>/filterOrderTest.do</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>filter1</filter-name>
+		<filter-class>course.c09.Filter1</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>filter1</filter-name>
+		<servlet-name>FilterOrderTestServlet</servlet-name>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>filter2</filter-name>
+		<filter-class>course.c09.Filter2</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>filter2</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>filter3</filter-name>
+		<filter-class>course.c09.Filter3</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>filter3</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+</web-app>
