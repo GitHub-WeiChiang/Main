@@ -15,7 +15,7 @@ Contents
 * ### Java
 * ### SystemsDesign
 * ### SpringMVC
-* ### InterviewQuestions
+* ### QuestionShorts
 * ### SimpleTomcat
 <br />
 
