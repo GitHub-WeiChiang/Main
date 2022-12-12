@@ -9,6 +9,7 @@ SpringMVC
 * ### Chapter12 JSP 程式設計
 * ### Chapter13 使用客製化標籤開發 JSP 程式
 * ### Chapter14 深入 Controller
+* ### Chapter15 深入 Model
 <br />
 
 Reference
