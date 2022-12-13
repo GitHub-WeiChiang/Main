@@ -95,4 +95,9 @@ synchronized 和 lock 的區別
     * ### synchronized 無法得知。
 * ### lock 可以提高多線程操作效率 (readwritelock)。
 * ### lock 透過 condition 實現 synchronized 的 wait、notify、notifyAll 機制。
+* ### Lock 是一個介面，其中規範了 lock()、unclock() 與 newCondition() 三種方法。
+* ### Condition 是一個介面，作用是在執行緒之間進行溝通，就如其名稱所示，告知執行緒目前的狀況為何，是要等待？還是通知？其規範的幾個重要方法。
+    * ### await(): 告知目前的執行緒等待，直到被通知或中斷（interrupted）。
+    * ### signal(): 通知目前等待中的一個執行緒，從上次的等待點繼續執行，類似物件的 notify() 方法。
+    * ### signalAll(): 通知目前等待中的所有執行緒參與鎖定競爭，而後從上次的等待點繼續執行，類似物件的 notifyAll() 方法。
 <br />
