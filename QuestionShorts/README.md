@@ -2,6 +2,7 @@ QuestionShorts
 =====
 * ### Question001 手写 tomcat 竟然只需这几步！
 * ### Question002 Timing attack
+* ### Question003 synchronized 和 lock 的區別
 <br />
 
 Reference
