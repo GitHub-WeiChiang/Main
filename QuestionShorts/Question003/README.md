@@ -1,4 +1,4 @@
-synchronized 和 lock
+Question003 synchronized 和 lock
 =====
 * ### 在 Java 中有兩種鎖，一種是內置鎖 synchronized，一種是顯示鎖 Lock，其中 Lock 鎖是可中斷鎖，而 synchronized 則爲不可中斷鎖。
 * ### 所謂的中斷鎖指的是鎖在執行時可被中斷，也就是在執行時可以接收 interrupt 的通知，從而中斷鎖執行。
