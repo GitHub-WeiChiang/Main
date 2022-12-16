@@ -22,4 +22,30 @@ Chapter17 網站安全性實作
     * ### 使用者的辨識與驗證 (authentication): 憑證與身份驗證。
     * ### 使用者對系統功能及資源存取的授權 (authorization): 存取控制。
 * ### Java 認證和授權服務 (Java Authentication and Authorization Service，簡稱 JAAS): 是一個 Java 以使用者為中心的安全框架，作為 Java 以代碼為中心的安全的補充。
+* ### 使用者驗證方式
+    * ### BASIC: 醜爆沒人用。
+    * ### DIGEST: 加密過，但一樣醜爆沒人用。
+    * ### FORM: 普遍方式。
+    ```
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>xxx</form-login-page>
+            <form-error-page>xxx</form-error-page>
+        </form-login-config>
+	</login-config>
+
+    <error-page>
+		<location>xxx</location>
+	</error-page>
+    ```
+    * ### CLIENT CERTIFICATE: 客戶端憑證。
+* ### HTTPS
+```
+<security-constraint>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+</security-constraint>
+```
 <br />
