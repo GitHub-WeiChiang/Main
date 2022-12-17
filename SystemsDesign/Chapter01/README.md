@@ -48,5 +48,5 @@ Chapter01 使用者人數 - 從零到百萬規模
     * ### 使用分片擴展資料層
     * ### 每一層都是單一服務
     * ### 監控系統並善用自動化工具
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter01/SystemArchitectureDiagram.drawio.png)
+* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter01/SystemArchitectureDiagram.png)
 <br />
