@@ -13,6 +13,7 @@ SpringMVC
 * ### Chapter16 非同步的 Servlet 和 AJAX
 * ### Chapter17 網站安全性實作
 * ### Chapter18 Spring 框架導論
+* ### Chapter19 Spring DI
 <br />
 
 Reference
