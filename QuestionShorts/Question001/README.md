@@ -1,4 +1,4 @@
-Question002 Timing attack
+Question001 Timing attack
 =====
 * ### 程式一
 * ### Compare two strings using the same time whether they are equal.

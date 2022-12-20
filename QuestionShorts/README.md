@@ -1,10 +1,6 @@
 QuestionShorts
 =====
-* ### Question001 手写 tomcat 竟然只需这几步！
-* ### Question002 Timing attack
-* ### Question003 synchronized 和 lock 的區別
-* ### Question004 什麼是 Java Bean
-* ### Question005 Bean 的生命週期
+* ### Question001 Timing attack
 <br />
 
 Reference
