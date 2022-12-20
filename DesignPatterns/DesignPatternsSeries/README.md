@@ -1,6 +1,7 @@
 DesignPatternsSeries
 =====
 * ### SingleResponsibility
+* ### OpenClose
 <br />
 
 Reference
