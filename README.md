@@ -2,9 +2,9 @@ Contents
 =====
 * ### DesignPatterns
 * ### DataStructuresAndAlgorithms
-* ### Blockchain (腰斬)
+* ### Blockchain
 * ### Git
-* ### SpringBoot (腰斬)
+* ### SpringBoot
 * ### Python
 * ### GpsDatingApp
 * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
@@ -14,7 +14,7 @@ Contents
 * ### Docker
 * ### Java
 * ### SystemsDesign
-* ### SpringMVC (腰斬)
+* ### SpringMVC
 * ### QuestionShorts
 * ### SimpleTomcat
 <br />
