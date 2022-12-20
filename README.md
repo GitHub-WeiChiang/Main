@@ -4,7 +4,6 @@ Contents
 * ### DataStructuresAndAlgorithms
 * ### Blockchain
 * ### Git
-* ### SpringBoot
 * ### Python
 * ### GpsDatingApp
 * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
@@ -14,10 +13,7 @@ Contents
 * ### Docker
 * ### Java
 * ### SystemsDesign
-* ### SpringMVC
 * ### QuestionShorts
-* ### SimpleTomcat
-* ### JavaWeb
 <br />
 
 Note
