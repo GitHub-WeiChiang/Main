@@ -2,6 +2,7 @@ DesignPatternsSeries
 =====
 * ### SingleResponsibility
 * ### OpenClose
+* ### LawOfDemeter
 <br />
 
 Reference
