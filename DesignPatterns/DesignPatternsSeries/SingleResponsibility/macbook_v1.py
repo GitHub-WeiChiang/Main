@@ -1,8 +1,10 @@
+# 依據數值分類
 class LaptopProperty: 
     cpu = ""
     size = 0
     resolution = ""
 
+# 依據功能分類
 class LaptopFunction:
     def startUp(self):
         pass
@@ -10,11 +12,13 @@ class LaptopFunction:
     def shutDown(self):
         pass
 
+# 實作
 class MacLaptopProperty(LaptopProperty):
     cpu = ""
     size = 0
     resolution = ""
-    
+
+# 實作 
 class MacLaptopFunction(LaptopFunction):
     def startUp(self):
         pass

@@ -1,3 +1,4 @@
+# 全部放在一起
 class Laptop: 
     cpu = ""
     size = 0
@@ -8,6 +9,7 @@ class Laptop:
     def shutDown(self): 
         pass
 
+# 實作接口
 class BasicLaptop(Laptop):
     cpu = ""
     size = 0

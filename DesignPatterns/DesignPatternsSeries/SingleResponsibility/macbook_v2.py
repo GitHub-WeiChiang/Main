@@ -1,10 +1,13 @@
+# 數值接口
 class LaptopBasicProperty: 
     cpu = ""
     size = 0
 
+# 數值擴充接口
 class LaptopExtensionProperty:
     resolution = ""
-    
+
+# 功能接口
 class LaptopBasicFunction:
     def startUp(self):
         pass
@@ -12,17 +15,21 @@ class LaptopBasicFunction:
     def shutDown(self):
         pass
 
+# 功能擴充接口
 class LaptopExtensionFunction:
     def sleep(self):
         pass
 
+# 實作
 class MacLaptopBasicProperty(LaptopBasicProperty):
     cpu = ""
     size = 0
 
+# 實作
 class MacLaptopExtensionProperty(LaptopExtensionProperty):
     resolution = ""
-    
+
+# 實作
 class MacLaptopBasicFunction(LaptopBasicFunction):
     def startUp(self):
         pass
@@ -30,10 +37,12 @@ class MacLaptopBasicFunction(LaptopBasicFunction):
     def shutDown(self):
         pass
 
+# 實作
 class MacLaptopExtensionFunction(LaptopExtensionFunction):
     def sleep(self):
         pass
 
+# 整合
 class MacBookV2:
     basic_property: MacLaptopBasicProperty
     basic_function: MacLaptopBasicFunction
