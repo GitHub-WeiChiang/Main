@@ -1,8 +1,9 @@
 DesignPatternsSeries
 =====
-* ### SingleResponsibility
-* ### OpenClose
-* ### LawOfDemeter
+* ### SingleResponsibility: 一個類別應該只專注於一項事物。
+* ### OpenClose: 類別架構應該對架構應該對擴展開放而對修改封閉。
+* ### LawOfDemeter: 類別應只和自己關係密切的類別溝通。
+* ### DependencyInversion: 高階類別與低階類別間應該要有一個抽象的中介接口。
 <br />
 
 Reference
