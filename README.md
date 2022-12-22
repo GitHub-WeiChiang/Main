@@ -14,6 +14,7 @@ Contents
 * ### Java
 * ### SystemsDesign
 * ### QuestionShorts
+* ### FastAPI
 <br />
 
 Note
