@@ -12,6 +12,7 @@ SystemsDesign
 * ### Chapter10 設計通知系統
 * ### Chapter11 動態訊息系統
 * ### Chapter12 設計聊天系統
+* ### Chapter13 設計搜尋文字自動補全系統
 <br />
 
 Reference
