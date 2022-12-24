@@ -11,6 +11,7 @@ SystemsDesign
 * ### Chapter09 設計網路爬蟲
 * ### Chapter10 設計通知系統
 * ### Chapter11 動態訊息系統
+* ### Chapter12 設計聊天系統
 <br />
 
 Reference
