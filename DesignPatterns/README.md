@@ -2,7 +2,7 @@ DesignPatterns
 =====
 * ### Java
 * ### Python
-* ### DesignPatternsSeries
+* ### Series
 <br />
 
 Design Pattern 應用紀錄
