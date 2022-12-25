@@ -6,6 +6,7 @@ Series
 * ### DependencyInversion: 高階類別與低階類別間應該要有一個抽象的中介接口。
 * ### CompositeReuse: 應該多使用關聯、聚合與組合，少使用繼承。
 * ### InterfaceSegregation: 客戶 (類別) 不應該依賴 (實作) 它不需要的接口，且接口的設計應要符合單一職責原則。
+* ### LiskovSubstitutionPrinciple: 任何父類別可以出現的地方，其子類別一定也可以出現。
 <br />
 
 Reference
