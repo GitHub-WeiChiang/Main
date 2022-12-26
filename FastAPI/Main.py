@@ -1,12 +1,9 @@
-# ASGI 服务器
 import uvicorn as uvicorn
 
 from fastapi import FastAPI
 from Router import router
 from starlette.responses import RedirectResponse
 
-# FastAPI 是直接从 Starlette 继承的类
-# Starlette is a lightweight ASGI framework / toolkit, which is ideal for building async web services in Python.
 app = FastAPI()
 
 
