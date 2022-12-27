@@ -4,6 +4,19 @@ from pydantic import BaseModel
 from typing import Union
 
 
+class User(BaseModel):
+    username: str
+    full_name: Union[str, None] = None
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "username": "albert",
+                "full_name": "Wei Chiang",
+            }
+        }
+
+
 class Item(BaseModel):
     name: str
     price: float
