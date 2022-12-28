@@ -1,11 +1,27 @@
-from fastapi import APIRouter, Query, Body, Cookie
+from fastapi import APIRouter, Query, Body, Cookie, Form, HTTPException
 from typing import Union, List
-from Model import Item, User
+from Model import Item, User, UserIn, UserOut
 from Enum import ModelName
 
 router = APIRouter(prefix="/router", tags=["Router"])
 
 # 路径操作是按顺序依次运行的。
+
+
+@router.get("/item9")
+async def item9(item_id: str):
+    raise HTTPException(status_code=404, detail="Item not found")
+
+
+
+@router.post("/login/")
+async def login(username: str = Form(), password: str = Form()):
+    return {"username": username}
+
+
+@router.post("/user/", response_model=UserOut, status_code=200)
+async def create_user(user: UserIn):
+    return user
 
 
 @router.get("/item8")

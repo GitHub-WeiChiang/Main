@@ -11,5 +11,12 @@ FastAPI
 * ### Body(embed=True) 可以使單一的 BaseModel 查询参数透過 request 傳遞至 FastAPI 時其 Json 具有鍵值。
 * ### 从 typing 导入 List 可以声明具有子类型的列表。
 * ### Python frozenset() 函数可以返回一个冻结的集合，冻结后集合不能再添加或删除任何元素。
+* ### 可以在任意的路径操作中使用 response_model 参数来声明用于响应的模型。
+* ### 可以使用 response_model_exclude_unset 参数忽略無实际值時的默認值。
+* ### 使用路径操作装饰器的 response_model_include 和 response_model_exclude 参数，接收一个由属性名称 str 组成的 set 来包含或者排除这些属性。
+* ### 可以在以下任意的路径操作中使用 status_code 参数来声明用于响应的 HTTP 状态码。
+* ### 可以使用来自 fastapi.status 的 HTTP 响应状态码便捷变量。
+* ### 使用 UploadFile 定义客户端的上传文件。
+* ### 向客户端返回 HTTP 错误响应，可以使用 HTTPException，另因其是 Python 异常，所以不能 return，只能 raise。
 * ### 
 <br />

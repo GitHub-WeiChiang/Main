@@ -4,6 +4,15 @@ from pydantic import BaseModel
 from typing import Union
 
 
+class UserIn(BaseModel):
+    username: str
+    password: str
+
+
+class UserOut(BaseModel):
+    username: str
+
+
 class User(BaseModel):
     username: str
     full_name: Union[str, None] = None
