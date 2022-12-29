@@ -18,5 +18,14 @@ FastAPI
 * ### 可以使用来自 fastapi.status 的 HTTP 响应状态码便捷变量。
 * ### 使用 UploadFile 定义客户端的上传文件。
 * ### 向客户端返回 HTTP 错误响应，可以使用 HTTPException，另因其是 Python 异常，所以不能 return，只能 raise。
+* ### 可以使用 from starlette import status 导入状态码，用于定义路径操作响应的 HTTP 状态码，参数应直接传递给路径操作装饰器。
+* ### tags 参数是由 str 组成的 list (一般只有一个 str)，用于为路径操作添加标签。
+* ### response_description 参数用于定义响应的描述说明。
+* ### jsonable_encoder 可以將數據類型 (如: Pydantic 模型) 轉換爲與 JSON 兼容的類型 (如: 字典、列表)。
+* ### 使用 Pydantic 的 exclude_unset 参数更新部分数据，可以在 Pydantic 模型的 .dict() 中使用 exclude_unset 参数，生成的 dict 只包含创建 item 模型时显式设置的数据，而不包括默认值。
+* ### 依赖注入常用于以下场景
+    * ### 共享业务逻辑（复用相同的代码逻辑）
+    * ### 共享数据库连接
+    * ### 实现安全、验证、角色权限
 * ### 
 <br />

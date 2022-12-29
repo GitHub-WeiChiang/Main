@@ -8,7 +8,7 @@ app = FastAPI()
 
 
 # 路径操作装饰器
-@app.get("/")
+@app.get("/", tags=["Main"])
 async def root():
     return RedirectResponse("http://127.0.0.1:8000/docs#/")
 

@@ -1,17 +1,50 @@
-from fastapi import APIRouter, Query, Body, Cookie, Form, HTTPException
+from fastapi import APIRouter, Query, Body, Cookie, Form, HTTPException, Depends
 from typing import Union, List
-from Model import Item, User, UserIn, UserOut
+from Model import Item, Item2, User, UserIn, UserOut
 from Enum import ModelName
+from fastapi.encoders import jsonable_encoder
 
 router = APIRouter(prefix="/router", tags=["Router"])
 
 # 路径操作是按顺序依次运行的。
 
 
-@router.get("/item9")
+# 依赖项
+async def common_parameters(q: Union[str, None] = None, skip: int = 0, limit: int = 100):
+    return {"q": q, "skip": skip, "limit": limit}
+
+
+@router.get("/item11/")
+async def item11(commons: dict = Depends(common_parameters)):
+    return commons
+
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+
+@router.patch("/item10/{item_id}", response_model=Item2)
+async def update_item(item_id: str, item: Item2):
+    # # 更新數據中不包含的鍵值對會保留原有已經存在的值。
+    # stored_item_data = items[item_id]
+    # stored_item_model = Item2(**stored_item_data)
+    # update_data = item.dict(exclude_unset=True)
+    # updated_item = stored_item_model.copy(update=update_data)
+    # items[item_id] = jsonable_encoder(updated_item)
+    # return updated_item
+
+    # 更新數據中不包含的鍵值對會強制被還原成預設值 (若有設定預設值)。
+    update_item_encoded = jsonable_encoder(item)
+    items[item_id] = update_item_encoded
+    return update_item_encoded
+
+
+@router.get("/item9", deprecated=True)
 async def item9(item_id: str):
     raise HTTPException(status_code=404, detail="Item not found")
-
 
 
 @router.post("/login/")

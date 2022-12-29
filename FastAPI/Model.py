@@ -1,7 +1,15 @@
 # 标准的 Python 类型声明请求体
 from pydantic import BaseModel
 # 联合类型
-from typing import Union
+from typing import Union, List
+
+
+class Item2(BaseModel):
+    name: Union[str, None] = None
+    description: Union[str, None] = None
+    price: Union[float, None] = None
+    tax: float = 10.5
+    tags: List[str] = []
 
 
 class UserIn(BaseModel):
