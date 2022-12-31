@@ -34,5 +34,6 @@ FastAPI
     * ### DI (Dependency Injection，依賴注入): 將一個程式的相依關係改由呼叫它的外部程式來決定的方法。
     * ### 優點: 低耦合高內聚、更清晰的意圖、降低邏輯變更造成改動程式碼的幅度、關注點分離提高可測試性。
     * ### 缺點: 系統架構的複雜度增加。
-* ### 
+* ### 使用 OAuth2PasswordBearer 类實現 OAuth2 的 Password 流以及 Bearer 令牌 (Token)。
+* ### 透過 passlib 實作密码哈希和身份校验的功能。
 <br />
