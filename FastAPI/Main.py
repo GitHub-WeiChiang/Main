@@ -184,12 +184,6 @@ app = FastAPI()
 #     return response
 
 
-# 路径操作装饰器
-@app.get("/", tags=["Main"])
-async def root():
-    return RedirectResponse("http://127.0.0.1:8000/docs#/")
-
-
 def fake_hash_password(password: str):
     return "fakehashed" + password
 

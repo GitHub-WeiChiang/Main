@@ -9,17 +9,29 @@ router = APIRouter(prefix="/router", tags=["Router"])
 # 路径操作是按顺序依次运行的。
 
 
+async def device_id_check(device_id: str = Body()):
+    if device_id == "123456":
+        return device_id
+
+    raise HTTPException(status_code=404, detail="Item not found")
+
+
+@router.post("/item16")
+async def item16(device_id: str = Depends(device_id_check), interface: str = Body()):
+    return {"device_id": device_id, "interface": interface}
+
+
 async def verify_token(x_token: str = Header()):
     if x_token != "fake-super-secret-token":
         raise HTTPException(status_code=400, detail="X-Token header invalid")
 
 
-@router.get("/item15/", dependencies=[Depends(verify_token)])
+@router.get("/item15", dependencies=[Depends(verify_token)])
 async def item15():
     return [{"item": "Foo"}, {"item": "Bar"}]
 
 
-@router.get("/item14/")
+@router.get("/item14")
 async def item14(x_token: Union[List[str], None] = Header(default=None)):
     return {"X-Token values": x_token}
 
