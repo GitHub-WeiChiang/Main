@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, Body, Cookie, Form, HTTPException, Depends
+from fastapi import APIRouter, Query, Body, Cookie, Form, HTTPException, Depends, Header
 from typing import Union, List
 from Model import Item, Item2, User, UserIn, UserOut
 from Enum import ModelName
@@ -9,14 +9,50 @@ router = APIRouter(prefix="/router", tags=["Router"])
 # 路径操作是按顺序依次运行的。
 
 
+async def verify_token(x_token: str = Header()):
+    if x_token != "fake-super-secret-token":
+        raise HTTPException(status_code=400, detail="X-Token header invalid")
+
+
+@router.get("/item15/", dependencies=[Depends(verify_token)])
+async def item15():
+    return [{"item": "Foo"}, {"item": "Bar"}]
+
+
+@router.get("/item14/")
+async def item14(x_token: Union[List[str], None] = Header(default=None)):
+    return {"X-Token values": x_token}
+
+
 # 依赖项
 async def common_parameters(q: Union[str, None] = None, skip: int = 0, limit: int = 100):
     return {"q": q, "skip": skip, "limit": limit}
 
 
+class CommonQueryParams:
+    def __init__(self, q: Union[str, None] = None, skip: int = 0, limit: int = 100):
+        self.q = q
+        self.skip = skip
+        self.limit = limit
+
+
+@router.get("/item13/")
+async def item13(commons: CommonQueryParams = Depends()):
+    resp: dict = {
+        1: id(commons),
+        2: id(Depends(CommonQueryParams))
+    }
+    return resp
+
+
+@router.get("/item12/")
+async def item12(commons: CommonQueryParams = Depends(CommonQueryParams)):
+    return id(commons)
+
+
 @router.get("/item11/")
 async def item11(commons: dict = Depends(common_parameters)):
-    return commons
+    return id(commons)
 
 
 items = {
