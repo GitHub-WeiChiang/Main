@@ -36,4 +36,35 @@ FastAPI
     * ### 缺點: 系統架構的複雜度增加。
 * ### 使用 OAuth2PasswordBearer 类實現 OAuth2 的 Password 流以及 Bearer 令牌 (Token)。
 * ### 透過 passlib 實作密码哈希和身份校验的功能。
+* ### 透過 SQLAlchemy 實現數據庫操作。
+* ### 文件结构示例
+    * ### app
+        * ### __init__.py
+        * ### main.py
+        * ### dependencies.py
+        * ### routers
+            * ### __init__.py
+            * ### ...
+        * ### internal
+            * ### __init__.py
+            * ### ...
+* ### FastAPI 默认使用 JSONResponse 返回一个响应 (默认会使用 jsonable_encoder 将这些类型的返回值转换成 JSON 格式)。
+* ### 以在路径函数中定义一个类型为 Response 的参数，这样你就可以在这个临时响应对象中设置 cookie 了 (还可以在直接响应 Response 时直接创建 cookies)。
+```
+@app.post("/")
+def create_cookie(response: Response):
+    response.set_cookie(key="", value="")
+    
+@app.post("/")
+def create_cookie():
+    response = JSONResponse(content=content)
+    response.set_cookie(key="", value=")
+    return response
+```
+* ### 自定义响应
+    * ### PlainTextResponse: 接受文本或字节并返回纯文本响应。
+    * ### JSONResponse: 接受数据并返回一个 application / json 编码的响应。
+    * ### RedirectResponse: 返回 HTTP 重定向。默认情况下使用 307 状态代码 (临时重定向)。
+    * ### StreamingResponse: 类似文件的对象 (例如，由 open() 返回的对象)，则可以在 StreamingResponse 中将其返回。包括许多与云存储，视频处理等交互的库。
+    * ### FileResponse: 异步传输文件作为响应。
 <br />
