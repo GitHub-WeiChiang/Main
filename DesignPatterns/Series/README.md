@@ -1,4 +1,4 @@
-Series
+七大編程原則
 =====
 * ### SingleResponsibility: 一個類別應該只專注於一項事物。
 * ### OpenClose: 類別架構應該對架構應該對擴展開放而對修改封閉。
@@ -9,6 +9,56 @@ Series
 * ### LiskovSubstitutionPrinciple: 任何父類別可以出現的地方，其子類別一定也可以出現。
 <br />
 
+編成原則整理
+=====
+* ### 面對對象設計 (高層設計)
+    * ### 開閉 (目標): 對擴展開放，對修改關閉。
+    * ### 依賴倒置 (手段): 依賴於抽象而非具體。
+* ### 拆分解構
+    * ### 單一職責 (業務上): 類的職責要明確且功能要單一。
+    * ### 接口隔離 (架構上): 類應該只依賴真正有關聯的接口。
+* ### 類之間的通信
+    * ### 合成復用: 關聯、聚合與組合都優於繼承。
+    * ### 里氏替換: 子類別應該可以取代服類別，反之則否。
+    * ### 迪米特法則: 類應該只和真正有關聯的類溝通。
+<br />
+
+設計模式分類
+=====
+| 行為型 | 結構性 | 創建型 |
+| --- | --- | --- |
+| Chain of Responsibility | Adapter | Abstract Factory |
+| Command | Adapter | Builder |
+| Interpreter | Bridge | Factory Method |
+| Iterator | Composite | Prototype |
+| Mediator | Decorator | Singleton |
+| Memento | Facade |  |
+| Observer | Flyweight |  |
+| State | Proxy |  |
+| Strategy |  |  |
+| Template Method |  |  |
+| Visitor |  |  |
+<br />
+
+創建型模式
+=====
+* ### 幫助創建類或是對象。
+* ### 將創建與使用分離，使兩者相互獨立。
+<br />
+
+結構性模式
+=====
+* ### 涉及對象的組合，獲得更好與靈活的結構。
+* ### 更多的透過組合與運行期的動態結合實現。
+<br />
+
+行為型模式
+=====
+* ### 描述類或是對象如何交互分配職責。
+* ### 涉及算法與對象間職責分配，描述一組對象應如何協作完成一個整體功能。
+<br />
+
 Reference
 =====
 * ### 图灵星球 Turing Planet: 设计模式快速入门
+<br />
