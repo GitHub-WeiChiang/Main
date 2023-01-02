@@ -9,12 +9,13 @@ Contents
 * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
 * ### OnlineJudge
 * ### ComputerNetwork
-* ### Database
+* ### OracleDatabase
 * ### Docker
 * ### Java
 * ### SystemsDesign
 * ### Questions
 * ### FastAPI
+* ### MySQLPrinciples
 <br />
 
 Note
