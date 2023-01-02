@@ -17,9 +17,6 @@ JavaSEDomainKnowledgeUpdate
     * ### StreamAPI3 - 終端作業
     * ### StreamAPI4 - 短路型終端作業
     * ### StreamAPI5 - 操作平行化
-* ### SpringBoot
-* ### SpringMVC
-* ### SimpleTomcat
 <br />
 
 Note
