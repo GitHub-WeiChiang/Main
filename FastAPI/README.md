@@ -67,4 +67,17 @@ def create_cookie():
     * ### RedirectResponse: 返回 HTTP 重定向。默认情况下使用 307 状态代码 (临时重定向)。
     * ### StreamingResponse: 类似文件的对象 (例如，由 open() 返回的对象)，则可以在 StreamingResponse 中将其返回。包括许多与云存储，视频处理等交互的库。
     * ### FileResponse: 异步传输文件作为响应。
+* ### 启用 HTTPS
+    * ### 一般要用到: xxx.top.key (私钥文件) 和 xxx.yyy_bundle.crt (证书文件) 这两个文件，
+    * ### 使用 ssl_keyfile 参数和 ssl_certfile 分别指定私钥和证书。
+    ```
+    uvicorn.run(
+        app="project:app",
+        host=host,
+        port=port,
+        reload=True,
+        ssl_keyfile="./ssl/xxx.top.key",
+        ssl_certfile="./ssl/xxx.top_bundle.crt"
+    )
+    ```
 <br />
