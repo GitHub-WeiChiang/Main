@@ -1,7 +1,7 @@
 MySQLPrinciples
 =====
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
-* ### 
+* ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 <br />
 
 番外篇: Stored Procedure (從蒙圈到無限茫然)
