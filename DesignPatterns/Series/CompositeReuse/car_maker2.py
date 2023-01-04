@@ -3,6 +3,7 @@ class Car:
     # 因透過聚合方式，即便動力與烤漆選擇增加，也不會造成類別爆炸
     enery = None
     color = None
+    
     def __init__(self, energy, color):
         self.enery = energy
         self.color = color
