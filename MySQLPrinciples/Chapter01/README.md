@@ -18,6 +18,15 @@ Chapter01 裝作自己是個小白 -- 初識 MySQL
     mysql.server stop
     ```
     * ### mysqld_multi: 這傢伙也是一個啟動指令稿，但它可以啟動或停止多個伺服器處理程序，也能報告它們的運行狀態。
+* ### 在 Windows 系統中啟動伺服器程式
+    * ### 請在黑框框輸入 mysqld 或是雙擊 bin 裡面的 mysqld。
+    * ### 也可以把它註冊成 Windows 服務。
+    ```
+    "完整的可執行檔案路徑" --install
+
+    net start MySQL
+    net stop MySQL
+    ```
 * ### 啟動 MySQL 用戶端程式
     ```
     mysql -h主機名稱 -u用戶名 -p密碼
@@ -27,7 +36,7 @@ Chapter01 裝作自己是個小白 -- 初識 MySQL
     * ### 當你要逃離用戶端程式時，請輸入 quit、exit 或 \\q。
     * ### 如果不想被 process status 偷窺到密碼，請勿在一行命令中輸入密碼。
 * ### MySQL 採用 TCP 作為伺服器與用戶端之間的網路通訊協定。
-* ### MySQL 預設申請 (監聽) 3306 port。
+* ### MySQL 預設申請 (監聽) 3306 通訊埠。
 * ### Windows 作業系統中，兩種處理程序間的通訊方式為 "具名管線" 和 "共用記憶體"。
 * ### 類 UNIX 系統在兩種處理程序間的通訊方式為 UNIX 域通訊端。
 * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/MySQLPrinciples/Chapter01/QueryProcessing.png)
