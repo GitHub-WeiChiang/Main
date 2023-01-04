@@ -1,4 +1,4 @@
-Question002 Bloom Filter
+Question002 什麼是 Bloom Filter ?
 =====
 * ### 什麼是 Bloom Filter: 是一個可以儲存「某一個元素是否存在」的集合。
     * ### 不存在漏報 (False Negative): 有一定會說。

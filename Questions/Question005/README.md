@@ -1,4 +1,4 @@
-Question005 GET 與 POST 的區別
+Question005 GET 與 POST 的區別 ?
 =====
 * ### GET 在瀏覽器中可以回退，POST 造訪同一位址時只是再次提交請求。
 * ### GET 會被瀏覽器快取，POST 不會。
