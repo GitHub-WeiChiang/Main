@@ -11,6 +11,7 @@ Questions
 * ### Question009 - Redis 持久不持久 ?
 * ### Question010 - Redis 記憶體資料滿了怎麼辦 ?
 * ### Question011 - Redis 缓存淘汰策略 LRU 和 LFU 差在哪 ?
+* ### Question012 - 什麼是記憶體碎片化 ?
 <br />
 
 Reference
