@@ -7,7 +7,6 @@ Contents
 * ### Python
 * ### GpsDatingApp
 * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
-* ### OnlineJudge
 * ### ComputerNetwork
 * ### OracleDatabase
 * ### Docker
@@ -17,6 +16,7 @@ Contents
 * ### Questions
 * ### FastAPI
 * ### MySQLPrinciples
+* ### ProgrammationEfficace
 <br />
 
 Note
