@@ -1,4 +1,4 @@
-Question009 Redis 持久不持久 ?
+Question009 - Redis 持久不持久 ?
 =====
 * ### Redis 預設是持久化的鍵值對儲存資料庫 !
 * ### 默认开启 RDB，默认關閉 AOF。

@@ -1,4 +1,4 @@
-Question001 什麼是 Timing Attack ?
+Question001 - 什麼是 Timing Attack ?
 =====
 * ### 程式一
 * ### Compare two strings using the same time whether they are equal.
