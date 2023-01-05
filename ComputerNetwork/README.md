@@ -19,7 +19,7 @@ ComputerNetwork
 | IPv6 | Internet Protocol version 6 | 網際網路通訊協定第六版 | L3 |
 | IPX | Internetwork Packet Exchange | 網際網路封包交換協定 | L3 |
 | CLNP | Connectionless Network Protocol | 無連接網路協定 | L3 |
-| Ethernet protocol | Ethernet protocol | 乙太網路協定 | L2 |
+| Ethernet Protocol | Ethernet Protocol | 乙太網路協定 | L2 |
 | ICMP | Internet Control Message Protocol | 網際網路控制訊息協定 | L3 |
 | ARP | Address Resolution Protocol | 位址解析協定 | L3 |
 | GARP | Gratuitous Address Resolution Protocol | 無回報位址解析協定 | L3 |
