@@ -8,6 +8,8 @@ Questions
 * ### Question006 什麼是前綴樹 ?
 * ### Question007 什麼是 Twitter 雪片 ?
 * ### Question008 DAU 和 QPS 是什麼 ?
+* ### Question009 Redis 持久不持久 ?
+* ### Question010 Redis 記憶體資料滿了怎麼辦 ?
 <br />
 
 Reference
