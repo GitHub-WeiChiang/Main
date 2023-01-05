@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/OnlineJudge.iml" filepath="$PROJECT_DIR$/.idea/OnlineJudge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProgrammationEfficace.iml" filepath="$PROJECT_DIR$/.idea/ProgrammationEfficace.iml" />
     </modules>
   </component>
 </project>
