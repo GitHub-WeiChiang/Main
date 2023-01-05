@@ -3,6 +3,7 @@ MySQLPrinciples
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
+* ### Chapter03 字元集和比較規則
 <br />
 
 番外篇: Stored Procedure (從蒙圈到無限茫然)
