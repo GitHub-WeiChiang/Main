@@ -13,6 +13,8 @@ Questions
 * ### Question011 - Redis 缓存淘汰策略 LRU 和 LFU 差在哪 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question011)
 * ### Question012 - 什麼是記憶體碎片化 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question012)
 * ### Question013 - 聯合主鍵和複合主鍵的差異 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question013)
+* ### Question014 - CPU 密集型和 IO 密集型的應對策略建議是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question014)
+* ### Question015 - threading 和 multiprocessing 有差嗎 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question015)
 <br />
 
 Reference
