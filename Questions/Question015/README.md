@@ -1,4 +1,4 @@
-Question015 - threading 和 multiprocessing 有差嗎 ?
+Question015 - threading 和 multiprocessing 差在哪 ?
 =====
 * ### threading 重點摘要
     * ### 透過 context-switch 的方式實現。
