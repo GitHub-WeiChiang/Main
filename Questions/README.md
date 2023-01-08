@@ -17,7 +17,7 @@ Questions
 * ### Question015 - threading 和 multiprocessing 差在哪 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question015)
 * ### Question016 - asyncio.run() 背後的細節秘密「事件迴圈」是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question016)
 * ### Question017 - 什麼是依賴注入 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question017)
-* ### Question018 - 如何在 Python 中實現 AOP ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question017)
+* ### Question018 - 如何在 Python 中實現 AOP ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question018)
 <br />
 
 Reference
