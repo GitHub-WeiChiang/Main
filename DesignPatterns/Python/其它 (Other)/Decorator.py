@@ -11,7 +11,7 @@ __date__ = "2022/04/25"
 所以會先印出 Hello 在執行方法 printWorld。
 
 裝飾器實現的單例模式，
-不適用於以 multiprocessing 進行的多執行序環境，
+不適用於以 multiprocessing 進行的多執行緒環境，
 因 multiprocessing 庫雖實現了類似 thread 的 API 接口，
 但其透過 pickle 序列化部分地實現了變量共享，
 被裝飾器裝飾後的類別 (不一定要是實現單例的裝飾器) 或函式，

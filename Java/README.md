@@ -53,8 +53,8 @@ Note
 * ### SE 9 導入 of() 建立 immutable 物件 (List.of(), Set.of(), Map.of())，類似 Arrays.asList("1", "2", ...)。
 * ### SE 10 導入 copyOf() 建立 immutable 的副本物件 (List.copyOf(), Set.copyOf(), Map.copyOf())。
 * ### Thread 為求效能，啟動時會將程序裡的 main memory 資料複製在自己的 working memory 作為 cached copies 並於工作後寫回。
-* ### 可以透過 volatile 關鍵字避免快取產生，但不產生快取並不等於執行序安全。
-* ### 終止執行序可以透過 interrupt() 方法。
+* ### 可以透過 volatile 關鍵字避免快取產生，但不產生快取並不等於執行緒安全。
+* ### 終止執行緒可以透過 interrupt() 方法。
 * ### 執行緒預設為 non-daemon，non-daemon 執行緒都結束 JVM 才會結束，反之 daemon 執行緒無法影響 JVM 不結束。
 * ### \@Deprecated 代表這個方法要被淘汰，不要再使用勒。
 * ### 被 read lock 的方法其它執行緒不能 write lock 但可以一直 read lock，被 write lock 的方法其它執行緒請走開。
