@@ -12,5 +12,5 @@ Question019 - 在 Cisco 設備上透過 Policing 實作 QoS 時 CIR 與 Bc 代�
     * ### 大於 CIR 的 100Mbps，超出的包就会被丢弃或者被重新标记，
     * ### 也就是說在這樣的設定下，CIR 設為 100Mbps，Bc 设为 12.5MB，
     * ### 所達到的效果就是每 Tc (1s) 內最高接受 12.5MB 的平均傳輸量。
-* ### 理解更多 [click me](https://gitlab.com/ChiangWei/main/-/tree/master/ComputerNetwork)
+* ### 理解更多 -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/ComputerNetwork)
 <br />
