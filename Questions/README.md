@@ -18,6 +18,7 @@ Questions
 * ### Question016 - asyncio.run() 背後的細節秘密「事件迴圈」是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question016)
 * ### Question017 - 什麼是依賴注入 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question017)
 * ### Question018 - 如何在 Python 中實現 AOP ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question018)
+* ### Question019 - 在 Cisco 設備上透過 Policing 實作 QoS 時 CIR 與 Bc 代表什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question019)
 <br />
 
 Reference
