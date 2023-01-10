@@ -9,6 +9,6 @@ Chapter03 盤點 Asyncio
     * ### 等待多工任務完成。
     * ### 在全部並行任務完成後關閉迴圈。
 * ### QuickStart1.py 展示簡單的 asyncio 應用代碼。
-* ### QuickStart2.py 展示簡化的 asyncio.run() 底層機制流程大意。
+* ### QuickStart2.py 展示簡化的 asyncio.run() 底層機制流程。
 * ### coro 代表協程 (coroutine)，嚴格來說它是 async def 函式的呼叫結果，並不是函式本身。
 <br />
