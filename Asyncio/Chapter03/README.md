@@ -12,7 +12,7 @@ Chapter03 盤點 Asyncio
 * ### QuickStart2.py 展示簡化的 asyncio.run() 底層機制流程。
 * ### coro 代表協程 (coroutine)，嚴格來說它是 async def 函式的呼叫結果，並不是函式本身。
 * ### QuickStartExe.py 展示如何執行阻斷式函式。
-* ### ```loop.run_in_executor```: 用於包裝非 Coroutine 的函式。
+* ### loop.run_in_executor: 用於包裝非 Coroutine 的函式。
     * ### 簡單來說 run_in_executor 會把一般的非異步函式包裝成一個獨立的線程，利用線程並不會被 I/O 所阻塞的特性。
     * ### 用於協調已實現的非 Asyncio 所撰寫之商業邏輯方法。
     * ### 立即让同步函数化身异步语法，使同步库的函数和调用链上的其它异步库的函数能够协同作战。
