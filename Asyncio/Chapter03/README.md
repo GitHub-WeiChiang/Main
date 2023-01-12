@@ -11,4 +11,13 @@ Chapter03 盤點 Asyncio
 * ### QuickStart1.py 展示簡單的 asyncio 應用代碼。
 * ### QuickStart2.py 展示簡化的 asyncio.run() 底層機制流程。
 * ### coro 代表協程 (coroutine)，嚴格來說它是 async def 函式的呼叫結果，並不是函式本身。
+* ### QuickStartExe.py 展示如何執行阻斷式函式。
+* ### ```loop.run_in_executor```: 用於包裝非 Coroutine 的函式。
+    * ### 簡單來說 run_in_executor 會把一般的非異步函式包裝成一個獨立的線程，利用線程並不會被 I/O 所阻塞的特性。
+    * ### 用於協調已實現的非 Asyncio 所撰寫之商業邏輯方法。
+    * ### 立即让同步函数化身异步语法，使同步库的函数和调用链上的其它异步库的函数能够协同作战。
+    * ### 本质是使 concurrent.futures.Future 对象变成了 asyncio 里面的可等待 Future 对象。
+    * ### 毫无疑问它还是在线程里面运行的。
+    * ### 主要作用不是把同步变成协程运行，而是让其拥有了异步 await 的用法，既能不阻塞当前事件循环，又能在同步函数执行完成 return 结果时拿到结果接着用。
+    * ### 在异步环境 (被 async 修饰的异步函数) 里面，调用同步函数，将函数放到线程池运行防止阻塞整个事件循环的其他任务。
 <br />
