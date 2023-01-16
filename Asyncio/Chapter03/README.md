@@ -34,5 +34,3 @@ Chapter03 盤點 Asyncio
     | 第二層 | 事件迴圈 | asyncio.run(), BaseEventLoop |
     | 第一層 | 協程 | async def, async with, async for, await |
 <br />
-
-* ### 
