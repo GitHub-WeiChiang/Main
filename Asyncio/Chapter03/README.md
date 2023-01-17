@@ -33,4 +33,6 @@ Chapter03 盤點 Asyncio
     | 第三層 | Future | asyncio.Future |
     | 第二層 | 事件迴圈 | asyncio.run(), BaseEventLoop |
     | 第一層 | 協程 | async def, async with, async for, await |
+* ### 第一層: 基礎層，支援協程，著名的非同步框架 Curio 與 Trio 都只依賴 Python 的原生協程，沒有使用 Asyncio 程式庫的其它部分。
+* ### 第二層: 協程需要事件迴圈輔助才能執行 (因此 Curio 與 Trio 有自己的事件迴圈)，Asyncio 提供了迴圈的規範 AbstractEventLoop 與實作 BaseEventLoop。
 <br />
