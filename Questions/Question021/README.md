@@ -5,5 +5,5 @@ Question021 - 什麼是 Diffie Hellman 演算法 ?
     * ### n 與 g 為公開值，可以由發起端決定或憑證內註明。
     * ### 雙方各選一個數值
     * ### 計算秘密鑰匙 g^xy mod n
-* ### ![image]()
+* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/Questions/Question021/DiffieHellman.png)
 <br />
