@@ -20,7 +20,6 @@ Questions
 * ### Question018 - 如何在 Python 中實現 AOP ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question018)
 * ### Question019 - 在 Cisco 設備上透過 Policing 實作 QoS 時 CIR 與 Bc 代表什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question019)
 * ### Question020 - API (應用) 層的流量限速演算法有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question020)
-* ### Question021 - 什麼是 Diffie Hellman 演算法 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question021)
 <br />
 
 Reference
