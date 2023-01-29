@@ -61,6 +61,7 @@
 設計模式
 =====
 * ### 抽象工廠 Abstract Factory: 創建一系列相互依賴的類。
+* ### 生成器 Builder: 創建各實例生成所需不同的類。
 <br />
 
 Reference
