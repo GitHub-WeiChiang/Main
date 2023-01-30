@@ -35,4 +35,11 @@ Chapter03 盤點 Asyncio
     | 第一層 | 協程 | async def, async with, async for, await |
 * ### 第一層: 基礎層，支援協程，著名的非同步框架 Curio 與 Trio 都只依賴 Python 的原生協程，沒有使用 Asyncio 程式庫的其它部分。
 * ### 第二層: 協程需要事件迴圈輔助才能執行 (因此 Curio 與 Trio 有自己的事件迴圈)，Asyncio 提供了迴圈的規範 AbstractEventLoop 與實作 BaseEventLoop。
+    * ### 規範與實作的劃分，提供第三方開發者實現自己的事件迴圈 (uvloop 專案提供了比標準 Asyncio 模組更快的事件迴圈，且其只取代架構中迴圈的部分)。
+* ### 第三四層: Future (父) 是 Task (子) 的父類別，Future 實例代表某種進行中的動作，可以透過事件迴圈通知取得結果，Task 代表事件迴圈中的協程。
+    * ### Future 是迴圈感知 (loop aware)，Task 兼具迴圈感知與協程感知 (coroutine aware)。
+    * ### 就開發者而言較常使用 Task，而對框架設計者而言，能夠接觸細節的 Future 可能是較好的選擇。
+* ### 第五層: 代表著必需在個別執行緒 (行程) 中啟動與等待工作的功能特性。
+* ### 第六層: 代表著具有非同步感知 (async aware) 的工具 (e.g., asyncio.Queue)，asyncio.Queue 與執行緒安全的 Queue 類似，差別在於 asyncio 的版本在 get() 與 put() 時要配合 await 關鍵字，因為它的 get 會阻斷主執行緒。
+* ### 第七八九層: 網路 I/O 層，包含高階串流 API (第九層) 與粒度更細的協定 API (第八層)，傳輸層 (第七層) 除非用於框架建立，否則在正常開發上不會使用。
 <br />
