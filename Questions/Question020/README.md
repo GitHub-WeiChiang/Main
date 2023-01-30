@@ -1,4 +1,4 @@
-Question020 - API (應用) 層的流量限速演算法有哪些 ?
+Question020 - API (應用) 層的網路限速演算法有哪些 ?
 =====
 * ### Token Bucket (Token 桶)
 * ### Leaking Bucket (漏水桶)
