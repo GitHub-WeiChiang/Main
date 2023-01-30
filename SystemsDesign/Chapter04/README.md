@@ -18,7 +18,7 @@ Chapter04 設計網路限速器
 * ### 在雲端服務上，限速功能可以在 API gateway 實作。
 * ### 應該要在哪裡實作網路限速器 ?
     * ### 程式語言是否適合。
-    * ### 對於限速氣的控制與受限程度。
+    * ### 對於限速器的控制與受限程度。
     * ### 是否已使用雲端架構。
     * ### 成本時間考量。
 * ### 網路限速器演算法: Token bucket, Leaking bucket, Fixed window counter, Sliding window log, Sliding window counter.
