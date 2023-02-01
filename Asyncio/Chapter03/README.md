@@ -42,4 +42,64 @@ Chapter03 盤點 Asyncio
 * ### 第五層: 代表著必需在個別執行緒 (行程) 中啟動與等待工作的功能特性。
 * ### 第六層: 代表著具有非同步感知 (async aware) 的工具 (e.g., asyncio.Queue)，asyncio.Queue 與執行緒安全的 Queue 類似，差別在於 asyncio 的版本在 get() 與 put() 時要配合 await 關鍵字，因為它的 get 會阻斷主執行緒。
 * ### 第七八九層: 網路 I/O 層，包含高階串流 API (第九層) 與粒度更細的協定 API (第八層)，傳輸層 (第七層) 除非用於框架建立，否則在正常開發上不會使用。
+* ### 重點關注
+    * ### 第一層: async def 函式撰寫方式、使用 await 呼叫、協程執行。
+    * ### 第二層: 了解啟動、關機、事件迴圈互動方式。
+    * ### 第五層: 程式碼阻斷。
+    * ### 第六層: 用於資料在一個或多個長時運行協程的提供，asyncio.Queue 使用協程替代 queue.Queue 的 get()。
+    * ### 第九層: 處理 socket 溝通的簡單方式，串流 (也可以使用第三方程式庫取代第九層，像是 aiohttp)。
+* ### 協程
+    * ### Python 3.4 導入 asyncio，但只能透過產生器 (generator) 實作協程，可能會在程式碼中看到 @asyncio.coroutine 裝飾和 yield from 陳述。
+    * ### Python 3.5 透過 async def 建立協程，也被稱為原生協程。
+    ```
+    async def f():
+        return 123
+
+    type(f)
+    # <class 'function'>
+
+    import inspect
+    inspect.iscoroutinefunction(f)
+    # True
+    ```
+    * ### 使用 async def 作為函式開頭。
+    * ### 函式 f 型態為協程 "函式" (非同步函式終究是函式，如同 "皇后只能是皇后")，並非協程。
+    * ### inspect 模組提供更好的內省 (introspective) 機制，iscoroutinefunction 用於區別一般函式與協程函式。
+    * ### 如同產生器函式，產生器是產生器，函式是函式。
+    ```
+    def g():
+        yield 123
+
+    type(g)
+    # <class 'function'>
+
+    gen = g()
+    type(gen)
+    # <class 'generator'>
+    ```
+    ```
+    coro = f()
+
+    type(coro)
+    # <class 'coroutine'>
+
+    inspect.iscoroutine(coro)
+    # True
+    ```
+    * ### 協程是一個物件，可以重啟被暫停的函式。
+    * ### 協程的返回其實是引發 "StopIteration" 例外 (協程內部使用 send() 與 StopIteration)。
+    ```
+    async def f():
+        return 123
+
+    coro = f()
+
+    try:
+        coro.send(None)
+    except StopIteration as e:
+        print('The answer was:', e.value)
+    ```
+    * ### 透過 send 傳送 None 給啟始協程，事件迴圈內部就是這樣幹，我們不用處理，我們可以直接使用 loop.create_task(coro) 或是 await coro 來執行協程。
+    * ### 協程返回時會引發 StopIteration 例外，可以透過 value 取得協程的傳回值，啊這也不關我們的事，是底層細節，我們可以直接在 async def 中透過 return 回傳。
+    * ### send() 與 StopIteration 各自定義了協程執行的起點與終點，由事件迴圈負責這些底層操作。
 <br />
