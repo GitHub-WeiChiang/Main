@@ -44,6 +44,15 @@ Chapter04 設計網路限速器
     * ### X-Ratelimit-Remaining: 在目前視窗內可接受請求次數。
     * ### X-Ratelimit-Limit: 每個視窗內可接受請求次數。
     * ### X-Ratelimit-Retry-After: 還需等待多久才能解除限制在次方送請求。
+* ### 未超出速率限制時
+    * ### 處理請求
+    * ### X-RateLimit-Limit: 每個間隔容許的呼叫數。
+    * ### X-RateLimit-Remaining: 達到限制之前的間隔中剩餘呼叫數。
+* ### 已超出速率限制時
+    * ### 拒絕請求
+    * ### HTTP Status Code: 429
+    * ### X-RateLimit-Reset: 下一個間隔開始之前剩餘的秒數。
+    * ### Retry-After: 與 X-RateLimit-Reset 相同。
 * ### 分散式環境下網路限速器問題
     * ### 競爭: 透過 Lock、Lua 腳本或 Redis 的已排序集合資料結構解決。
     * ### 同步: 使用 Redis 集中式資料儲存系統。
