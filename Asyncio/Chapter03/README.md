@@ -178,4 +178,127 @@ Chapter03 盤點 Asyncio
     # 執行
     loop.run_until_complete(coro)
     ```
+* ### 事件迴圈
+    * ### 前一節為協程與事件迴圈細節模擬，基本上可以直接透過 asyncio.run(coro) 執行。
+    * ### 但有時候我們還是得和事件迴圈溝通
+        * ### 建議: 在協程環境內呼叫 asyncio.get_running_loop()。
+        * ### 不建議: 在任何位置呼叫 asyncio.get_running_loop()。
+    ```
+    # 取得同一個事件迴圈的方法
+
+    loop_1 = asyncio.get_event_loop()
+    loop_2 = asyncio.get_event_loop()
+
+    loop_1 is loop_2
+    # True
+    ```
+    * ### 取得同一個事件迴圈不需要傳遞 loop，直接呼叫 asyncio.get_event_loop() 或 asyncio.get_running_loop() 就好勒。
+    * ### asyncio.get_event_loop() vs. asyncio.get_running_loop()
+        * ### get_event_loop(): 需在同一執行緒才有作用 (在新執行緒中可以透過 new_event_loop() 建立新迴圈並以 set_event_loop() 將迴圈綁定為該執行緒專用)。
+        * ### get_running_loop() (建議使用): 一定如其運作 !
+    ```
+    import asyncio
+
+    # 在協程函式中建立任務且不等待
+    async def f():
+        loop = asyncio.get_event_loop()
+        for i in range():
+            # 因為沒有等待，這些任務完成前 f() 就會結束
+            loop.create_task('<some other coro>')
+    ```
+    * ### Python 3.7 以前，必需如上方範例實作，先取得迴圈 (用什麼方式取得依需求而定)，後排定 Task。
+    * ### Python 3.7 開始，可以透過以下方式。
+    ```
+    import asyncio
+
+    async def f():
+        for i in range():
+            asyncio.create_task('<some other coro>')
+    ```
+    * ### 一些老舊的代碼，可能會透過 asyncio.ensure_future() 進行任務衍生。
+* ### Task vs. Future
+    * ### 基本上都是使用 Task 的 create_task() 運行協程，而 Future 是其父類別。
+    * ### 迴圈會管理 Future，它代表某活動在未來的完成狀態 (類似於切換狀態的開關，一開始是未完成，然後才變成已完成)。
+    * ### Task 也是如此，但那個特定 "活動" 會是協程 (比如使用 async def 與 create_task() 建立的 Task)。
+    ```
+    from asyncio import Future
+
+    f = Future()
+    f.done()
+    # False
+    ```
+    * ### Future 其它操作
+        * ### 可以有 "結果" (使用 .set_result(value) 設定，透過 .result() 取得)。
+        * ### 可以使用 .cancel() 取消，透過 .cancelled() 檢查是否取消。
+        * ### 可以設定回呼函式，在 Future 完成時自動執行。
+    * ### 雖然常用的是 Task，但有時候無法避免操作 Future，比如在執行器中運行函式時，回傳的就是 Future 實例。
+    ```
+    # 理解就好，通常用不到，因為開發者通常只與 Task 交流記得嗎 ?
+
+    import asyncio
+
+    # 一個協程函式
+    async def main(f: asyncio.Future):
+        await asyncio.sleep(1)
+        # 結果設起來
+        f.set_result('I have finished.')
+
+    # 取得事件迴圈
+    loop = asyncio.get_event_loop()
+    # 手動建立 Future 實例 (預設與 loop 綁定，但沒有也不會繫結任何協程)
+    fut = asyncio.Future()
+
+    # 確認一下狀態
+    fut.done()
+    # False
+
+    # 排定 main() 協程，傳入 Future 實例
+    loop.create_task(main(fut))
+    # 透過 run_until_complete() 運行 Future 實例 (迴圈此時才動起來，main() 協程開始執行)
+    loop.run_until_complete(fut)
+
+    fut.done()
+    # True
+
+    fut.result()
+    # I have finished.
+    ```
+    * ### Python 3.8 之前可以在 Task 實例上呼叫 set_result()，現在不可以。
+    * ### Task 是高階實例，不可以做低級的事情。
+    ```
+    import asyncio
+    # 此模組用於實作情境管理器
+    from contextlib import suppress
+
+    async def main(f: asyncio.Future):
+        await asyncio.sleep(1)
+
+        try:
+            # 不允許呼叫，會引發 RuntimeError
+            f.set_result('I have finished.')
+        except RuntimeError as e:
+            print(f'No longer allowed: {e}')
+            # 透過 cancel() 取消任務，在底層協程中引發 CancelledError
+            f.cancel()
+    
+    loop = asyncio.get_event_loop()
+    # 建立 Task 實例病傳入協程 (此用 sleep 示意)
+    fut = asyncio.Task(asyncio.sleep(1_000_000))
+
+    fut.done()
+    # False
+
+    # 排定 main() 協程，傳入 Task 實例
+    loop.create_task(main(fut))
+
+    # 在程式內忽略某些無關緊要的例外
+    with suppress(asyncio.CancelledError):
+        loop.run_until_complete(fut)
+
+    fut.done()
+    # True
+
+    fut.cancelled()
+    # True
+    ```
 <br />
