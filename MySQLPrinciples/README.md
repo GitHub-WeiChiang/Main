@@ -1,7 +1,8 @@
 MySQLPrinciples
 =====
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
-* ### 優化篇: 參照 ! 標準 ! 習慣 ! 速度 ! 注意事項 ! (從刪庫到跑路)
+* ### 守則篇: MySQL Desing Principles (從刪庫到跑路)
+* ### 觸發篇: Introduction To MySQL Triggers (從看懂到看開)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -9,9 +10,139 @@ MySQLPrinciples
 * ### Chapter05 盛放記錄的大盒子 -- InnoDB 資料頁結構
 <br />
 
-優化篇: 參照 ! 標準 ! 習慣 ! 速度 ! 注意事項 ! (從刪庫到跑路)
+守則篇: MySQL Desing Principles (從刪庫到跑路)
 =====
 * ### 欄位經常修改: 使用非變長欄位資料格式，避免記憶體高次數重新分配導致碎片問題。
+<br />
+
+觸發篇: Introduction To MySQL Triggers (從看懂到看開)
+=====
+* ### Trigger 設計目的是讓 DB 在特定事件發生後，執行指定的操作，例如某資料表新增了一筆資料後，將該筆資料記錄到另一張表。
+* ### 來個簡單的案例，當使用者註冊成功以後，在日誌表留下使用者名稱和註冊的時間。
+* ### 建表
+```
+CREATE TABLE `user` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_name` VARCHAR(200) NOT NULL,
+    `mail` varchar(255) NOT NULL
+);
+
+CREATE TABLE `log` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_name` VARCHAR(200) NOT NULL,
+    `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP()
+);
+```
+* ### Trigger 的種類
+    * ### BEFORE INSERT
+    * ### BEFORE UPDATE
+    * ### BEFORE DELETE
+    * ### AFTER INSERT
+    * ### AFTER UPDATE
+    * ### AFTER DELETE
+* ### 當 user 新增後，將 user_name 複製到 log 中。
+```
+CREATE TRIGGER `trigger_name` AFTER INSERT ON `user`
+FOR EACH ROW
+    .... ;
+```
+* ### 若 trigger 中需要的動作超過一個時。
+```
+CREATE TRIGGER `trigger_name` AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    .... ;
+    .... ;
+END;
+```
+* ### 完整版的當 user 新增後，將 user_name 複製到 log 中。
+```
+-- 這個範例會報錯
+
+CREATE TRIGGER `trigger_name`
+AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    -- 找出最新的 user name，存在變數 @name 中
+    SET @name = (
+        SELECT `user_name`
+        FROM `user`
+        WHERE `id` = last_insert_id()
+    );
+
+    -- 將 user name 存進 log 中
+    INSERT INTO `log` (
+        `user_name`
+    ) VALUES (
+        @name
+    );
+END;
+```
+* ### 新增上方的 trigger 時，MySQL 會報錯誤，因其寫法會讓 MySQL 搞不清楚哪些是 trigger 要做的動作而哪些又是與 trigger 無關的 SQL 語句。
+* ### 使用 DELIMITER 暫時將原本代表語句結束的 ";" 換成 "$$" (符號自訂)
+```
+DELIMITER $$
+
+CREATE TRIGGER `trigger_name`
+AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    SET @name = (
+        SELECT `user_name`
+        FROM `user`
+        WHERE `id` = last_insert_id()
+    );
+    INSERT INTO `log` (
+        `user_name`
+    ) VALUES (
+        @name
+    );
+END;
+$$
+
+DELIMITER ;
+```
+* ### 雖然能夠成功建立，但存在一個問題，last_insert_id() 只能抓到 insert 成功以後的最後一個 ID，但若有一個 transaction 裡面包含多個 insert 時，AFTER INSERT 這個 trigger 裡面就只會抓到一個 ID (transaction 中最後一個 insert 的 user ID)。
+* ### MySQL 特別提供了一個 row 的 alias "NEW" 和 "OLD" (僅能在 trigger 中使用)，當 table user 一口氣新增 3 筆資料時，會觸發 trigger 執行三次，這時在 trigger 中使用 NEW 就會自動指向特定的 row。
+```
+DELIMITER $$
+
+CREATE TRIGGER `trigger_name`
+AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    -- 使用 NEW 來改寫
+    SET @name = NEW.user_name;
+
+    INSERT INTO `log` (
+        `user_name`
+    ) VALUES (
+        @name
+    );
+END;
+$$
+
+DELIMITER ;
+```
+* ### \@name 只被用了一次，優化一下。
+```
+DELIMITER $$
+
+CREATE TRIGGER `trigger_name`
+AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    -- 直接從 NEW 來指定要 insert 的資料即可
+    INSERT INTO `log` (
+        `user_name`
+    ) VALUES (
+        NEW.user_name
+    );
+END;
+$$
+
+DELIMITER ;
+```
 <br />
 
 番外篇: Stored Procedure (從蒙圈到無限茫然)
