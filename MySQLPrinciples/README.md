@@ -8,6 +8,7 @@ MySQLPrinciples
 * ### Chapter03 字元集和比較規則
 * ### Chapter04 從一筆記錄說起 -- InnoDB 記錄儲存結構
 * ### Chapter05 盛放記錄的大盒子 -- InnoDB 資料頁結構
+* ### Chapter06 快速查詢的秘笈 -- B+ 樹索引
 <br />
 
 守則篇: MySQL Desing Principles (從刪庫到跑路)
