@@ -1,4 +1,4 @@
-Question023 - MySQL 中 delimiter 關鍵字有什麼用 ?
+Question023 - MySQL 中的 delimiter 關鍵字有什麼用 ?
 =====
 * ### delimiter 是 mysql 分隔符，在 mysql 客户端中分隔符默认是分号 ";"，如果一次输入的语句较多，并且语句中间有分号，这时需要新指定一个特殊的分隔符。
 * ### 其实就是告诉 mysql 解释器，该段命令是否已经结束了，mysql 是否可以执行了，在命令行客户端中，如果有一行命令以分号结束，那么回车后，mysql 将会执行该命令。
