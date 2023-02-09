@@ -205,13 +205,13 @@ except Exception as e:
 CREATE TABLE `user` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_name` VARCHAR(200) NOT NULL,
-    `mail` varchar(255) NOT NULL
+    `mail` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `log` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_name` VARCHAR(200) NOT NULL,
-    `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP()
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP()
 );
 ```
 * ### Trigger 的種類

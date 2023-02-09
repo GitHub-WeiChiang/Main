@@ -22,6 +22,7 @@ Questions
 * ### Question020 - API (應用) 層的網路限速演算法有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question020)
 * ### Question021 - 先佔式多工與非先佔式多工的差異為何 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question021)
 * ### Question022 - InnoDB 的主鍵生成策略是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question022)
+* ### Question023 - MySQL 中 delimiter 關鍵字有什麼用 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question023)
 <br />
 
 Reference
