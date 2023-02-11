@@ -3,12 +3,14 @@ MySQLPrinciples
 * ### 守則篇: MySQL Desing Principles (從刪庫到跑路)
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
 * ### 觸發篇: Introduction To MySQL Triggers (從看懂到看開)
+* ### 物化篇: Materialized View (還沒入門就奪門而逃)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
 * ### Chapter04 從一筆記錄說起 -- InnoDB 記錄儲存結構
 * ### Chapter05 盛放記錄的大盒子 -- InnoDB 資料頁結構
 * ### Chapter06 快速查詢的秘笈 -- B+ 樹索引
+* ### Chapter07 B+ 樹索引的使用
 <br />
 
 守則篇: MySQL Desing Principles (從刪庫到跑路)
@@ -324,6 +326,37 @@ $$
 
 DELIMITER ;
 ```
+<br />
+
+物化篇: Materialized View (還沒入門就奪門而逃)
+=====
+* ### View
+    * ### 由一個查詢指令所做成，並存放在資料庫來 "代表這個指令" 的物件，每次使用他都會觸發這個指令來做查詢。
+    * ### 建立檢視表。
+    ```
+    create view 檢視表名稱 as 想要的指令
+    ``` 
+    * ### 每次使用 View 查詢其實都會重跑一次所撰寫的指令。
+    * ### 一般的 View 並不會有任何效能提升。
+* ### Materialized View
+    * ### 又稱 "實體化檢視表" 以下簡稱 MView。
+    * ### 與 View 一樣是將一個查詢存起來，但建立的同時會先執行一次所撰寫的指令，並且把結果用資料表的形式存起來。
+    * ### 建立實體化檢視表。
+    ```
+    create materialized view 檢視表名稱 as 想要的指令
+    ```
+    * ### MView 就是一個真的有存資料的表，甚至可以加 Index 來加速搜尋。
+    * ### 必須透過 "refresh" 來刷新資料，使其再執行一次所撰寫的指令，並用新的結果覆蓋舊的結果。
+    ```
+    refresh materialized view 檢視表名稱
+    ```
+    * ### 如果這個表很常被查詢，若擔心查詢當下此表正在被整個 refresh 更新，使資料處於被鎖住的狀況，可以用 "concurrently" 的方式來 refresh。
+    ```
+    refresh materialized view concurrently 檢視表名稱
+    ```
+    * ### "concurrently" 會讓 PostgresQL 不會直接把整張表鎖住，而是會另外產生一份新的表來做比對，針對有更動的列來更新 (使用 concurrently 有一個前提: 表內要有一或多個 unique index)。
+    * ### 適用場景: 假設每日需查詢 (顯示) "前一天有多少特定新用戶"，當時間到了該日，這個資料一天內就完全不會改變，一天只需計算一次，透過這種 MView 的方式，進而改善服務的效能。
+    * ### 如果服務需要用到運算量較大的查詢 (併表操作)，就可以把它寫成一個 Materialized View，並決定 refresh 頻率，而非每次都重新執行運算。
 <br />
 
 Reference
