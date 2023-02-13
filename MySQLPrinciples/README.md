@@ -1,6 +1,6 @@
 MySQLPrinciples
 =====
-* ### 守則篇: MySQL Desing Principles (從刪庫到跑路)
+* ### 守則篇: MySQL Design Principles (從刪庫到跑路)
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
 * ### 觸發篇: Introduction To MySQL Triggers (從看懂到看開)
 * ### 物化篇: Materialized View (還沒入門就奪門而逃)
@@ -13,16 +13,16 @@ MySQLPrinciples
 * ### Chapter07 B+ 樹索引的使用
 <br />
 
-守則篇: MySQL Desing Principles (從刪庫到跑路)
+守則篇: MySQL Design Principles (從刪庫到跑路)
 =====
 * ### 先說好，這些僅是透過 "理論推算" 的 "參考"。
-* ### 非變長欄位資料格式適用於修改頻率較高的欄位 (Chapter04)。
-* ### 變長欄位資料格式適用於修改頻率較低的欄位 (Chapter04)。
-* ### 不要為所欲為的肆意創建索引 (Chapter07)。
-* ### 為 ORDER BY 子句中的欄位建立索引有機會提高效能 (Chapter07)。
-* ### ORDER BY 升冪 (ASC) 排列的效能優於降冪 (DESC) 排列 (Chapter07)。
-* ### 聯合索引的建立對於含有 GROUP BY 的查詢可以有效提升效率 (Chapter07)。
-* ### 索引使用與創建注意事項 (Chapter07)
+* ### 非變長欄位資料格式適用於修改頻率較高的欄位。 / Chapter04
+* ### 變長欄位資料格式適用於修改頻率較低的欄位。 / Chapter04
+* ### 不要為所欲為的肆意創建索引。 / Chapter07
+* ### 為 ORDER BY 子句中的欄位建立索引有機會提高效能。 / Chapter07
+* ### ORDER BY 升冪 (ASC) 排列的效能優於降冪 (DESC) 排列。 / Chapter07
+* ### 聯合索引的建立對於含有 GROUP BY 的查詢可以有效提升效率。 / Chapter07
+* ### 索引使用與創建注意事項 / Chapter07
     * ### 適用於 "搜索"、"排序" 與 "分組" 的列。
     * ### 適用於 "欄位值不重複比例較高" 的列。
     * ### 索引列資料型態 "越小越好"。
