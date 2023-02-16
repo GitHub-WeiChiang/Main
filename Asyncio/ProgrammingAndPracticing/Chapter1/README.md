@@ -6,4 +6,5 @@ Chapter1 Python AIO 庫
 * ### support_blocked_io.py (在協程中支持阻塞型 I/O)
 * ### base_events_sample_code.py (run_in_executor 源碼示例)
 * ### support_blocked_io_modified.py (在協程中使用自定義線程池執行器支持阻塞型 I/O)
+* ### cpu_bound_computing.py (CPU 密集型運算支持)
 <br />
