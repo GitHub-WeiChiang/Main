@@ -4,6 +4,7 @@ MySQLPrinciples
 * ### 番外篇: Stored Procedure (從蒙圈到無限茫然)
 * ### 觸發篇: Introduction To MySQL Triggers (從看懂到看開)
 * ### 物化篇: Materialized View (還沒入門就奪門而逃)
+* ### 約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -372,6 +373,10 @@ DELIMITER ;
     * ### "concurrently" 會讓 PostgresQL 不會直接把整張表鎖住，而是會另外產生一份新的表來做比對，針對有更動的列來更新 (使用 concurrently 有一個前提: 表內要有一或多個 unique index)。
     * ### 適用場景: 假設每日需查詢 (顯示) "前一天有多少特定新用戶"，當時間到了該日，這個資料一天內就完全不會改變，一天只需計算一次，透過這種 MView 的方式，進而改善服務的效能。
     * ### 如果服務需要用到運算量較大的查詢 (併表操作)，就可以把它寫成一個 Materialized View，並決定 refresh 頻率，而非每次都重新執行運算。
+<br />
+
+約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
+=====
 <br />
 
 Reference
