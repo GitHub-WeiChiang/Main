@@ -377,6 +377,59 @@ DELIMITER ;
 
 約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
 =====
+* ### 讓我們來討論一下 Mysql 中 Check 约束无效的原因以及解决方法吧 !
+```
+mysql> create table checkDemoTable(a int, b int, id int, primary key(id));
+Query OK, 0 rows affected
+
+mysql> alter table checkDemoTable add constraint checkDemoConstraint check(a > 0);
+Query OK, 0 rows affected
+Records: 0 Duplicates: 0 Warnings: 0
+
+mysql> insert into checkDemoTable values(-2, 1, 1);
+Query OK, 1 row affected
+
+mysql> select * from checkDemoTable;
++----+---+----+
+| a | b | id |
++----+---+----+
+| -2 | 1 | 1 |
++----+---+----+
+1 row in set
+```
+* ### 很明显，CHECK 语句在声明中并未起到作用。
+* ### 在 MYSQL 中，CHECK 只是一段可调用但无意义的子句，MySQL 会直接忽略。
+* ### CHECK 子句会被分析但是会被忽略: 接受这些子句但又忽略子句的原因是为了提高兼容性，以便更容易地从其它 SQL 服务器中导入代码，并运行应用程序，创建带参考数据的表。
+* ### 解决这个问题有两种办法
+    * ### 如果需要设置 CHECK 约束的字段范围小，并且比较容易列举全部的值，就可以考虑将该字段的类型设置为枚举类型 enum() 或集合类型 set()，比如性别字段可以这样设置，插入枚举值以外值的操作将不被允许。
+    ```
+    mysql> create table checkDemoTable(a enum('男', '女'), b int, id int, primary key(id));
+    Query OK, 0 rows affected
+
+    mysql> insert into checkDemoTable values('男', 1, 1);
+    Query OK, 1 row affected
+
+    mysql> select * from checkDemoTable;
+    +----+---+----+
+    | a | b | id |
+    +----+---+----+
+    | 男 | 1 | 1 |
+    +----+---+----+
+    1 row in set
+    ```
+    * ### 如果需要设置 CHECK 约束的字段是连续的，或者列举全部值很困难，比如正实数或正整数，那就只能用触发器来代替约束实现数据有效性了。
+    ```
+    DELIMITER $$
+
+    CREATE TRIGGER TestField1_BeforeInsert BEFORE INSERT ON checkDemoTable
+    FOR EACH ROW
+    BEGIN
+    IF NEW.a < 0 THEN
+    SET NEW.a = 0;
+    END IF;
+    
+    END $$
+    ```
 <br />
 
 Reference
