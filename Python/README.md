@@ -14,7 +14,6 @@ Python
 * ### Chapter12 除錯、測試與效能
 * ### Chapter13 並行、平行與非同步
 * ### Chapter14 進階主題
-* ### Asyncio
 <br />
 
 Note
@@ -69,6 +68,93 @@ Note
 * ### 關於底線 2 (Protected, Private Members)
 	* ### Python's convention to make an instance variable protected is to add a prefix _ (single underscore) to it. This effectively prevents it from being accessed unless it is from within a sub-class.
 	* ### The double underscore __ prefixed to a variable makes it private. It gives a strong suggestion not to touch it from outside the class.
+* ### \_\_call\_\_()
+	* ### Python 中的函数是一级对象，这意味着 Python 中的函数的引用可以作为输入传递到其它的函数中并被执行。
+	* ### 而 Python 中类的实例可以被当做函数对待，也就是说，可以将它们作为输入传递到其它的函数中并调用他们，正如我们调用一个正常的函数那样。
+	* ### 而类中 \_\_call\_\_() 函数的意义正在于此，为了将一个类实例当做函数调用，我们需要在类中实现 \_\_call\_\_() 方法。
+	```
+	class Sample(object):
+		def __init__(self):
+			self.a = 0
+			self.b = 0
+
+		def __call__(self, a, b):
+			self.a = a
+			self.b = b
+			print('__call__ with （{}, {}）'.format(self.a, self.b))
+	
+
+	>>> sample = Sample()
+	>>> sample(1,2)
+	__call__ with (1, 2)
+	```
+* ### Python 魔法方法 \_\_getattr\_\_
+	```
+	class MyClass:
+		def __init__(self, x):
+			self.x = x
+
+		def __getattr__(self, item):
+			print('找不到 {} 啦'.format(item))
+			return None
+
+
+	>>> obj = MyClass(1)
+	>>> obj.x
+	1
+	>>> obj.y
+	找不到 y 啦
+	None
+	```
+	* ### 定義一個 MyClass 類，設定一個例項屬性為 x，值為 1，obj 為這個類的例項，獲取 obj.x 返回 1，而獲取 obj.y 發現屬性找不到，原因是 obj 的例項變數中不包含 y，找不到某屬性時會呼叫 \_\_getattr\_\_ 方法。
+	* ### 呼叫 \_\_getattr\_\_ 詳細過程如下
+		* ### 在物件的實例項屬性中尋找 (找不到執行第二步)
+		* ### 來到物件所在的類中查詢類屬性 (找不到執行第三步)
+		* ### 來到物件的繼承鏈上尋找 (找不到執行第四步)
+		* ### 呼叫 \_\_getattr\_\_ 方法，如果使用者沒有定義或者還是找不到，丟擲 AttributeError 異常，屬性查詢失敗。
+		```
+		class MyClass:
+			def __init__(self, x):
+				self.x = x
+
+
+		>>> obj = MyClass(1)
+		>>> obj.y
+
+		AttributeError: 'MyClass' object has no attribute 'a'
+		```
+* ### Python 魔法方法 \_\_getattribute\_\_
+	* ### 當我們呼叫物件的屬性時，首先會呼叫 \_\_getattribute\_\_ 魔法方法。
+	```
+	obj.x
+	obj.__getattribute__(x)
+	```
+	* ### 上兩行代碼為等價，當 \_\_getattribute\_\_ 查詢失敗，就會去呼叫 \_\_getattr\_\_ 方法。
+	```
+	class MyClass:
+		def __init__(self, x):
+			self.x = x
+
+		def __getattribute__(self, item):
+			print('正在獲取屬性 {}'.format(item))
+			return super(MyClass, self).__getattribute__(item)
+
+
+	>>> obj = MyClass(2)
+	>>> obj.x
+	正在獲取屬性 x
+	2
+	```
+	* ### 使用 \_\_getattribute\_\_ 魔法方法時，要返回父類的方法。
+	* ### 內建的 getattr 和 hasattr 也會觸發這個魔法方法。
+	```
+	>>> getattr(obj, 'x', None)
+	正在獲取屬性 x
+	2
+	>>> hasattr(obj, 'x', None)
+	正在獲取屬性 x
+	True
+	```
 <br />
 
 Reference
