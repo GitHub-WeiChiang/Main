@@ -24,6 +24,7 @@ Questions
 * ### Question022 - InnoDB 的主鍵生成策略是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question022)
 * ### Question023 - MySQL 中 delimiter 關鍵字有什麼用 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question023)
 * ### Question024 - 如何有效提升應用服務效能 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question024)
+* ### Question025 - Monorepo 和 Polyrepo 是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question025)
 <br />
 
 Reference
