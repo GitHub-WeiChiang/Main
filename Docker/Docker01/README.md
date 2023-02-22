@@ -50,12 +50,27 @@ Docker01 Docker 是什么 ?
 * ### 对于那些不会自动终止的容器，我们可以使用 docker container kill 命令终止。
     ```
     # 使用 docker container ls 找到要终止容器的 id
-    $ docker contianer ls 
+    $ docker container ls 
 
     # 使用 kill 命令终止容器
     $ docker container kill [containerId]
     ```
 * ### 文本文件 .dockerignore 用於排除不要被打包进入 image 文件的路径。
+* ### Dockerfile 是一个文本文件，用来配置 image 的具体内容。
+    ```
+    # 将 image 文件继承与官方的 3.7 版本的 Python。
+    FROM python:3.7
+
+    # 将当前目录下的所有文件 (除了 .dockerignore 排除的路径)，
+    # 都拷贝进 image 文件的 /app 目录。
+    COPY . /app
+
+    # 指定接下来的工作路径为 /app。
+    WORKDIR /app
+
+    # 在 /app 目录下，运行 python 文件。
+    CMD python3 Hello.py
+    ```
 * ### 使用 docker image build 命令创建 image 文件
     ```
     $ docker image build -t python-app .
