@@ -1,4 +1,4 @@
-Docker04
+Docker04 什么是 Docker Registry 和 DockerHub ?
 =====
 * ### docker run -d -p 5000:5000 --name registry registry:2
 * ### docker ps # List containers.
