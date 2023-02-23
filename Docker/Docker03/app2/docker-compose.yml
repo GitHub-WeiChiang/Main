@@ -10,4 +10,4 @@ services:
       - REDIS_HOST=redis-server
     build: ./backend
     ports: 
-      - "5000:5000"
+      - "5001:5001"
