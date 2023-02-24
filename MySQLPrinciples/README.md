@@ -13,6 +13,7 @@ MySQLPrinciples
 * ### Chapter06 快速查詢的秘笈 -- B+ 樹索引
 * ### Chapter07 B+ 樹索引的使用
 * ### Chapter08 MySQL 的資料目錄
+* ### Chapter09 存放頁面的大池子 -- InnoDB 的表格空間
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
