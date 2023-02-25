@@ -16,6 +16,7 @@ MySQLPrinciples
 * ### Chapter09 存放頁面的大池子 -- InnoDB 的表格空間
 * ### Chapter10 條條大路通羅馬 -- 表單存取方法
 * ### Chapter11 兩個表的親密接觸 -- 連接的原理
+* ### Chapter12 誰最便宜就選誰 -- 基於成本的最佳化
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
@@ -39,6 +40,9 @@ MySQLPrinciples
 * ### 連接查詢最佳化 / Chapter11
     * ### 為 "被驅動表" 加上高效率的索引。
     * ### 透過 "啟動選項" 或 "系統變數" 調大 join_buffer_size 的值進而優化 "基於區塊的巢狀結構迴圈連接 (Block Nested - Loop Join)" 演算法的執行。
+* ### 連接查詢最佳化 2 / Chapter12
+    * ### 儘量減少驅動表的扇出。
+    * ### 存取被驅動表的成本要儘量低: 簡單說就是，被驅動表的連接列最好是該表的主鍵或唯一二級索引列，如此可以把存取被驅動表的成本降至更低。
 <br />
 
 番外篇: Stored Procedure (從蒙圈到無限茫然)
