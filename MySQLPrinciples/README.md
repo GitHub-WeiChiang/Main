@@ -15,6 +15,7 @@ MySQLPrinciples
 * ### Chapter08 MySQL 的資料目錄
 * ### Chapter09 存放頁面的大池子 -- InnoDB 的表格空間
 * ### Chapter10 條條大路通羅馬 -- 表單存取方法
+* ### Chapter11 兩個表的親密接觸 -- 連接的原理
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
@@ -35,6 +36,9 @@ MySQLPrinciples
     * ### 索引列應 "單獨出現" 於搜索條件。
     * ### 新插入記錄 "主鍵" 盡可能 "遞增" 呈現。
     * ### 避免出現 "容錯索引" 與 "重複索引" 的場景。
+* ### 連接查詢最佳化 / Chapter11
+    * ### 為 "被驅動表" 加上高效率的索引。
+    * ### 透過 "啟動選項" 或 "系統變數" 調大 join_buffer_size 的值進而優化 "基於區塊的巢狀結構迴圈連接 (Block Nested - Loop Join)" 演算法的執行。
 <br />
 
 番外篇: Stored Procedure (從蒙圈到無限茫然)
