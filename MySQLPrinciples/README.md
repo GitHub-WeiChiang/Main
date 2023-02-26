@@ -19,6 +19,7 @@ MySQLPrinciples
 * ### Chapter12 誰最便宜就選誰 -- 基於成本的最佳化
 * ### Chapter13 兵馬未動，糧草先行 -- InnoDB 統計資料是如何收集的
 * ### Chapter14 基於規則的最佳化 (內含子查詢最佳化二三事)
+* ### Chapter15 查詢最佳化的百科全書 -- EXPLAIN 詳解
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
