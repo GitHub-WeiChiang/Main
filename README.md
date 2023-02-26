@@ -23,6 +23,7 @@ Contents
 Starting Time
 =====
 * ### 2020 / 01 / 09
+* ### "Life is short (You need Python)" -- Bruce Eckel
 <br />
 
 Note
