@@ -25,6 +25,9 @@ Questions
 * ### Question023 - MySQL 中 delimiter 關鍵字有什麼用 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question023)
 * ### Question024 - 如何有效提升應用服務效能 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question024)
 * ### Question025 - Monorepo 和 Polyrepo 是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question025)
+* ### Question026 - InnoDB 中索引的種類有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question026)
+* ### Question027 - InnoDB 中的存取方法有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question027)
+* ### Question028 - 資料庫子查詢區分的依據是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question028)
 <br />
 
 Reference
