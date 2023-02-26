@@ -63,6 +63,7 @@
 * ### 抽象工廠 Abstract Factory: 創建一系列相互依賴的類。
 * ### 生成器 Builder: 創建各實例生成所需不同的類。
 * ### 工廠方法 Factory Method: 創建需要使用大量重複代碼對象。
+* ### 原型 Prototype: 支持相同物件的大量複製。
 <br />
 
 Reference
