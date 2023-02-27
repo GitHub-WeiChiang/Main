@@ -28,6 +28,7 @@ Questions
 * ### Question026 - InnoDB 中索引的種類有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question026)
 * ### Question027 - InnoDB 中的存取方法有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question027)
 * ### Question028 - 資料庫子查詢區分的依據是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question028)
+* ### Question029 - 什麼是 InnoDB 預先讀取 (read ahead) ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question029)
 <br />
 
 Reference

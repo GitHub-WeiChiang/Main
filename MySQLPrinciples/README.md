@@ -21,6 +21,7 @@ MySQLPrinciples
 * ### Chapter14 基於規則的最佳化 (內含子查詢最佳化二三事)
 * ### Chapter15 查詢最佳化的百科全書 -- EXPLAIN 詳解
 * ### Chapter16 神兵利器 -- optimizer trace 的神奇功效
+* ### Chapter17 調節磁碟和 CPU 的矛盾 -- InnoDB 的 Buffer Pool
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
