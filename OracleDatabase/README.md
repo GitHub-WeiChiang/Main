@@ -8,7 +8,7 @@ OracleDatabase
     * ### I/O 流量減少
     * ### Stored Procedure
 * ### Schema, 泛指 Table、View、Index、Row 等, 是形式描述語言的一種結構 (不包含資料)。
-* ### DDL, Data Definition Language, 無需 commit (CREATE、DROP)。
+* ### DDL, Data Definition Language, 無需 commit (CREATE、DROP、ALTER)。
 * ### DML, Data Manipulation Language, 需 commit (SELECT、INSERT、UPDATE、DELETE)。
 * ### DCL, Data Control Language, 授權相關。
 * ### TCL, Transaction Control Language (SAVEPOINT、ROLLBACK)。
