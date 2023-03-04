@@ -24,6 +24,7 @@ MySQLPrinciples
 * ### Chapter17 調節磁碟和 CPU 的矛盾 -- InnoDB 的 Buffer Pool
 * ### Chapter18 從貓爺借錢說起 -- 交易簡介
 * ### Chapter19 說過的話就一定要做到 -- redo 記錄檔
+* ### Chapter20 後悔了怎麼辦 -- undo 記錄檔
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
