@@ -105,7 +105,7 @@ Chapter20 後悔了怎麼辦 -- undo 記錄檔
 * ### Rollback Segment Header (詳細內容請參閱書籍 20-40 頁)
     * ### 存放各個 Undo 頁面鏈結串列的 first undo page 頁號 (undo slot)。
     * ### 每個 Undo Page 鏈結串列都相當於是一個班，這個鏈結串列的 first undo page 就相當於這個班的班長，這些班長被召集在會議室，Rollback Segment Header 就是那個會議室。
-* ### 其餘過於複雜的理論內容
+* ### 其餘理論內容
     * ### 回覆段 (請參閱書籍 20-40 頁)
     * ### 回覆段相關設定 (請參閱書籍 20-49 頁)
     * ### Undo Log 在崩潰恢復時的作用 (請參閱書籍 20-50 頁)
