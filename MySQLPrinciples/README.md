@@ -26,6 +26,7 @@ MySQLPrinciples
 * ### Chapter19 說過的話就一定要做到 -- redo 記錄檔
 * ### Chapter20 後悔了怎麼辦 -- undo 記錄檔
 * ### Chapter21 一筆記錄的多副面孔 -- 交易隔離等級和 MVCC
+* ### Chapter22 工作面試老大難 -- 鎖
 <br />
 
 守則篇: MySQL Design Principles (從刪庫到跑路)
