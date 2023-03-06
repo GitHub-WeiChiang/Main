@@ -1,8 +1,7 @@
 Asyncio
 =====
 * ### 加速篇: Python 的 Numba 庫 (從爬不太動到原地起飛)
-* ### Principles
-* ### ProgrammingAndPracticing
+* ### Chapter1 Python AIO 庫
 <br />
 
 加速篇: Python 的 Numba 庫 (從爬不太動到原地起飛)
@@ -45,4 +44,9 @@ def f(x, y):
 * ### Numba 还支持很多加速类型
     * ### ​\@jit(nopython=True,fastmath=True) 牺牲一丢丢数学精度来提高速度
     * ### \@jit(nopython=True,parallel=True) 自动进行并行计算
+<br />
+
+Reference
+=====
+* ### Python 異步編程實戰 — 基於 AIO 的全棧開發技術
 <br />

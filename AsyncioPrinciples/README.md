@@ -1,4 +1,4 @@
-Principles
+AsyncioPrinciples
 =====
 * ### Chapter01 簡介 Asyncio
 * ### Chapter02 Thread 的真相
@@ -7,4 +7,4 @@ Principles
 
 Reference
 =====
-* ### Python非同步設計：使用Asyncio
+* ### Python 非同步設計：使用 Asyncio
