@@ -90,18 +90,24 @@ Chapter20 後悔了怎麼辦 -- undo 記錄檔
     * ### 一個交易中最多有 4 個 Undo Page 組成的鏈結串列。
     * ### 有用到才會分配對應的鏈結串列。
     * ### 不同交易維護各自的 Undo Page 鏈結串列。
+    * ### 第一個 Undo Page 稱為 first undo page，其餘的稱為 normal undo page。
 * ### Undo Log Segment Header (詳細內容請參閱書籍 20-32 頁)
     * ### 一個 Undo 頁面鏈結串列對應一個段，稱為 Undo Log Segment。
-    * ### "Undo Page 鏈結串列" 的 "第一個頁面" 會具有 "Undo Log Segment Header"。
+    * ### "Undo Page 鏈結串列" 的 "第一個頁面 (first undo page)" 會具有 "Undo Log Segment Header"。
     * ### 結構
         * ### TRX_UNDO_STATE: Undo Page 鏈結串列狀態。
         * ### TRX_UNDO_LAST_LOG: 此 Undo Page 鏈結串列中最後一個 Undo Log Header 位置。
         * ### TRX_UNDO_FSEG_HEADER: 此 Undo Page 鏈結串列對應的段的 Segment Header 資訊。
         * ### TRX_UNDO_PAGE_LIST: Undo Page 鏈結串列基節點。
 * ### Undo Log Header: 該組 Undo log 的屬性 (詳細內容請參閱書籍 20-34 頁)。
+* ### 對沒有被重用的 undo page 鏈結串列來說，第一個頁面 (first undo page) 在真正寫入 undo 記錄檔前，會填充 undo page header、undo log segment header、undo log header 三個部分，之後才開始寫入 undo 紀錄檔，對於其它頁面 (normal undo page)，真正在寫入 undo log 前，只會填充 undo page header。
+* ### 鏈結串列基節點存放到 first undo page 的 undo log segment header，鏈結串列節點資訊放到每一個 undo 頁面的 undo page header 部分。
 * ### 重用 Undo Page (詳細內容請參閱書籍 20-37 頁)
     * ### 該鏈結串列中只包含一個 Undo Page。
     * ### 該 Undo 頁面已經使用的空間小於整個頁面空間的 3/4。
+* ### undo page 鏈結串列可分為 insert 與 update 兩種，重用策略如下 (詳細內容請參閱書籍 20-38 頁)
+    * ### insert undo 鏈結串列: 提交之後即可清除。
+    * ### update undo 鏈結串列: 提交之後不可清除，需用於 MVCC。
 * ### Rollback Segment Header (詳細內容請參閱書籍 20-40 頁)
     * ### 存放各個 Undo 頁面鏈結串列的 first undo page 頁號 (undo slot)。
     * ### 每個 Undo Page 鏈結串列都相當於是一個班，這個鏈結串列的 first undo page 就相當於這個班的班長，這些班長被召集在會議室，Rollback Segment Header 就是那個會議室。
