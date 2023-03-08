@@ -5,6 +5,7 @@ MySQLPrinciples
 * ### 觸發篇: Introduction To MySQL Triggers (從看懂到看開)
 * ### 物化篇: Materialized View (還沒入門就奪門而逃)
 * ### 約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
+* ### 鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -454,6 +455,207 @@ mysql> select * from checkDemoTable;
     
     END $$
     ```
+<br />
+
+鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
+=====
+* ### 锁对 MySQL 的数据访问并发有着举足轻重的影响。
+* ### ![image]()
+* ### 锁的解释
+    * ### 计算机协调多个进程或线程并发访问某一资源的机制。
+* ### 锁的重要性
+    * ### 在数据库中，除传统计算资源 (CPU、RAM、I/O) 的争抢，数据也是一种供多用户共享的资源。
+    * ### 如何保证数据并发访问的一致性，有效性，是所有数据库必须要解决的问题。
+    * ### 锁冲突也是影响数据库并发访问性能的一个重要因素，因此锁对数据库尤其重要。
+* ### 锁的缺点
+    * ### 加锁是消耗资源的，锁的各种操作，包括获得锁、检测锁是否已解除、释放锁等，都会增加系统的开销。
+* ### 简单的例子
+    * ### 现如今网购已经特别普遍了，比如淘宝双十一活动，当天的人流量是千万及亿级别的，但商家的库存是有限的。
+    * ### 系统为了保证商家的商品库存不发生超卖现象，会对商品的库存进行锁控制。
+    * ### 当有用户正在下单某款商品最后一件时，系统会立马对该件商品进行锁定，防止其他用户也重复下单，直到支付动作完成才会释放 (支付成功则立即减库存售罄，支付失败则立即释放)。
+* ### 表锁
+    * ### 读锁 (read lock)，也叫共享锁 (shared lock)，针对同一份数据，多个读操作可以同时进行而不会互相影响 (select)。
+    * ### 写锁 (write lock)，也叫排他锁 (exclusive lock)，当前操作没完成之前，会阻塞其它读和写操作 (update、insert、delete)。
+    * ### 存储引擎默认锁: MyISAM。
+    * ### 特点
+        * ### 对整张表加锁。
+        * ### 开销小。
+        * ### 加锁快。
+        * ### 无死锁。
+        * ### 锁粒度大，发生锁冲突概率大，并发性低 (相對效能差)。
+    * ### 结论
+        * ### 读锁会阻塞写操作，不会阻塞读操作。
+        * ### 写锁会阻塞读和写操作。
+    * ### 建议: MyISAM 的读写锁调度是写优先，这也是 MyISAM 不适合做写为主表的引擎，因为写锁以后，其它线程不能做任何操作，大量的更新使查询很难得到锁，从而造成永远阻塞。
+* ### 行锁
+    * ### 读锁 (read lock)，也叫共享锁 (shared lock)，允许一个事务去读一行，阻止其他事务获得相同数据集的排他锁。
+    * ### 写锁 (write lock)，也叫排他锁 (exclusive lock)，允许获得排他锁的事务更新数据，阻止其他事务取得相同数据集的共享锁和排他锁。
+    * ### 意向共享锁 (IS)，一个事务给一个数据行加共享锁时，必须先获得表的 IS 锁。
+    * ### 意向排它锁 (IX)，一个事务给一个数据行加排他锁时，必须先获得该表的 IX 锁。
+    * ### 存储引擎默认锁: InnoDB。
+    * ### 特点
+        * ### 对一行数据加锁。
+        * ### 开销大。
+        * ### 加锁慢。
+        * ### 会出现死锁。
+        * ### 锁粒度小，发生锁冲突概率最低，并发性高 (相對效能佳)。
+    * ### 事务并发带来的问题
+        * ### 更新丢失，解决: 让事务变成串行操作，而不是并发的操作，即对每个事务开始---对读取记录加排他锁。
+        * ### 脏读，解决: 隔离级别为 Read uncommitted。
+        * ### 不可重读，解决: 使用 Next-Key Lock 算法来避免。
+        * ### 幻读，解决: 间隙锁 (Gap Lock)。
+* ### 页锁: 开销、加锁时间和锁粒度介于表锁和行锁之间，会出现死锁，并发处理能力一般。
+* ### 表锁上锁
+    * ### 隐式上锁 (默认，自动加锁自动释放)
+        ```
+        # 上读锁
+        select
+
+        # 上写锁
+        insert、update、delete
+        ```
+    * ### 显式上锁
+        ```
+        # 读锁
+        lock table tableName read;
+        # 写锁
+        lock table tableName write;
+        ```
+    * ### 显式解锁
+        ```
+        # 释放被当前会话持有的任何锁
+        unlock tables;
+        ```
+    | session 1 | session 2 |
+    | -- | -- |
+    | lock table teacher read; // 上读锁 |  |
+    | select * from teacher; // 可以正常读取 | select * from teacher; // 可以正常读取 |
+    | update teacher set name = 3 where id = 2; // 报错因被上读锁不能写操作 | update teacher set name = 3 where id = 2; // 被阻塞 |
+    | unlock tables; // 解锁 |  |
+    |  | update teacher set name = 3 where id = 2; // 更新操作成功 |
+
+    | session 1 | session 2 |
+    | -- | -- |
+    | lock table teacher write; // 上写锁 |  |
+    | select * from teacher; // 可以正常读取 | select * from teacher; // 被阻塞 |
+    | update teacher set name = 3 where id = 2; // 可以正常更新操作 | update teacher set name = 4 where id = 2; // 被阻塞 |
+    | unlock tables; // 解锁 |  |
+    |  | select * from teacher; // 读取成功 |
+    |  | update teacher set name = 4 where id = 2; // 更新操作成功 |
+* ### 行锁上鎖
+    * ### 隐式上锁 (默认，自动加锁自动释放)
+        ```
+        # 不会上锁
+        select
+
+        # 上写锁
+        insert、update、delete
+        ```
+    * ### 显式上锁
+        ```
+        # 读锁
+        select * from tableName lock in share mode;
+
+        # 写锁
+        select * from tableName for update;
+        ```
+    * ### 显式解锁
+        * ### 提交事务 (commit)
+        * ### 回滚事务 (rollback)
+        * ### kill 阻塞进程
+    | session 1 | session 2 |
+    | -- | -- |
+    | begin; |  |
+    | select * from teacher where id = 2 lock in share mode; // 上读锁 |  |
+    |  | select * from teacher where id = 2; // 可以正常读取 |
+    | update teacher set name = 3 where id = 2; // 可以更新操作 | update teacher set name = 5 where id = 2; // 被阻塞 |
+    | commit; |  |
+    |  | update teacher set name = 5 where id = 2; // 更新操作成功 |
+
+    | session 1 | session 2 |
+    | -- | -- |
+    | begin; |  |
+    | select * from teacher where id = 2 for update; // 上写锁 |  |
+    |  | select * from teacher where id = 2; // 可以正常读取 |
+    | update teacher set name = 3 where id = 2; // 可以更新操作 | update teacher set name = 5 where id = 2; // 被阻塞 |
+    | rollback; |  |
+    |  | update teacher set name = 5 where id = 2; // 更新操作成功 |
+    * ### 为什么上了写锁，别的事务还可以读操作 ? 因为 InnoDB 有 MVCC 机制 (多版本并发控制)，可以使用快照读，而不会被阻塞。
+* ### 行锁的实现算法
+    * ### Record Lock: 单个行记录上的锁，Record Lock 总是会去锁住索引记录，如果 InnoDB 存储引擎表建立的时候没有设置任何一个索引，这时 nnoDB 存储引擎会使用隐式的主键来进行锁定。
+    * ### Gap Lock: 当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB 会给符合条件的已有数据记录的索引加锁，对于键值在条件范围内但并不存在的记录。
+        * ### 优点: 解决了事务并发的幻读问题。
+        * ### 不足: 因为 query 执行过程中通过范围查找的话，他会锁定争个范围内所有的索引键值，即使这个键值并不存在。
+        * ### Gap Lock 有一个致命的弱点，就是当锁定一个范围键值之后，即使某些不存在的键值也会被无辜的锁定，而造成锁定的时候无法插入锁定键值范围内任何数据。在某些场景下这可能会对性能造成很大的危害。
+    * ### Next - key Lock: 同时锁住数据 + 间隙锁，在 Repeatable Read 隔离级别下，Next - key Lock 算法是默认的行记录锁定算法。
+* ### 行锁的注意点
+    * ### 只有通过索引条件检索数据时，InnoDB 才会使用行级锁，否则会使用表级锁 (索引失效，行锁变表锁)。
+    * ### 即使是访问不同行的记录，如果使用的是相同的索引键，会发生锁冲突。
+    * ### 如果数据表建有多个索引时，可以通过不同的索引锁定不同的行。
+* ### 如何排查锁
+    * ### 表鎖
+        ```
+        # 查看表鎖情況
+        show open tables;
+
+        # 表锁分析
+        show status like 'table%';
+        ```
+        * ### table_locks_waited: 出现表级锁定争用而发生等待的次数 (不能立即获取锁的次数，每等待一次值加 1)，此值高说明存在着较严重的表级锁争用情况。
+        * ### table_locks_immediate: 产生表级锁定次数，不是可以立即获取锁的查询次数，每立即获取锁加 1。
+    * ### 行锁
+        ```
+        # 行鎖分析
+        show status like 'innodb_row_lock%';
+        ```
+        * ### innodb_row_lock_current_waits: 当前正在等待锁定的数量。
+        * ### innodb_row_lock_time: 从系统启动到现在锁定总时间长度。
+        * ### innodb_row_lock_time_avg: 每次等待所花平均时间。
+        * ### innodb_row_lock_time_max: 从系统启动到现在等待最长的一次所花时间。
+        * ### innodb_row_lock_waits: 系统启动后到现在总共等待的次数。
+* ### information_schema 库
+    * ### innodb_lock_waits 表
+    * ### innodb_locks 表
+    * ### innodb_trx 表
+* ### 优化建议
+    * ### 尽可能让所有数据检索都通过索引来完成，避免无索引行锁升级为表锁。
+    * ### 合理设计索引，尽量缩小锁的范围。
+    * ### 尽可能较少检索条件，避免间隙锁。
+    * ### 尽量控制事务大小，减少锁定资源量和时间长度。
+    * ### 尽可能低级别事务隔离。
+* ### 死锁
+    * ### 指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+    * ### 产生的条件
+        * ### 互斥条件: 一个资源每次只能被一个进程使用。
+        * ### 请求与保持条件: 一个进程因请求资源而阻塞时，对已获得的资源保持不放。
+        * ### 不剥夺条件: 进程已获得的资源，在没有使用完之前，不能强行剥夺。
+        * ### 循环等待条件: 多个进程之间形成的一种互相循环等待的资源的关系。
+    * ### 解决
+        * ### 查看死锁：show engine innodb status \G。
+        * ### 自动检测机制，超时自动回滚代价较小的事务 (innodb_lock_wait_timeout，默认 50 s)。
+        * ### 人为解决，kill 阻塞进程 (show processlist)。
+        * ### wait for graph 等待图 (主动检测)。
+    * ### 如何避免
+        * ### 加锁顺序一致，尽可能一次性锁定所需的数据行。
+        * ### 尽量基于primary (主键) 或 unique key 更新数据。
+        * ### 单次操作数据量不宜过多，涉及表尽量少。
+        * ### 减少表上索引，减少锁定资源。
+        * ### 尽量使用较低的隔离级别。
+        * ### 尽量使用相同条件访问数据，这样可以避免间隙锁对并发的插入影响。
+        * ### 精心设计索引，尽量使用索引访问数据。
+        * ### 借助相关工具: pt-deadlock-logger。
+* ### 乐观锁与悲观锁
+    * ### ![image]()
+    * ### 悲观锁
+        * ### 解释: 假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。
+        * ### 实现机制: 表锁、行锁等。
+        * ### 实现层面: 数据库本身。
+        * ### 适用场景: 并发量大。
+    * ### 乐观锁
+        * ### 解释: 假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
+        * ### 实现机制: 提交更新时检查版本号或者时间戳是否符合。
+        * ### 实现层面: 业务代码。
+        * ### 适用场景: 并发量小。
 <br />
 
 Reference
