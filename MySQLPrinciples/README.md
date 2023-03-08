@@ -460,7 +460,7 @@ mysql> select * from checkDemoTable;
 鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
 =====
 * ### 锁对 MySQL 的数据访问并发有着举足轻重的影响。
-* ### ![image]()
+* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/MySQLPrinciples/Lock.png)
 * ### 锁的解释
     * ### 计算机协调多个进程或线程并发访问某一资源的机制。
 * ### 锁的重要性
@@ -645,7 +645,7 @@ mysql> select * from checkDemoTable;
         * ### 精心设计索引，尽量使用索引访问数据。
         * ### 借助相关工具: pt-deadlock-logger。
 * ### 乐观锁与悲观锁
-    * ### ![image]()
+    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/MySQLPrinciples/GLockBLock.png)
     * ### 悲观锁
         * ### 解释: 假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。
         * ### 实现机制: 表锁、行锁等。
