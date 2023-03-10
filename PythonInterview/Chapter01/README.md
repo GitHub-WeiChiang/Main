@@ -112,7 +112,7 @@ Chapter01 Python 面試基礎
 
 
     # 最直接也最笨的方法
-    def is_prime_1(num: int) -> (bool, float):
+    def is_prime_1(num: int) -> bool:
         for i in range(2, num):
             if num % i == 0:
                 return False
@@ -121,7 +121,7 @@ Chapter01 Python 面試基礎
 
 
     # 将循环判断次数减少一半
-    def is_prime_2(num: int) -> (bool, float):
+    def is_prime_2(num: int) -> bool:
         limit = int(num / 2) + 1
 
         for i in range(2, limit):
@@ -132,7 +132,7 @@ Chapter01 Python 面試基礎
 
 
     # 在法二的基础上继续提高
-    def is_prime_3(num: int) -> (bool, float):
+    def is_prime_3(num: int) -> bool:
         limit = int(math.sqrt(num)) + 1
 
         for i in range(2, limit):
@@ -143,7 +143,7 @@ Chapter01 Python 面試基礎
 
 
     # 考虑偶数的因素
-    def is_prime_4(num: int) -> (bool, float):
+    def is_prime_4(num: int) -> bool:
         if num == 2:
             return True
 
@@ -160,7 +160,7 @@ Chapter01 Python 面試基礎
 
 
     # 埃拉托斯特尼篩法
-    def eratosthenes(n):
+    def eratosthenes(n) -> list:
         temp = [True] * (n + 1)
 
         for i in range(2, int(n ** 0.5) + 1):
