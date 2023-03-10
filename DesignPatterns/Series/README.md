@@ -64,6 +64,7 @@
 * ### 生成器 Builder: 創建各實例生成所需不同的類。
 * ### 工廠方法 Factory Method: 創建需要使用大量重複代碼對象。
 * ### 原型 Prototype: 支持相同物件的大量複製。
+* ### 單例 Singleton: 保證一個類只有一個實例。
 <br />
 
 Reference
