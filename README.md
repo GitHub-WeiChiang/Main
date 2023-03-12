@@ -8,7 +8,6 @@ Contents
 * ### GpsDatingApp
 * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction
 * ### ComputerNetwork
-* ### OracleDatabase
 * ### Docker
 * ### Java
 * ### Spring
@@ -17,7 +16,6 @@ Contents
 * ### FastAPI
 * ### MySQLPrinciples
 * ### ProgrammationEfficace
-* ### AsyncioPrinciples
 * ### Asyncio
 * ### PythonInterview
 <br />
