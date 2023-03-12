@@ -1,4 +1,4 @@
-SpringBoot (Version 1, Eclipse)
+SpringBoot
 =====
 * ### Chapter03 使用開發工具
 * ### Chapter04 Spring Boot 基礎
@@ -20,7 +20,7 @@ SpringBoot (Version 1, Eclipse)
 		* ### 快取平行處理競爭問題。
 		* ### 為甚麼比較快: 純記憶體操作、單執行續操作、非阻塞 I/O 多工機制。
 		* ### 可用於高平行處裡讀寫、計數器、排行榜、分散式階段、互動場景與最新列表。
-		* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/Spring/SpringBoot/%E7%B7%A9%E5%AD%98%E7%95%B0%E5%B8%B8%E5%A0%B4%E6%99%AF.jpg)
+		* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SpringBoot/%E7%B7%A9%E5%AD%98%E7%95%B0%E5%B8%B8%E5%A0%B4%E6%99%AF.jpg)
 	* ### Memcached
 		* ### 以 Libenevt 為基礎的事件處裡，內建記憶體儲存方式。
 		* ### 分散式不互相通訊。
