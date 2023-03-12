@@ -17,7 +17,6 @@ Contents
 * ### MySQLPrinciples
 * ### ProgrammationEfficace
 * ### Asyncio
-* ### PythonInterview
 <br />
 
 Note
