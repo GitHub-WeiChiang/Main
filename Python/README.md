@@ -1,7 +1,5 @@
 Python
 =====
-* ### Loguru: 更爲優雅、簡潔的 Python 日誌管理模塊
-* ### PythonInterview
 * ### Chapter01 Python 起步走
 * ### Chapter02 從 REPL 到 IDE
 * ### Chapter03 型態與運算子

@@ -1,7 +1,6 @@
 Asyncio
 =====
 * ### 加速篇: Python 的 Numba 庫 (從爬不太動到原地起飛)
-* ### AsyncioPrinciples
 * ### Chapter1 Python AIO 庫
 * ### Chapter2 Docker 工具
 <br />

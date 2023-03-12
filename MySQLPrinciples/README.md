@@ -6,7 +6,6 @@ MySQLPrinciples
 * ### 物化篇: Materialized View (還沒入門就奪門而逃)
 * ### 約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
 * ### 鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
-* ### OracleDatabase
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
