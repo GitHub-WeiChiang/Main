@@ -106,7 +106,7 @@ Chapter01 Python 面試基礎
     * ### 不可變數據類型: 數字型 (Number)、字符串型 (String)、元組 (Tuple)。
     * ### 可變數據類型: 列表 (List)、集合 (Set)、字典 (Dictionary)。
 * ### 如何判斷輸入的數是不是質數 ?
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/Chapter01/eratosthenes.gif)
+    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/Python/PythonInterview/Chapter01/eratosthenes.gif)
     ```
     import math
 
