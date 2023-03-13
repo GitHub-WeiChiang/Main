@@ -30,6 +30,7 @@ Questions
 * ### Question028 - 資料庫子查詢區分的依據是什麼 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question028)
 * ### Question029 - 什麼是 InnoDB 預先讀取 (read ahead) ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question029)
 * ### Question030 - 資料庫語言的類型有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question030)
+* ### Question031 - Python 中 import 與 from import 的差異為何 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question031)
 <br />
 
 Reference
