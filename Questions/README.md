@@ -31,6 +31,7 @@ Questions
 * ### Question029 - 什麼是 InnoDB 預先讀取 (read ahead) ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question029)
 * ### Question030 - 資料庫語言的類型有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question030)
 * ### Question031 - Python 中 import 與 from import 的差異為何 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question031)
+* ### Question032 - 如何在特定業務邏輯下同時新增數據到兩張相關的資料表中 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question032)
 <br />
 
 Reference

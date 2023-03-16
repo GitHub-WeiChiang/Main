@@ -6,6 +6,8 @@ MySQLPrinciples
 * ### 物化篇: Materialized View (還沒入門就奪門而逃)
 * ### 約束篇: CHECK Constraint In MySQL Isn't Working (從入門到女裝)
 * ### 鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
+* ### 公共篇: MySQL Common Table Expression 公共表表示式 (從入門到改行)
+* ### 遞回篇: MySQL 遞回 Common Table Expression 公共表表示式 (樓上改行是對的)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -656,6 +658,212 @@ mysql> select * from checkDemoTable;
         * ### 实现机制: 提交更新时检查版本号或者时间戳是否符合。
         * ### 实现层面: 业务代码。
         * ### 适用场景: 并发量小。
+<br />
+
+公共篇: MySQL Common Table Expression 公共表表示式 (從入門到改行)
+=====
+* ### MySQL 8.0 開始支援 !
+* ### 什麼是公用表表示式 ?
+    * ### 公用表表示式是一個命名的臨時結果集，僅存在於單個 SQL 語句 (如 SELECT、INSERT、UPDATE 或 DELETE) 的執行範圍。
+    * ### 與衍生表 (派生表) 類似，CTE 不作為物件儲存，僅在查詢執行期間持續。
+    * ### 與衍生表 (派生表) 不同，CTE 可以是自參照 (遞回 CTE)，也可以在同一查詢中多次參照。
+    * ### 與衍生表 (派生表) 相比，CTE 提供了更好的可讀性和效能。
+* ### MySQL CTE 語法
+    * ### CTE 的結構包括名稱，可選列列表和定義 CTE 的查詢。
+    * ### 定義 CTE 後，可以像 SELECT、INSERT、UPDATE、DELETE 或 CREATE VIEW 語句中的檢視一樣使用。
+    ```
+    # CTE 的基本語法
+    # 查詢中的列數必須與 column_list 中的列數相同。
+    # 如果省略 column_list，CTE 將使用定義 CTE 的查詢的列列表。
+
+    WITH cte_name (column_list) AS (
+        query
+    )
+    SELECT * FROM cte_name;
+    ```
+* ### 簡單的 MySQL CTE 範例
+    ```
+    # 使用 CTE 查詢範例資料庫 (yiibaidb) 中的 customers 表中的資料。
+
+    WITH customers_in_usa AS (
+        SELECT customerName, state
+        FROM customers
+        WHERE country = 'USA'
+    )
+    SELECT customerName
+    FROM customers_in_usa
+    WHERE state = 'CA'
+    ORDER BY customerName;
+    ```
+    * ### 此範例中，CTE 的名稱為 customers_in_usa，定義 CTE 的查詢返回兩列: customerName 和 state。
+    * ### 因此，customers_in_usa CTE 返回位於美國的所有客戶。
+    * ### 在定義美國 CTE 的客戶之後，可在 SELECT 語句中參照它，例如僅查詢選擇位於 California 的客戶。
+* ### 再來一個範例
+    ```
+    WITH topsales2013 AS (
+        SELECT
+            salesRepEmployeeNumber employeeNumber,
+            SUM(quantityOrdered * priceEach) sales
+        FROM orders
+        INNER JOIN orderdetails USING (orderNumber)
+        INNER JOIN customers USING (customerNumber)
+        WHERE YEAR(shippedDate) = 2013 AND status = 'Shipped'
+        GROUP BY salesRepEmployeeNumber
+        ORDER BY sales DESC
+        LIMIT 5
+    )
+    SELECT employeeNumber, firstName, lastName, sales
+    FROM employees JOIN topsales2013 USING (employeeNumber);
+    ```
+    * ### 在這個例子中，CTE 返回了在 2013 年前五名的銷售代表。
+    * ### 之後參照了 topsales2013 CTE 來獲取有關銷售代表的其他資訊，包括名字和姓氏。
+* ### 更高階的 MySQL CTE 範例
+    ```
+    WITH salesrep AS (
+        SELECT
+            employeeNumber,
+            CONCAT(firstName, ' ', lastName) AS salesrepName
+        FROM employees
+        WHERE jobTitle = 'Sales Rep'
+    ), customer_salesrep AS (
+        SELECT customerName, salesrepName
+        FROM customers
+        INNER JOIN salesrep ON employeeNumber = salesrepEmployeeNumber
+    )
+    SELECT *
+    FROM customer_salesrep
+    ORDER BY customerName;
+    ```
+    * ### 這個例子在同一查詢中有兩個 CTE。
+    * ### 第一個 CTE (salesrep) 獲得職位是銷售代表的員工。
+    * ### 第二個 CTE (customer_salesrep) 使用 INNER JOIN 子句與第一個 CTE 連線來獲取每個銷售代表負責的客戶。
+    * ### 使用第二個 CTE 之後，透過帶有 ORDER BY 子句的簡單 SELECT 語句來查詢來自該 CTE 的資料。
+* ### WITH 子句用法
+    * ### 在 SELECT、UPDATE 和 DELETE 語句的開頭使用 WITH 子句。
+        ```
+        WITH ... SELECT ...
+        WITH ... UPDATE ...
+        WITH ... DELETE ...
+        ```
+    * ### 在子查詢或衍生表 (派生表) 子查詢的開頭使用WITH子句。
+        ```
+        SELECT ... WHERE id IN (WITH ... SELECT ...);
+        SELECT * FROM (WITH ... SELECT ...) AS derived_table;
+        ```
+    * ### 在 SELECT 語句之前立即使用 WITH 子句 (包括 SELECT 子句)。
+        ```
+        CREATE TABLE ... WITH ... SELECT ...
+        CREATE VIEW ... WITH ... SELECT ...
+        INSERT ... WITH ... SELECT ...
+        REPLACE ... WITH ... SELECT ...
+        DECLARE CURSOR ... WITH ... SELECT ...
+        EXPLAIN ... WITH ... SELECT ...
+        ```
+<br />
+
+遞回篇: MySQL 遞回 Common Table Expression 公共表表示式 (樓上改行是對的)
+=====
+* ### MySQL 8.0 開始支援 !
+* ### MySQL 遞回 CTE 簡介
+    * ### 遞回公用表表示式 (CTE) 是一個具有參照 CTE 名稱本身的子查詢的 CTE。
+    ```
+    WITH RECURSIVE cte_name AS (
+        initial_query  -- anchor member
+        UNION ALL
+        recursive_query -- recursive member that references to the CTE name
+    )
+    SELECT * FROM cte_name;
+    ```
+    * ### 遞回CTE由三個主要部分組成
+        * ### 形成 CTE 結構的基本結果集的初始查詢 (initial_query)，初始查詢部分被稱為 "錨成員"。
+        * ### 遞回查詢部分是參照 CTE 名稱的查詢，因此稱為遞回成員。
+        * ### 遞回成員由一個 UNION ALL (保留表中重复行) 或 UNION DISTINCT (消去表中重复行) 運算子與錨成員相連。
+        * ### 終止條件是當遞回成員沒有返回任何行時，確保遞回停止。
+    * ### 遞回 CTE 的執行順序
+        * ### 將成員分為兩個: "錨點" 和 "遞回" 成員。
+        * ### 執行錨成員形成基本結果集 (R0)，並使用該基本結果集進行下一次疊代。
+        * ### 將 Ri 結果集作為輸入執行遞回成員，並將 Ri+1 作為輸出。
+        * ### 重複第三步，直到遞回成員返回一個空結果集，換句話說，滿足終止條件。
+        * ### 使用 UNION ALL 運算子將結果集從 R0 到 Rn 組合。
+* ### 遞回成員限制
+    * ### 遞回成員不能包含以下結構
+        * ### 聚合函式，如 MAX、MIN、SUM、AVG、COUNT 等。
+        * ### GROUP BY 子句。
+        * ### ORDER BY 子句。
+        * ### LIMIT 子句。
+        * ### DISTINCT。
+    * ### 上述約束不適用於錨定成員。
+    * ### 只有在使用 UNION 運算子時，不能包含 DISTINCT。
+    * ### 如果使用 UNION DISTINCT 運算子，則允許使用 DISTINCT。
+    * ### 遞回成員只能在其子句中參照 CTE 名稱，而不是參照任何子查詢。
+* ### 簡單的 MySQL 遞回 CTE 範例
+    ```
+    WITH RECURSIVE cte_count (n) AS (
+        SELECT 1
+        UNION ALL
+        SELECT n + 1
+        FROM cte_count
+        WHERE n < 3
+    )
+    SELECT n
+    FROM cte_count;
+    ```
+    * ### 作為基本結果集返回 1 的錨成員: ```SELECT 1```。
+    * ### 遞迴成員，參照了 cte_count 的 CTE 名稱: ```SELECT n + 1 FROM cte_count WHERE n < 3```。
+    * ### 遞回成員中的表示式 "< 3" 是終止條件。
+    * ### 當 n 等於 3，遞回成員將返回一個空集合，將停止遞回。
+    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/MySQLPrinciples/Recursive.png)
+    * ### 遞回 CTE 返回以下輸出: n | 1 2 3。
+    * ### 遞回CTE的執行步驟如下
+        * ### 分離錨和遞回成員。
+        * ### 錨定成員形成初始行 (SELECT 1)，因此第一次疊代在 n = 1 時產生 1 + 1 = 2。
+        * ### 第二次疊代對第一次疊代的輸出 (2) 進行操作，並且在 n = 2 時產生 2 + 1 = 3。
+        * ### 在第三次操作 (n = 3) 之前，滿足終止條件 (n < 3)，因此查詢停止。
+        * ### 使用 UNION ALL 運算子組合所有結果集 1, 2 和 3。
+* ### 使用 MySQL 遞回 CTE 遍歷分層資料
+    ```
+    # 使用 CTE 查詢範例資料庫 (yiibaidb) 中的 customers 表中的資料。
+    # employees 表具有參照 employeeNumber 欄位的 reportsTo 欄位。
+    # reportsTo 列儲存經理的 ID。
+    # 總經理不會向公司的組織結構中的任何人報告，因此 reportsTo 列中的值為 NULL。
+
+    WITH RECURSIVE employee_paths AS (
+        SELECT employeeNumber, reportsTo managerNumber, officeCode, 1 lvl
+        FROM employees
+        WHERE reportsTo IS NULL
+        UNION ALL
+        SELECT
+            e.employeeNumber,
+            e.reportsTo,
+            e.officeCode,
+            lvl+1
+        FROM employees e
+        INNER JOIN employee_paths ep ON ep.employeeNumber = e.reportsTo
+    )
+    SELECT employeeNumber, managerNumber, lvl, city
+    FROM employee_paths ep
+    INNER JOIN offices o USING (officeCode)
+    ORDER BY lvl, city;
+    ```
+    ```
+    # 首先使用以下查詢形成錨成員，此查詢 (錨成員) 返回 reportTo 為 NULL 的總經理。
+
+    SELECT employeeNumber, reportsTo managerNumber, officeCode
+    FROM employees
+    WHERE reportsTo IS NULL
+    ```
+    ```
+    # 其次通過參照 CTE 名稱來執行遞回成員，在這個範例中為 employee_paths。
+    # 此查詢 (遞回成員) 返回經理的所有直接上級，直到沒有更多的直接上級。
+    # 如果遞回成員不返回直接上級，則遞回停止。
+
+    SELECT e.employeeNumber, e.reportsTo, e.officeCode
+    FROM employees e
+    INNER JOIN employee_paths ep ON ep.employeeNumber = e.reportsTo
+    ```
+    ```
+    最後使用 employee_paths 的查詢將 CTE 返回的結果集與 offices 表結合起來，以得到最終結果集合。
+    ```
 <br />
 
 Reference
