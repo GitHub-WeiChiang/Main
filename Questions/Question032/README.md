@@ -9,4 +9,5 @@ Question032 - 如何在特定業務邏輯下同時新增數據到兩張相關的
 * ### 理解更多 (主鍵生成策略) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question022)
 * ### 理解更多 (觸發篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples)
 * ### 理解更多 (公共篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples)
+* ### 理解更多 (回傳篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples)
 <br />

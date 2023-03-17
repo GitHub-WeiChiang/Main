@@ -8,6 +8,7 @@ MySQLPrinciples
 * ### 鎖頭篇: 徹底搞懂 MySQL 的鎖機制 (從入門到入墳)
 * ### 公共篇: MySQL Common Table Expression 公共表表示式 (從入門到改行)
 * ### 遞回篇: MySQL 遞回 Common Table Expression 公共表表示式 (樓上改行是對的)
+* ### 回傳篇: PostgreSQL 的 RETURNING 子句 (嗯...這個滿簡單的)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -864,6 +865,38 @@ mysql> select * from checkDemoTable;
     ```
     最後使用 employee_paths 的查詢將 CTE 返回的結果集與 offices 表結合起來，以得到最終結果集合。
     ```
+<br />
+
+回傳篇: PostgreSQL 的 RETURNING 子句 (嗯...這個滿簡單的)
+=====
+* ### 有時在修改資料列的操作過程中取得資料是很方便的。
+* ### INSERT、UPDATE 和 DELETE 指令都有一個選擇性的 ```RETURNING``` 子句來支持這個功能。
+* ### 使用 ```RETURNING``` 可以避免執行額外的資料庫查詢來收集資料，特別是在難以可靠地識別修改的資料列時尤其有用。
+* ### "RETURNING" 子句允許的語法與 SELECT 指令的輸出列表相同，它可以包含命令目標資料表的欄位名稱，或者包含使用這些欄位的表示式。
+* ### 常用的簡寫形式是 ```RETURNING *```，預設是資料表的所有欄位，且相同次序。
+* ### 在 INSERT 中，可用於 RETURNING 的資料是新增的資料列，這在一般的資料新增中並不是很有用，因為它只會重複用戶端所提供的資料，但如果是計算過的預設值就會非常方便，例如當使用串列欄位 (serial) 提供唯一識別時，RETURNING 可以回傳分配給新資料列的 ID:
+    ```
+    CREATE TABLE users (firstname text, lastname text, id serial primary key);
+
+    INSERT INTO users (firstname, lastname)
+    VALUES ('Joe', 'Cool')
+    RETURNING id;
+    ```
+* ### 對於 INSERT ... SELECT，RETURNING 子句也非常有用。
+* ### 在 UPDATE 中，可用於 RETURNING 的資料是被修改的資料列新內容，例如:
+    ```
+    UPDATE products
+    SET price = price * 1.10
+    WHERE price <= 99.99
+    RETURNING name, price AS new_price;
+    ```
+* ### 在 DELETE 中，可用於 RETURNING 的資料是已刪除資料列的內容，例如:
+    ```
+    DELETE FROM products
+    WHERE obsoletion_date = 'today'
+    RETURNING *;
+    ```
+* ### 但是有一件很遺憾的事情: RETURNING is supported by Oracle and PostgreSQL but not by MySQL。
 <br />
 
 Reference
