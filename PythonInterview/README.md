@@ -1,7 +1,8 @@
 PythonInterview
 =====
 * ### 高潔篇: Functools (高階函數和可調用對像上的操作)
-* ### Chapter01 Python 面試基礎
+* ### 通信篇: 進程間的通信 (Queue 與 Pipe)
+* ### Chapter02 Python 面試基礎
 <br />
 
 高潔篇: Functools (高階函數和可調用對像上的操作)
@@ -149,6 +150,150 @@ PythonInterview
     # float, tuple
     # {<class 'object'>: <function fun at 0x104920040>, <class 'int'>: <function _ at 0x104aa64d0>, <class 'list'>: <function _ at 0x104aa6560>, <class 'tuple'>: <function _ at 0x104aa6680>, <class 'float'>: <function _ at 0x104aa6680>}
     # <function _ at 0x104aa64d0>
+    ```
+<br />
+
+通信篇: 進程間的通信 (Queue 與 Pipe)
+=====
+* ### 当使用多个进程时，通常使用消息传递来进行进程之间的通信，并避免必须使用任何同步原语 (如锁)。
+* ### 对于传递消息，可以使用 Pipe (用于两个进程之间的连接) 或队列 Queue (允许多个生产者和消费者)。
+* ### multiprocessing 通常使用 queue.Empty 和 queue.Full 异常来发出超时信号，它们在 multiprocessing 命名空间中不可用，因此需要从中导入它们 queue。
+* ### Queue 用来在多个进程间通信 (get 和 put)
+    * ### put: 放数据，Queue.put() 默认有 block = True 和 timeout 两个参数。
+    * ### 当 block = True 时，写入是阻塞式的，阻塞时间由 timeout 确定。
+    * ### 当队列 q 被 (其他线程) 写满后，这段代码就会阻塞，直至其他线程取走数据。
+    * ### Queue.put() 方法加上 block = False 的参数，即可解决这个隐蔽的问题。
+    * ### 但要注意，非阻塞方式写队列，当队列满时会抛出 exception Queue.Full 的异常。
+    * ### get: 取数据 (默认阻塞)，```Queue.get([block[, timeout]])```获取队列 (timeout 為等待时间)。
+    ```
+    import os, time, random
+    from multiprocessing import Process, Queue
+    
+    # 写数据进程执行的代码:
+    def _write(q,urls):
+        print('Process(%s) is writing...' % os.getpid())
+        for url in urls:
+            q.put(url)
+            print('Put %s to queue...' % url)
+            time.sleep(random.random())
+    
+    # 读数据进程执行的代码:
+    def _read(q):
+        print('Process(%s) is reading...' % os.getpid())
+        while True:
+            url = q.get(True)
+            print('Get %s from queue.' % url)
+    
+    if __name__=='__main__':
+        # 父进程创建Queue，并传给各个子进程：
+        q = Queue()
+
+        _writer1 = Process(target=_write, args=(q,['url_1', 'url_2', 'url_3']))
+        _writer2 = Process(target=_write, args=(q,['url_4','url_5','url_6']))
+
+        _reader = Process(target=_read, args=(q,))
+
+        # 启动子进程_writer，写入:
+        _writer1.start()
+        _writer2.start()
+
+        # 启动子进程_reader，读取:
+        _reader.start()
+
+        # 等待_writer结束:
+        _writer1.join()
+        _writer2.join()
+
+        # _reader进程里是死循环，无法等待其结束，只能强行终止:
+        _reader.terminate()
+
+    '''
+    Process(7460) is writing...
+    Put url_1 to queue...
+    Process(13764) is writing...
+    Put url_4 to queue...
+    Process(13236) is reading...
+    Get url_1 from queue.
+    Get url_4 from queue.
+    Put url_2 to queue...
+    Get url_2 from queue.
+    Put url_5 to queue...
+    Get url_5 from queue.
+    Put url_6 to queue...
+    Get url_6 from queue.
+    Put url_3 to queue...
+    Get url_3 from queue.
+    '''
+    ```
+* ### Pipe 常用来在两个进程间通信，两个进程分别位于管道的两端。
+    ```
+    multiprocessing.Pipe([duplex])
+    (con1, con2) = Pipe()
+    ```
+    * ### con1 管道的一端，负责存储，也可以理解为发送信息。
+    * ### con2 管道的另一端，负责读取，也可以理解为接受信息。
+    ```
+    from multiprocessing import Process, Pipe
+
+    def send(pipe):
+        pipe.send(['spam'] + [42, 'egg'])   # send 传输一个列表
+        pipe.close()
+
+    if __name__ == '__main__':
+        # 创建两个 Pipe 实例
+        (con1, con2) = Pipe()
+
+        # 函数的参数，args 一定是实例化之后的 Pipe 变量，不能直接写 args=(Pip(),)
+        sender = Process(target=send, args=(con1,))
+
+        # Process 类启动进程
+        sender.start()
+
+        # 管道的另一端 con2 从 send 收到消息
+        print("con2 got: %s" % con2.recv())
+
+        # 关闭管道
+        con2.close()
+    ```
+    * ### 管道是可以同时发送和接受消息的:
+    ```
+    from multiprocessing import Process, Pipe
+
+    def talk(pipe):
+        # 传输一个字典
+        pipe.send(dict(name='Bob', spam=42))
+
+        # 接收传输的数据
+        reply = pipe.recv()
+        
+        print('talker got:', reply)
+
+    if __name__ == '__main__':
+        # 创建两个 Pipe() 实例，也可以改成 (conf1, conf2)
+        (parentEnd, childEnd) = Pipe()
+
+        # 创建一个 Process 进程，名称为 child
+        child = Process(target=talk, args=(childEnd,))
+
+        # 启动进程
+        child.start()
+
+        # parentEnd 是一个 Pip() 管道，可以接收 child Process 进程传输的数据
+        print('parent got:', parentEnd.recv())
+
+        # parentEnd 是一个 Pip() 管道，可以使用 send 方法来传输数据
+        parentEnd.send({x * 2 for x in 'spam'})
+
+        # 传输的数据被 talk 函数内的 pip 管道接收，并赋值给 reply
+        child.join()
+
+        print('parent exit')
+
+    '''
+    parent got: {'name': 'Bob', 'spam': 42}
+    talker got: {'ss', 'mm', 'pp', 'aa'}
+    parent exit
+    '''
     ```
 <br />
 

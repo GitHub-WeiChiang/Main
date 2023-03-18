@@ -1,4 +1,4 @@
-Chapter01 Python 面試基礎
+Chapter02 Python 面試基礎
 =====
 * ### 有序數據類型如何反轉 ? 反轉函數 reverse() 與 reversed() 的區別
     ```
