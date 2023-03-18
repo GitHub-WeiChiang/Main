@@ -65,6 +65,7 @@
 * ### 工廠方法 Factory Method: 創建需要使用大量重複代碼對象。
 * ### 原型 Prototype: 支持相同物件的大量複製。
 * ### 單例 Singleton: 保證一個類只有一個實例。
+* ### 適配器 Adapter: 讓接口不兼容的對象能夠相互合作。
 <br />
 
 Reference

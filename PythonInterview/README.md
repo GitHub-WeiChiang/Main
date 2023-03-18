@@ -1,6 +1,8 @@
 PythonInterview
 =====
 * ### 高潔篇: Functools (高階函數和可調用對像上的操作)
+* ### 線程篇: 詳解 threading 模塊
+* ### 進程篇: 詳解 multiprocessing 模塊
 * ### Chapter01 Python 面試基礎
 <br />
 
@@ -150,6 +152,15 @@ PythonInterview
     # {<class 'object'>: <function fun at 0x104920040>, <class 'int'>: <function _ at 0x104aa64d0>, <class 'list'>: <function _ at 0x104aa6560>, <class 'tuple'>: <function _ at 0x104aa6680>, <class 'float'>: <function _ at 0x104aa6680>}
     # <function _ at 0x104aa64d0>
     ```
+<br />
+
+線程篇: 詳解 threading 模塊
+=====
+* ### 
+<br />
+
+進程篇: 詳解 multiprocessing 模塊
+=====
 <br />
 
 Reference
