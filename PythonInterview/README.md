@@ -4,6 +4,8 @@ PythonInterview
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
+* ### Chapter04 Python 序列
+* ### Chapter05 字符串和正則表達式
 <br />
 
 高潔篇: Functools (高階函數和可調用對像上的操作)
