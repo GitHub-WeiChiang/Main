@@ -4,7 +4,7 @@ Contents
     * ### Python -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Python)
     * ### Java -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Java)
 * ### Python 模組與應用
-    * ### JwtToken -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/JwtToken)
+    * ### JsonWebToken -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/JsonWebToken)
     * ### Loguru -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Loguru)
     * ### Asyncio -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Asyncio)
     * ### AsyncioPrinciples -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/AsyncioPrinciples)
