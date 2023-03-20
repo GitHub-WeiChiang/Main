@@ -2,7 +2,6 @@ PythonInterview
 =====
 * ### 高潔篇: Functools (高階函數和可調用對像上的操作)
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
-* ### ＧＣ篇: 深入理解 Python 內存管理與垃圾回收
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
 * ### Chapter04 Python 序列
@@ -300,46 +299,6 @@ PythonInterview
     parent exit
     '''
     ```
-<br />
-
-ＧＣ篇: 深入理解 Python 內存管理與垃圾回收
-=====
-* ### 内存的管理简单来说: 分配 (malloc) + 回收 (free)。
-* ### 內存管理的兩個目標: 高效分配 + 有效回收。
-* ### 对象管理
-    * ### Python 对象实现的核心结构体: PyObject
-    ```
-    typedef struct_object{
-    　　int ob_refcnt;
-    　　struct_typeobject *ob_type;
-    }PyObject;
-    ```
-    * ### PyObject 是每个对象必有的内容，可以说是 Python 中所有对象的祖父:
-        * ### ob_refcnt: 引用计数 (reference count)。
-        * ### ob_type: 指向另一种类型的指针 (pointer to another type)。
-* ### CPython 的内存管理
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/CPython.png)
-    * ### Python 将部分内存用于内部使用和非对象内存，另一部分专用于对象存储。
-    * ### CPython 有一个对象分配器，负责在对象内存区域内分配内存，每当新对象需要分配或删除空间时，都会调用该方法。
-    * ### 为 list 和 int 等 Python 对象添加和删除数据一次不会涉及太多数据，因此，分配器的设计已调整为可以一次处理少量数据，它还尝试在绝对需要之前不分配内存。
-* ### Python 的内存分配器
-    * ### 在 Python 中，当要分配内存空间时，不单纯使用 malloc / free，而是在其基础上堆放 3 个独立的分层，有效率地进行分配。
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/Python.png)
-    * ### 第 0 层往下是 OS 的功能。
-    * ### 第 -2 层是隐含和机器的物理性相关联的部分，OS 的虚拟内存管理器负责这部分功能。
-    * ### 第 -1 层是与机器实际进行交互的部分，OS 会执行这部分功能。
-    * ### 在第 3 层到第 0 层调用了一些具有代表性的函数，其调用架構如下:
-        * ### PyDict_New() -- layer 3
-        * ### PyObject_GC_New() -- layer 2
-        * ### PyObject_Malloc() -- layer 2
-        * ### new_arena() -- layer 1
-        * ### malloc() -- layer 0
-* ### 第 0 层: 通用的基础分配器
-    * ### 以 Linux 为例，第 0 层指的就是 glibc 的 malloc() 这样的分配器，是对 Linux 等 OS 申请内存的部分。
-    * ### Python 中并不是在生成所有对象时都调用 malloc()，而是根据要分配的内存大小来改变分配的方法。
-    * ### 申请的内存大小如果大于 256 字节，就老实地调用 malloc()，如果小于等于 256 字节，就要轮到第 1 层和第 2 层出场了。
-* ### 第 1 层: Python 低级内存分配器
-    * ### 
 <br />
 
 Reference
