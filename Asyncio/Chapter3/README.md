@@ -7,4 +7,7 @@ Chapter3 AIOHTTP
 * ### aiohttp_template_pages (模板渲染)
 * ### aiohttp_submitform (表單處理)
 * ### aiohttp_upload_file (文件上傳)
+* ### aiohttp_session_counter (Session)
+* ### aiohttp_client (HTTP 客戶端)
+* ### aiohttps (HTTPS 支持)
 <br />
