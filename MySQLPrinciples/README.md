@@ -9,6 +9,7 @@ MySQLPrinciples
 * ### 公共篇: MySQL Common Table Expression 公共表表示式 (從入門到改行)
 * ### 遞回篇: MySQL 遞回 Common Table Expression 公共表表示式 (樓上改行是對的)
 * ### 回傳篇: PostgreSQL 的 RETURNING 子句 (嗯...這個滿簡單的)
+* ### 函數篇: MySQL 自定義函數 (從呼叫函數到呼叫破喉嚨)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -897,6 +898,136 @@ mysql> select * from checkDemoTable;
     RETURNING *;
     ```
 * ### 但是有一件很遺憾的事情: RETURNING is supported by Oracle and PostgreSQL but not by MySQL。
+<br />
+
+函數篇: MySQL 自定義函數 (從呼叫函數到呼叫破喉嚨)
+=====
+* ### 定義
+    * ### 如果有一些复杂的业务逻辑在数据库层面就可以完成，无需在程序层面完成的时候，这时候就可以写成 MySQL 自定义函数。
+    * ### 函数是指一组预编译好的 sql 语句集合，理解成批处理语句，必须有返回值，调用函数等于一次性执行了这些语句，有利降低语句重复编写和调用。
+* ### 作用
+    * ### 可以高度抽象业务逻辑，前置到数据库层面，而不是应用层面。
+    * ### 相比于从数据库查询出来，然后程序操作数据，数据库操作一定程度上提高效率。
+    * ### 高度可复用性，数据库层面的方法封装，不只是应用在多个同样业务场景，还可以应用到多个不同语言中。
+* ### 函数的使用
+    ```
+    # 创建函数
+
+    CREATE FUNCTION func_name([param_list]) RETURNS TYPE
+    BEGIN
+        -- Todo:function body
+    END 
+    ```
+    ```
+    # 调用函数
+
+    SELECT func_name([param_list]);
+    ```
+    ```
+    # 查看函数创建脚本
+
+    SHOW CREATE FUNCTION func_name;
+    ```
+    ```
+    # 查看函数信息
+
+    SHOW FUNCTION STATUS;
+    ```
+    ```
+    # 删除函数
+
+    DROP FUNCTION IF EXISTS func_name;
+    ```
+* ### 示例
+    ```
+    # 数据基础
+
+     1 mysql> select * from students;
+     2 +-----------+-------------+-------+---------+
+     3 | studentid | studentname | score | classid |
+     4 +-----------+-------------+-------+---------+
+     5 |         1 | brand       | 105.5 |       1 |
+     6 |         2 | helen       | 98.5  |       1 |
+     7 |         3 | lyn         | 97    |       1 |
+     8 |         4 | sol         | 97    |       1 |
+     9 |         5 | b1          | 89    |       2 |
+    10 |         6 | b2          | 90    |       2 |
+    11 |         7 | c1          | 76    |       3 |
+    12 |         8 | c2          | 73.5  |       3 |
+    13 |         9 | lala        | 73    |       0 |
+    14 |        10 | A           | 100   |       3 |
+    15 |        16 | test1       | 100   |       0 |
+    16 |        17 | trigger2    | 107   |       0 |
+    17 |        22 | trigger1    | 100   |       0 |
+    18 +-----------+-------------+-------+---------+
+    19 13 rows in set
+    ```
+    ```
+    # 无参函数: 获取有班级号的所有同学的平均成绩
+
+    DROP FUNCTION IF EXISTS fun_test1;
+    
+    DELIMITER $
+
+    CREATE FUNCTION fun_test1() RETURNS DECIMAL(10, 2)
+    BEGIN
+        DECLARE avg_score DECIMAL(10, 2) DEFAULT 0;
+        SELECT AVG(score) INTO avg_score
+        FROM students
+        where classid != 0;
+        return avg_score;
+    END $
+
+    DELIMITER ;
+    ```
+    ```
+    # 使用 select 调用，无需传入参数
+
+    1 mysql> select fun_test1();
+    2 +-------------+
+    3 | fun_test1() |
+    4 +-------------+
+    5 | 91.83       |
+    6 +-------------+
+    7 1 row in set
+    ```
+    ```
+    # 有参函数: 获取班级号为 1 的同学的平均成绩，参数 cid 为班级号
+
+    DROP FUNCTION IF EXISTS fun_test2;
+
+    DELIMITER $
+
+    CREATE FUNCTION fun_test2(cid INT) RETURNS DECIMAL(10, 2)
+    BEGIN
+        DECLARE avg_score DECIMAL(10, 2) DEFAULT 0;
+        SELECT AVG(score) INTO avg_score
+        FROM students
+        where classid = cid;
+        return avg_score;
+    END $
+
+    DELIMITER ;
+    ```
+    ```
+    # 使用 select 调用，传入参数 1 
+
+    1 mysql> select fun_test2(1);
+    2 +--------------+
+    3 | fun_test2(1) |
+    4 +--------------+
+    5 | 99.5         |
+    6 +--------------+
+    7 1 row in set
+    ```
+* ### 存储过程和函数的区别
+    * ### 存储过程的关键字为 procedure，返回值可以有多个，调用时用 call，一般用于执行比较复杂的的过程体、更新、创建等语句。
+    * ### 函数的关键字为 function，返回值必须有一个，调用用 select，一般用于查询单个值并返回。
+|  | 存储过程 | 函数 |
+| -- | -- | -- |
+| 返回值 | 可以有 0 个或者多个 | 必须有一个 |
+| 关键字 | procedure | function |
+| 调用方式 | call | select |
 <br />
 
 Reference
