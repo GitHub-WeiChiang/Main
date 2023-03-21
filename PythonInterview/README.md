@@ -462,7 +462,7 @@ PythonInterview
         ```
         * ### 每新增 700 个需要 GC 的对象，Python 就执行一次 G0 的 GC 操作。
         * ### 每执行 10 次 G0 的 GC，触发一次 G1 的 GC。
-        * ### 每执行 10 次 G1 代 GC，触发一次 G2 的 GC (其實頻率更低)。
+        * ### 每执行 10 次 G1 的 GC，触发一次 G2 的 GC (其實頻率更低)。
 <br />
 
 Reference
