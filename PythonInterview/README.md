@@ -3,6 +3,8 @@ PythonInterview
 * ### 高潔篇: Functools (高階函數和可調用對像上的操作)
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
 * ### 垃圾篇: 一文讀懂 Python 垃圾回收機制 (在座的各位都是...)
+* ### 線程篇: threading (從精通到重新入門)
+* ### 進程篇: multiprocessing (從入門到再次入門)
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
 * ### Chapter04 Python 序列
@@ -463,6 +465,14 @@ PythonInterview
         * ### 每新增 700 个需要 GC 的对象，Python 就执行一次 G0 的 GC 操作。
         * ### 每执行 10 次 G0 的 GC，触发一次 G1 的 GC。
         * ### 每执行 10 次 G1 的 GC，触发一次 G2 的 GC (其實頻率更低)。
+<br />
+
+線程篇: threading (從精通到重新入門)
+=====
+<br />
+
+進程篇: multiprocessing (從入門到再次入門)
+=====
 <br />
 
 Reference
