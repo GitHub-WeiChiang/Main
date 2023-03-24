@@ -469,6 +469,396 @@ PythonInterview
 
 線程篇: threading (從精通到重新入門)
 =====
+* ### 使用 threading 模块操作多线程有以下两种方法
+    * ### 创建 threading.Thread 类的实例，调用其 start() 方法
+        ```
+        import time
+        import threading
+        
+        
+        def task_thread(counter):
+            print(
+                f'线程名称：{threading.current_thread().name} 参数：{counter} 开始时间：{time.strftime("%Y-%m-%d %H:%M:%S")}'
+            )
+            num = counter
+            while num:
+                time.sleep(3)
+                num -= 1
+            print(
+                f'线程名称：{threading.current_thread().name} 参数：{counter} 结束时间：{time.strftime("%Y-%m-%d %H:%M:%S")}'
+            )
+        
+        
+        if __name__ == "__main__":
+            # 初始化 3 个 线程，传递不同的参数
+            t1 = threading.Thread(target=task_thread, args=(3,))
+            t2 = threading.Thread(target=task_thread, args=(2,))
+            t3 = threading.Thread(target=task_thread, args=(1,))
+            # 开启三个线程
+            t1.start()
+            t2.start()
+            t3.start()
+            # 等待运行结束
+            t1.join()
+            t2.join()
+            t3.join()
+        
+        # 线程名称：Thread-1 参数：3 开始时间：2021-03-04 15:36:39
+        # 线程名称：Thread-2 参数：2 开始时间：2021-03-04 15:36:39
+        # 线程名称：Thread-3 参数：1 开始时间：2021-03-04 15:36:39
+        
+        # 线程名称：Thread-3 参数：1 结束时间：2021-03-04 15:36:42
+        # 线程名称：Thread-2 参数：2 结束时间：2021-03-04 15:36:45
+        # 线程名称：Thread-1 参数：3 结束时间：2021-03-04 15:36:48
+        ```
+        * ### 程序实例化了三个 Thread 类的实例，并向任务函数传递不同的参数，使他们运行不同的时间后结束，start() 方法开启线程，join() 方法等待线程结束
+    * ### 继承 Thread 类，在子类中重写 run() 和 init() 方法
+        ```
+        import time
+        import threading
+        
+        
+        class MyThread(threading.Thread):
+            def __init__(self, counter):
+                super().__init__()
+                self.counter = counter
+        
+            def run(self):
+                print(
+                    f'线程名称：{threading.current_thread().name} 参数：{self.counter} 开始时间：{time.strftime("%Y-%m-%d %H:%M:%S")}'
+                )
+                counter = self.counter
+                while counter:
+                    time.sleep(3)
+                    counter -= 1
+                print(
+                    f'线程名称：{threading.current_thread().name} 参数：{self.counter} 结束时间：{time.strftime("%Y-%m-%d %H:%M:%S")}'
+                )
+        
+        
+        if __name__ == "__main__":
+        
+            # 初始化 3 个线程，传递不同的参数
+            t1 = MyThread(3)
+            t2 = MyThread(2)
+            t3 = MyThread(1)
+            # 开启三个线程
+            t1.start()
+            t2.start()
+            t3.start()
+            # 等待运行结束
+            t1.join()
+            t2.join()
+            t3.join()
+
+        # 线程名称：Thread-1 参数：3 开始时间：2021-03-04 15:40:41
+        # 线程名称：Thread-2 参数：2 开始时间：2021-03-04 15:40:41
+        # 线程名称：Thread-3 参数：1 开始时间：2021-03-04 15:40:41
+        # 
+        # 线程名称：Thread-3 参数：1 结束时间：2021-03-04 15:40:44
+        # 线程名称：Thread-2 参数：2 结束时间：2021-03-04 15:40:47
+        # 线程名称：Thread-1 参数：3 结束时间：2021-03-04 15:40:50
+        ```
+* ### 多进程同步之 Lock 锁: 多个线程之间对某个数据进行修改，会出现不可预料的结果。
+    * ### 不加锁的情况
+        ```
+        import threading
+        
+        
+        def task_thread(n):
+            global num
+            for i in range(1000000):
+                # 此處有機率發生线程抢占
+                num = num + n
+                num = num - n
+        
+        
+        if __name__ == '__main__':
+            num = 0
+            t1 = threading.Thread(target=task_thread, args=(6,))
+            t2 = threading.Thread(target=task_thread, args=(17,))
+            t3 = threading.Thread(target=task_thread, args=(11,))
+            t1.start()
+            t2.start()
+            t3.start()
+            t1.join()
+            t2.join()
+            t3.join()
+            print(num)
+        ```
+        * ### 上述代码，实例化 3 个线程，去执行 task_thread 任务函数，num = 0 的概率是非常小的，因为当一个线程执行 num + n 时，另一个线程可能正在执行 num - m，导致之前的线程执行 num - n 时 num 已经不是之前的值。这是由于线程抢占造成的，想要避免这种情况，就得给线程加锁。
+    * ### 加锁的情况
+        ```
+        import threading
+        
+        lock = threading.Lock()
+        
+        
+        def task_thread(n):
+            global num
+            # 获取锁，用于线程同步
+            lock.acquire()
+            for i in range(1000000):
+                # 這裡非常安全
+                num = num + n
+                num = num - n
+            # 释放锁，开启下一个线程
+            lock.release()
+        
+        
+        if __name__ == '__main__':
+            num = 0
+            t1 = threading.Thread(target=task_thread, args=(6,))
+            t2 = threading.Thread(target=task_thread, args=(17,))
+            t3 = threading.Thread(target=task_thread, args=(11,))
+            t1.start()
+            t2.start()
+            t3.start()
+            t1.join()
+            t2.join()
+            t3.join()
+            print(num)
+        ```
+        * ### 无论执行多少次，结果都是 0。
+* ### 多线程同步之 Semaphore (信号量): Lock 锁只是允许一个线程访问共享数据，而信号量是同时允许一定数量的线程访问共享数据。
+    ```
+    import threading
+    import time
+    
+    
+    # 模拟银行业务办理
+    def yewubanli(name):
+        semaphore.acquire()
+        time.sleep(3)
+        print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {name} 正在办理业务")
+    
+        semaphore.release()
+    
+    
+    if __name__ == '__main__':
+        
+        # 同时只有 5 个人办理业务
+        semaphore = threading.BoundedSemaphore(5)
+        thread_list = []
+        for i in range(12):
+            t = threading.Thread(target=yewubanli, args=(i,))
+            thread_list.append(t)
+        
+        for thread in thread_list:
+            thread.start()
+    
+        for thread in thread_list:
+            thread.join()
+
+    '''
+    2021-03-04 17:24:00 0 正在办理业务
+    2021-03-04 17:24:00 1 正在办理业务
+    2021-03-04 17:24:00 2 正在办理业务
+    2021-03-04 17:24:00 3 正在办理业务
+    2021-03-04 17:24:00 4 正在办理业务
+    2021-03-04 17:24:03 5 正在办理业务
+    2021-03-04 17:24:03 6 正在办理业务
+    2021-03-04 17:24:03 7 正在办理业务
+    2021-03-04 17:24:03 8 正在办理业务
+    2021-03-04 17:24:03 9 正在办理业务
+    2021-03-04 17:24:06 10 正在办理业务
+    2021-03-04 17:24:06 11 正在办理业务
+    '''
+    ```
+* ### 多线程同步之 Condition (条件锁): 条件对象 Condition 能让一个线程 A 停下，等待线程 B，线程 B 满足某个条件后又通知线程 A 继续执行。
+    ```
+    import threading
+    
+    
+    class Boy(threading.Thread):
+        def __init__(self, cond, name):
+            super(Boy, self).__init__()
+            self.cond = cond
+            self.name = name
+    
+        def run(self):
+            self.cond.acquire()
+            print(self.name + ": 嫁给我吧！？")
+            self.cond.notify()  # 唤醒一个挂起的线程，让 hanmeimei 表态
+            self.cond.wait()  # 释放内部所占用的琐，同时线程被挂起，直至接收到通知被唤醒或超时，等待 hanmeimei 回答
+            print(self.name + ": 我单下跪，送上戒指！")
+            self.cond.notify()
+            self.cond.wait()
+            print(self.name + ": Li 太太，你的选择太明智了。")
+            self.cond.release()
+    
+    
+    class Girl(threading.Thread):
+        def __init__(self, cond, name):
+            super(Girl, self).__init__()
+            self.cond = cond
+            self.name = name
+    
+        def run(self):
+            self.cond.acquire()
+            self.cond.wait()  # 等待 Lilei 求婚
+            print(self.name + ": 没有情调，不够浪漫，不答应")
+            self.cond.notify()
+            self.cond.wait()
+            print(self.name + ": 好吧，答应你了")
+            self.cond.notify()
+            self.cond.release()
+    
+    
+    if __name__ == '__main__':
+        cond = threading.Condition()
+
+        boy = Boy(cond, "LiLei")
+        girl = Girl(cond, "HanMeiMei")
+
+        girl.start()
+        boy.start()
+
+    '''
+    LiLei: 嫁给我吧！？
+    HanMeiMei: 没有情调，不够浪漫，不答应
+    LiLei: 我单下跪，送上戒指！
+    HanMeiMei: 好吧，答应你了
+    LiLei: Li 太太，你的选择太明智了。
+    '''
+    ```
+    * ### 上述代码实例化了两个 Thread 线程对象，boy 和 girl，同时调用 threading 实例化 cond 对象，程序先调用 start() 启动 gril 线程，gril 获取到条件变量锁 cond 对象，但又执行 wait() 方法进行阻塞并释放锁。boy 线程启动后，获得条件变量锁并发出消息，之后通过 notify 唤醒一个阻塞的线程，并释放条件锁 cond 进入阻塞状态。最后通过 release() 方法释放条件锁 cond。
+* ### 多线程同步之 Event (事件): 事件用于线程之间的通信，一个线程发出一个信号，其他一个或者多个线程等待，调用 Event 对象的 wait() 方法，线程则会阻塞等待，调用 set() 方法，线程会被唤醒。
+    ```
+    import threading, time
+    
+    
+    class Boy(threading.Thread):
+        def __init__(self, cond, name):
+            super(Boy, self).__init__()
+            self.cond = cond
+            self.name = name
+    
+        def run(self):
+            print(self.name + ": 嫁给我吧！？")
+            self.cond.set()  # 唤醒一个挂起的线程，让 hanmeimei 表态
+            time.sleep(0.5)
+            self.cond.wait()
+            print(self.name + ": 我单下跪，送上戒指！")
+            self.cond.set()
+            time.sleep(0.5)
+            self.cond.wait()
+            self.cond.clear()
+            print(self.name + ": Li 太太，你的选择太明智了。")
+    
+    
+    class Girl(threading.Thread):
+        def __init__(self, cond, name):
+            super(Girl, self).__init__()
+            self.cond = cond
+            self.name = name
+    
+        def run(self):
+            self.cond.wait()  # 等待 Lilei 求婚
+            self.cond.clear()
+            print(self.name + ": 没有情调，不够浪漫，不答应")
+            self.cond.set()
+            time.sleep(0.5)
+            self.cond.wait()
+            print(self.name + ": 好吧，答应你了")
+            self.cond.set()
+    
+    
+    if __name__ == '__main__':
+        cond = threading.Event()
+        boy = Boy(cond, "LiLei")
+        girl = Girl(cond, "HanMeiMei")
+        boy.start()
+        girl.start()
+
+    '''
+    LiLei: 嫁给我吧！？
+    HanMeiMei: 没有情调，不够浪漫，不答应
+    LiLei: 我单下跪，送上戒指！
+    HanMeiMei: 好吧，答应你了
+    LiLei: Li 太太，你的选择太明智了。
+    '''
+    ```
+    * ### Event 内部默认设置了一个标志，初始值为 False，调用 Event.set() 对象时将内部标志设置为 True，唤醒一个线程。
+* ### 线程优先队列 queue: Python 中 queue 模块提供了同步的、线程安全的队列类。包含先进先出队列 queue，后进先出队列 LifoQueue 和优先级队列 Priority。这些队列都是实现了锁的原理，所以是线程安全的，可直接用来实现线程之间的同步。
+    ```
+    import threading
+    import time
+    import queue
+    
+    def ProducerA():
+        count = 1
+        while True:
+            q.put(f"冷饮 {count}")
+            print(f"{time.strftime('%H:%M:%S')} A 放入:[冷饮 {count}]")
+            count += 1
+            time.sleep(1)
+    
+    
+    def ConsumerB():
+        while True:
+            print(f"{time.strftime('%H:%M:%S')} B 取出 [{q.get()}]")
+            time.sleep(5)
+    
+    
+    if __name__ == '__main__':
+        # 先进先出
+        q = queue.Queue(maxsize=5)  # 最大容量为5
+        # q = queue.LifoQueue(maxsize=3)
+        # q = queue.PriorityQueue(maxsize=3)
+        p = threading.Thread(target=ProducerA)
+        c = threading.Thread(target=ConsumerB)
+        c.start()
+        p.start()
+    
+    '''
+    11:44:00 A 放入:[冷饮 1]
+    11:44:00 B 取出 [冷饮 1]
+    11:44:01 A 放入:[冷饮 2]
+    11:44:02 A 放入:[冷饮 3]
+    11:44:03 A 放入:[冷饮 4]
+    11:44:04 A 放入:[冷饮 5]
+    11:44:05 B 取出 [冷饮 2]
+    11:44:05 A 放入:[冷饮 6]
+    11:44:06 A 放入:[冷饮 7]
+    11:44:10 B 取出 [冷饮 3]
+    11:44:10 A 放入:[冷饮 8]
+    11:44:15 B 取出 [冷饮 4]
+    11:44:15 A 放入:[冷饮 9]
+    11:44:20 B 取出 [冷饮 5]
+    11:44:20 A 放入:[冷饮 10]
+    '''
+    ```
+    * ### queue.Queue.put() 方法往队列中存入数据，get() 方法从队列中获取一条数据并删除。当队列满时，put 方法不再执行而是等待队列有空闲空间继续放入数据，get 方法当队列为空则继续等待。
+* ### Pool 线程池: 系统启动一个新线程的成本是比较高的，因为它涉及与操作系统的交互。在这种情形下，使用线程池可以很好地提升性能，尤其是当程序中需要创建大量生存期很短暂的线程时，更应该考虑使用线程池。导入线程池: from multiprocess.dummy import Pool
+    ```
+    from multiprocessing.dummy import Pool as ThreadPool
+    import time
+    
+    
+    def fun(n):
+        time.sleep(2)
+    
+    
+    if __name__ == '__main__':
+        start = time.time()
+        for i in range(5):
+            fun(i)
+        print("单线程顺序执行耗时:", time.time() - start)
+    
+        start2 = time.time()
+        # 开 5 个 worker，没有参数时默认是 cpu 的核心数
+        pool = ThreadPool(processes=5)
+        results2 = pool.map(fun, range(5))
+        pool.close()
+        pool.join()
+        print("线程池 (5) 并发执行耗时:", time.time() - start2)
+
+    '''
+    单线程顺序执行耗时: 10.010493993759155
+    线程池 (5) 并发执行耗时: 2.0543053150177
+    '''
+    ```
 <br />
 
 進程篇: multiprocessing (從入門到再次入門)
