@@ -4,6 +4,7 @@ PythonInterview
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
 * ### 垃圾篇: 一文讀懂 Python 垃圾回收機制 (在座的各位都是...)
 * ### 海象篇: 賦值表達式 Assignment Expressions 之海象運算符 (:= 像海象對吧 ?)
+* ### 蒙圈篇: for in if in for else try except else (洗勒公啥)
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
 * ### Chapter04 Python 序列
@@ -565,6 +566,71 @@ nums2 = [j for i in nums1 if (j := f(i)) > 50]
 print(nums2)
 ```
 * ### 使用海象运算符时: 三个数字满足列表推导式的条件，节省 3 次的函数调用。当程序数据巨大的时候，这将起到提升性能的作用。
+<br />
+
+蒙圈篇: for in if in for else try except else (洗勒公啥)
+=====
+```
+>>> newList = []
+>>> for x in a:
+... if x % 2 == 0:
+...    newList.append(x)
+>>> newList
+[12, 4, 6]
+
+# vs.
+
+>>> a = [12, 3, 4, 6, 7, 13, 21]
+>>> newList = [x for x in a if x % 2 == 0]
+>>> newList
+[12, 4, 6]
+```
+```
+>>> a = [12, 3, 4, 6, 7, 13, 21]
+>>> b = ['a', 'b', 'x']
+>>> newList = [(x, y) for x in a for y in b]
+>>> newList
+[(12, 'a'), (12, 'b'), (12, 'x'), (3, 'a'), (3, 'b'), (3, 'x'), (4, 'a'), (4, 'b'), (4, 'x'), (6, 'a'), (6, 'b'), (6, 'x'), (7, 'a'), (7, 'b'), (7, 'x'), (13, 'a'), (13, 'b'), (13, 'x'), (21, 'a'), (21, 'b'), (21, 'x')]
+>>> newList2 = [(x, y) for x in a for y in b if x % 2 == 0 and y < 'x']
+>>> newList2
+[(12, 'a'), (12, 'b'), (4, 'a'), (4, 'b'), (6, 'a'), (6, 'b')]
+
+# 前面的 for 语句是外层的循环，後面的 for 语句是內层的循环
+```
+```
+def print_prime(n):
+    for i in range(2, n):
+        found = True
+        for j in range(2, i):
+            if i % j == 0:
+                found = False
+                break
+        if found:
+            print("{} it's a prime number".format(i))
+
+# vs.
+
+def print_prime(n):
+    for i in range(2, n):
+        for j in range(2, i):
+            if i % j == 0:
+                break
+        # 循环正常结束时 (非 return 或 break 等)，else 子句的逻辑就会被执行到
+        else:
+            print("{} it's a prime number".format(i))
+```
+```
+def demo(str_param):
+    try:
+        # Do something here
+        pass
+    except Exception:
+        print("有錯就執行")
+    else:
+        print("沒錯才執行")
+    finally:
+        print("無論如何都執行")
+```
 <br />
 
 Reference
