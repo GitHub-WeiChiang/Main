@@ -28,13 +28,13 @@
 | 行為型 | 結構性 | 創建型 |
 | --- | --- | --- |
 | Chain of Responsibility | Adapter | Abstract Factory |
-| Command | Adapter | Builder |
-| Interpreter | Bridge | Factory Method |
-| Iterator | Composite | Prototype |
-| Mediator | Decorator | Singleton |
-| Memento | Facade |  |
-| Observer | Flyweight |  |
-| State | Proxy |  |
+| Command | Bridge | Builder |
+| Interpreter | Composite | Factory Method |
+| Iterator | Decorator | Prototype |
+| Mediator | Facade | Singleton |
+| Memento | Flyweight |  |
+| Observer | Proxy |  |
+| State |  |  |
 | Strategy |  |  |
 | Template Method |  |  |
 | Visitor |  |  |
@@ -65,8 +65,8 @@
 * ### 工廠方法 Factory Method: 創建需要使用大量重複代碼對象。
 * ### 原型 Prototype: 支持相同物件的大量複製。
 * ### 單例 Singleton: 保證一個類只有一個實例。
-* ### 適配器 Adapter: 讓接口不兼容的對象能夠相互合作。
-* ### 橋接 Bridge: 將抽象與實現分離，在抽象和現實間搭建橋樑。
+* ### 適配器 Adapter: 讓接口不兼容的對象能夠相互合作。 (既有代碼兼容)
+* ### 橋接 Bridge: 將抽象與實現分離，在抽象和現實間搭建橋樑。 (前期架構設計)
 <br />
 
 Reference
