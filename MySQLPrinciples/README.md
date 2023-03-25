@@ -10,6 +10,7 @@ MySQLPrinciples
 * ### 遞回篇: MySQL 遞回 Common Table Expression 公共表表示式 (樓上改行是對的)
 * ### 回傳篇: PostgreSQL 的 RETURNING 子句 (嗯...這個滿簡單的)
 * ### 函數篇: MySQL 自定義函數 (從呼叫函數到呼叫破喉嚨)
+* ### 更新篇: PostgreSQL 9.4 引入特性: FILTER 子句 (夜深了...)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -1028,6 +1029,31 @@ mysql> select * from checkDemoTable;
 | 返回值 | 可以有 0 个或者多个 | 必须有一个 |
 | 关键字 | procedure | function |
 | 调用方式 | call | select |
+<br />
+
+更新篇: PostgreSQL 9.4 引入特性: FILTER 子句 (夜深了...)
+=====
+* ### filter 子句可以对聚集函数增加过滤功能，仅对符合条件的子集进行聚集。
+* ### 假设需要对一组数据执行 count 统计，同时需要统计奇数和偶数，可以在一个查询中使用 filter 进行实现:
+    ```
+    test=# SELECT
+    test-#     count(*) count_all,
+    test-#     count(*) FILTER(WHERE value % 2 = 1) count_1,
+    test-#     count(*) FILTER(WHERE value % 2 = 0) count_2
+    test-# FROM generate_series(1, 100, 1) as t(value);
+
+    count_all | count_1 | count_2
+    -----------+---------+---------
+        100 |      50 |      50
+    (1 行记录)
+    ```
+* ### FILTER 子句將实现簡單化，且提升了代码可读性，甚至優化了查询性能。
+* ### FILTER 子句帮助过滤满足某些条件的数据子集，从而避免不必要的聚合函数。
+* ### 註
+    * ### 函數: generate_series(start, stop, step)
+    * ### 参数类型: int 或 bigint
+    * ### 返回类型: setof int 或 setof bigint (与参数类型相同)
+    * ### 描述: 生成一个数值序列，从 start 到 stop，步进为 step
 <br />
 
 Reference
