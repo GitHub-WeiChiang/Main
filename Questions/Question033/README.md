@@ -1,4 +1,4 @@
-Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 的解決方案為何 ?
+Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 如何解決 ?
 =====
 * ### redis-cli.exe
 * ### shutdown

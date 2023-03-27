@@ -32,7 +32,7 @@ Questions
 * ### Question030 - 資料庫語言的類型有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question030)
 * ### Question031 - Python 中 import 與 from import 的差異為何 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question031)
 * ### Question032 - 如何在特定業務邏輯下同時新增數據到兩張相關的資料表中 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question032)
-* ### Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 的解決方案為何 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question033)
+* ### Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 如何解決 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question033)
 * ### Question034 - Python 中的編譯、解譯與鏈接各為何意 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question034)
 <br />
 
