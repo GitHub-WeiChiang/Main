@@ -176,15 +176,15 @@ Chapter03 盤點 Asyncio
             asyncio.run(main())
         ```
 * ### Asyncio 之塔
-    | 層次 | 概念 | 實作 |
-    | - | - | - |
-    | 第 9 層 |  |  |
-    | 第 8 層 |  |  |
-    | 第 7 層 |  |  |
-    | 第 6 層 |  |  |
-    | 第 5 層 |  |  |
-    | 第 4 層 |  |  |
-    | 第 3 層 |  |  |
-    | 第 2 層 |  |  |
-    | 第 1 層 |  |  |
+    | 應用開發者 | 層次 | 概念 | 實作 |
+    | - | - | - | - |
+    |  | 第 9 層 | 網路: 串流 | StreamReader, StreamWriter, asyncio.open_connection(), asyncio.start_server() |
+    |  | 第 8 層 | 網路: TCP 與 UDP | Protocol |
+    |  | 第 7 層 | 網路: 傳輸 | BaseTransport |
+    | v | 第 6 層 | 工具 | asyncio.Queue |
+    | v | 第 5 層 | 子行程與執行緒 | run_in_executor(), asyncio.subprocess |
+    |  | 第 4 層 | Task | asyncio.Task, asyncio.create_task() |
+    |  | 第 3 層 | Future | asyncio.Future |
+    | v | 第 2 層 | 事件迴圈 | asyncio.run(), BaseEventLoop |
+    | v | 第 1 層 (基礎) | 協程 | async def, async with, async for, await |
 <br />
