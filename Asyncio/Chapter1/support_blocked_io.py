@@ -5,7 +5,7 @@ import time
 # 声明一个阻塞型任务
 def blocked_task():
     for i in range(10):
-        # 以 time.slee p函数来模拟阻塞型 IO 逻辑的执行效果
+        # 以 time.sleep 函数来模拟阻塞型 IO 逻辑的执行效果
         time.sleep(1)
         print(f"[{time.strftime('%X')}] Blocked task {i}")
 
@@ -27,7 +27,7 @@ async def main():
     # 并发执行一个阻塞型任务和一个异步任务
     await asyncio.gather(
         # 通过函数 run_in_executor 可以让指定的函数运行在特定的执行器（Executor）中，
-        # 例如线程池执行器（concurrent.futures.ThreadPoolExecutor）或进程池执行器（concurrent.futures.ProcessPoolExecutor
+        # 例如线程池执行器（concurrent.futures.ThreadPoolExecutor）或进程池执行器（concurrent.futures.ProcessPoolExecutor)
         current_running_loop.run_in_executor(None, blocked_task),
         async_task()
     )

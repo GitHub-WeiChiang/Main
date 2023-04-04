@@ -31,7 +31,7 @@ async def main():
     # 并发执行一个阻塞型任务和一个异步任务
     await asyncio.gather(
         # 通过函数 run_in_executor 可以让指定的函数运行在特定的执行器（Executor）中，
-        # 例如线程池执行器（concurrent.futures.ThreadPoolExecutor）或进程池执行器（concurrent.futures.ProcessPoolExecutor
+        # 例如线程池执行器（concurrent.futures.ThreadPoolExecutor）或进程池执行器（concurrent.futures.ProcessPoolExecutor)
         current_running_loop.run_in_executor(executor, blocked_task),
         async_task()
     )
