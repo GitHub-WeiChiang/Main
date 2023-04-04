@@ -178,7 +178,7 @@ Chapter03 盤點 Asyncio
 * ### Asyncio 之塔
     | 應用開發者 | 層次 | 概念 | 實作 |
     | - | - | - | - |
-    |  | 第 9 層 | 網路: 串流 | StreamReader, StreamWriter, asyncio.open_connection(), asyncio.start_server() |
+    | ~~v~~ | 第 9 層 | 網路: 串流 | StreamReader, StreamWriter, asyncio.open_connection(), asyncio.start_server() |
     |  | 第 8 層 | 網路: TCP 與 UDP | Protocol |
     |  | 第 7 層 | 網路: 傳輸 | BaseTransport |
     | v | 第 6 層 | 工具 | asyncio.Queue |
@@ -187,4 +187,22 @@ Chapter03 盤點 Asyncio
     |  | 第 3 層 | Future | asyncio.Future |
     | v | 第 2 層 | 事件迴圈 | asyncio.run(), BaseEventLoop |
     | v | 第 1 層 (基礎) | 協程 | async def, async with, async for, await |
+    * ### 第 1 層: 基礎層，第三方框架設計的起點，之名非同步框架 Curio 與 Trio 都只使用了這一層，僅此這一層。
+    * ### 第 2 層: 提供了迴圈的規範 AbstractEventLoop 與實作 BaseEventLoop，Curio 與 Trio 就各自實作了自己的事件迴圈，而 uvloop 提供了效能更好的迴圈實作 (只替換了此階層)。
+    * ### 第 3, 4 層: 提供 Future (父類別) 與 Task (子類別)，其中 Task 為 Future 的子類別。
+        * ### Future 實例代表某種進行中的動作，可以透過事件迴圈的通知取的結果。
+        * ### Task 代表的是事件迴圈中運行的協程。
+        * ### Future 是 "迴圈感知 (Loop Aware)"；而 Task 兼具 "迴圈感知 (Loop Aware)" 與 "協程感知 (Coroutine Aware)"。
+        * ### 簡而言之，應用開發者常用 Task，框架開發者則視需求而定。
+    * ### 第 5 層: 必需在個別執行緒，或甚至是個別行程中啟動、等待工作的特性。
+    * ### 第 6 層: 具有非同步感知 (Async Aware) 的一些工具，asyncio.Queue 與執行緒安全的 queue.Queue 類似，差別在於 asyncio.Queue 在進行 get() 與 put() 時要配合 await 關鍵字，不可以在協程中直接使用 queue.Queue，因為它的 get() 會阻斷主執行緒。
+    * ### 第 7 層: 如果你 / 妳不是框架設計者，不會使用到這層。
+    * ### 第 8 層: 協定 API，相較於串流 API，具有更細的粒度。
+    * ### 第 9 層: 串流 API，使用串流層的場合都可以使用協定層，當然串流層較易於使用。
+* ### 使用 Asyncio 進行 I/O 應用程式開發 (非框架) 應該關注:
+    * ### 第 1 層: 知道撰寫 async def 函式的方式，以及如何使用 await 來呼叫、執行其它協程。
+    * ### 第 2 層: 瞭解啟動、關機以及與事件迴圈互動的方式。
+    * ### 第 5 層: 在非同步應用程式中想使用阻斷式程式碼，執行器是必要的，畢竟現今第三方程式庫大多與非同步不相容。
+    * ### 第 6 層: 若要提供資料給一或多個長時運行的協程，使用 asyncio.Queue 是最好的方式，就如同使用 queue.Queue 在執行緒間分派資料。
+    * ### ~~第 9 層~~: 其實在使用第三方程式庫的情況下 (多數情況都是如此)，並不會使用到這一層。
 <br />
