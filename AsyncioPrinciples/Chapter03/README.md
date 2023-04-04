@@ -135,6 +135,7 @@ Chapter03 盤點 Asyncio
     loop.run_until_complete(group)
     loop.close()
     ```
+    * ### run_in_executor() 的第一個參數接受 Executor 實例，不幸的，想用預設值就必需傳入 None，至於為什麼 Asyncio 的開發團隊不使用關鍵字引數呢...，就如同為什麼我年輕的時候不好好讀書呢...。 
     * ### 若使用 asyncio.run() 就無需自行撰寫上述步驟:
         ```
         import asyncio
@@ -174,4 +175,16 @@ Chapter03 盤點 Asyncio
         if __name__ == '__main__':
             asyncio.run(main())
         ```
+* ### Asyncio 之塔
+    | 層次 | 概念 | 實作 |
+    | - | - | - |
+    | 第 9 層 |  |  |
+    | 第 8 層 |  |  |
+    | 第 7 層 |  |  |
+    | 第 6 層 |  |  |
+    | 第 5 層 |  |  |
+    | 第 4 層 |  |  |
+    | 第 3 層 |  |  |
+    | 第 2 層 |  |  |
+    | 第 1 層 |  |  |
 <br />
