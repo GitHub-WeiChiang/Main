@@ -205,4 +205,70 @@ Chapter03 盤點 Asyncio
     * ### 第 5 層: 在非同步應用程式中想使用阻斷式程式碼，執行器是必要的，畢竟現今第三方程式庫大多與非同步不相容。
     * ### 第 6 層: 若要提供資料給一或多個長時運行的協程，使用 asyncio.Queue 是最好的方式，就如同使用 queue.Queue 在執行緒間分派資料。
     * ### ~~第 9 層~~: 其實在使用第三方程式庫的情況下 (多數情況都是如此)，並不會使用到這一層。
+* ### 協程
+    * ### Python 3.4 導入了 asyncio，但在 Python 3.5 才加入 async def 與 await 協程語法。
+    * ### Python 3.4 中是將產生器 (Generator) 作為協程使用，在一些較舊的程式碼中，會看到產生器韓式使用了 ```@asyncio.coroutine``` 裝飾，且包含了 yield from 陳述。
+    * ### Python 3.5 的 async def 所建立的協程，被稱為 "原生協程"。
+    * ### 以下將會示範相關的低階互動。
+* ### 新的 async def 關鍵字
+    ```
+    # 標準庫 inspect 模組提供更好的內省 (introspective) 機制
+    import inspect
+
+
+    # 透過 async def 宣告函式
+    async def f():
+        return 123
+
+    # 雖然把 async def 所宣告的函式稱為協程，
+    # 但嚴格來說，它只是 "協程函式"。
+    print(type(f))
+    # <class 'function'>
+
+    # iscoroutinefunction() 可以區別一般函式與協程函式
+    print(inspect.iscoroutinefunction(f))
+    # True
+    ```
+    * ### 如同當函數內包含了 yield 會被稱為產生器，實際上它也只是個函式，需在函式執行後才會傳回產生器，協程函式也是如此，必需呼叫 async def 函式，才能取得協程物件。
+    ```
+    import inspect
+
+
+    async def f():
+        return 123
+
+    coro = f()
+
+    print(type(coro))
+    # <class 'coroutine'>
+
+    print(inspect.iscoroutine(coro))
+    # True
+    ```
+    * ### 協程是什麼 ? 協程是個物件，可以重啟被暫停的函式。
+    * ### 有點耳熟捏 ? 協程類似產生器，也確實在 Python 3.5 前，是透過在一般的產生器上標註特定裝飾器，以搭配 asyncio 程式庫。
+* ### Python 如何 "切換" 協程的執行 (如何取的傳回值)
+    * ### 協程的 "返回" 其實是引發 "StopIteration" 例外。
+    ```
+    async def f():
+        return 123
+
+    coro = f()
+
+    try:
+        # 傳送 None 來起始協程，事件迴圈內不就是以這種方式處理，
+        # 我們不用親自做這件事，
+        # 可以使用 loop.create_task(coro) 或 await coro 來執行協程，
+        # 迴圈的底層會執行 .send(None)。
+        coro.send(None)
+    except StopIteration as e:
+        # 協程返回時，會引發 "StopIteration" 例外，
+        # 可以透過例外的 value 屬性取得協程的傳回值，
+        # 這也是底層的細節，在我們的觀點下，
+        # async def 函式與普通函式相同，
+        # 是透過 return 陳述來傳回值。
+        print('The answer was:', e.value)
+        # The answer was: 123
+    ```
+    * ### send() 和 StopIteration 個字定義了協程的起點與終點，且是由 "事件迴圈" 負責這些低階的內部操作，我們只需要排定迴圈要執行的協程即可。
 <br />
