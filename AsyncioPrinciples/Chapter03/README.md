@@ -398,7 +398,7 @@ Chapter03 盤點 Asyncio
     * ### 但有時候還是必需以某種程度的方式與事件迴圈本身互動 (還可以卷別人)。
 * ### 取得事件迴圈的方式
     * ### 建議: 在協程環境內呼叫 ```asyncio.get_running_loop()```。
-    * ### ~~~不建議: 在任何位置呼叫 ```asyncio.get_event_loop()```。~~
+    * ### ~~不建議: 在任何位置呼叫 ```asyncio.get_event_loop()```。~~
     * ### 建議的方式在 Python 3.7 才導入，所以還是理解一下不建議的比較好，因為可能在程式中看到它。
     ```
     import asyncio
