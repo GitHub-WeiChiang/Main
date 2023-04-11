@@ -271,4 +271,125 @@ Chapter03 盤點 Asyncio
         # The answer was: 123
     ```
     * ### send() 和 StopIteration 個字定義了協程的起點與終點，且是由 "事件迴圈" 負責這些低階的內部操作，我們只需要排定迴圈要執行的協程即可。
+* ### 新的 await 關鍵字
+    * ### 新的關鍵字 await (僅) 接受一個參數，也就是 awaitable 物件。
+    * ### 可以用以下其中一種方式定義:
+        * ### 協程 (也就是 async def 函式的呼叫結果)。
+        * ### 實作 \_\_await\_\_() 方法的物件，該方法必需傳回迭代器 (這是遠古世紀的用法)。
+    ```
+    import asyncio
+
+
+    async def f():
+        await asyncio.sleep(1.0)
+        return 123
+
+
+    async def main():
+        # 呼叫 f() 會產生協程，這意味著必需 await，
+        # 當 f() 完成時，result 為 123。
+        result = await f()
+        return result
+
+    asyncio.run(main())
+    ```
+* ### 如何提供例外給協程 (通常用於取消協程)
+    * ### 在呼叫 task.cancel() 時，事件迴圈內部會使用 coro.throw() 在協程 "內部" 引發 asyncio.CancelledError。
+    ```
+    import asyncio
+
+
+    async def f():
+        await asyncio.sleep(0)
+
+
+    # 透過協程函式 f() 建立新協程
+    coro = f()
+    coro.send(None)
+
+    # 透過 coro.throw() 並提供例外類別與值，
+    # 在協程內部的 await 處引發例外。
+    coro.throw(Exception, 'blah')
+    ```
+* ### throw() 會用來 "取消任務 (在 asyncio 內部)"
+    ```
+    import asyncio
+
+
+    async def f():
+        try:
+            while True:
+                await asyncio.sleep(0)
+        # 這個協程函式可以處理例外，處理對象為 asyncio 程式庫中，
+        # 專門用於 "取消任務" 的例外類型 asyncio.CancelledError，
+        # 注意，例外是由外部注入協程，也就是被事件迴圈注入，
+        # 實際上，任務被取消時，任務包裹的協程內部就是發生 CancelledError。
+        except asyncio.CancelledError:
+            # 報告協程被取消了，
+            print('I was cancelled!')
+        else:
+            return 111
+
+
+    coro = f()
+
+    # 模擬協程啟動
+    coro.send(None)
+    coro.send(None)
+
+    # 模擬任務取消
+    coro.throw(asyncio.CancelledError)
+
+    # 正常離開協程 (asyncio.CancelledError 是專門用於 "取消任務" 的例外類型)
+    # I was cancelled!
+    ```
+    * ### 任務的取消，就是基本的例外引發 (與處理)。
+    * ### 假設在處理 CancelledError 時又進行另一個協程 (沒事別這樣幹，基本上也不會碰到底層就是了)
+        ```
+        import asyncio
+
+
+        async def f():
+            try:
+                while True:
+                    await asyncio.sleep(0)
+            except asyncio.CancelledError:
+                print('Nope!')
+                while True:
+                    # 在處理 CancelledError 時又等待另一個 awaitable 物件
+                    await asyncio.sleep(0)
+            else:
+                return 111
+
+
+        coro = f()
+        coro.send(None)
+
+        # 不意外的，協程會持續好好的活著，跟我不一樣...
+        coro.throw(asyncio.CancelledError)
+        # Nope!
+
+        coro.send(None)
+        ```
+        * ### 反正如果需要撰寫底層代碼，別這麼做，當收到取消信號時，唯一的工作就是: 清理必要的資料，然後結束它的人生，我的也順便，而非忽略。
+    * ### 到此為止都在扮演事件迴圈，親自處理底層 .send(None) 呼叫細節，使用 asyncio 的程式碼長這樣。
+        ```
+        import asyncio
+
+
+        async def f():
+            await asyncio.sleep(0)
+            return 111
+
+
+        # 取的迴圈
+        loop = asyncio.get_event_loop()
+        coro = f()
+
+        # 執行協程直到完成，交由底層自行處理 .send(None) 等細節，
+        # 並捕捉 StopIteration 例外完成協程，
+        # 同時取得傳回值。
+        loop.run_until_complete(coro)
+        ```
+# 事件迴圈
 <br />
