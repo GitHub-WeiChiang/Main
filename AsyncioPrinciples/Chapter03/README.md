@@ -391,5 +391,54 @@ Chapter03 盤點 Asyncio
         # 同時取得傳回值。
         loop.run_until_complete(coro)
         ```
-# 事件迴圈
+* ### 事件迴圈
+    * ### 事件迴圈會自行處理行程切換、StopIteration 捕捉等等的相關事件。
+    * ### 「不直接處理事件迴圈，是可行的，開發上應該也要這麼做」，所以跳過這節吧 ?
+    * ### 在開發任務上，應該盡可能使用 asyncio.run(coro) 起步走，並透過 await 來呼叫 asyncio 撰寫程式碼。
+    * ### 但有時候還是必需以某種程度的方式與事件迴圈本身互動 (還可以卷別人)。
+* ### 取得事件迴圈的方式
+    * ### 建議: 在協程環境內呼叫 ```asyncio.get_running_loop()```。
+    * ### ~~~不建議: 在任何位置呼叫 ```asyncio.get_event_loop()```。~~
+    * ### 建議的方式在 Python 3.7 才導入，所以還是理解一下不建議的比較好，因為可能在程式中看到它。
+    ```
+    import asyncio
+
+
+    loop = asyncio.get_event_loop()
+    loop2 = asyncio.get_event_loop()
+
+    # 參考同一實例
+    print(loop is loop2)
+    # True
+    ```
+    * ### 如果要在協程函式內部取得迴圈實例，只要呼叫 get_running_loop() 或 get_event_loop()，不需要在函式間以 loop 為參數傳遞。
+* ### 對於框架設計者來說，在函式上設計 loop 參數是比較好的選擇，防止使用者拿到相同的迴圈幹了些壞壞的事。
+* ### "get_running_loop()" vs. "get_event_loop()"
+    * ### get_event_loop() 只能在同一執行緒上作用，在新執行緒中單純呼叫 get_event_loop() 會失敗，除非特別透過 new_event_loop() 建立新迴圈，並且呼叫 set_event_loop() 設定為該執行緒的專用迴圈。
+    * ### get_running_loop() 無論如何將會如期運作 (所以這是被 "建議" 的迴圈取得方式): 只要在某協程環境、任務，或者被這兩者呼叫的函式中，呼叫 get_running_loop()，它一定是提供目前運作中的事件迴圈。
+    * ### get_running_loop() 有效的簡化背景任務的衍生。
+* ### 在協程函式中建立一些任務且不等待任務完成
+    ```
+    import asyncio
+
+
+    async def f():
+        loop = asyncio.get_event_loop()
+        for i in range():
+            loop.create_task('<some other coro>')
+    ```
+    * ### 在協程中建立新任務，因為不會等待，可以確保任務不依賴協程函式 f() 的執行環境，在建立的任務完成前，f() 就會先行結束。
+* ### Python 3.7 之前，必需取得 loop 實例才能排定 Task，導入 get_running_loop() 後，有些 asyncio 函式也會用到它，像是 asyncio.create_task()。
+* ### Python 3.7 開始可以透過以下方式衍生非同步 Task
+    ```
+    import asyncio
+
+
+    async def f():
+        for i in range():
+            asyncio.create_task('<some other coro>')
+    ```
+    * ### 還有一個低階函式 asyncio.ensure_future()，也能以和 create_task() 同樣的方式來衍生任務 (可能在遠古世紀的程式碼中看到它的身影)。
+* ### Task 與 Future
+    * ### to be continued...
 <br />
