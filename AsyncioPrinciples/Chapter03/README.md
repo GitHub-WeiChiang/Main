@@ -440,5 +440,154 @@ Chapter03 盤點 Asyncio
     ```
     * ### 還有一個低階函式 asyncio.ensure_future()，也能以和 create_task() 同樣的方式來衍生任務 (可能在遠古世紀的程式碼中看到它的身影)。
 * ### Task 與 Future
-    * ### to be continued...
+    * ### 「最常使用的會是 Task，大部分情況下會使用 creat_task() 函式來運行協程」。
+    * ### Future 是 Task 的父類別，提供了與迴圈互動的所有功能。
+    * ### 差異
+        * ### Future: 迴圈會管理 Future，它代表某活動在未來的完成狀態。
+        * ### Task: 與上同理，只不過那個特定 "活動" 會是協程，例如使用 async def 函式與 create_task() 建立 Task。
+    * ### 在 Future 實例建立時，開關是設定在 "未完成"，在一段時間後會是 "已完成"，可以透過 Future 的 done() 方法檢查其狀態。
+        ```
+        from asyncio import Future
+        f = Future()
+        print(f.done())
+        # False
+        ```
+* ### Future 也可以進行以下的操作
+    * ### 可以有 "結果" (使用 .set_result(value) 來設定，.result() 來取得)。
+    * ### 可以用 .cancel() 來取消 (用 .cancelled() 檢查是否取消)。
+    * ### 可設定回呼函式，在 Future 完成時會執行。
+* ### 「最常使用的會是 Task」，然而 Future 無可避免地也會用到，例如在執行器中運行函式時，就會回傳 Future 實例，而非 Task。
+    ```
+    import asyncio
+
+
+    # 建立簡單的 main 函式，稍後執行。
+    async def main(f: asyncio.Future):
+        await asyncio.sleep(1)
+
+        # 在 Future 實例 f 設定結果。
+        f.set_result('I have finished.')
+
+
+    loop = asyncio.get_event_loop()
+
+    # 手動建立 Future 實例，
+    # 這個實例預設會與 loop 綁定，
+    # 但沒有也不會繫結任何協程 (Task 才會這麼做)。
+    fut = asyncio.Future()
+
+    # 確認 Future 進行操作前的狀態。
+    print(fut.done())
+    # False
+
+    # 排定 main() 協程，傳入 Future 實例，
+    # main() 會睡個覺後設定 Future 實例，
+    # 此時 main() 協程尚未開始運作，
+    # 要等待迴圈運行後，協程才會開始執行。
+    loop.create_task(main(fut))
+
+    # 透過 run_until_complete 運行 Future 實例，
+    # 協程開始執行。
+    loop.run_until_complete(fut)
+
+    # 確認 Future 當前狀態。
+    print(fut.done())
+    # True
+
+    # 存取結果。
+    print(fut.result())
+    # I have finished.
+    ```
+    * ### 「注意，基本上不太會使用上述的示例代碼，並直接與 Future 互動」，只需理解即可，開發時幾乎是透過 Task 與 asyncio 互動。
+    * ### 如果在 Task 實例上呼叫 set_result() 會發生什麼事 ? Python 3.8 之前可以這麼做，但現在不可以勒。
+    * ### Task 實例是用來包裹協程物件，只有底層協程函式的內部才能設定結果。
+        ```
+        import asyncio
+
+        from contextlib import suppress
+
+
+        async def main(f: asyncio.Future):
+            await asyncio.sleep(1)
+            try:
+                # 試著呼叫 set_result()，
+                # 這時會引發 RuntimeError。
+                f.set_result('I have finished.')
+            except RuntimeError as e:
+                print(f'No longer allowed: {e}')
+                f.cancel()
+
+
+        loop = asyncio.get_event_loop()
+
+        # 建立 Task 實例 (用 sleep 產生一個協程，便於展示)
+        fut = asyncio.Task(asyncio.sleep(1_000_000))
+
+        print(fut.done())
+        # False
+
+        # No longer allowed: Task does not support set_result operation
+
+        loop.create_task(main(fut))
+
+        # 使用 with suppress() 來捕獲異常，
+        # 當異常發生時程式碼不會中斷，
+        # 而是忽略這個異常繼續執行下去。
+        with suppress(asyncio.CancelledError):
+            loop.run_until_complete(fut)
+
+        print(fut.done())
+        # True
+
+        # 透過 cancelled() 取消任務，
+        # 這會在底層的協程中引發 CancelledError。
+        print(fut.cancelled())
+        # True
+        ```
+* ### 建立 Task ? 確保 Future ? 從中選擇 !
+    * ### 可以使用 asyncio.creat_task() 執行協程，在導入 asyncio.create_task() 前如果想做相同的事，必需先取得 loop 實例後使用 loop.create_task()。
+    * ### 也可以使用模組層次的函式來達到相同目的: asyncio.ensure_future()。
+    * ### 關於 ensure_future() 的說明
+        * ### 如果 "傳入協程"，會傳回 Task 實例 (而協程會排定給事件迴圈)，就像呼叫 asyncio.create_task() 或 loop.create_task()，會傳回新的 Task 實例。
+        * ### 如果 "傳入 Future (或者 Task 實例，因為 Task 是 Future 的子類別)"，會傳回同一實例，不做任何修改。
+    ```
+    import asyncio
+
+
+    # 簡單協程函式
+    async def f():
+        pass
+
+
+    # 建立協程物件
+    coro = f()
+
+    # 取的事件迴圈
+    loop = asyncio.get_event_loop()
+
+    # 將協程排定給迴圈，並取得新的 Task 實例。
+    task = loop.create_task(coro)
+
+    # 驗證型態
+    assert isinstance(task, asyncio.Task)
+
+    # 示範 ensure_future() 可以完成與 create_task() 相同動作，
+    # 傳入協程並取得 Task 實例 (協程排定由迴圈執行)，
+    # 如果傳入協程 coro，則結果與 create_task() 相同。
+    new_task = asyncio.ensure_future(coro)
+
+    # 驗證型態
+    assert isinstance(new_task, asyncio.Task)
+
+    # 將 Task 傳給 ensure_future()
+    mystery_meat = asyncio.ensure_future(task)
+
+    # 傳入與取回的物件，是同一個 Task 實例
+    assert mystery_meat is task
+    ```
+    * ### 直接傳入 Future 實例 (包含 Task，它是它的子類別對吧 !)
+        * ### 框架開發者可以使用 ensure_future() 設計較具彈性的 API。
+        * ### 這樣彈性的 API 便於提供給直接使用的開發者。
+    * ### ensure_future() 的用處是，如果有一個物件可能是協程或 Future 實例 (包含 Task，它是它的子類別對吧 !)，接下來想呼叫 Future 定義的某方法 (通常會是 cancel())，若物件是 Future 實例 (包含 Task，它是它的子類別對吧 !)，什麼都不用做，若是協程，就用 Task 包裹。
+    * ### 如果是協程，想要排定執行的話，正確的 API 是 create_task()，呼叫 ensure_future() 的唯一時機是，想提供某個可接受協程或 Future 實例 (包含 Task，它是它的子類別對吧 !) 的 API (就像 asyncio 本身許多 API)，而打算做的事必須有個 Future。
 <br />
