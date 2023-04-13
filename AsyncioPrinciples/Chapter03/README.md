@@ -590,4 +590,53 @@ Chapter03 盤點 Asyncio
         * ### 這樣彈性的 API 便於提供給直接使用的開發者。
     * ### ensure_future() 的用處是，如果有一個物件可能是協程或 Future 實例 (包含 Task，它是它的子類別對吧 !)，接下來想呼叫 Future 定義的某方法 (通常會是 cancel())，若物件是 Future 實例 (包含 Task，它是它的子類別對吧 !)，什麼都不用做，若是協程，就用 Task 包裹。
     * ### 如果是協程，想要排定執行的話，正確的 API 是 create_task()，呼叫 ensure_future() 的唯一時機是，想提供某個可接受協程或 Future 實例 (包含 Task，它是它的子類別對吧 !) 的 API (就像 asyncio 本身許多 API)，而打算做的事必須有個 Future。
+* ### 簡單來說，asyncio.ensure_future() 是設計框架的輔助函式，用常見的函式舉例:
+    ```
+    from typing import Any, List
+
+
+    def listify(x: Any) -> List:
+        if isinstance(x, (str, bytes)):
+            return [x]
+        try:
+            return [_ for _ in x]
+        except TypeError:
+            return [x]
+    ```
+    * ### 無論指定的引數為何，函式都會嘗試將其轉為 list。
+    * ### asyncio.ensure_future() 與此概念相同，函數會嘗試把引數轉會為 Future (或子類別) 型態。
+    * ### 同常這類輔助函式較傾向予框架開發者使用。
+    * ### 事實上 asyncio 標準程式庫模組，也基於上述理由運用了 ensure_future()，只要 API 文件中，函式的參數接受 "awaitable 物件"，內部可能就使用了 ensure_future() 來轉換參數。
+    ```
+    asyncio.gather(*aws, loop=None, ...)
+    ```
+    * ### aws 就代表 "awaitable 物件"，包含協程、Task 與 Future。
+    * ### gather() 在內部使用了 ensure_future() 轉換型態: Task 與 Future 維持不變，而會為協程建立 Task。
+    * ### 在應用開發任務上，若需要在事件迴圈中排定協程，應直接使用 asyncio.create_task() 而非 asyncio.ensure_future()。
+* ### 非同步情境管理器: async with
+    * ### 在協程支援上，情境管理器意外的方便，對於網路資源 (如: 連線)，許多情況都需要正確的定義開啟或是關閉的時機。
+    * ### 理解 async with 的關鍵在於，情境管理器是由 "方法呼叫" 驅動，下為運作方式示例。
+    ```
+    class Connection:
+        def __init__(self, host, port):
+            self.host = host
+            self.port = port
+
+        # 相較於同步管理器使用 __enter__() 方法，
+        # 這邊使用 __aenter__() 方法，
+        # 且此方法必須是 async def 方法。
+        async def __aenter__(self):
+            self.conn = await get_conn(self.host, self.port)
+            return self.conn
+
+        # 相對於 __exit__()，這邊使用 __aexit__()，
+        # 參數列和 __exit__() 是相同的，
+        # 情境管理器的本體中若發生例外，
+        # 會傳入對應引數。
+        async def __aexit__(self, exc_type, exc, tb):
+            await self.conn.close()
+    ```
+    * ### 使用 asyncio 的程式不代表其情境管理器一定要採取非同步，「如果在 "進入" 與 "離開" 方法時，需要 await 某東西，才需要非同步情境管理器」。
+    * ### 此書的作者偷偷告訴我，他不太喜歡這種定義情境管理器的方式，因為 contextlib 中就有好用的 ```@contextmanager``` 裝飾器，固然也有了非同步版本的 ```@asynccontextmanager```。
+* ### contextlib 的作法
 <br />
