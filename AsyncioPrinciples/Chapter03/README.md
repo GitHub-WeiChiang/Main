@@ -943,4 +943,304 @@ Chapter03 盤點 Asyncio
         # results =  [100, 101, 102]
         ```
         * ### 上述示例表明，await 的使用與 async for 的使用互不相干。
+* ### 適當地啟動與關機
+    * ### 非同步的程式多半會是長時間運行、基於網路的應用程式，而在正確地啟動與關機這方面，真他媽有夠複雜。
+    * ### 相較之下，啟動較為簡單。asyncio 應用程式的標準啟動方式是，定義一個 main() 協程函式，使用 asyncio.run() 來呼叫。
+    * ### 關機就複雜多了，在 async def main() 結束後，會採取以下動作:
+        * ### 收集未定 (pending) 狀態的任務物件 (如果 U 的話)。
+        * ### 取消這些任務 (在各個運作中的協程內部引發 CancelledError，可以在協程函式本體中，決定是否使用 try / except 處理)
+        * ### 將這些任務收集到 group 任務群集。
+        * ### 使用 run_util_complete() 運行 group 群集，等待它們結束，也就是等到 CancelledError 引發，然後處理掉。
+    * ### asyncio.run() 會處理這些步驟，但當自行建立第一個複雜的 asyncio 應用程式時，若能遵照一些慣例，在關機時或許能避免「Task was destroyed but it is pending (消毀了未定狀態的任務) !」之類的錯誤訊息。
+    * ### 未定任務終結者
+        ```
+        import asyncio
+
+
+        async def f(delay):
+            await asyncio.sleep(delay)
+            
+            
+        loop = asyncio.get_event_loop()
+
+        # 睡一秒
+        t1 = loop.create_task(f(1))
+        # 睡兩秒
+        t2 = loop.create_task(f(2))
+
+        # 只會把任務 1 完成
+        loop.run_until_complete(t1)
+
+        loop.close()
+
+        # Task was destroyed but it is pending!
+        ```
+        * ### 此錯誤訊息表示，迴圈關閉時仍存在未完成任務，而應避免這類錯誤訊息的發生，這也是為什麼關機程序在慣例上，要收集結束的任務、將它們取消，在它們結束後才關閉迴圈。
+        * ### asyncio.run() 會完成這些動作。
+        * ### 但理解處理的細節，可以讓我們具備處理更複雜的情況。
+    * ### 非同步應用程式稱命週期
+        ```
+        import asyncio
+
+        from asyncio import StreamReader, StreamWriter
+
+
+        # 伺服器使用 echo() 協程函式，為每個連線建立協程，
+        # 此函式使用 asymcio 的串流 API 進行網路處理。
+        async def echo(reader: StreamReader, writer: StreamWriter):
+            print('New connection.')
+
+            try:
+                # 使用無窮迴圈等待訊息以保持連線
+                while data := await reader.readline():
+                    # 將資料轉大寫後傳回給發送者
+                    writer.write(data.upper())
+                    await writer.drain()
+                
+                print('Leaving Connection.')
+            # 如果任務被取消會顯示指定訊息
+            except asyncio.CancelledError:
+                print('Connection dropped!')
+
+
+        async def main(host='127.0.0.1', port=8888):
+            # 啟動 TCP 伺服器
+            server = await asyncio.start_server(echo, host, port)
+            async with server:
+                await server.serve_forever()
+        
+        try:
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            print('Bye!')
+        ```
+        ```
+        # 啟動伺服器
+        # 有人連線
+        New connection.
+        # 有人斷線
+        Leaving Connection.
+        # 有人連線
+        New connection.
+        # 關閉伺服器
+        Connection dropped!
+        Bye!
+        ```
+        ```
+        # 等待可以適當的恢復寫入到流。
+        
+        writer.write(data.upper())
+        await writer.drain()
+
+        # 與底層 I/O 寫緩衝區進行交互的流程控制方法。
+        # 當緩衝區大小達高水位，drain() 會阻塞，
+        # 直到恢復至低水位以恢復寫入。
+        ```
+        * ### 將上述示例想像成真實世界上已上線的應用程式，需將這些拋棄連線的事件，傳送給某個監控服務。
+    * ### 在處理 CancelledError 時建立任務
+        ```
+        import asyncio
+
+        from asyncio import StreamReader, StreamWriter
+
+
+        async def send_event(msg: str):
+            await asyncio.sleep(1)
+
+
+        async def echo(reader: StreamReader, writer: StreamWriter):
+            print('New connection.')
+
+            try:
+                while data := await reader.readline():
+                    writer.write(data.upper())
+                    await writer.drain()
+
+                print('Leaving Connection.')
+            except asyncio.CancelledError:
+                msg = 'Connection dropped!'
+
+                print(msg)
+
+                asyncio.create_task(send_event(msg))
+
+
+        async def main(host='127.0.0.1', port=8888):
+            server = await asyncio.start_server(echo, host, port)
+            async with server:
+                await server.serve_forever()
+
+        try:
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            print('Bye!')
+        ```
+        * ### 此示例假設會將事件發送給外部服務器。
+        * ### 因為事件通知會涉及網路存取，為其建立獨立的非同步任務是常見的做法，使用 create_task() 函式達成多事務同時處理支持。
+        * ### 然而這個示例有個臭蟲，當還有連線存在時停止了伺服器，會出現 "Task was destroyed but it is pending!" 錯誤訊息。
+        * ### 這是因為，當前有效狀態中的任務會被收集而取消，此時 await 的也只有這些任務，之後 asyncio.run() 立即返回，而此示例在處理 CancelledError 時又建立了新任務。
+        * ### 在處理 CancelledError 例外時的大方向原則為，避免嘗試建立新任務，如果一定要這麼做，必須在同一函式範疇中 await 新建的 Task 或 Future。
+* ### gather() 的 return_exceptions=True 是什麼 ?
+    * ### 函式簽署的預設是 gather(..., return exceptions=False)，而這個預設在多數情況 (包括關機處理) 是有問題的，因而 asyncio.run() 內部使用 gather() 時，指定了 return_exceptions=True。
+    * ### 觀察
+        * ### run_until_complete() 會執行指定的 Future，在關機期間，它執行的對象就是 gather() 傳回的 Future。
+        * ### 如果該 Future 發生例外，run_until_complete() 也會發生例外，這代表迴圈會停止。
+        * ### 如果 run_until_complete() 運行一個 Future 群組，任一子任務中發生例外，而該子任務沒有處理的話，例外也會在該 Future 群組引發 (此處例外也包含了 CancelledError)。
+        * ### 如果某些任務處理了 CancelledError，而其它任務沒有，迴圈不會因此停止，也就是全部任務做完前，迴圈不會停下來。
+        * ### 就關機而言，這是不合理的，無論某些任務是否引發例外，都希望群組中全部任務結束後，才結束 run_until_complete()。
+        * ### 因此，我們需 設定 gather(..., return exceptions=False)，使 Future 群組把來自子任務的例外是為傳回值，也就不會往外傳播而干擾 run_until_complete()。
+    * ### 重點就在於: return exceptions=False 與 run_until_complete() 間的關係，以此方式捕捉例外，會有不是很好的結果，可能忽略了一些例外，因為現在任務群組把例外處理掉了，如果擔心這個問題，可以從 run_until_complete() 取的輸出清單，掃描是否有 Exception 的子類型。
+        ```
+        import asyncio
+
+
+        async def f(delay):
+            # 如果輸入 0 就糟糕惹
+            await asyncio.sleep(1 / delay)
+            return delay
+
+
+        loop = asyncio.get_event_loop()
+
+        for i in range(10):
+            loop.create_task(f(i))
+
+        pending = asyncio.all_tasks(loop=loop)
+        group = asyncio.gather(*pending, return_exceptions=True)
+        results = loop.run_until_complete(group)
+
+        print(f'Results: {results}')
+
+        loop.close()
+
+        # Results: [7, 3, 4, 1, 5, 8, ZeroDivisionError('division by zero'), 6, 2, 9]
+        ```
+        * ### 如果沒有設定 return_exceptions=True 的話，run_until_complete() 中的 ZeroDivisionError 會拋出並中斷迴圈，妨礙其他任務的完成。
+* ### 信號
+    * ### 先前的範例使用 KeyboardInterrupt 示範中斷迴圈的方式 (Ctrl - C)，在 asyncio.run() 內部，拋出 KeyboardInterrupt 相當於解除了 loop.run_until_complete() 的阻斷，讓後續的關機程序得以執行。
+    * ### KeyboardInterrupt 對應的是 SIGINT 信號，在網路服務中，處理中斷時更常用的信號其實是 SIGTERM。
+    * ### asyncio 內建了信號處理方面的支援，其複雜到靠北靠北 (double 靠北)。
+    * ### 先看看下一個示例的輸出
+        ```
+        <Your app is running>
+        <Your app is running>
+        Got signal: SIGINT, shutting down.
+        ```
+        * ### 最後一行表示了按下 Ctrl - C 終止程式，來看看 SIGINT 與 SIGTERM 在處理上的陷阱。
+        ```
+        import asyncio
+
+
+        async def main():
+            while True:
+                print('<Your app is running>')
+                await asyncio.sleep(1)
+
+
+        if __name__ == '__main__':
+            loop = asyncio.get_event_loop()
+            task = loop.create_task(main())
+
+            try:
+                loop.run_until_complete(task)
+            # 此案例只有 Ctrl - C 會中斷迴圈
+            except KeyboardInterrupt:
+                print('Got signal: SIGINT, shutting down.')
+
+            tasks = asyncio.all_tasks(loop=loop)
+
+            for t in tasks:
+                t.cancel()
+
+            group = asyncio.gather(*tasks, return_exceptions=True)
+
+            loop.run_until_complete(group)
+
+            loop.close()
+        ```
+    * ### 假設
+        * ### 有同事要求除了 SIGINT 也要把 SIGTERM 作為關機信號來處理。
+        * ### 實際應用程式中，必需在 main() 協程中進行清理，必需處理 CancelledError，而捕捉例外後的處理會耗費數秒才能結束。
+        * ### 如果收到數次信號，在接收到第一個關機信號後、結束應用程式前，必需忽略任何新信號。
+    * ### 可處理 SIGINT 與 SIGTERM 且只會停止迴圈一次
+        ```
+        import asyncio
+
+        # 匯入標準程式庫
+        from signal import SIGINT, SIGTERM
+
+
+        async def main():
+            try:
+                while True:
+                    print('<Your app is running>')
+                    await asyncio.sleep(1)
+            # 收到取消信號後，持續執行三秒的顯示
+            except asyncio.CancelledError:
+                for i in range(3):
+                    print('<Your app is shutting down...>')
+                    await asyncio.sleep(1)
+
+
+        # 收到信號時的迴呼處理器
+        def handler(sig):
+            # 停止迴圈，此行會解除 loop.run_forever() 的阻斷，
+            # 以執行後續未定任務的收集與取消，
+            # 以及 run_until_complete() 等關機程序。
+            loop.stop()
+            
+            print(f'Got signal: {sig!s}, shutting down.')
+            
+            # 為了在處於關機程序時，不被其他信號干擾，
+            # 將 SIGTERM 信號處理器從迴圈中移除。
+            # 主要是因為處理器會在 run_until_complete() 階段再次呼叫 loop.stop()，
+            # 這會干擾關機處理。
+            loop.remove_signal_handler(SIGTERM)
+            # 如果只是單純移除 SIGINT，
+            # KeyboardInterrupt 會變成 SIGINT 的處理器，
+            # 取而代之的，設定一個空 lambda 函式作為處理器，
+            # 如此就不會引發 KeyboardInterrupt，
+            # 同時 SIGINT 也失去作用。
+            loop.add_signal_handler(SIGINT, lambda: None)
+
+
+        if __name__ == '__main__':
+            loop = asyncio.get_event_loop()
+            
+            # 將信號處理器綁定給迴圈，
+            # 如果在此不變更處理器，
+            # Python 預設的 SIGINT 處理器會引發 KeyboardInterrupt。
+            for sig in (SIGTERM, SIGINT):
+                loop.add_signal_handler(sig, handler, sig)
+                
+            loop.create_task(main())
+            
+            # run_forever() 阻斷執行，
+            # 直到某個東西停止迴圈，
+            # 此示例中 SIGINT 或 SIGTERM 送至行程，
+            # handler() 中會停止迴圈。
+            loop.run_forever()
+            
+            tasks = asyncio.all_tasks(loop=loop)
+            
+            for t in tasks:
+                t.cancel()
+                
+            group = asyncio.gather(*tasks, return_exceptions=True)
+            
+            loop.run_until_complete(group)
+            
+            loop.close()
+
+        
+        '''
+        <Your app is running>
+        <Your app is running>
+        Got signal: Signals.SIGINT, shutting down.
+        <Your app is shutting down...>
+        <Your app is shutting down...>
+        '''
+        ```
+        * ### 此時即便在關機處理期間，按下 Ctrl - C，當 main() 協程最後完成前，什麼事都不會發生。
+    * ### 
 <br />
