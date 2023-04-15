@@ -714,5 +714,233 @@ Chapter03 盤點 Asyncio
         * ### 將阻斷函式修改為協程函式，並不是一件容易的事，這要從底層開始修改，從底層開始就要支援異步，但往往接手的專案並非如此。
         * ### 在接手現有專案或使用第三方程式庫時，常常會發現底層沒辦法更動 (可能是能力不足，或是跟我一樣懶)，這時候就要使用偉大的 "執行器" 了。
         * ### 這也就是所謂的，如果既有的程式可以運作，不一定要堅持導入 Async。
-    * ### 
+    * ### 非阻斷式做法
+        * ### 當無法變更 download_webpage() 與 update_stats() 從阻斷式為異步時，就需要導入 "執行器"。
+        ```
+        import asyncio
+        from contextlib import asynccontextmanager
+
+
+        @asynccontextmanager
+        async def web_page(url):
+            loop = asyncio.get_event_loop()
+
+            # 使用預設執行器，需傳入 None 為 excutor 的引數
+            data = await loop.run_in_executor(None, download_webpage, url)
+
+            yield data
+
+            # 記得要 await 呦 (上面也是)，
+            # 否則不會等待呼叫完成，
+            # 而是直接繼續下一步。
+            await loop.run_in_executor(None, update_stats, url)
+
+
+        async with web_page('google.com') as data:
+            process(data)
+        ```
+* ### 非同步迭代器: async for
+    * ### 傳統的同步迭代器
+        ```
+        class A:
+            # 迭代器需實作 __iter__() 方法
+            def __iter__(self):
+                # 初始為 "開始" 狀態
+                self.x = 0
+                # __iter__() 方法必須回傳 iterable 物件，
+                # 也就是實作 __next__() 方法，
+                # 在此為同一個實例，
+                # 因為 A 本身就實作了 __next__() 方法。
+                return self
+
+            # 在迭代期間 __next__() 方法會被持續呼叫
+            def __next__(self):
+                if self.x > 2:
+                    # 發生 StopIteration 時就會停止
+                    raise StopIteration
+                else:
+                    # 每次迭代需生成回傳值
+                    self.x += 1
+                
+                return self.x
+
+
+        for i in A():
+            print(i)
+
+        '''
+        1
+        2
+        3
+        '''
+        ```
+        * ### 如果 \_\_next\_\_() 是個 async def 協程函式，就可以 await 某種 I/O 密集操作。
+    * ### 非同步迭代器需要具備以下條件:
+        * ### 實作 def \_\_aiter\_\_()，不是 async def 呦 !
+        * ### \_\_aiter\_\_() 傳回物件，必需實作 async def \_\_anext\_\_()。
+        * ### \_\_anext\_\_() 必須回傳每次的迭代值，而完成時要引發 StopAsyncIteration。
+    * ### 讀取 Redis 資料的非同步迭代器
+        ```
+        import asyncio
+
+        from aioredis import create_redis
+
+
+        async def main():
+            # 使用 aioredis 中的高階介面取得連線
+            redis = await create_redis(('localhost', 6379))
+
+            # 假設以下的 key 在 redis 中對應的 value 很大
+            keys = ['Americas', 'Africa', 'Europe', 'Asia']
+
+            # async for 可以在等待下一個資料來到前暫停迭代本身
+            async for value in OneAtATime(redis, keys):
+                # 模擬取得值後所進行的 I/O 密集活動或是其它操作
+                await do_something_with(value)
+
+
+        class OneAtATime:
+            # 初始化，取得 redis 連線實例與需迭代鍵陣列
+            def __init__(self, redis, keys):
+                self.redis = redis
+                self.keys = keys
+
+            # 不同於上一個範例使用 __iter__()，
+            # 此處為 __aiter__()。
+            def __aiter__(self):
+                # 建立普通迭代器
+                self.ikeys = iter(self.keys)
+                # 回傳實作 __anext__() 的自己
+                return self
+
+            # 此處以宣告為 async def 的 __anext__() 方法，
+            # 取代上一個範例用 def 宣告的 __next__() 方法。
+            async def __anext__(self):
+                try:
+                    # 迭代取得 key
+                    k = next(self.ikeys)
+                except StopIteration:
+                    # 當發生 StopIteration 時，
+                    # 將其轉換為 StopAsyncIteration，
+                    # 此為非同步迭代器內部用來停止的信號。
+                    raise StopAsyncIteration
+                
+                # 取得該鍵在 redis 對應的值 (需 await 讓事件迴圈進行切換)
+                value = await self.redis.get(k)
+                return value
+
+
+        asyncio.run(main())
+        ```
+* ### 更簡單的非同步產生器函式
+    * ### 協程與產生器是完全不同的概念。
+    * ### 非同步產生器在行為上，與一般的產生器更為接近。
+    * ### 對迭代器來說，async for 會搭配非同步產生器，而 for 會搭配一般的產生器。
+    * ### 使用非同步產生器函式定義前 redis 示例
+        ```
+        import asyncio
+
+        from aioredis import create_redis
+
+
+        async def main():
+            redis = await create_redis(('localhost', 6379))
+            keys = ['Americas', 'Africa', 'Europe', 'Asia']
+            
+            async for value in one_at_a_time(redis, keys):
+                await do_something_with(value)
+
+
+        # 透過 async def 宣告使其成為協程函式，
+        # 而因當中包含 yield 關鍵字，
+        # 所以稱為非同步產生器函式。
+        async def one_at_a_time(redis, keys):
+            for k in keys:
+                value = await redis.get(k)
+                yield value
+
+
+        asyncio.run(main())
+        ```
+* ### 非同步包含式
+    * ### 非同步的 list、dict 與 set 包含式
+        ```
+        import asyncio
+
+
+        # 簡單的非同步產生器函式，
+        # 可以指定上限使其迭代生成 tuple 回傳。
+        async def doubler(n):
+            for i in range(n):
+                yield i, i * 2
+                # 睡一下，畢竟這是非同步函式
+                await asyncio.sleep(0.1)
+
+
+        async def main():
+            # 非同步的 list 包含式 (使用 async for)
+            result = [x async for x in doubler(3)]
+            print(result)
+
+            # 非同步的 dict 包含式
+            result = {x: y async for x, y in doubler(3)}
+            print(result)
+
+            # 非同步的 set 包含式
+            result = {x async for x in doubler(3)}
+            print(result)
+
+
+        asyncio.run(main())
+
+        '''
+        [(0, 0), (1, 2), (2, 4)]
+        {0: 0, 1: 2, 2: 4}
+        {(2, 4), (1, 2), (0, 0)}
+        '''
+        ```
+    * ### 也可以在包含式中使用 await。
+    * ### 使 "包含式" 成為 "非同步包含式 (async comprehension)" 是透過 async for 而非 await。
+    * ### 要讓 await 在包含式中合法，只要在協程函式本體中使用它即可，也就是 async def 宣告函式。
+    * ### 在同一個 list 包含式中使用 await 與 async for，不過就是結合兩個獨立的概念。
+    * ### 綜合應用
+        ```
+        import asyncio
+
+
+        ＃ 簡單會睡覺協程函式
+        async def f(x):
+            await asyncio.sleep(0.1)
+            return x + 100
+
+
+        # 非同步產生器函式，
+        # 稍後會在非同步 list 包含式中呼叫，
+        # 透過 async for 來驅動迭代。
+        async def factory(n):
+            for x in range(n):
+                await asyncio.sleep(0.1)
+
+                # 非同步包含式執行時，會將 f 與迭代值 x 組成 tuple 後 yield，
+                # 被傳回的 f 是協程函式，而非協程。
+                yield f, x
+
+
+        async def main():
+            # 非同步包含式，同時含有 async for 與 await，
+            # factory() 會傳回非同步函式器，迭代中會驅動它，
+            # 因為是非同步產生器，不能只是用 for，
+            # 需使用 async for，
+            # 而呼叫回傳 tuple 中的 f() 會建立協程，
+            # 所以必需它配 await 使用。
+            results = [await f(x) async for f, x in factory(3)]
+
+            print('results = ', results)
+
+
+        asyncio.run(main())
+
+        # results =  [100, 101, 102]
+        ```
+        * ### 上述示例表明，await 的使用與 async for 的使用互不相干。
 <br />
