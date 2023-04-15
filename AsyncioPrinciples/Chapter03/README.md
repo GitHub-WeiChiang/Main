@@ -1242,5 +1242,195 @@ Chapter03 盤點 Asyncio
         '''
         ```
         * ### 此時即便在關機處理期間，按下 Ctrl - C，當 main() 協程最後完成前，什麼事都不會發生。
-    * ### 
+    * ### 上述示例，致力於控制事件迴圈的生命週期，而「在應用開發實務上，應該使用方便的 asyncio.run()」。
+        ```
+        import asyncio
+
+        from signal import SIGINT, SIGTERM
+
+
+        async def main():
+            loop = asyncio.get_running_loop()
+
+            for sig in (SIGTERM, SIGINT):
+                # 在 main 中改變信號處理行為
+                loop.add_signal_handler(sig, handler, sig)
+
+            try:
+                while True:
+                    print('<Your app is running>')
+                    await asyncio.sleep(1)
+            except asyncio.CancelledError:
+                for i in range(3):
+                    print('<Your app is shutting down...>')
+                    await asyncio.sleep(1)
+
+
+        def handler(sig):
+            loop = asyncio.get_running_loop()
+
+            # 不能像之前的範例一樣停止迴圈，
+            # 因為在 main() 任務完成前就停止迴圈會收到警訊，
+            # 相對地只能取消任務，
+            # 讓 main() 的任務結束，
+            # 之後 asyncio.run() 內部就會進行清理。
+            for task in asyncio.all_tasks(loop=loop):
+                task.cancel()
+
+            print(f'Got signal: {sig!s}, shutting down.')
+            
+            loop.remove_signal_handler(SIGTERM)
+            loop.add_signal_handler(SIGINT, lambda: None)
+
+
+        if __name__ == '__main__':
+            asyncio.run(main())
+
+
+        '''
+        <Your app is running>
+        <Your app is running>
+        Got signal: Signals.SIGINT, shutting down.
+        <Your app is shutting down...>
+        <Your app is shutting down...>
+        '''
+        ```
+* ### 關機期間等待執行器
+    * ### 在很前面的範例提到，把阻斷式 time.sleep() 的呼叫時間，設定的比 asyncio.sleep() 呼叫短，是為了讓範例比較簡單，因為執行器工作會比 main() 協程更快完成，程式就能正確關機。
+    * ### 如果不這麼做呢 ?
+    * ### 執行器花更多時間才結束
+        ```
+        import time
+        import asyncio
+
+
+        async def main():
+            loop = asyncio.get_running_loop()
+            loop.run_in_executor(None, blocking)
+            print(f'{time.ctime()} Hello!')
+            await asyncio.sleep(1.0)
+            print(f'{time.ctime()} Goodbye!')
+
+
+        def blocking():
+            time.sleep(1.5)
+            print(f"{time.ctime()} Hello from a thread!")
+
+
+        asyncio.run(main())
+        ```
+        * ### 此示例會報錯 (RuntimeError)。
+        * ### 報錯理論:
+            * ### run_in_executor() 沒有建立 Task 實例，它傳回的是 Future。
+            * ### 這表示 asyncio.run() 中用來收集、取消的「有效任務」集合中，不包含該 Future。
+            * ### 因此 run_in_executor() 不會等待執行器作業完成。
+            * ### asyncio.run() 中的 loop.close() 內部會引發 RuntimeError。
+        * ### Python 3.9 中改進了上述的問題，所以就不會報錯了。
+    * ### 來看看有哪些方案可以採用，以解決上述問題。
+    * ### 方案 A: 在協程中包裝執行器呼叫
+        ```
+        import time
+        import asyncio
+
+
+        async def main():
+            loop = asyncio.get_running_loop()
+            future = loop.run_in_executor(None, blocking)
+            try:
+                print(f'{time.ctime()} Hello!')
+                await asyncio.sleep(1.0)
+                print(f'{time.ctime()} Goodbye!')
+            finally:
+                # 確定 main() 函式結束前，
+                # 一定要等待 Future 完成。
+                await future
+
+
+        def blocking():
+            time.sleep(2.0)
+            print(f"{time.ctime()} Hello from a thread!")
+
+
+        try:
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            print('Bye!')
+        ```
+    * ### 方案 B: 將執行器 Future 加入任務收集群組
+        ```
+        import time
+        import asyncio
+
+
+        # 輔助函式會等待 Future 完成，
+        # 即便發生 CancelledError。
+        async def make_coro(future):
+            try:
+                return await future
+            except asyncio.CancelledError:
+                return await future
+
+
+        async def main():
+            loop = asyncio.get_running_loop()
+            future = loop.run_in_executor(None, blocking)
+            # 取的 run_in_executor() 傳回的 Future，
+            # 傳給新定義的 make_coro() 輔助函式。
+            asyncio.create_task(make_coro(future))
+            print(f'{time.ctime()} Hello!')
+            await asyncio.sleep(1.0)
+            print(f'{time.ctime()} Goodbye!')
+
+
+        def blocking():
+            time.sleep(2.0)
+            print(f"{time.ctime()} Hello from a thread!")
+
+
+        try:
+            asyncio.run(main())
+        except KeyboardInterrupt:
+            print('Bye!')
+        ```
+    * ### 方案 C: 就像露營一樣，自行準備迴圈與執行器
+        ```
+        import time
+        import asyncio
+
+        from concurrent.futures import ThreadPoolExecutor as Executor
+
+
+        async def main():
+            print(f'{time.ctime()} Hello!')
+            await asyncio.sleep(1.0)
+            print(f'{time.ctime()} Goodbye!')
+            loop.stop()
+
+
+        def blocking():
+            time.sleep(2.0)
+            print(f"{time.ctime()} Hello from a thread!")
+
+
+        loop = asyncio.get_event_loop()
+        # 自行建立執行器實例
+        executor = Executor()
+        # 指定自訂執行器為迴圈預設
+        loop.set_default_executor(executor)
+        loop.create_task(main())
+        # 一如繼往的執行阻斷函式
+        future = loop.run_in_executor(None, blocking)
+        try:
+            loop.run_forever()
+        except KeyboardInterrupt:
+            print('Cancelled')
+        tasks = asyncio.all_tasks(loop=loop)
+        for t in tasks:
+            t.cancel()
+        group = asyncio.gather(*tasks, return_exceptions=True)
+        loop.run_until_complete(group)
+        # 明確等待執行器工作結束
+        executor.shutdown(wait=True)
+        loop.close()
+        ```
 <br />
