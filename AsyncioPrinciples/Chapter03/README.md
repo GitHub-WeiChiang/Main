@@ -639,4 +639,80 @@ Chapter03 盤點 Asyncio
     * ### 使用 asyncio 的程式不代表其情境管理器一定要採取非同步，「如果在 "進入" 與 "離開" 方法時，需要 await 某東西，才需要非同步情境管理器」。
     * ### 此書的作者偷偷告訴我，他不太喜歡這種定義情境管理器的方式，因為 contextlib 中就有好用的 ```@contextmanager``` 裝飾器，固然也有了非同步版本的 ```@asynccontextmanager```。
 * ### contextlib 的作法
+    * ### ```@asynccontextmanager``` 的使用方式與 contextlib 標準程式庫中的 ```@contextmanager``` 類似。
+    # ### 阻斷式的做法
+        ```
+        from contextlib import contextmanager
+
+        # 將產生器函式傳入情境管理器
+        @contextmanager
+        def web_page(url):
+            # -------- Enter Scope ---------
+
+            # download_webpage() 是一個虛構的函式，
+            # 表示從 URL 上取得資料，
+            # 會是一個阻斷式的呼叫。
+            data = download_webpage(url)
+
+            # ------------------------------
+
+            yield data
+
+            # --------- Exit Scope ---------
+
+            # 這也是一個虛構的函式，
+            # 表示從 URL 取得資料後要進行的動作，
+            # 也會是一個阻斷式呼叫。
+            update_stats(url)
+
+
+        # 使用情境管理器，
+        # 此情境管理器隱藏網路呼叫 download_webpage() 等細節。
+        with web_page('google.com') as data:
+            # 此處也可能是阻斷的，取決於函式內容，
+            # 函式功能可能是:
+            # 1. 快到不阻斷 (快速的計算密集)
+            # 2. 稍微阻斷 (快速的 I/O 密集，可能是磁碟存取，而非網路存取)
+            # 3. 阻斷 (緩慢的  I/O 密集)
+            # 4. 慢到靠北 (就慢到靠北，不然想怎樣)
+            process(data)
+        ```
+    * ### 導入 Python 3.7 非同步感知特性
+        ```
+        from contextlib import asynccontextmanager
+
+        # 使用方式與 @contextmanager 相同，
+        # 除了被裝飾的函式需宣告為 async def，
+        # 好啦使用方式有點不同。
+        @asynccontextmanager
+        async def web_page(url):
+            # 假設 download_webpage() 可以被修改成 "異步" 的，
+            # 此時就需要加上 await 關鍵字，
+            # 讓事件迴圈可以執行任務切換，
+            # 進行其餘任務的執行。
+            data = await download_webpage(url)
+
+            # 理論上此處應包含 try / finally 處理 (示例嘛... 偷個懶 !)，
+            # yield 會使函式變成 "產生器函式"，
+            # 而 async def 關鍵字，
+            # 進一步使其成為 "非同步產生器函式"，
+            # 當函式被呼叫時，會回傳 "非同步產生器"，
+            # 可以透過 inspect 模組中的函式進行校驗，
+            # 分別為 isasyncgenfunction() 與 isasyncgen()。
+            yield data
+
+            # 假設 update_stats() 已經修改為可產生協程，
+            # 需加上 await 關鍵字。
+            await update_stats(url)
+
+
+        # 使用非同步情境管理器時，
+        # 要使用 async with。
+        async with web_page('google.com') as data:
+            process(data)
+        ```
+        * ### 將阻斷函式修改為協程函式，並不是一件容易的事，這要從底層開始修改，從底層開始就要支援異步，但往往接手的專案並非如此。
+        * ### 在接手現有專案或使用第三方程式庫時，常常會發現底層沒辦法更動 (可能是能力不足，或是跟我一樣懶)，這時候就要使用偉大的 "執行器" 了。
+        * ### 這也就是所謂的，如果既有的程式可以運作，不一定要堅持導入 Async。
+    * ### 
 <br />
