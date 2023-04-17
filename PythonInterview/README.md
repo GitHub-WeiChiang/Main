@@ -3,8 +3,8 @@ PythonInterview
 * ### 高潔篇: Functools (高階函數和可調用對像上的操作)
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
 * ### 垃圾篇: 一文讀懂 Python 垃圾回收與內存管理機制 (在座的各位都是...)
-* ### 海象篇: 賦值表達式 Assignment Expressions 之海象運算符 (:= 像海象對吧 ?)
 * ### 蒙圈篇: for in if in for else try except else (洗勒公啥)
+* ### 分清篇: 執行緒、線程、行程、進程、並行、並發、平行 ?、並行、異步、協程 ?? (你搞得我好亂啊 !)
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
 * ### Chapter04 Python 序列
@@ -488,107 +488,6 @@ PythonInterview
         * ### 每执行 10 次 G1 的 GC，触发一次 G2 的 GC (其實頻率更低)。
 <br />
 
-海象篇: 賦值表達式 Assignment Expressions 之海象運算符 (:= 像海象對吧 ?)
-=====
-```
-import re
-import io
-
-# Example 1:
-a = [0] * 100
-if len(a) > 10:
-  print(f"List is too long ({len(a)} elements, expected <= 10)")
- 
-n = len(a)
-if n > 10:
-  print(f"List is too long ({n} elements, expected <= 10)")
- 
-if (x := len(a)) > 10:
-  print(f"List is too long ({x} elements, expected <= 10)")
- 
-# Example 2, bad
-ads = "Now 20% off till 6/18"
- 
-m1 = re.search(r'(\d+)% off', ads)
-discount1 = float(m1.group(1)) / 100 if m1 else 0.0
- 
-discount2 = float(m2.group(1)) / 100 if (m2 := re.search(r'(\d+)% off', ads)) else 0.0
- 
-print(f'{discount1 = }, {discount2 = }')
- 
-# Example 3
-f1 = io.StringIO("123456789")
-x1 = f1.read(4)
-while x1 != '':
-  print(x1)
-  x1 = f1.read(4)
- 
-f2 = io.StringIO("123456789")
-while (x2 := f2.read(4)) != '':
-  print(x2)
- 
-# Example 4
-prog_langs = {'c++', 'python', 'java'}
-langs = ['C++', 'Java', 'PYthon', 'English', '中文']
- 
-l1 = [lang.lower() for lang in langs if lang.lower() in prog_langs]
-print(l1)
- 
-l2 = [l for lang in langs if (l := lang.lower()) in prog_langs]
-print(l2)
-```
-* ### 海象运算符 ```:=``` 作为一项新奇的 python 语法，在最新发布的 python3.8 中被首次提出来。
-* ### 海象运算符即一个变量名后跟一个表达式或者一个值，这个和赋值运算符 = 类似，可以看作是一种新的赋值运算符。
-* ### 在合适的场景中使用海象运算符可以降低程序复杂性，简化代码。一方面，可以写出优雅而简洁的 Python 代码；另一方面，可以看懂他人的代码。在一些实例中，甚至可以提高程序的性能。
-```
-a = 0
-if a < 15:
-　　print("hello, walrus operator！")
-
-# vs.
-
-if a := 15 > 10:
-    print("hello, walrus operator！")
-```
-```
-count = 5
-while count:
-　　print("hello, walrus operator！")
-　　count -= 1
-
-# vs.
-
-count = 5
-# 需要加 1 是因为执行输出前 count 就减 1 了
-while (count := count - 1) + 1:
-　　print("hello, walrus operator！")
-```
-```
-nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-count = 1
-def f(x):
-　　global count
-　　print(f"f(x)函数运行了{count}次")
-　　count += 1
-　　return x ** 2
-nums2 = [f(i) for i in nums1 if f(i) > 50]
-print(nums2)
-
-# vs.
-
-nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-count = 1
-def f(x):
-　　global count
-　　print(f"f(x)函数运行了{count}次")
-　　count += 1
-　　return x ** 2
-nums2 = [j for i in nums1 if (j := f(i)) > 50]
-print(nums2)
-```
-* ### 使用海象运算符时: 三个数字满足列表推导式的条件，节省 3 次的函数调用。当程序数据巨大的时候，这将起到提升性能的作用。
-<br />
-
 蒙圈篇: for in if in for else try except else (洗勒公啥)
 =====
 ```
@@ -652,6 +551,10 @@ def demo(str_param):
     finally:
         print("無論如何都執行")
 ```
+<br />
+
+分清篇: 執行緒、線程、行程、進程、並行、並發、平行 ?、並行、異步、協程 ?? (你搞得我好亂啊 !)
+=====
 <br />
 
 Reference
