@@ -4,7 +4,9 @@ Chapter02 Thread 的真相
   * ### Thread: "執行緒"，又稱 "線程"，可以實現 "Concurrent"，由 ```threading``` 模組實作。
   * ### Process: "行程"，又稱 "進程"，可以實現 "Parallel"，由 ```multiprocessing``` 模組實作。
   * ### Coroutine: "協程"，又稱 "異步"，可以實現 "Concurrent"，由 ```asyncio``` 模組實作。
-* ### ![image]()
+    * ### A "coroutine" is a "concurrency" design pattern.
+    * ### "Coroutines" are like threads executing work "concurrently".
+* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/AsyncioPrinciples/Chapter02/ConcAndPara.jpg)
 * ### 名詞對照
   * ### Thread
     * ### 台灣: 執行緒
