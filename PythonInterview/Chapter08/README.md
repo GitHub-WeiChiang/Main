@@ -235,7 +235,104 @@ Chapter08 進程與線程
             # ValueError: Semaphore released too many times
             ```
     * ### Event 對象
-        * ### to be continued
-    * ### 同步對列
-        * ### to be continued
+        * ### 透過 "事件" 的方式，讓不同的執行續之間彼此溝通，輕鬆做到 "等待 A 執行緒完成某件事後，B 執行緒再繼續" 的功能。
+        * ### threading.Event(): 註冊一個事件。
+        * ### 一个事件对象管理一个内部标示符。
+        * ### set(): 觸發事件 (將标示符設為 True)。
+        * ### wait(): 等待事件被觸發 (使线程一直处于阻塞状态直到标示符变为 True)。
+        * ### clear(): 清除事件觸發，事件回到未被觸發的狀態 (將标示符設為 False)。
+        * ### 示例 1: 註冊一個 event 事件，當 aa() 執行時使用 event.wait() 等待事件被觸發，接著設定 bb() 執行到 i 等於 30 的時候就會觸發事件，這時 aa() 才會開始運作。
+            ```
+            import threading
+            import time
+
+
+            def aa():
+                event.wait()
+                event.clear()
+                for i in range(1, 6):
+                    print('A:', i)
+                    time.sleep(0.5)
+
+
+            def bb():
+                for i in range(10, 60, 10):
+                    if i == 30:
+                        event.set()
+                    print('B:', i)
+                    time.sleep(0.5)
+
+
+            event = threading.Event()
+            a = threading.Thread(target=aa)
+            b = threading.Thread(target=bb)
+
+            a.start()
+            b.start()
+
+
+            '''
+            B: 10
+            B: 20
+            B: 30
+            A: 1
+            B: 40
+            A: 2
+            B: 50
+            A: 3
+            A: 4
+            A: 5
+            '''
+            ```
+        * ### 示例 2: 註冊兩個事件，event_a 會在輸入任意內容後觸發，觸發後就會印出 1 ~ 5 的數字，印出完成後會觸發 event_b，這時才又可以繼續輸入文字，不斷重複兩個事件的觸發與執行續的執行。
+            ```
+            import threading
+            import time
+
+
+            def aa():
+                i = 0
+                while True:
+                    event_a.wait()
+                    event_a.clear()
+                    for i in range(1, 6):
+                        print(i)
+                        time.sleep(0.5)
+                    event_b.set()
+
+
+            def bb():
+                while True:
+                    input('輸入任意內容')
+                    event_a.set()
+                    event_b.wait()
+                    event_b.clear()
+
+
+            event_a = threading.Event()
+            event_b = threading.Event()
+            a = threading.Thread(target=aa)
+            b = threading.Thread(target=bb)
+
+            a.start()
+            b.start()
+
+
+            '''
+            輸入任意內容a
+            1
+            2
+            3
+            4
+            5
+            輸入任意內容b
+            1
+            2
+            3
+            4
+            5
+            輸入任意內容
+            '''
+            ```
+    * ### Queue 與 Pipe (通信篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/PythonInterview)
 <br />
