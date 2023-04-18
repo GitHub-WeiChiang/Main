@@ -4,7 +4,6 @@ PythonInterview
 * ### 通信篇: 進程間的通信 (Queue 與 Pipe)
 * ### 垃圾篇: 一文讀懂 Python 垃圾回收與內存管理機制 (在座的各位都是...)
 * ### 蒙圈篇: for in if in for else try except else (洗勒公啥)
-* ### 分清篇: 執行緒、線程、行程、進程、並行、並發、平行、異步、協程 (你搞得我好亂啊 !)
 * ### Chapter02 Python 面試基礎
 * ### Chapter03 Python 中函數的應用
 * ### Chapter04 Python 序列
@@ -551,10 +550,6 @@ def demo(str_param):
     finally:
         print("無論如何都執行")
 ```
-<br />
-
-分清篇: 執行緒、線程、行程、進程、並行、並發、平行、異步、協程 (你搞得我好亂啊 !)
-=====
 <br />
 
 Reference
