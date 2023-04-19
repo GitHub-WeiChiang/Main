@@ -10,6 +10,7 @@ PythonInterview
 * ### Chapter05 字符串和正則表達式
 * ### Chapter07 異常處理
 * ### Chapter08 進程與線程
+* ### Chapter09 Python 操作數據庫
 <br />
 
 高潔篇: Functools (高階函數和可調用對像上的操作)
