@@ -20,4 +20,12 @@ Chapter10 Web 應用入門
             * ### 缓存
             * ### 匿名信和安全性
     * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/Chapter10/Proxy.png)
+* ### Nginx 主要用途為何 ?
+    * ### Nginx 是一種高性能的 Web 伺服器，可用於反向代理、負載平衡、靜態資源緩存和 HTTP 動態模塊等功能。
+    * ### Nginx 的主要用途:
+        * ### Web 伺服器: Nginx 可以像 Apache、IIS 等 Web 伺服器一樣，接受客戶端請求並回應相應的資源。
+        * ### 反向代理: Nginx 可以將客戶端的請求轉發到多個 Web 伺服器，使得客戶端只需要連接到 Nginx 服務器就可以獲得多個 Web 伺服器的服務。
+        * ### 負載平衡: Nginx 可以將客戶端的請求均勻地分配到多個 Web 伺服器上，以提高 Web 應用的可用性和可擴展性。
+        * ### 靜態資源緩存: Nginx 可以將靜態資源 (例如圖片、CSS、JavaScript 等) 緩存到內存或硬碟中，以加快資源載入速度，降低 Web 伺服器的負載。
+        * ### HTTP 動態模塊: Nginx 支援許多第三方模塊，可以通過這些模塊實現一些高級的功能，例如 URL 重寫、反向代理、防止 DDOS 攻擊、負載平衡等。
 <br />
