@@ -1,0 +1,67 @@
+<mxfile host="Electron" modified="2023-04-22T15:01:36.137Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.1 Chrome/112.0.5615.87 Electron/24.1.2 Safari/537.36" etag="02lEo5DIlfFcXkwkJw1s" version="21.2.1" type="device">
+  <diagram name="第1頁" id="qhB0eLHmh1ptTIn3DnNf">
+    <mxGraphModel dx="597" dy="405" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-24" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="269" width="100" height="251" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="umK9AhRE5xUXWR9Ewtwj-1" target="umK9AhRE5xUXWR9Ewtwj-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-15" value="Write 寫操作" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="umK9AhRE5xUXWR9Ewtwj-14">
+          <mxGeometry x="0.0125" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="umK9AhRE5xUXWR9Ewtwj-1" target="umK9AhRE5xUXWR9Ewtwj-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-17" value="Read 寫操作" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="umK9AhRE5xUXWR9Ewtwj-16">
+          <mxGeometry x="0.1386" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-2" value="" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" vertex="1" parent="1">
+          <mxGeometry x="210" y="130" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-3" value="" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" vertex="1" parent="1">
+          <mxGeometry x="290" y="130" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-4" value="" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.pc;" vertex="1" parent="1">
+          <mxGeometry x="370" y="130" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="umK9AhRE5xUXWR9Ewtwj-7" target="umK9AhRE5xUXWR9Ewtwj-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="umK9AhRE5xUXWR9Ewtwj-7" target="umK9AhRE5xUXWR9Ewtwj-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="umK9AhRE5xUXWR9Ewtwj-7" target="umK9AhRE5xUXWR9Ewtwj-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-23" value="數據同步" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="umK9AhRE5xUXWR9Ewtwj-22">
+          <mxGeometry x="-0.6863" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-7" value="Master 主數據庫" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database.svg;" vertex="1" parent="1">
+          <mxGeometry x="215" y="280" width="50" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-9" value="Servant 從數據庫" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database.svg;" vertex="1" parent="1">
+          <mxGeometry x="375" y="280" width="50" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-18" value="Servant 從數據庫" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database.svg;" vertex="1" parent="1">
+          <mxGeometry x="375" y="360" width="50" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="umK9AhRE5xUXWR9Ewtwj-19" value="Servant 從數據庫" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database.svg;" vertex="1" parent="1">
+          <mxGeometry x="375" y="440" width="50" height="37" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
