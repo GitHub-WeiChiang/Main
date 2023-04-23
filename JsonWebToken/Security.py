@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Any, Union, Optional
 from jose import jwt
-from fastapi import Header
+from fastapi import Header, HTTPException
 
 ALGORITHM = "HS256"
 SECRET_KEY = "albert0425369@gmail.com"
@@ -22,7 +22,7 @@ def create_access_token(
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(
-            minutes=5
+            minutes=60
         )
 
     to_encode = {"exp": expire, "sub": str(subject)}
@@ -52,5 +52,5 @@ def check_jwt_token(
 
         return payload
     except (jwt.JWTError, jwt.ExpiredSignatureError, AttributeError):
-        # 抛出自定义异常， 然后捕获统一响应
-        raise Exception("access token fail")
+        # 抛出自定义异常，然后捕获统一响应
+        raise HTTPException(status_code=498, detail="access token fail")
