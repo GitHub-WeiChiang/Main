@@ -19,7 +19,7 @@ class UserInfo(BaseModel):
 async def login_access_token(user_info: UserInfo):
     # 登入流程...
 
-    # 登录token 只存放了user.id
+    # 登录 token 只存放了 username
     return {
         "token": create_access_token(user_info.username),
     }
@@ -29,7 +29,7 @@ async def login_access_token(user_info: UserInfo):
 async def get_user_info(token_data: Union[str, Any] = Depends(check_jwt_token)):
     print(token_data)
 
-    # 这个状态能响应说明token验证通过
+    # 这个状态能响应说明 token 验证通过
     return {
         "info": token_data
     }
