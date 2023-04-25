@@ -29,9 +29,9 @@ Contents
     * ### ProgrammationEfficace -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/ProgrammationEfficace)
     * ### DataStructuresAndAlgorithms -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/DataStructuresAndAlgorithms)
 * ### 碩士成果
-    * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction)
+    * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction) ([視頻](https://youtu.be/zDQRNE98Zi8)、[論文](http://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id=%22109TIT00392046%22.&searchmode=basic))
 * ### 個人專案
-    * ### GpsDatingApp -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/GpsDatingApp)
+    * ### GpsDatingApp -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/GpsDatingApp) ([視頻](https://youtube.com/playlist?list=PLRyxGT6X5Kt2HRZrOWHPtsvQz_fM4fF8M))
 * ### 電腦網路
     * ### ComputerNetwork -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/ComputerNetwork)
 * ### 區塊鏈
