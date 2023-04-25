@@ -34,6 +34,7 @@ Questions
 * ### Question032 - 如何在特定業務邏輯下同時新增數據到兩張相關的資料表中 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question032)
 * ### Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 如何解決 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question033)
 * ### Question034 - Python 中的編譯、解譯與鏈接各為何意 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question034)
+* ### Question035 - Python 內置的 hash() 為什麼每次運作結果不同 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question035)
 <br />
 
 Reference
