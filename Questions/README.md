@@ -35,6 +35,8 @@ Questions
 * ### Question033 - Redis 出現 Creating Server TCP listening socket *:6379: bind: No error 如何解決 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question033)
 * ### Question034 - Python 中的編譯、解譯與鏈接各為何意 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question034)
 * ### Question035 - Python 內置的 hash() 為什麼每次運作結果不同 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question035)
+* ### Question036 - Python 常見的後端框架有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question036)
+* ### Question037 - Python 常見的服務器有哪些 ? [click me](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question037)
 <br />
 
 Reference
