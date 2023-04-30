@@ -7,6 +7,7 @@ Asyncio
 * ### Chapter4 aioMySQL
 * ### Chapter5 ASGI
 * ### Chapter6 Tornado
+* ### Chapter7 Socket.IO
 <br />
 
 加速篇: Python 的 Numba 庫 (從爬不太動到原地起飛)
