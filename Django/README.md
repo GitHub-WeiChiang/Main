@@ -1,6 +1,6 @@
 Django
 =====
-* ### 測試
+* ### Chapter01 走進 Django
 <br />
 
 Reference
