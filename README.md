@@ -15,6 +15,7 @@ Contents
     * ### DesignPatterns -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DesignPatterns)
     * ### SystemsDesign -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SystemsDesign)
 * ### 後端框架
+    * ### Django -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Django)
     * ### FastAPI -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/FastAPI)
     * ### SimpleTomcat -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SimpleTomcat)
     * ### SpringBoot -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SpringBoot)
