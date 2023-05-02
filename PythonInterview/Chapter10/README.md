@@ -19,7 +19,7 @@ Chapter10 Web 應用入門
             * ### 负载均衡
             * ### 缓存
             * ### 匿名信和安全性
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/Chapter10/Proxy.png)
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/PythonInterview/Chapter10/Proxy.png)
 * ### Nginx 主要用途為何 ?
     * ### Nginx 是一種高性能的 Web 伺服器，可用於反向代理、負載平衡、靜態資源緩存和 HTTP 動態模塊等功能。
     * ### Nginx 的主要用途:

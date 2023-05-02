@@ -334,7 +334,7 @@ Chapter08 進程與線程
             輸入任意內容
             '''
             ```
-    * ### Queue 與 Pipe (通信篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/PythonInterview)
+    * ### Queue 與 Pipe (通信篇) -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/PythonInterview)
 * ### 什麼是全局解譯器鎖 (GIL)
     * ### Python 的全局解释器锁（Global Interpreter Lock，GIL）是一种机制，它确保同一时间只有一个线程能够执行 Python 字节码，也就是说，在多线程编程中，Python 的 GIL 会对多线程执行代码的效率产生影响。
     * ### 在 Python 中，所有线程都共享一个解释器，GIL 会在解释器级别上对多线程执行代码的进程进行协调，以保证在同一时刻只有一个线程能够执行 Python 字节码，这个机制的目的是确保线程安全，防止多线程访问共享资源时出现冲突。
@@ -350,7 +350,7 @@ Chapter08 進程與線程
         * ### Coroutine: "協程"，又稱 "異步" 與 "微線程"，可以實現 "Concurrent"，由 ```asyncio``` 模組實作。
             * ### A "coroutine" is a "concurrency" design pattern.
             * ### "Coroutines" are like threads executing work "concurrently".
-        * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/AsyncioPrinciples/Chapter02/ConcAndPara.jpg)
+        * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/AsyncioPrinciples/Chapter02/ConcAndPara.jpg)
     * ### 名詞對照
         * ### Thread
             * ### 台灣: 執行緒

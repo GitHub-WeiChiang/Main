@@ -41,5 +41,5 @@ Chapter12 設計聊天系統
     * ### 載入時間優化。
     * ### 錯誤處理。
     * ### 訊息重發機制。
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter12/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter12/SystemArchitectureDiagram.png)
 <br />

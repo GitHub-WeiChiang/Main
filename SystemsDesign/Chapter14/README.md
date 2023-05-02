@@ -29,5 +29,5 @@ Chapter14 設計 YouTube
     * ### DRM (Digital Rights Management, 數位版權管理) 系統。
     * ### AES 加密。
     * ### 浮水印。
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter14/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter14/SystemArchitectureDiagram.png)
 <br />

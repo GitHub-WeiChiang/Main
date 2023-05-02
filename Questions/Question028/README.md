@@ -8,5 +8,5 @@ Question028 - 資料庫子查詢區分的依據是什麼 ?
 * ### 按與外層查詢的關係來區分子查詢
     * ### 不相關子查詢: 子查詢可以單獨運行出結果，不依賴於外層查詢的值。
     * ### 相關子查詢: 子查詢的執行需要依賴外層查詢的值。
-* ### 理解更多 -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples/Chapter14)
+* ### 理解更多 -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples/Chapter14)
 <br />

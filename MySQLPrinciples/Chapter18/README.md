@@ -10,7 +10,7 @@ Chapter18 從貓爺借錢說起 -- 交易簡介
     * ### 資料庫中的資料全部符合現實世界中的約束，就稱這些資料是一致的，符合一致性。
     * ### 可以透過主鍵、唯一索引、外鍵、NOT NULL、CHECK 等方式實施。
     * ### MySQL 的 CHECK 約束沒有任何作用，不同於 SQL Server 和 Oracle DB。
-    * ### 理解更多 (約束篇) -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples)
+    * ### 理解更多 (約束篇) -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples)
     * ### 更多的一致性需求主要是在程式業務邏輯實現。
 * ### 持久性 (Durability)
     * ### 狀態轉換完成後，這個轉換的結果將永久保留，稱為持久性。

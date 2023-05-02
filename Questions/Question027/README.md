@@ -12,5 +12,5 @@ Question027 - InnoDB 中的存取方法有哪些 ?
         * ### Union 索引合併。
         * ### Sort - Union 索引合併。
     * ### 註: MySQL 沒有 Sort - intersection。
-* ### 理解更多 -> [click me](https://gitlab.com/ChiangWei/main/-/tree/master/MySQLPrinciples/Chapter10)
+* ### 理解更多 -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples/Chapter10)
 <br />

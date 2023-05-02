@@ -13,5 +13,5 @@ Chapter11 動態訊息系統
     * ### 動態快取: 取得相關 key 值。
     * ### 使用者快取 / 貼文快取: 獲取內容資訊。
     * ### 回傳響應
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter11/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter11/SystemArchitectureDiagram.png)
 <br />

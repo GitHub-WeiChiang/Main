@@ -39,5 +39,5 @@ Chapter09 設計網路爬蟲
     * ### 多餘內容 (重複)。
     * ### 網路蜘蛛陷阱 (迴圈)。
     * ### 資料雜訊 (廣告)。
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter09/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter09/SystemArchitectureDiagram.png)
 <br />

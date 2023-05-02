@@ -327,7 +327,7 @@ PythonInterview
     * ### 内存池的作用就是预先在内存中申请一定数量的，大小相等的内存块留作备用，当有新的内存需求时，就先从内存池中分配内存给这个需求，不够之后再申请新的内存。
     * ### Python 中的内存管理机制为 Pymalloc，这样做最显著的优势就是能够减少内存碎片，提升效率。
 * ### 内存池是如果工作的
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/CPython.png)
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/PythonInterview/CPython.png)
     * ### Python 的对象管理主要位于 Level +1 ~ Level +3 层。
     * ### Level +3 层: 对于 Python 内置的对象 (比如 int、dict 等) 都有独立的私有内存池，对象之间的内存池不共享，即 int 释放的内存，不会被分配给 float 使用。
     * ### Level +2 层: 当申请的内存大小小于 256 KB 时，内存分配主要由 Python 对象分配器 (Python’s object allocator) 实施。
@@ -428,7 +428,7 @@ PythonInterview
         * ### 当需要释放的对象比较大时，如字典对象，需要对引用的所有对象循环嵌套调用，可能耗时比较长。
         * ### 循环引用: 这是引用计数的致命伤，引用计数对此是无解的，因此必须要使用其它的垃圾回收算法对其进行补充。
         * ### 註: 孤島參照法 (lsolating a Reference) 會造成 "循环引用" 現象。
-        * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/CircularReference.png)
+        * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/PythonInterview/CircularReference.png)
 * ### 标记 - 清除
     * ### 引用计数算法无法解决循环引用问题，循环引用的对象会导致大家的计数器永远都不会等于 0，带来无法回收的问题。
     * ### 标记 - 清除算法主要用于潜在的循环引用问题，该算法分为 2 步:
@@ -458,7 +458,7 @@ PythonInterview
     * ### 上述範例，a 和 b 相互引用，e 引用了 c 和 d。
     * ### 如果采用引用计数器算法，那么 a 和 b 两个对象将无法被回收。
     * ### 而采用标记清除法，从根节点 (即 e 对象) 开始遍历，c、d、e 三个对象都会被标记为可达，而 a 和 b 无法被标记，因此 a 和 b 会被回收。
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/MarkAndSweep.png)
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/PythonInterview/MarkAndSweep.png)
     * ### 什么样的对象会被看成是根节点
         * ### 当前栈帧中的本地变量表中引用的对象，如各个线程被调用的方法堆栈中使用到的参数、局部变量、临时变量等。
         * ### 全局静态变量

@@ -59,7 +59,7 @@ Note
 	* ### thread 適合小任務、資訊共用的任務 (直接拿 global 資訊來用)。
 	* ### multiprocess 適合大任務、資訊獨立的任務 (把相關資訊交由其他核心處理後，不太需要拿取新資訊)。
 	* ### python 的 thread 實作使用 GIL (global interpreter lock) 保護程式取用資料衝突的機制。
-	* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/Python/thread%20%E8%88%87%20multiprocess%20%E6%AF%94%E8%BC%83.png)
+	* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/Python/thread%20%E8%88%87%20multiprocess%20%E6%AF%94%E8%BC%83.png)
 * ### 關於底線
 	* ### 單底線: 這個回傳值我不要了。
 	* ### 前單底線: 表示 private，不要碰我。

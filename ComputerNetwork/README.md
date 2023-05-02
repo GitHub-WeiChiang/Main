@@ -63,7 +63,7 @@ ComputerNetwork
 | EAP | Extensible Authentication Protocol | 可擴展身份驗證協議 | L4 |
 <br />
 
-![image](https://gitlab.com/ChiangWei/main/-/raw/master/ComputerNetwork/Internet%20Protocol.png)
+![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/ComputerNetwork/Internet%20Protocol.png)
 <br />
 
 * ### EMS (Element Management System，網元管理系統)，是管理特定類型的一個或多個電信 NE (Network Element，網路單元) 的系統。

@@ -134,7 +134,7 @@ Chapter09 Python 操作數據庫
         * ### 中間件方式
             * ### 透過獨立系統對數據庫進行管理，實現讀寫分離。
             * ### 中間件對業務服務器提供 SQL 兼容。
-    * ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/PythonInterview/Chapter09/ReadWriteSplitting.png)
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/PythonInterview/Chapter09/ReadWriteSplitting.png)
 * ### 三種刪除操作 drop、truncate 和 delete 有什麼區別 ?
     * ### drop
         * ### 數據庫定義語言，屬於數據庫層級。
@@ -163,5 +163,5 @@ Chapter09 Python 操作數據庫
         * ### 發生故障時丟失數據較少，適合災難性場景數據恢復。
         * ### AOF 日誌文件相較於 RDB 數據快照檔案更大。
         * ### 綜合效能 AOF 劣於 RDB。
-    * ### [理解更多](https://gitlab.com/ChiangWei/main/-/tree/master/Questions/Question009)
+    * ### [理解更多](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question009)
 <br />

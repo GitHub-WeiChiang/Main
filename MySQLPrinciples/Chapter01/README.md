@@ -39,7 +39,7 @@ Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### MySQL 預設申請 (監聽) 3306 通訊埠。
 * ### Windows 作業系統中，兩種處理程序間的通訊方式為 "具名管線" 和 "共用記憶體"。
 * ### 類 UNIX 系統在兩種處理程序間的通訊方式為 UNIX 域通訊端。
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/MySQLPrinciples/Chapter01/QueryProcessing.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/MySQLPrinciples/Chapter01/QueryProcessing.png)
 * ### 伺服器會創建專門執行緒與用戶端互動，當用戶斷開連接時，該執行緒會被快取，並分配給後續所連接的用戶端。
 * ### 查詢快取
     * ### 跨用戶端。

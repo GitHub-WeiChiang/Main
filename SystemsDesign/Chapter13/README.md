@@ -9,5 +9,5 @@ Chapter13 設計搜尋文字自動補全系統
 * ### 若透過關聯式資料庫查詢頻域最高單詞並不是很有效率的做法，可以使用 trie 資料結構 (甚至可以使用 CDN) 並把快取保存在瀏覽器。
 * ### 前綴樹 (prefix tree, trie): 提升查詢速度，樹結構如圖所示，前綴樹通常直接採用整顆替換作為更新方式，也可以根據查詢時間加上權重。
 * ### 若前綴樹大到需要進行分片對應 (shard map)，要注意 hotkey 開頭字母問題。
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter13/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter13/SystemArchitectureDiagram.png)
 <br />

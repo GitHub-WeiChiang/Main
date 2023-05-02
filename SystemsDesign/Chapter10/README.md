@@ -25,5 +25,5 @@ Chapter10 設計通知系統
     * ### 通知安全: 認證過客戶端才可發送。
     * ### 通知監視: 效能管理。
     * ### 通知追蹤: 分析！
-* ### ![image](https://gitlab.com/ChiangWei/main/-/raw/master/SystemsDesign/Chapter10/SystemArchitectureDiagram.png)
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/SystemsDesign/Chapter10/SystemArchitectureDiagram.png)
 <br />
