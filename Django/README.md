@@ -1,9 +1,9 @@
 Django
 =====
-* ### Chapter01 走進 Django
+* ### Chapter01 網站開發環境建置
 <br />
 
 Reference
 =====
-* ### Django + Vue.js 實戰派 - Python Web 開發與運維
+* ### 快速學會 Python 架站技術：活用 Django 4 建構動態網站的 16堂課
 <br />

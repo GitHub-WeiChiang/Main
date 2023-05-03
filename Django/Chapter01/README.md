@@ -1,4 +1,4 @@
-Chapter01 走進 Django
+Chapter01 網站開發環境建置
 =====
 * ### 
 <br />
