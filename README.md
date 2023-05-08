@@ -30,9 +30,9 @@ Contents
     * ### ProgrammationEfficace -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/ProgrammationEfficace)
     * ### DataStructuresAndAlgorithms -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DataStructuresAndAlgorithms)
 * ### 碩士成果
-    * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction) ([視頻](https://youtu.be/zDQRNE98Zi8)、[論文](http://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id=%22109TIT00392046%22.&searchmode=basic))
+    * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction) ([影片](https://youtu.be/zDQRNE98Zi8)、[論文](http://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id=%22109TIT00392046%22.&searchmode=basic))
 * ### 個人專案
-    * ### GpsDatingApp -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/GpsDatingApp) ([視頻](https://youtube.com/playlist?list=PLRyxGT6X5Kt2HRZrOWHPtsvQz_fM4fF8M))
+    * ### GpsDatingApp -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/GpsDatingApp) ([影片](https://youtube.com/playlist?list=PLRyxGT6X5Kt2HRZrOWHPtsvQz_fM4fF8M))
 * ### 電腦網路
     * ### ComputerNetwork -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/ComputerNetwork)
 * ### 區塊鏈
