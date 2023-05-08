@@ -37,4 +37,16 @@ Chapter02 Django 網站快速入門
     # 啟動 Django 伺服器
     python manage.py runserver
     ```
+* ### Django 網站框架主要檔案用途
+    | 檔案名稱 | 資料夾位置 | 用途 |
+    | - | - | - |
+    | manage.py | BASE DIR | 網站管理程式，執行命令操作。 |
+    | db.sqlite3 | BASE DIR | 預設資料庫檔案。 |
+    |  |  |  |
+    |  |  |  |
+    |  |  |  |
+    |  |  |  |
+    |  |  |  |
+    |  |  |  |
+    |  |  |  |
 <br />
