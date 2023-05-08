@@ -1,6 +1,7 @@
 Django
 =====
 * ### Chapter01 網站開發環境建置
+* ### Chapter02 Django 網站快速入門
 <br />
 
 Reference
