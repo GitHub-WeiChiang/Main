@@ -11,6 +11,7 @@ MySQLPrinciples
 * ### 回傳篇: PostgreSQL 的 RETURNING 子句 (嗯...這個滿簡單的)
 * ### 函數篇: MySQL 自定義函數 (從呼叫函數到呼叫破喉嚨)
 * ### 更新篇: PostgreSQL 9.4 引入特性: FILTER 子句 (夜深了...)
+* ### 分頁篇: 有的時候總是會遇到要分頁的情況 (人生迷茫中...)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -1054,6 +1055,94 @@ mysql> select * from checkDemoTable;
     * ### 参数类型: int 或 bigint
     * ### 返回类型: setof int 或 setof bigint (与参数类型相同)
     * ### 描述: 生成一个数值序列，从 start 到 stop，步进为 step
+<br />
+
+分頁篇: 有的時候總是會遇到要分頁的情況 (人生迷茫中...)
+=====
+* ### 今日主角: ROW_NUMBER()
+* ### 用於排序的函數，可實作分頁功能，其會將查詢出的每一列資料加上一個序號 (從 1 開始遞增)，依次排序且不會重複。
+* ### 使用時必須搭配 OVER 子句選擇對某一列進行排序才能生成序號。
+* ### 初階使用
+    ```
+    # 根據 ID 進行排序並依序生成流水號 (從 1 開始)。
+
+    SELECT
+        ROW_NUMBER() OVER (
+            ORDER BY ID ASC
+        ) AS ROW_ID,
+        *
+    FROM CUSTOMERS
+    ```
+* ### 中階使用
+    ```
+    # 以 ADDRESS 為分組依據，
+    # 並透過 ID 進行排序後依序生成流水號 (從 1 開始)。
+
+    SELECT
+        ROW_NUMBER() OVER (
+            PARTITION BY ADDRESS
+            ORDER BY ID ASC
+        ) AS ROW_ID,
+        *
+    FROM CUSTOMERS
+    ```
+* ### 進階使用
+    ```
+    # 以 ADDRESS 為分組依據，
+    # 並透過 ID 進行排序後依序生成流水號 (從 1 開始)，
+    # 後印出每組的第一筆資料。
+
+    SELECT *
+    FROM (
+        SELECT
+            ROW_NUMBER() OVER (
+                PARTITION BY ADDRESS
+                ORDER BY ID ASC
+            ) AS ROW_ID,
+            *
+        FROM CUSTOMERS
+    ) AS RNC
+    WHERE RNC.ROW_ID = 1 
+    ```
+* ### 使用 OFFSET ROWS
+    ```
+    # ORDER BY 是必須的。
+    # OFFSET N ROWS 表示略過前 N 行，從第 N + 1 行開始。
+
+    SELECT *
+    FROM CUSTOMERS
+    ORDER BY CUSTOMERS_ID 
+    OFFSET 5 ROWS
+    ```
+* ### 使用 OFFSET ROWS 搭配 FETCH NEXT ROWS ONLY
+    ```
+    # ORDER BY 是必須的。
+    # OFFSET N ROWS 表示略過前 N 行，從第 N + 1 行開始。
+    # FETCH NEXT M ROWS ONLY 列出從第  N + 1 行開始的 M 筆資料。
+    # 這個方法在 MSSQL 2012 版本 (含) 以上適用，以下怎麼辦呢，請看下去。
+
+    SELECT *
+    FROM CUSTOMERS
+    ORDER BY CUSTOMERS_ID
+    OFFSET 2 ROWS
+    FETCH NEXT 8 ROWS ONLY
+    ```
+* ### 使用 ROW_NUMBER() 搭配 OVER (ORDER BY)
+    ```
+    # 在 MSSQL 2012 版以下的實作方法，
+    # 等同於上一個範例的效果。
+
+    SELECT *
+    FROM (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY CUSTOMERS_ID
+            ) AS ROW_ID,
+            *
+        FROM CUSTOMERS
+    ) AS RNC
+    WHERE RNC.ROW_ID > 2 AND RNC.ROW_ID <= 2 + 8
+    ```
 <br />
 
 Reference
