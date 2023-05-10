@@ -11,9 +11,9 @@ Contents
     * ### JsonWebToken -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/JsonWebToken)
     * ### Loguru -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Loguru)
     * ### Asyncio -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Asyncio)
-    * ### AsyncioPrinciples -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/AsyncioPrinciples)
+    * ### !! 精選 3 !! AsyncioPrinciples -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/AsyncioPrinciples)
 * ### 架構設計
-    * ### DesignPatterns -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DesignPatterns)
+    * ### !! 精選 1 !! DesignPatterns -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DesignPatterns)
     * ### SystemsDesign -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SystemsDesign)
 * ### 後端框架
     * ### Django -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Django)
@@ -22,7 +22,7 @@ Contents
     * ### SpringBoot -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SpringBoot)
     * ### SpringMVC -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SpringMVC)
 * ### 資料庫
-    * ### MySQLPrinciples -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples)
+    * ### !! 精選 2 !! MySQLPrinciples -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples)
     * ### OracleDatabase -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/OracleDatabase)
 * ### 工具
     * ### Docker -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Docker)
