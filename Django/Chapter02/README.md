@@ -21,6 +21,8 @@ Chapter02 Django 網站快速入門
     conda create --name Chapter02 python=3.10
 
     conda activate Chapter02
+
+    conda deactivate
     ```
 * ### 建立網站框架
     ```
@@ -92,4 +94,6 @@ Chapter02 Django 網站快速入門
     # 需在 admin.py 中進行資料表納管
     # http://127.0.0.1:8000/admin/
     ```
+* ### render(): 此函式會將 template 進行渲染。
+* ### locals(): 此函式會將所在區域之變數使用字典打包以供使用。
 <br />
