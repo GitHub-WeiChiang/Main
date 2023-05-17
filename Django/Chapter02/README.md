@@ -97,4 +97,8 @@ Chapter02 Django 網站快速入門
 * ### render(): 此函式會將 template 進行渲染。
 * ### locals(): 此函式會將所在區域之變數使用字典打包以供使用。
 * ### Pasteboard — Easy Image Uploads -> [click me](https://pasteboard.co/)
+* ### 生成 requirements.txt
+    ```
+    pip list --format=freeze > requirements.txt
+    ```
 <br />

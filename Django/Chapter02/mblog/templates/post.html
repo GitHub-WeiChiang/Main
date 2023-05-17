@@ -1,6 +1,8 @@
 <!-- post.html -->
 
+<!-- 在 Django 模板中加载 Markdown 扩展，以便使用 Markdown 语法解析和渲染文本内容。 -->
 {% extends 'base.html' %}
+{% load markdown_extras %}
 {% block title %}
     {{ post.title }} - 文學天地
 {% endblock %}
@@ -14,7 +16,7 @@
 {% endblock %}
 {% block content %}
     <p style='font-family: 微軟正黑體; font-size: 12pt; letter-spacing: 2pt;'>
-        {{ post.body | safe }}
+        {{ post.body | convert_markdown | safe }}
     </p>
 {% endblock %}
 
