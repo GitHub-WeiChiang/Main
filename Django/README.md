@@ -6,10 +6,11 @@ Django
 
 VS Code Extensions
 =====
-* ### Python
-* ### code runner
+* ### Code Runner
 * ### Django
 * ### Django Template
+* ### HTML CSS Support
+* ### Python
 <br />
 
 Reference
