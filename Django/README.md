@@ -2,6 +2,7 @@ Django
 =====
 * ### Chapter01 網站開發環境建置
 * ### Chapter02 Django 網站快速入門
+* ### Chapter03 讓網站上線
 <br />
 
 VS Code Extensions
