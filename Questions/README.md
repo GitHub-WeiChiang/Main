@@ -37,6 +37,7 @@ Questions
 * ### Question035 - Python 內置的 hash() 為什麼每次運作結果不同 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question035)
 * ### Question036 - Python 常見的後端框架有哪些 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question036)
 * ### Question037 - Python 常見的服務器有哪些 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question037)
+* ### Question038 - 如何在 Python 中實作安全的型態轉換 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question038)
 <br />
 
 Reference
