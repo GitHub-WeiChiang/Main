@@ -8,6 +8,9 @@ DesignPatterns
 
 Design Pattern 應用紀錄
 =====
+* ### FastAPI Web Framework
+    * ### Decorator (@app.route 路由映射、Depends 依賴注入)
+    * ### Chain Of Responsibility (@app.middleware 中間件)
 * ### 整合網管
     * ### Singleton (組態管理、資訊管理、資訊同步、遠端控制、限速管理)
     * ### Facade (時序資料庫存取)
