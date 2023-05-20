@@ -66,4 +66,77 @@ Chapter03 讓網站上線
 * ### settings.py: 負責 Django 網站相關設定。
 * ### wsgi.py: 負責建立與 Apache 轉交程式碼以及回傳執行結果。
 * ### FileZilla -> [click me](https://filezilla-project.org/)
+* ### 安装 tree 软件包的命令，用于以树形结构显示目录和文件的层次关系。
+    ```
+    apt install tree -y
+    ```
+* ### 啟用 Apache 前工作 (settings.py 配置修改)
+    ```
+    # SECRET_KEY 主要用于加密和保护敏感信息，以及确保应用程序的安全性。
+    with open("/etc/secret_key.txt") as f:
+        SECRET_KEY = f.read().strip()
+
+    DEBUG = False
+
+    # For testing.
+    ALLOWED_HOSTS = ["*"]
+
+    STATIC_URL = 'static/'
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+    STATIC_ROOT = '/var/www/mblog/staticfiles'
+
+    """
+    此時需要執行以下命令
+
+    python manage.py collectstatic
+
+    用于将静态文件收集到一个指定的目录中，以便在生产环境中提供静态文件的访问
+    """
+    ```
+* ### 啟用 Apache 前工作 ( 000-default.conf 配置修改)
+    ```
+    <VirtualHost *:80>
+        ServerAdmin albert0425369@gmail.com
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        Alias /static /var/www/mblog/staticfiles/
+        <Directory /var/www/mblog/staticfiles>
+            Require all granted
+        </Directory>
+
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIDaemonProcess mblog python-path=/var/www/mblog python-home=/var/www/venv_mblog
+        WSGIProcessGroup mblog
+        WSGIScriptAlias / /var/www/mblog/mblog/wsgi.py
+    </VirtualHost>
+    ```
+* ### 重啟 Apache
+    ```
+    service apache2 restart
+    ```
+* ### 問題記錄
+    * ### WSGI: Truncated or oversized response headers received from daemon process (Pending)
+        ```
+        # Add the below line to your httpd.conf.
+        # In my case the file was /etc/apache2/sites-available/default-ssl.conf
+
+        WSGIApplicationGroup %{GLOBAL}
+        ```
+    * ### Other
+        ```
+        # 确保 Web 服务器可以访问和管理特定目录下的文件和资源。
+
+        """
+        chown: 是一个缩写，表示 "change owner"，即更改所有者。
+        -R: 是一个选项，表示递归地更改指定目录下的所有文件和子目录的所有者。
+        www-data:www-data: 是新的所有者和所属组的标识。
+        在这个例子中，www-data 是一个常见的 Apache Web 服务器使用的用户和组。
+        """
+
+        chown -R www-data:www-data /var/www/mblog
+        ```
 <br />
