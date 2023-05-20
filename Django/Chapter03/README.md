@@ -63,7 +63,7 @@ Chapter03 讓網站上線
     # 執行
     python manage.py runserver IP:Port
     ```
-* ### setting.py: 負責 Django 網站相關設定。
+* ### settings.py: 負責 Django 網站相關設定。
 * ### wsgi.py: 負責建立與 Apache 轉交程式碼以及回傳執行結果。
 * ### FileZilla -> [click me](https://filezilla-project.org/)
 <br />
