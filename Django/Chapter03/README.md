@@ -179,4 +179,54 @@ Chapter03 讓網站上線
     # 檢查憑證到期日
     sudo openssl x509 -dates -noout -in /etc/letsencrypt/live/<your_domain_name>/cert.pem
     ```
+* ### Heroku 部署
+    ```
+    brew tap heroku/brew && brew install heroku
+
+    heroku --version
+
+    heroku login
+
+    heroku --help
+
+    # 安裝 Gunicorn (Green Unicorn) 套件。
+    # Gunicorn 是一個 WSGI (Web Server Gateway Interface) HTTP 伺服器，
+    # 用於在生產環境中運行 Python Web 應用程序。
+    pip install gunicorn
+
+    # 安裝 Django On Heroku 套件。
+    # Django On Heroku 是一個 Django 應用程序的插件，
+    # 用於簡化在 Heroku 平台上部署 Django 應用程序的過程。
+    pip install django-on-heroku
+
+    # 手動建立檔案 Procfile 並寫入以下內容 (與 manage.py 同階層)
+    web: gunicorn mblog.wsgi
+
+    # 修改 settings.py 配置
+    import django_on_heroku
+
+    DEBUG = False
+
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATIC_URL = 'static/' / django_on_heroku.settings(locals())
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+
+    # 建立網站
+    heroku create app_name
+
+    # 上傳專案至 Heroku 主機
+    git add .
+    git commit -m "for heroku upload"
+    git push heroku main
+
+    # 建立 Migration (資料遷移) 中介檔案
+    heroku run python manage.py makemigrations
+    # 依照 Migration (資料遷移) 中介檔案進行同步更新
+    heroku run python manage.py migrate
+
+    # 瀏覽
+    heroku open
+    ```
 <br />
