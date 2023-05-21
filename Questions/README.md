@@ -39,6 +39,7 @@ Questions
 * ### Question037 - Python 常見的服務器有哪些 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question037)
 * ### Question038 - 如何在 Python 中實作安全的型態轉換 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question038)
 * ### Question039 - Apache 出現 WSGI: Truncated or oversized response headers received from daemon process 如何解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question039)
+* ### Question040 - VMware 安裝與執行連網及分辨率問題如何解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question040)
 <br />
 
 Reference
