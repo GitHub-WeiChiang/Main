@@ -95,7 +95,7 @@ Chapter03 讓網站上線
     用于将静态文件收集到一个指定的目录中，以便在生产环境中提供静态文件的访问
     """
     ```
-* ### 啟用 Apache 前工作 ( 000-default.conf 配置修改)
+* ### 啟用 Apache 前工作 (000-default.conf 配置修改)
     ```
     <VirtualHost *:80>
         ServerAdmin albert0425369@gmail.com
@@ -139,4 +139,44 @@ Chapter03 讓網站上線
 
         chown -R www-data:www-data /var/www/mblog
         ```
+* ### 000-default.conf 域名配置修改
+    ```
+    <VirtualHost domain.name:80>
+        ...
+    </VirtualHost>
+    ```
+* ### 啟用 HTTPS (SSL)
+    ```
+    # 安裝 Snapd 軟體管理工具並啟用，方便安裝、管理和更新自包含的應用程式。
+    apt install snapd
+
+    # 使用 Snap 安裝 Certbot 軟體，
+    # Certbot 是一個由 Electronic Frontier Foundation (EFF) 開發的工具，
+    # 用於自動化在網站上設置和更新 SSL/TLS 加密證書。
+    snap install --classic certbot
+
+    # 建立一個符號連結，將 /snap/bin/certbot 連結到 /usr/bin/certbot，
+    # 以方便在系統中使用 /usr/bin/certbot 路徑來執行 Certbot 工具。
+    ln -s /snap/bin/certbot /usr/bin/certbot
+
+    * ### 000-default.conf HTTPS (SSL) 配置修改
+    <VirtualHost domain.name:443>
+        ...
+    </VirtualHost>
+
+    # 使用 Certbot 工具與 Apache 網頁伺服器進行互動，
+    # 以自動獲取和安裝 SSL/TLS 加密證書。
+    certbot --apache
+
+    # Redirect HTTP to HTTPS
+    <VirtualHost mblog.hopto.org:80>
+        Redirect permanent / https://mblog.hopto.org/
+    </VirtualHost>
+
+    # 測試憑證的自動更新
+    certbot renew --dry-run
+
+    # 檢查憑證到期日
+    sudo openssl x509 -dates -noout -in /etc/letsencrypt/live/<your_domain_name>/cert.pem
+    ```
 <br />
