@@ -1,18 +1,18 @@
 Chapter04 深入瞭解 Django 的 MVC 架構
 =====
-* ### 初始化步驟
+* ### 初始化步驟 ("VENV_NAME" here is "Chapter04")
     ```
-    conda create --name Chapter04 python=3.10
+    conda create --name VENV_NAME python=3.10
 
-    conda activate Chapter04
+    conda activate VENV_NAME
 
     pip install django
 
-    django-admin startproject chapter04
+    django-admin startproject PROJECT_NAME
 
-    cd chapter04
+    cd PROJECT_NAME
 
-    python manage.py startapp mysite
+    python manage.py startapp APP_NAME
     ```
     ```
     ALLOWED_HOSTS = ['*']
@@ -34,6 +34,8 @@ Chapter04 深入瞭解 Django 的 MVC 架構
     python manage.py createsuperuser
     ```
     ```
+    from APP_NAME.models import MODELS_NAME
+
     admin.site.register(MODELS_NAME)
     ```
     ```
