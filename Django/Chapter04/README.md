@@ -114,7 +114,7 @@ Chapter04 深入瞭解 Django 的 MVC 架構
     | exclude() | 傳回不符合指定條件的 QuerySet |
     | order_by() | 針對所接收的 QuerySet 進行排序 |
     | all() | 取得該表所有資料 |
-    | get() | 取得符合條件唯一紀錄 (沒有或是超過一筆都會引發 Exception) |
+    | get() | 取得符合條件唯一紀錄 (沒有或是超過一筆都會引發 Exception !) |
     | first() / last() | 取的第一個或是最後一個元素 |
     | aggregate() | 計算所接收 QuerySet 指定欄位的聚合函數 |
     | exists() | 是否存在指定條件之紀錄 (通常附加於 filter 方法) |
@@ -124,4 +124,46 @@ Chapter04 深入瞭解 Django 的 MVC 架構
     | contains / icontains | 如同 SQL 中的 like 與 ILIKE |
     | in | 提供一個串列，僅需符合該串列中任一項目即可 |
     | gt / gte / lt / lte | 大於 / 大於等於 / 小於 / 小於等於 |
+    * ### Sample Code 1
+        ```
+        # Equal
+        TABLE.objects.filter(COLUMN_NAME=VALUE)
+
+        # Less Than
+        TABLE.objects.filter(COLUMN_NAME__lt=VALUE)
+
+        # Order By: ASC
+        TABLE.objects.all().order_by("COLUMN_NAME")
+
+        # Order By: DESC
+        TABLE.objects.all().order_by("-COLUMN_NAME")
+        ```
+    * ### Sample Code 2
+        ```
+        # All Data
+        TABLE.objects.all()
+
+        # Not Equal
+        TABLE.objects.exclude(COLUMN_NAME=VALUE)
+
+        # Less Than Or Equal To
+        TABLE.objects.filter(COLUMN_NAME__lte=VALUE)
+
+        # Count
+        from django.db.models import Count
+        TABLE.objects.aggregate(Count('COLUMN_NAME'))
+
+        # Sum
+        from django.db.models import Sum
+        TABLE.objects.aggregate(Sum('COLUMN_NAME'))
+
+        # Not Case Sensitive
+        TABLE.objects.filter(COLUMN_NAME__icontains=VALUE)
+
+        # Or
+        TABLE.objects.filter(COLUMN_NAME__in=[..., ..., ...])
+
+        # Is Exist
+        TABLE.objects.filter(COLUMN_NAME=VALUE).exists()
+        ```
 <br />
