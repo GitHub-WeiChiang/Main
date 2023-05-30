@@ -8,6 +8,8 @@ DesignPatterns
 
 Design Pattern 應用紀錄
 =====
+* ### Django Web Framework
+    * ### Fluent Interface (QuerySet)
 * ### FastAPI Web Framework
     * ### Decorator (@app.route 路由映射、Depends 依賴注入)
     * ### Chain Of Responsibility (@app.middleware 中間件)
