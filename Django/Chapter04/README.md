@@ -166,4 +166,22 @@ Chapter04 深入瞭解 Django 的 MVC 架構
         # Is Exist
         TABLE.objects.filter(COLUMN_NAME=VALUE).exists()
         ```
+* ### 找不到網頁的回應
+    ```
+    from django.http import Http404
+
+    raise Http404("msg")
+    ```
+* ### Path Parameters
+    ```
+    def VIEW_FUNC(request, PARAM_NAME):
+        pass
+
+
+    urlpatterns = [
+        ...,
+        path('.../<PARAM_TYPE:PARAM_NAME>/', VIEW_FUNC),
+        ...,
+    ]
+    ```
 <br />

@@ -11,10 +11,12 @@ class Product(models.Model):
         ('L', 'Large'),
     )
 
+    # Stock Keeping Unit: 存貨單位
     sku = models.CharField(max_length=5)
     name = models.CharField(max_length=20)
     price = models.PositiveIntegerField()
     size = models.CharField(max_length=1, choices=SIZES)
+    # Quantity: 數量
     qty = models.IntegerField(default=0)
     
     # 產生資料項目以 name 欄位內容顯示
