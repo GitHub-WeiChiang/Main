@@ -1,17 +1,44 @@
 Loguru: 更爲優雅、簡潔的 Python 日誌管理模塊
 =====
-```
-pip3 install loguru
-```
-| 級別 | 層級 | 使用 |
-|-----------|-----|--------------------|
-| TRACE | 5 | logger.trace() |
-| DEBUG | 10 | logger.debug() |
-| INFO | 20 | logger.info() |
-| SUCCESS | 25 | logger.success() |
-| WARNING | 30 | logger.warning() |
-| ERROR | 40 | logger.error() |
-| CRITICAL | 50 | logger.critical() |
+* ### Sample Code
+    ```
+    pip3 install loguru
+    ```
+    ```
+    from loguru import logger
+
+    if __name__ == '__main__':
+        # 刪除預設處理程序
+        logger.remove(handler_id=None)
+
+        # 日誌文件的配置
+        logger.add(
+            # 文件路徑: 路徑 + 檔案名稱
+            "./Log/{time}.log",
+            # 文件編碼: utf-8
+            encoding="utf-8",
+            # 啟用多進程安全隊列: 使日誌調用非阻塞
+            enqueue=True,
+            # 分隔日誌文件: 每日 00:00 生成新文件
+            rotation="00:00",
+            # 日誌的最長保留時間: 僅保留兩個月內日誌檔案 (過期則刪除)
+            retention="2 months",
+            # 發送到接收器的最低嚴重級別: INFO
+            level="INFO",
+            # 啟用接收器處理日誌消息時發生錯誤的自動捕獲 (異常不會傳播到調用者，可防止應用程序崩潰)
+            catch=True
+        )
+    ```
+* ### 日誌級別
+    | 級別 | 層級 | 使用 |
+    |-----------|-----|--------------------|
+    | TRACE | 5 | logger.trace() |
+    | DEBUG | 10 | logger.debug() |
+    | INFO | 20 | logger.info() |
+    | SUCCESS | 25 | logger.success() |
+    | WARNING | 30 | logger.warning() |
+    | ERROR | 40 | logger.error() |
+    | CRITICAL | 50 | logger.critical() |
 * ### 快速裝逼: basic.py
 * ### logger 默認採用 sys.stderr 標準錯誤輸出將日誌輸出到控制檯中。
 * ### 將日誌同時輸出到其它的位置 (日誌文件): log_file.py
