@@ -18,7 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from mysite import views
 
+"""
+Pattern: 必須以 "/" 作為結束。
+Path Converter: <參數型態:變數名稱>
+"""
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
+    path('about/', views.about),
+    path('about/<int:author_no>/', views.about),
+    path('list/<int:yr>/<int:mon>/<int:day>/', views.listing),
+    path('post/<int:yr>/<int:mon>/<int:day>/<int:post_num>/', views.post),
 ]
