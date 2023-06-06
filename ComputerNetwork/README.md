@@ -138,6 +138,45 @@ QoS 流量策略 Policing 詳解
     * ### 测得的平均速度越接近真实的平均速度。
     * ### 不过至于 Bc 是越大越好，还是越小越好，这没有定论，要根据实际的需求来制定。
 * ### Cisco 設備只能夠設定 CIR 與 Bc，無法設定 Tc。
+* ### 實作示例: Cisco Switch 端口限速 (QoS)
+    ```
+    # 透過命名方式設定 ACL
+    conf t
+    ip access-list extended ACL_NAME
+    permit ip any any
+    exit
+
+    # 指定 CLASS 套用 ACL: CLASS 透過 class-map 定義一個類與 ACL 綁定
+    class-map match-all CLASS_NAME
+    match access-group name ACL_NAME
+    exit
+
+    # 指定 POLICY 套用 CLASS 並設定 CIR 和 Bc，
+    # POLICY 為策略，透過 policy-map 建立策略文件與 CLASS 綁定並對應至介面，
+    # 上述 CIR 為承諾信息速率 (Bits Per Second)，
+    # Bc 為承諾突發速率 (Bytes)。
+    policy-map POLICY_NAME
+    class CLASS_NAME
+    police CIR Bc
+    exit
+    exit
+
+    # 對端口進行限速套用: 以流出為例
+    int INTERFACE_NAME
+    service-policy output POLICY_NAME
+    exit
+
+    # 查詢端口套用
+    sh policy-map
+    sh policy-map int
+    sh policy-map INTERFACE_NAME
+
+    # 徹底刪除 QoS
+    no service-policy
+    no policy-map
+    no class-map
+    no ip access-list extended
+    ```
 <br />
 
 Reference
