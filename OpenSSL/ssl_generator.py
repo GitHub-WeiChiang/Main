@@ -8,7 +8,7 @@ def generate_certificate():
     cert = crypto.X509()
 
     cert.get_subject().C = "TW"
-    cert.get_subject().O = "NCSIST"
+    cert.get_subject().O = "ORG_NAME"
     cert.get_subject().CN = "127.0.0.1:8000"
 
     cert.gmtime_adj_notBefore(0)
