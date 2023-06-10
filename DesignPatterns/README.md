@@ -1,12 +1,50 @@
 DesignPatterns
 =====
+* ### Mind on Patterns
+* ### Application of Design Patterns
 * ### Introduction
 * ### Python
 * ### Java
 * ### Design Patterns: Elements of Reusable Object-Oriented Software
 <br />
 
-Design Pattern 應用紀錄
+Mind on Patterns
+=====
+* ### Beginner Mind: I need a pattern for Hello World.
+    ```
+    The Beginner uses patterns everywhere.
+
+    The beginner gets lots of experience with and practice using patterns.
+
+    The beginner also thinks: "The more patterns I use, the better the design!".
+
+    The beginner will learn this is not so, that all designs should be as simple as possible.
+
+    Complexity and patterns should only be used where they are needed for practical extensibility.
+    ```
+* ### Intermediate Mind: Maybe I need a Singleton here.
+    ```
+    As learning progresses, the Intermediate mind starts to see where patterns are needed and where they aren’t.
+
+    The intermediate mind still tries to fit too many square patterns into round holes, but also begins to see that patterns can be adapted to fit situations where the canonical pattern doesn’t fit.
+    ```
+* ### Zen Mind: This is a natural place for Decorator.
+    ```
+    The Zen mind is able to see patterns where they fit naturally.
+
+    The Zen mind is not obsessed with using patterns; rather it looks for simple solutions that best solve the problem.
+
+    The Zen mind thinks in terms of the object principles and their trade-offs.
+
+    When a need for a pattern naturally arises, the Zen mind applies it knowing well that it may require adaptation.
+
+    The Zen mind also sees relationships to similar patterns and understands the subtleties of differences in the intent of related patterns.
+    
+    The Zen mind is also a Beginner mind — it doesn’t let all that pattern knowledge overly influence design decisions.
+    ```
+<br />
+
+Application of Design Patterns
 =====
 * ### Django Web Framework
     * ### Fluent Interface
