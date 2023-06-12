@@ -41,6 +41,7 @@ Questions
 * ### Question039 - Apache 出現 WSGI: Truncated or oversized response headers received from daemon process 如何解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question039)
 * ### Question040 - VMware 安裝與執行連網及分辨率問題如何解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question040)
 * ### Question041 - 什麼是 Call Stack ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question041)
+* ### Question042 - 網頁架構 DOM 是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question042)
 <br />
 
 Reference

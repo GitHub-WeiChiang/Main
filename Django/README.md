@@ -9,6 +9,7 @@ Django
 * ### Chapter03 讓網站上線
 * ### Chapter04 深入瞭解 Django 的 MVC 架構
 * ### Chapter05 網址的對應與委派
+* ### Chapter06 Template 深入探討
 <br />
 
 Initial Configuration Sample Code
