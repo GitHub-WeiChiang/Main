@@ -16,6 +16,7 @@ Question043 - JS 中 ```<script>``` 標籤的 async 和 defer 屬性作用為何
     ```
     # 當 JS 單純的與 HTML 寫在一起時 (非外部檔案)
     document.addEventListener("DOMContentLoaded", function() {
+        // DOM Ready!
     });
 
     # 引入為外部檔案且依賴 DOM 載入完成時
@@ -23,5 +24,18 @@ Question043 - JS 中 ```<script>``` 標籤的 async 和 defer 屬性作用為何
 
     # 引入為外部檔案但不依賴 DOM 載入時
     <script src="your-script.js" async></script>
+    ```
+    ```
+    # 這是 jQuery 的 ready() 函數: 對於老舊瀏覽器的支援程度較為友善
+    $(document).ready(function() {
+        // DOM Ready!
+    });
+
+    # The load event is fired when the whole page has loaded,
+    # including all dependent resources such as stylesheets,
+    # scripts, iframes, and images.
+    window.addEventListener("load", function(event) {
+        // All resources finished loading!
+    });
     ```
 <br />
