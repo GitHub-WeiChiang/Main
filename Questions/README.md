@@ -42,6 +42,7 @@ Questions
 * ### Question040 - VMware 安裝與執行連網及分辨率問題如何解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question040)
 * ### Question041 - 什麼是 Call Stack ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question041)
 * ### Question042 - 網頁架構 DOM 是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question042)
+* ### Question043 - JS 中 ```<script>``` 標籤的 async 和 defer 屬性作用為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question043)
 <br />
 
 Reference
