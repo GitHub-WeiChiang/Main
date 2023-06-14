@@ -11,12 +11,18 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
+        <!-- 導航欄連結的區域 (默认的导航栏) -->
         <nav class='navbar navbar-default'>
+            <!-- 滿版寬度，隨著版型寬度調整，用於不需要嚴謹的最大寬度版面 -->
             <div class='container-fluid'>
+                <!-- 标题 -->
                 <div class='navbar-header'>
+                    <!-- 让文本看起来更大一号 -->
                     <a class='navbar-brand' href='#'>現正播出: {{ tv.name }}</a>
                 </div>
+                <!-- 向导航栏添加链接 (无序列表) -->
                 <ul class='nav navbar-nav'>
+                    <!-- 指示當前的活動狀態 -->
                     <li class='active'>
                         <a href='/'>Home</a>
                     </li>
@@ -26,12 +32,16 @@
                 </ul>
             </div>
         </nav>
+        <!-- 基本建構區塊 -->
         <div class='conatiner'>
             <div id='tvcode' align='center'>
+                <!-- rameborder 属性规定是否显示 iframe 周围的边框 -->
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{tv.tvcode}}?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
+        <!-- 基本的面板 -->
         <div class='panel panel-default'>
+            <!-- 页脚 -->
             <div class='panel-footer'><em>{{ now }}</div>
         </div>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
