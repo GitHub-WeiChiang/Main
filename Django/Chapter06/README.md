@@ -41,4 +41,28 @@ Chapter06 Template 深入探討
     * ### 本質上，它將網頁與腳本或程式語言連結在一起。
     * ### 雖然常常使用 JavaScript 來存取 DOM，但它本身並不是 JavaScript 語言的一部分，而且它也可以被其它語言存取 (不過不太常見就是了)。
     * ### 理解更多 -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question042)
+* ### 在 template 中使用 static 檔案
+    ```
+    # 指定在網址中以 "static/" 為開頭的網址為靜態檔案的讀取:
+    # 表示用于访问静态文件的 URL 前缀。
+    STATIC_URL = 'static/'
+
+    # 設定執行靜態檔案收集時其實際被複製並取用的位置:
+    # 表示在运行 collectstatic 命令时将收集到的静态文件的存储位置。
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+    # 設定靜態檔案在執行時要搜尋的檔案位置:
+    # 包含路径的列表，用于指定额外的静态文件目录。
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+    ```
+* ### 将项目中的静态文件从各个应用收集到一个统一的位置，以便在生产环境中提供服务:
+    ```
+    python manage.py collectstatic
+    ```
+* ### 加载静态文件
+    ```
+    {% load static %}
+    ```
 <br />

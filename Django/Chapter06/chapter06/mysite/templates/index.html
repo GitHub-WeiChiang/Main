@@ -18,7 +18,11 @@
                 <!-- 标题 -->
                 <div class='navbar-header'>
                     <!-- 让文本看起来更大一号 -->
-                    <a class='navbar-brand' href='#'>現正播出: {{ tv.name }}</a>
+                    <a class='navbar-brand' href='#'>
+                        {% load static %}
+					    <img src="{% static 'images/logo.png' %}" width=60>
+                        現正播出: {{ tv.name }}
+                    </a>
                 </div>
                 <!-- 向导航栏添加链接 (无序列表) -->
                 <ul class='nav navbar-nav'>
