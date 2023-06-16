@@ -154,12 +154,25 @@ QoS 流量策略 Policing 詳解
     # 指定 POLICY 套用 CLASS 並設定 CIR 和 Bc，
     # POLICY 為策略，透過 policy-map 建立策略文件與 CLASS 綁定並對應至介面，
     # 上述 CIR 為承諾信息速率 (Bits Per Second)，
-    # Bc 為承諾突發速率 (Bytes)。
+    # Bc 為承諾突發速率 (Bytes)，
+    # 最後設定當流量超过了配置的限速值，超出部分的数据包将被丢弃，
+    # 在默认情况下，流量超出限速时会被标记为 "exceed"，
+    # 但没有进一步指定如何处理这些标记的流量，
+    # 这意味着即使流量超出了限速配置，系统仍然会继续转发这些流量，
+    # 而没有直接的丢弃行为。
     policy-map POLICY_NAME
     class CLASS_NAME
     police CIR Bc
+    exceed-action drop
     exit
     exit
+    exit
+
+    # 上述指令 police CIR Bc 可以替換為更加便利的配置，
+    # 透過 police Rate 直接指定流量限速的速率，
+    # Rate 為参数，直接指定了限制的速率，单位通常是 "比特/秒 (bps)"，
+    # 仅使用 Rate 进行配置较为简单，它只关注限制的速率而不考虑短期突发的容忍度，
+    # 可能会导致在某些情况下出现瞬时突发，從而对设备的性能和稳定性产生一定影响。
 
     # 對端口進行限速套用: 以流出為例
     int INTERFACE_NAME
@@ -177,6 +190,8 @@ QoS 流量策略 Policing 詳解
     no class-map
     no ip access-list extended
     ```
+    * ### 註 1: 使用 CIR 和 Bc 进行配置可以更精确地控制流量限速，确保设备的平稳运行和容忍短期突发。
+    * ### 註 2: 仅使用 Rate 进行配置相对简单，但可能导致瞬时突发并对设备性能产生影响。
 <br />
 
 Reference
