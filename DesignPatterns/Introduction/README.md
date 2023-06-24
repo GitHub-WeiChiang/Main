@@ -153,5 +153,5 @@ The SOLID Principles of Object Oriented
 
 Reference
 =====
-* ### 图灵星球 Turing Planet: 设计模式快速入门
+* ### 图灵星球 Turing Planet: 设计模式快速入门教程
 <br />
