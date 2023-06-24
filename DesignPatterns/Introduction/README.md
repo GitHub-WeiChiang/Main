@@ -9,6 +9,15 @@
 * ### LiskovSubstitution 里氏替換: 任何父類別可以出現的地方，其子類別一定也可以出現。
 <br />
 
+The SOLID Principles of Object - Oriented
+=====
+* ### The ```S```ingle Responsibility Principle
+* ### The ```O```pen-Closed Principle
+* ### The ```L```iskov Substitution Principle
+* ### The ```I```nterface Segregation Principle
+* ### The ```D```ependency Inversion Principle
+<br />
+
 編成原則整理
 =====
 * ### 面對對象設計 (高層設計)
