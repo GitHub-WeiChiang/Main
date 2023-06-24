@@ -163,5 +163,5 @@ Chapter09 Python 操作數據庫
         * ### 發生故障時丟失數據較少，適合災難性場景數據恢復。
         * ### AOF 日誌文件相較於 RDB 數據快照檔案更大。
         * ### 綜合效能 AOF 劣於 RDB。
-    * ### [理解更多](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question009)
+    * ### 理解更多 -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question009)
 <br />
