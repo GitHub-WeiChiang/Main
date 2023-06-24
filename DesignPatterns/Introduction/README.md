@@ -1,12 +1,12 @@
 七大編程原則
 =====
-* ### SingleResponsibility: 一個類別應該只專注於一項事物。
-* ### OpenClose: 類別架構應該對架構應該對擴展開放而對修改封閉。
-* ### LawOfDemeter: 類別應只和自己關係密切的類別溝通。
-* ### DependencyInversion: 高階類別與低階類別間應該要有一個抽象的中介接口。
-* ### CompositeReuse: 應該多使用關聯、聚合與組合，少使用繼承。
-* ### InterfaceSegregation: 客戶 (類別) 不應該依賴 (實作) 它不需要的接口，且接口的設計應要符合單一職責原則。
-* ### LiskovSubstitutionPrinciple: 任何父類別可以出現的地方，其子類別一定也可以出現。
+* ### SingleResponsibility 單一職責: 一個類別應該只專注於一項事物。
+* ### OpenClose 開閉: 類別架構應該對架構應該對擴展開放而對修改封閉。
+* ### LawOfDemeter 迪米特法則: 類別應只和自己關係密切的類別溝通。
+* ### DependencyInversion 依賴倒置: 高階類別與低階類別間應該要有一個抽象的中介接口。
+* ### CompositeReuse 合成復用: 應該多使用關聯、聚合與組合，少使用繼承。
+* ### InterfaceSegregation 接口隔離: 客戶 (類別) 不應該依賴 (實作) 它不需要的接口，且接口的設計應要符合單一職責原則。
+* ### LiskovSubstitutionPrinciple 里氏替換: 任何父類別可以出現的地方，其子類別一定也可以出現。
 <br />
 
 編成原則整理
