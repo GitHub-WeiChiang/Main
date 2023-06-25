@@ -25,5 +25,8 @@ Linux01 Linux 操作系统简介和 Ubuntu 安装
     $ sudo add-apt-repository universe
     $ sudo add-apt-repository restricted
     $ sudo add-apt-repository multiverse
+
+    # Install
+    $ sudo apt install PACKAGE_NAME
     ```
 <br />
