@@ -67,4 +67,71 @@ Linux04 Linux 远程控制、AWS 创建和脚本编辑
     ```
     $ python3 copy.py
     ```
+* ### 创建 AWS EC2 Instance
+    * ### AWS EC2 ubuntu
+    * ### Lauch a instance
+    * ### Download the keypair
+* ### 連線至執行個體
+    * ### 選擇執行個體 -> 連線
+    ```
+    chmod 400 ssh.pem
+
+    ssh -i "ssh.pem" ubuntu@ec2-35-91-120-232.us-west-2.compute.amazonaws.com
+    ```
+* ### VNC: VNC 是一款优秀的云服务器远程控制图像化操作工具软件，由著名的 AT&T 的欧洲研究实验室开发。
+    ```
+    $ sudo apt-get update
+
+    $ sudo apt-get upgrade
+
+    $ sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4
+
+    $ sudo apt install xfce4-goodies
+
+    $ sudo apt install tightvncserver
+
+    # Enter password after
+    $ vncserver
+    ```
+    * ### 將以下內容覆蓋至 ```~/.vnc/xstartup```
+        ```
+        vim ~/.vnc/xstartup
+
+        # 删除全部内容
+        # gg: 光标跳转到该文件的行首。
+        # dG: 删除光标行及其以下行的全部内容 (d 为删除，G 为光标跳转到末尾行)。
+        ggdG
+        ```
+        ```
+        #!/bin/sh
+        # Uncomment the following two lines for normal desktop:
+        unset SESSION_MANAGER
+        # exec /etc/X11/xinit/xinitrc
+        unset DBUS_SESSION_BUS_ADDRESS
+        startxfce4 &
+        [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+        [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+        xsetroot -solid grey
+        vncconfig -iconic &
+        gnome-panel &
+        gnome-settings-daemon &
+        metacity &
+        nautilus &
+        gnome-terminal &
+        ```
+    ```
+    $ exit
+
+    $ ssh -L 5902:localhost:5902 -i ./ssh.pem ubuntu@IP_V_4
+
+    $ vncserver -geometry 1340x750
+    ```
+    * ### 下載並註冊 VNC Viewer
+    * ### 開啟 VNC Viewer 並在 RVNC CONNECT 中輸入 localhost:5902。
+* ### 使用 screen share (macOS) 来连接 VNC
+    ```
+    $ ssh -L 5902:localhost:5902 -i ./ssh.pem ubuntu@IP_V_4
+    ```
+    * ### Command + Space
+    * ### localhost:5902
 <br />
