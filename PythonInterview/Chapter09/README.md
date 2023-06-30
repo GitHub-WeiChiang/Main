@@ -103,9 +103,6 @@ Chapter09 Python 操作數據庫
             sub = r.pubsub()
             sub.subscribe("queue")
 
-            # 订阅多个频道使用 psubscribe 方法並傳入陣列
-            sub.psubscribe("queue")
-
             for message in sub.listen():
                 if message['type'] == 'message':
                     print(num, message['channel'], message['data'])
@@ -116,6 +113,7 @@ Chapter09 Python 操作數據庫
                 threading.Thread(target=subscriber, args=(i,)).start()
         ```
         * ### 关键方法: pubsub、publish、subscribe、psubscribe。
+        * ### 可使用 subscribe 或 psubscribe 方法來訂閱 redis 消息，其中 subscribe 是訂閱一個頻道，psubscribe 可訂閱多個頻道。
 * ### 數據庫的讀寫分離
     * ### 為什麼要進行數據庫讀寫分離 ?
         * ### 因寫入耗時大於查詢耗時，大量寫入場景會長時戰用數據連接，此時查詢操作需等待寫入操作結束，會嚴重影響查詢效率。
