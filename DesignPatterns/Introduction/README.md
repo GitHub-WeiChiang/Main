@@ -149,6 +149,10 @@ The SOLID Principles of Object Oriented
     * ### 支付方式。
     * ### 壓縮和解壓縮算法。
     * ### 圖像渲染。
+* ### 樣板方法 Template: 定義算法的骨架。
+    * ### 數據庫訪問。
+    * ### GUI 設計。
+    * ### 框架和庫。
 <br />
 
 Reference
