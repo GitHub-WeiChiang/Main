@@ -39,4 +39,26 @@ MongoDB
     ```
     pip install pymongo
     ```
+* ### Django
+    ```
+    pip install django-mongoengine
+
+    MONGODB_DATABASES = {
+        "default": {
+            "name": "demo",
+            "host": "localhost",
+            "password": "admin",
+            "username": "admin",
+        },
+    }
+
+    INSTALLED_APPS = [
+        ...,
+        'django_mongoengine',
+    ]
+    ```
+* ### MongoDB 的層級架構
+    * ### Database: 一個 MongoDB 伺服器中會有一至多個 Database，且通常將不同的應用放在不同 database 中。
+    * ### Collection: 資料表，如同關聯式資料庫的 Table，通常一個 databse 中會有數個 collection。
+    * ### Document: 一筆資料，如同關聯式資料庫的 Row，通常一個 collection 中會有數筆 document。
 <br />
