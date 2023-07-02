@@ -153,6 +153,9 @@ The SOLID Principles of Object Oriented
     * ### 數據庫訪問。
     * ### GUI 設計。
     * ### 框架和庫。
+* ### 訪問者 Visitor: 將算法和數據結構分離。
+    * ### 編譯器。
+    * ### 文檔轉換。
 <br />
 
 Reference
