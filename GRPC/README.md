@@ -1,6 +1,6 @@
 GRPC
 =====
-* ###  gRPC 是一个高性能、通用的开 源RPC 框架，基于 HTTP/2 协议标准而设计，基于 ProtoBuf 序列化协议开发。
+* ### gRPC 是一个高性能、通用的开 源RPC 框架，基于 HTTP/2 协议标准而设计，基于 ProtoBuf 序列化协议开发。
 * ### 一个 gRPC 服务的大体结构图如下: gRPC 的服务跨语言的但需要遵循相同的协议 (proto)。
 * ### 相比于 REST 服务，gPRC 的优势是使用了二进制编码，比 JSON / HTTP 更快，且有清晰的接口规范以及支持流式传输，但实现相比 REST 服务要复杂。
 * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/GRPC/gRPC.png)

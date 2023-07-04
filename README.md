@@ -4,6 +4,7 @@ Contents
     * ### Python -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Python)
     * ### Java -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Java)
 * ### Python 模組與應用
+    * ### Pika -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Pika)
     * ### GRPC -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/GRPC)
     * ### XMLRPC -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/XMLRPC)
     * ### Thriftpy2 -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Thriftpy2)
