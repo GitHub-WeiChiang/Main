@@ -2,6 +2,7 @@ Pika
 =====
 * ### 01 - Message Queue 介紹
 * ### 02 - RabbitMQ 簡介與 5 種設計模式
+* ### 03 - RabbitMQ 架設方法與網頁管理介面
 <br />
 
 01 - Message Queue 介紹
@@ -92,4 +93,15 @@ Pika
         * ### ```quick.orange.male.rabbit```: 沒人要它，哭哭好可憐。
         * ### ```lazy.orange.male.rabbit```: Q2。
     * ### Tutorial -> [click me](https://www.rabbitmq.com/tutorials/tutorial-five-python.html)
+<br />
+
+03 - RabbitMQ 架設方法與網頁管理介面
+=====
+* ### RabbitMQ 環境架設
+    * ### Docker 指令
+        ```
+        # create and start container
+
+        docker run --rm --name rabbitmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=1234 rabbitmq:management
+        ```
 <br />
