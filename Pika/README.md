@@ -104,4 +104,21 @@ Pika
 
         docker run --rm --name rabbitmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=1234 rabbitmq:management
         ```
+        * ### docker run: 執行容器。
+        * ### --rm: 當容器終止時會自動刪除。
+        * ### --name rabbitmq: 將容器命名為 rabbitmq。
+        * ### -p 5672:5672: 將本機端的 5672 port 關聯到容器的 5672 port (RabbitMQ)。
+        * ### -p 15672:15672: 將本機端的 15672 port 關聯到容器的 15672 port (Web UI)。
+        * ### -e RABBITMQ_DEFAULT_USER=root: 宣告環境變數，連線到 RabbitMQ 的 username。
+        * ### -e RABBITMQ_DEFAULT_PASS=1234: 宣告環境變數，連線到 RabbitMQ 的 password。
+        * ### rabbitmq:management: 指定容器抓 Docker Hub 上的 RabbitMQ Official Images。
+    * ### Docker Compose 指令
+        ```
+        # create and start container
+
+        docker-compose -f docker-compose.yml up
+        ```
+        ```
+        docker-compose stop
+        ```
 <br />
