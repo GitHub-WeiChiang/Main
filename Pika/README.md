@@ -118,7 +118,37 @@ Pika
 
         docker-compose -f docker-compose.yml up
         ```
-        ```
-        docker-compose stop
-        ```
+* ### 進入 
+    * ### RabbitMQ -> [click me](http://localhost:15672)
+    * ### Overview: RabbitMQ Server 的重要資訊和指標。
+    * ### Connections: 當前 RabbitMQ Server 上所有 Clients 的連線狀態與網路資訊。
+    * ### Channels: 當前 RabbitMQ Server 上所有 Channels 的訊息吞吐量。
+    * ### Exchanges: 查看與管理功能，預設已建立數種 Type 的 Exchanges。
+    * ### Queues: 查看並管理每一條 Queue 的訊息 (messages) 狀態與吞吐量。
+    * ### 新增 Queue: 輸入自訂 Queue name（唯一值），並設定必要及可選的參數。
+        * ### Durablity
+            * ### Durable: 關閉或重啟後訊息還會留存。
+            * ### Transient: 關閉或重啟後不留存。
+        * ### Auto delete
+            * ### Yes: Queue 會在所有 Consumer 都中斷連接時自行刪除。
+        * ### Aruguments
+            * ### Message TTL: Queue 裡的訊息在多少時間 (毫秒) 內若沒有被取用就會被丟棄。
+            * ### Auto expire: Queue 在多少時間 (毫秒) 內若都沒有被使用就會自動刪除。
+            * ### Single active connsumer: 該 Queue 是否只能有一個存活的 Consumer。
+            * ### Max length: Queue 最多保存的訊息量，若超過會從頭端 (FIFO) 丟棄訊息。
+            * ### Max length bytes: Queue 最多保存的訊息長度，若超過會從頭端 (FIFO) 丟棄訊息。
+                * ### 若 Max length 為 1000，代表 Queue 最多能保存 1000 則訊息。
+                * ### 若 Max length bytes 為 10000，單一訊息 12 bytes，代表最多只能存 10000 / 12 = 833 則訊息。
+    * ### Queue 的訊息可能會因為過期 (MMessage TTL) 或超過限制 (Max length) 被丟棄，透過以下兩個 Arguments 設定這些訊息要被重新推送至哪裡。
+        * ### Dead letteer exchange: 被丟棄的訊息要被推送進入的 Exchange。
+        * ### Dead letteer routing key: Dead letteer exchange 要綁定 (binding) Queue 的 Routing key。
+    * ### 管理 Queue (點選進入 Queue 內容頁面)
+        * ### 查看 Messages 的詳細資訊和速率指標。
+        * ### 設定 Queue 要綁定 (binding) 的 Exchange 和 Routing key。
+        * ### 查看連接的 Consumer。
+        * ### 推送訊息、取出一至多則訊息。
+        * ### 刪除 (delete) 整條 Queue。
+        * ### 清空 (purge) 整條 Queue 裡的訊息。
+        * ### 嘗試推送 (Publish) 與取出 (Get) 訊息。
+    * ### Admin: 管理與新增 Users。
 <br />
