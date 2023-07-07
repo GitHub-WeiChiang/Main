@@ -1,6 +1,6 @@
 Question041 - 什麼是 Call Stack ?
 =====
-* ### 每當函式在執行且還沒結束時，都會在記憶體上生成 Call Stack，Call Stack 會決定現在我應該執行哪一個副函式 (Call Stack 會先執行 Stack 最上面的函式)。
+* ### 每當函式在執行且還沒結束時，都會在記憶體上生成 Call Stack，Call Stack 會決定現在應該執行哪一個副函式 (Call Stack 會先執行 Stack 最上面的函式)。
 ```
 def main():
     print("start")
