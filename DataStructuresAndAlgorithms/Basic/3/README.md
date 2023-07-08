@@ -101,7 +101,7 @@
 
 
     def sort(arr: list) -> list:
-        if len(arr) < 2:
+        if len(arr) <= 1:
             return arr
 
         mid = len(arr) // 2
