@@ -86,7 +86,7 @@
     * ### 将一个数组分为两个子数组，通过递归重复将数组切分到只剩下一个元素为止。
     * ### 后将每个子数组中的元素排序后合并，通过不断合并子数组，最后取得一个排好序的数组。
     ```
-    def merge(lef: list, rig: list):
+    def merge(lef: list, rig: list) -> list:
         result = []
 
         while len(lef) and len(rig):
@@ -100,7 +100,7 @@
         return result
 
 
-    def sort(arr: list):
+    def sort(arr: list) -> list:
         if len(arr) < 2:
             return arr
 
