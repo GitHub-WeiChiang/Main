@@ -5,6 +5,7 @@ Basic
 * ### 3 - 排序算法
 * ### 4 - 链表 LinkedList
 * ### 5 - 堆栈和队列
+* ### 6 - 哈希表 Hash Table
 <br />
 
 Reference
