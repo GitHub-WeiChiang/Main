@@ -87,28 +87,21 @@
     * ### 后将每个子数组中的元素排序后合并，通过不断合并子数组，最后取得一个排好序的数组。
     ```
     def merge(lef: list, rig: list) -> list:
-        result = []
+        res: list = list()
 
-        while len(lef) and len(rig):
-            if lef[0] < rig[0]:
-                result.append(lef.pop(0))
-            else:
-                result.append(rig.pop(0))
+        while lef and rig:
+            res.append(lef.pop(0) if lef[0] < rig[0] else rig.pop(0))
 
-        result += (lef or rig)
-
-        return result
+        return res + (lef or rig)
 
 
     def sort(arr: list) -> list:
-        if len(arr) <= 1:
+        if (l := len(arr)) <= 1:
             return arr
 
-        mid = len(arr) // 2
-        lef = arr[:mid]
-        rig = arr[mid:]
+        mid_ind: int = l // 2
 
-        return merge(sort(lef), sort(rig))
+        return merge(sort(arr[:mid_ind]), sort(arr[mid_ind:]))
 
 
     if __name__ == '__main__':
