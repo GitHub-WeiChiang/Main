@@ -1,7 +1,7 @@
 3 - 排序算法
 =====
 * ### 插入排序 Insertion Sort
-    * ### ![image](![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/InsertionSort.gif))
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/InsertionSort.gif)
     * ### 从前到后依次处理未排好序的元素，对于每个元素，将它与之前排好序的元素进行比较，找到对应的位置后并插入。
     * ### 本质上，对于每一个要被处理的元素，只关心它与之前元素的关系，当前元素之后的元素在下一轮才會被处理。
     ```
@@ -24,7 +24,7 @@
         * ### 时间复杂度: O(n ^ 2)
         * ### 空间复杂度: O(1)
 * ### 快排 QuickSort
-    * ### ![image](![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/QuickSort.png))
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/QuickSort.png)
     * ### 选取一个目标元素，将目标元素放到数组中正确的位置，根据排好序后的元素，将数组切分为两个子数组，用相同的方法，在没有排好序的范围使用相同的操作。
     ```
     def sort(arr: list) -> list:
@@ -82,7 +82,7 @@
         * ### 时间复杂度: O(n ^ 2); 平均时间复杂度: O(n log n)。
         * ### 空间复杂度: O(n); 平均空间复杂度: O(log n)。
 * ### 归并排序 MergeSort
-    * ### * ### ![image](![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/MergeSort.png))
+    * ### * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/MergeSort.png)
     * ### 将一个数组分为两个子数组，通过递归重复将数组切分到只剩下一个元素为止。
     * ### 后将每个子数组中的元素排序后合并，通过不断合并子数组，最后取得一个排好序的数组。
     ```
