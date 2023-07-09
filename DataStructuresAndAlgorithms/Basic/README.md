@@ -6,6 +6,7 @@ Basic
 * ### 4 - 链表 LinkedList
 * ### 5 - 堆栈和队列
 * ### 6 - 哈希表 Hash Table
+* ### 7 - 树和二分查找树 (Tree & Binary Search Tree)
 <br />
 
 Reference
