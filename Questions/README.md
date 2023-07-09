@@ -44,6 +44,7 @@ Questions
 * ### Question042 - 網頁架構 DOM 是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question042)
 * ### Question043 - JS 中 ```<script>``` 標籤的 async 和 defer 屬性作用為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question043)
 * ### Question044 - Python 的 yield 產生器是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question044)
+* ### Question045 - B Tree 和 B+ Tree 的区别為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question045)
 <br />
 
 Reference
