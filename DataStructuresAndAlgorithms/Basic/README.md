@@ -7,6 +7,8 @@ Basic
 * ### 5 - 堆栈和队列
 * ### 6 - 哈希表 Hash Table
 * ### 7 - 树和二分查找树 (Tree & Binary Search Tree)
+* ### 8 - 优先队列 PriorityQueue 與堆 Heap
+* ### 9 - 图 Graph
 <br />
 
 Reference
