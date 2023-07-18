@@ -5,7 +5,7 @@ Chapter04 Python 序列
     # sorted 默認升冪排序，透過 reverse=True 可設定為降冪
 
     def sort_by_key(dt: dict) -> list:
-    return sorted(dt.items(), key=lambda d: d[0])
+        return sorted(dt.items(), key=lambda d: d[0])
 
 
     def sort_by_value(dt: dict) -> list:
