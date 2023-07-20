@@ -82,7 +82,7 @@
         * ### 时间复杂度: O(n ^ 2); 平均时间复杂度: O(n log n)。
         * ### 空间复杂度: O(n); 平均空间复杂度: O(log n)。
 * ### 归并排序 MergeSort
-    * ### * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/MergeSort.png)
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/DataStructuresAndAlgorithms/Basic/3/MergeSort.png)
     * ### 将一个数组分为两个子数组，通过递归重复将数组切分到只剩下一个元素为止。
     * ### 后将每个子数组中的元素排序后合并，通过不断合并子数组，最后取得一个排好序的数组。
     ```
