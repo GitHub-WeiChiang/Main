@@ -1,8 +1,9 @@
 Pika
 =====
-* ### 01 - Message Queue 介紹
+* ### 01 - Message Queue 介紹與實際應用
 * ### 02 - RabbitMQ 簡介與 5 種設計模式
 * ### 03 - RabbitMQ 架設方法與網頁管理介面
+* ### 04 - RabbitMQ x Python 程式實作範例
 <br />
 
 01 - Message Queue 介紹
@@ -23,6 +24,11 @@ Pika
 * ### 常見工具
     * ### 開源: RabbitMQ、Redis、Kafka。
     * ### 雲端: Cloud Pub / Sub、Amazon SQS。
+* ### 實際應用
+    * ### 場景: 將商品資訊 (圖片 & 文字) 進行向量轉換，分為會使用到 CV 模型和 NLP 模型，由於 GPU 運算負擔比較重 (機器資源、計算時間等)，因此將系統拆分為 Producer 和 Consumer。
+    * ### Producer 負責資料過濾 (data filtering) 與特徵提取 (feature extraction)。
+    * ### Consumer 負責任務收集 (task collecting) 和向量轉換 (vectorization)。
+    * ### 兩個系統彼此不會直接溝通，而是將 Message 透過 Broker 暫存與傳遞，分為 Image Queue 和 Text Queue，並可以根據目標完成時間來調整 Producer 和 Consumer 的數量，加速任務的消化。
 <br />
 
 02 - RabbitMQ 簡介與 5 種設計模式
@@ -151,4 +157,57 @@ Pika
         * ### 清空 (purge) 整條 Queue 裡的訊息。
         * ### 嘗試推送 (Publish) 與取出 (Get) 訊息。
     * ### Admin: 管理與新增 Users。
+<br />
+
+04 - RabbitMQ x Python 程式實作範例
+=====
+* ### Installation
+    ```
+    pip install pika
+  
+    pip install aio-pika
+    ```
+* ### 三種從 RabbitMQ Broker 消費 (consume) 訊息的方法
+    * ### Using channel.basic_get() to consume a message: 開發者手動調用取出訊息。
+        ```
+        channel.queue_declare(queue='hello')
+    
+        channel.basic_get(queue='hello', auto_ack=True)
+        method, properties, body = channel.basic_get(queue='hello', auto_ack=True)
+        print(f" [x] Received {body.decode()}")
+    
+        connection.close()
+        ```
+    * ### Using channel.basic_consume() to consume messages: 持續監聽。
+        ```
+        channel.queue_declare(queue='hello')
+        
+        def callback(ch, method, properties, body):
+            print(f" [x] Received {body.decode()}")
+        
+        channel.basic_consume(queue='hello', auto_ack=True, on_message_callback=callback)
+        
+        print(' [*] Waiting for messages. To exit press CTRL+C')
+        channel.start_consuming()
+        
+        try:
+            channel.start_consuming()
+        except KeyboardInterrupt:
+            channel.stop_consuming()
+        
+        connection.close()
+        ```
+    * ### Using channel.consume() generator to consume messages: 定時接收 (無訊息接收到 None)。
+        ```
+        channel.queue_declare(queue='hello')
+        
+        for method, properties, body in channel.consume(queue='hello', auto_ack=True, inactivity_timeout=10):
+        
+            print(f" [x] Received {body.decode()}")
+        
+            if method == None and properties == None and body == None:
+                break
+        
+        connection.close()
+        ```
 <br />
