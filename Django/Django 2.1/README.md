@@ -4,33 +4,13 @@ Django 2.1
     * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/Django/Django%202.1/WebApplicationFramework.png)
 * ### Django 的 MTV 模型组织
     * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/Django/Django%202.1/MTV.png)
-* ### 程序安装
-    ```
-    conda env list
-
-    conda create --name VENV_NAME python=3.10
-
-    source activate VENV_NAME
-
-    pip install django
-    ```
-* ### 创建 Django 项目
-    ```
-    django-admin startproject PROJECT_NAME
-    ```
-    * ### 项目核心文件
-        * ### mysite -> mysite -> __init__.py: 空文件。
-        * ### mysite -> mysite -> settings.py: 主配置文件。
-        * ### mysite -> mysite -> urls.py: 主路由文件。
-        * ### mysite -> mysite -> wsgi.py: 網關接口。
-        * ### mysite -> templates: HTML 文件安置目錄。
-        * ### mysite -> manage.py: 項目管理腳本。
-* ### 创建 APP
-    ```
-    cd PROJECT_NAME
-
-    python manage.py startapp APP_NAME
-    ```
+* ### 项目核心文件
+    * ### mysite -> mysite -> __init__.py: 空文件。
+    * ### mysite -> mysite -> settings.py: 主配置文件。
+    * ### mysite -> mysite -> urls.py: 主路由文件。
+    * ### mysite -> mysite -> wsgi.py: 網關接口。
+    * ### mysite -> templates: HTML 文件安置目錄。
+    * ### mysite -> manage.py: 項目管理腳本。
 <br />
 
 Reference
