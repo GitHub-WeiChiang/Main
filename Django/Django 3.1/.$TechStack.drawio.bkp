@@ -1,0 +1,159 @@
+<mxfile host="Electron" modified="2023-07-30T09:26:46.418Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="FJaBphP2vEpbosKyru1Y" version="21.6.5" type="device">
+  <diagram name="第 1 页" id="TAYIcj168XyNDj4Eb8kf">
+    <mxGraphModel dx="722" dy="681" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-2" value="HTML" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-4" target="MAO-X3mDC_g_FuNNEKtC-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-4" value="前端技術" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-5" target="MAO-X3mDC_g_FuNNEKtC-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-5" value="Web 服務器" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-6" target="MAO-X3mDC_g_FuNNEKtC-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-6" value="Web 框架" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-7" target="MAO-X3mDC_g_FuNNEKtC-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-7" value="公共組件" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-8" target="MAO-X3mDC_g_FuNNEKtC-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-8" value="訪問數據庫" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-9" target="MAO-X3mDC_g_FuNNEKtC-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-9" value="數據庫" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-11" value="CSS" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-12" value="JS" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-13" value="Bootstrap" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-14" value="Ajax" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-15" value="Vue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-16" value="Apache" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-18" value="Nginx" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-19" value="Lighttpd" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-20" value="SSL" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-21" value="Django" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-23" value="Tornado" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-24" value="Flask" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-25" value="Twisted" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-26" value="FastAPI" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-27" value="Virtualenv" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-29" value="uWSGI" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-30" value="Gunicorn" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-31" value="RabbitMQ" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-32" value="Celery" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-33" value="pymysql" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-35" value="SQLAlchemy" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-36" value="Django Model" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-37" value="MySQL" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-39" value="SQLite" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-40" value="Postgres" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-41" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-42" target="MAO-X3mDC_g_FuNNEKtC-47">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="380" />
+              <mxPoint x="780" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-42" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-43" target="MAO-X3mDC_g_FuNNEKtC-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-43" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MAO-X3mDC_g_FuNNEKtC-44" target="MAO-X3mDC_g_FuNNEKtC-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-44" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-45" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-46" value="..." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MAO-X3mDC_g_FuNNEKtC-47" value="Python" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
