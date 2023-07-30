@@ -174,4 +174,60 @@ Chapter00 - 第一个 Django 应用
 
     admin.site.register(Question)
     ```
+* ### 为什么不把模板文件直接放在 polls/templates 目录下，而是费劲的再建个子目录 polls 呢?
+    * ### 设想这么个情况，有另外一个 app，它也有一个名叫 index.html 的文件，当 Django 在搜索模板时，有可能就找到它，然后退出搜索，这就命中了错误的目标。
+    * ### 解决这个问题的最好办法就是在 templates 目录下再建立一个与 app 同名的子目录，将自己所属的模板都放到里面，从而达到独立命名空间的作用，不会再出现引用错误。
+    1. ### 應用中可能有很多个 app，其中甚至有不少 app 並非從零撰寫只是導入使用。
+    2. ### app 的排序是不可預期的，Django 只会按照既定的规则顺序查找每个 app。3. ### Django 查找模版时，会去每个 app 的 templates 目录下查找，这是核心机制 ! 就是每个 ! 而不是只查找該 app 的 html 文件目录。
+    4. ### 如果有多个 app 同时有 index.html 模板，那么 Django 找到的第一个 index 就会被调用，比如 app_a 排在 app_b 前面，那么 app_a 没问题了，但 app_b 会使用 app_a 中的 index.html 文件。
+    5. ### 为了解决这个问题，在每个 app 的 templates 目录下再创建一级目录，就相当于增加了模版命名空间限制。
+* ### render() 函数
+    * ### 第一个位置参数是请求对象 (就是 view 函数的第一个参数)。
+    * ### 第二个位置参数是模板文件。
+    * ### 第三参数是可选的，一个字典，包含需要传递给模板的数据。
+    * ### 最后 render() 函数返回一个经过字典数据渲染过的模板封装而成的 HttpResponse 对象。
+* ### 返回 404 错误
+    * ### get_object_or_404(): 替代 models.objects.get()。
+    * ### get_list_or_404(): 替代 models.objects.filter()。
+* ### HttpResponseRedirect: 重定向的 URL。
+    * ### reverse() 函数: 避免在视图函数中硬编码 URL，首先需要一个在 URLconf 中指定的 name，然后是传递的数据。
+* ### vote{{ choice.votes|pluralize }}: Django 模板语言中用来智能选择正确单词形式的过滤器，它根据对象的 votes 属性的值来决定是使用单数还是复数形式。
+* ### DetailView 需要从 url 捕获到的称为 "pk" 的主键值。
+* ### context_object_name 属性: 用於客製化指定上下文变量。
+* ### FBV vs. CBV
+    * ### 类视图相比函数视图具有类的特性，可封装可继承，利于代码重用。
+    * ### 通用视图是类视图的一种。
+    * ### 通用视图的代码虽然少了，但学习成本高了。
+    * ### 在享受便利的同时，要记住更多通用视图的用法和规则，有得有失。
+    * ### 其实可以自己编写新的通用视图，定義客製化规则與规矩，不必使用 Django 提供的，但这相当于造轮子。
+    * ### 不要沉迷于类视图的强大。
+* ### 编写测试程序
+    ```
+    python manage.py shell
+
+    import datetime
+
+    from django.utils import timezone
+
+    from polls.models import Question
+
+    future_question = Question(pub_date=timezone.now() + datetime.timedelta(days=30))
+
+    future_question.was_published_recently()
+
+    exit()
+    ```
+* ### 创建一个测试来暴露这个 bug
+    * ### 测试代码放在应用的 tests.py 文件中，测试系统将自动地从任何名字以 test 开头的文件中查找测试程序。
+    * ### 每个 app 在创建的时候，都会自动创建一个 tests.py 文件。
+* ### 运行测试程序
+    ```
+    python manage.py test polls
+    ```
+    * ### python manage.py test polls 命令会查找投票应用中所有的测试程序。
+    * ### 发现一个 django.test.TestCase 的子类。
+    * ### 为测试创建一个专用的数据库。
+    * ### 查找名字以 test 开头的测试方法。
+    * ### 在 test_was_published_recently_with_future_question 方法中，创建一个 Question 实例，该实例的 pub_data 字段的值是 30 天后的未来日期。
+    * ### 然后利用 assertIs() 方法，它发现 was_published_recently() 返回了 True，而不是我们希望的 False。
 <br />
