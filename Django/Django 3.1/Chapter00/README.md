@@ -230,4 +230,8 @@ Chapter00 - 第一个 Django 应用
     * ### 查找名字以 test 开头的测试方法。
     * ### 在 test_was_published_recently_with_future_question 方法中，创建一个 Question 实例，该实例的 pub_data 字段的值是 30 天后的未来日期。
     * ### 然后利用 assertIs() 方法，它发现 was_published_recently() 返回了 True，而不是我们希望的 False。
+* ### 使用静态文件
+    * ### Django 的 STATICFILES_FINDERS 设置项中包含一个查找器列表，它们知道如何从各种源中找到静态文件。
+    * ### 其中一个默认的查找器是 AppDirectoriesFinder，它在每个 INSTALLED_APPS 下查找 static 子目录。
+    * ### {% static %} 模板标签会生成静态文件的绝对 URL 路径。
 <br />
