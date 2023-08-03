@@ -6,7 +6,7 @@ Chapter00 - 第一个 Django 应用
 
     conda create --name VENV_NAME python=3.10
 
-    source activate django
+    source activate VENV_NAME
 
     pip install django
 
