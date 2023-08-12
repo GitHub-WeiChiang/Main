@@ -65,4 +65,156 @@ Chapter01 - 第一章: 模型层
 * ### FileField vs. FilePathField
     * ### 如果只需要选择现有文件，可以使用 FilePathField；如果需要上传文件并保存在服务器上，可以使用 FileField。
     * ### 通常情况下，FileField 更常用，因为它更灵活，并且可以处理上传文件的情况。
+* ### 关系类型字段: 多对一 (ForeignKey)
+    ```
+    class ForeignKey(to, on_delete, **options)
+    ```
+    * ### 外键需要两个位置参数，一个是关联的模型，另一个是 on_delete。
+    * ### 在 Django 2.0 版本后，on_delete 属于必填参数。
+    * ### 外键要定义在 "多" 的一方。
+    * ### 若关联的模型位于当前模型之后，则需要通过字符串的方式进行引用。
+        ```
+        class Car(models.Model):
+            manufacturer = models.ForeignKey(
+                'Manufacturer',
+                on_delete=models.CASCADE,
+            )
+
+        class Manufacturer(models.Model):
+            pass
+        ```
+    * ### 若关联的对象在另外一个 app 中，可以显式的指出。
+        ```
+        class Car(models.Model):
+            manufacturer = models.ForeignKey(
+                'app.Manufacturer',
+                on_delete=models.CASCADE,
+            )
+        ```
+    * ### 递归外键: 评论系统
+        ```
+        models.ForeignKey('self', on_delete=models.CASCADE)
+        ```
+    * ### Django 会为每一个外键添加 "_id" 后缀。
+* ### 外键重要参数: on_delete
+    * ### Django 2.0 后不可省略，需显式指定。
+    * ### CASCADE: 同 SQL 的 ON DELETE CASCADE 约束，进行级联删除。
+    * ### PROTECT: 阻止删除操作並引發 ProtectedError 异常。
+    * ### SET_NULL: 将外键字段设为 null (字段需设置 null=True)。
+        ```
+        user = models.ForeignKey(
+            User,
+            on_delete=models.SET_NULL,
+            blank=True,
+            null=True,
+        )
+        ```
+    * ### SET_DEFAULT: 将外键字段设为默认值 (字段需设置 default 参数)。
+    * ### DO_NOTHING: 什么也不做。
+    * ### SET(): 设置为一个传递给 SET() 的值或者一个回调函数的返回值。
+        ```
+        from django.conf import settings
+        from django.contrib.auth import get_user_model
+        from django.db import models
+
+        def get_sentinel_user():
+            return get_user_model().objects.get_or_create(username='deleted')[0]
+
+        class MyModel(models.Model):
+            user = models.ForeignKey(
+                settings.AUTH_USER_MODEL,
+                on_delete=models.SET(get_sentinel_user),
+            )
+        ```
+    * ### RESTRICT: Django3.1 新增，难以理解，与 PROTECT 不同，大多数情况下同样不允许删除，但是在某些特殊情况下可以删除。
+        ```
+        class Artist(models.Model):
+            name = models.CharField(max_length=10)
+
+        class Album(models.Model):
+            artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+        class Song(models.Model):
+            artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+            album = models.ForeignKey(Album, on_delete=models.RESTRICT)
+        ```
+        ```
+        >>> artist_one = Artist.objects.create(name='artist one')
+        >>> artist_two = Artist.objects.create(name='artist two')
+        >>> album_one = Album.objects.create(artist=artist_one)
+        >>> album_two = Album.objects.create(artist=artist_two)
+        >>> song_one = Song.objects.create(artist=artist_one, album=album_one)
+        >>> song_two = Song.objects.create(artist=artist_one, album=album_two)
+        >>> album_one.delete()
+        # Raises RestrictedError.
+        >>> artist_two.delete()
+        # Raises RestrictedError.
+        >>> artist_one.delete()
+        (4, {'Song': 2, 'Album': 1, 'Artist': 1})
+        ```
+* ### 外键重要参数: limit_choices_to
+    * ### 限制外键所能关联的对象，只能用于 Django 的 ModelForm 和 admin 后台，对其它场合无限制功能。
+    * ### 假设有一个模型 Author 和一个模型 Book，并且想要在 Book 模型中使用外键来引用 Author，但是只希望选择那些已经出版了至少一本书的作者，可以使用 limit_choices_to 选项来实现这一点，确保用户在选择书的作者时只能看到符合条件的作者选项。
+    ```
+    from django.db import models
+
+    class Author(models.Model):
+        name = models.CharField(max_length=100)
+
+    class Book(models.Model):
+        title = models.CharField(max_length=100)
+        author = models.ForeignKey(Author, on_delete=models.CASCADE, limit_choices_to={'books__gt': 0})
+    ```
+* ### 外键重要参数: related_name
+    * ### 用于关联对象反向引用模型的名称。
+    * ### 这个参数我们可以不设置，Django 会默认以模型的小写加上 "_set" 作为反向关联名。
+    * ### 如果不想为外键设置一个反向关联名称，可以将这个参数设置为 "+"。
+* ### 外键重要参数: related_query_name
+    * ### 反向关联查询名，用于从目标模型反向过滤模型对象的名称。
+    ```
+    from django.db import models
+
+    class Author(models.Model):
+        name = models.CharField(max_length=100)
+
+    class Book(models.Model):
+        title = models.CharField(max_length=100)
+        author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    ```
+    ```
+    # 获取作者的所有书籍
+
+    author = Author.objects.get(id=1)
+    books_by_author = author.books.all()
+    ```
+    ```
+    # 获取作者的书籍数量
+
+    author = Author.objects.get(id=1)
+    book_count = author.books.count()
+    ```
+* ### 外键重要参数: to_field
+    * ### 默认情况下，外键都是关联到被关联对象的主键上 (一般为 id)。
+    * ### 如果指定这个参数，可以关联到指定的字段上，但是该字段必须具有 unique=True 属性，也就是具有唯一属性。
+* ### 外键重要参数: db_constraint
+    * ### 默认情况下，这个参数被设为 True，表示遵循数据库约束。
+    * ### 如果设为 False，那么将无法保证数据的完整性和合法性。
+    * ### 以下面场景可能需要将它设置为 False
+        * ### 有历史遗留的不合法数据，没办法的选择。
+        * ### 正在分割数据表。
+    * ### 当它为 False 且试图访问一个不存在的关系对象时，会抛出 DoesNotExist 异常。
+* ### 外键重要参数: swappable
+    * ### 允许在 Django 中创建可插拔的模型，最常见的用途是创建自定义的用户模型以实现可定制的用户认证系统。
+    * ### 这使得開發者可以根据项目的特定需求对 Django 进行更深入的定制。
+    ```
+    from django.contrib.auth.models import AbstractUser
+
+    class CustomUser(AbstractUser):
+        # 添加自定义字段或方法
+
+        class Meta:
+            swappable = 'AUTH_USER_MODEL'
+    ```
+* ### 关系类型字段: 多对多 (ManyToManyField)
+    * ### To Be Continued...
 <br />
