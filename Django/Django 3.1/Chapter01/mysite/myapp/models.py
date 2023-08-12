@@ -1,19 +1,7 @@
 import uuid
-import datetime
 
 from django.db import models
 from django.db import models
-
-class Comment(models.Model):
-    title = models.CharField(max_length=128)
-    text = models.TextField()
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE)
-
-class Manufacturer(models.Model):
-    pass
-
-class Car(models.Model):
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
 
 class MyUUIDModel(models.Model):
     # editable=False: 字段不能在後台管理界面中被編輯。
@@ -47,12 +35,15 @@ class Album(models.Model):
 class Person(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    birth_date = models.DateField(default=datetime.date(1, 1, 1))
+    birth_date = models.DateField()
 
     # baby_boomer_status 作为一个自定义的模型方法，
     # 可以被任何 Person 的实例调用，进行生日日期判断。
     def baby_boomer_status(self):
         "Returns the person's baby-boomer status."
+
+        import datetime
+
         if self.birth_date < datetime.date(1945, 8, 1):
             return "Pre-boomer"
         elif self.birth_date < datetime.date(1965, 1, 1):
