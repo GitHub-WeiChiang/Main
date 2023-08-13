@@ -5,7 +5,6 @@ DesignPatterns
 * ### Introduction
 * ### Python
 * ### Java
-* ### Design Patterns: Elements of Reusable Object-Oriented Software
 <br />
 
 Mind on Patterns
