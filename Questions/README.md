@@ -46,6 +46,7 @@ Questions
 * ### Question044 - Python 的 yield 產生器是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question044)
 * ### Question045 - B Tree 和 B+ Tree 的区别為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question045)
 * ### Question046 - Monolithic Architecture 與 Microservices Architecture 的差異為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question046)
+* ### Question047 - 為什麼模組 simdjson 速度比較快 ? SIMD 到底是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question047)
 <br />
 
 Reference
