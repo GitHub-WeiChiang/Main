@@ -91,3 +91,56 @@ db_test = client.test
 #     "temperature": {"$gte": 20, "$lt": 30}
 # })
 # pprint.pprint(list(cursor))
+
+# # 存在運算子 (具有被指定為 True 的那個欄位)
+# db.AQI.insert_one({"weather": "晴天"})
+# cursor = db.AQI.find({
+#     "weather": {"$exists": True}
+# })
+# pprint.pprint(list(cursor))
+
+# # 模糊查詢
+# # County 中有北字
+# cursor = db.AQI.find({
+#     "County": {"$regex": "北"}
+# })
+# pprint.pprint(list(cursor))
+# # County 中第一個字為新字
+# cursor = db.AQI.find({
+#     "County": {"$regex": "^新"}
+# })
+# pprint.pprint(list(cursor))
+# # County 中最後一個字為縣字
+# cursor = db.AQI.find({
+#     "County": {"$regex": "縣$"}
+# })
+# pprint.pprint(list(cursor))
+# # AQI 在 15 (含) 以上的所有縣市資料
+# cursor = db.AQI.find({
+#     "AQI": {"$regex": "1[5-9].|[2-9]."}
+# })
+# pprint.pprint(list(cursor))
+
+# # 運用 where 語句
+# # 查詢 AQI 超過 100 的資料
+# cursor = db.AQI.find().where("parseInt(this.AQI) > 10")
+# pprint.pprint(list(cursor))
+# # 查詢 AQI 大於 20 小於 25 的資料
+# cursor = db.AQI.find().where("parseInt(this.AQI) > 20 && parseInt(this.AQI) < 25")
+# pprint.pprint(list(cursor))
+
+# # 查詢結果排序
+# # 將 test 資料庫中 weather 資料表的溫度做遞增排序
+# cursor = db_test.weather.find().sort("temperature")
+# pprint.pprint(list(cursor))
+# # 將 test 資料庫中 weather 資料表的溫度做遞減排序
+# cursor = db_test.weather.find().sort("temperature", -1)
+# pprint.pprint(list(cursor))
+# # 將 test 資料庫 weather 資料表中的資料先按照 humidity 遞增排序，再按照 temperature 遞增排序
+# cursor = db_test.weather.find().sort("humidity", 1).sort("temperature", 1)
+# pprint.pprint(list(cursor))
+# # 將 test 資料庫 weather 資料表中的資料先按照 humidity 遞增排序，若相同則按照 temperature 遞增排序
+# cursor = db_test.weather.find().sort([
+#     ("humidity", 1), ("temperature", 1)
+# ])
+# pprint.pprint(list(cursor))
