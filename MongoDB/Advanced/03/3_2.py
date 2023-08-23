@@ -144,3 +144,52 @@ db_test = client.test
 #     ("humidity", 1), ("temperature", 1)
 # ])
 # pprint.pprint(list(cursor))
+
+# # 中文排序
+# # 按筆畫排序
+# cursor = db.AQI.find(
+#     {}, {"SiteName": 1, "_id": 0}
+# ).collation({"locale": "zh_Hant"}).sort("SiteName")
+# pprint.pprint(list(cursor))
+# # 按照注音符號排序
+# cursor = db.AQI.find(
+#     {}, {"SiteName": 1, "_id": 0}
+# ).collation({"locale": "zh@collation=zhuyin"}).sort("SiteName")
+# pprint.pprint(list(cursor))
+# # 按照拼音排序
+# cursor = db.AQI.find(
+#     {}, {"SiteName": 1, "_id": 0}
+# ).collation({"locale": "zh"}).sort("SiteName")
+# pprint.pprint(list(cursor))
+
+# 若覺得每次排序中文都要修改語系很麻煩:
+# 1. 建立特定語系的資料表後再輸入資料
+#     step 1. Create Collection
+#     step 2. Use Custom Collation
+#     step 3. locale: zh_Hant - Chinese (Traditional)
+# 2. 建立特定語系的 View
+
+# # 計算查詢筆數
+# # 可以設定查詢條件
+# n1 = db.AQI.count_documents({"County": "臺北市"})
+# # 快速估算整個資料表且無法設定查詢條件
+# n2 = db.AQI.estimated_document_count()
+# print((n1, n2))
+
+# # 去除重複資料
+# cursor = db.AQI.distinct("County")
+# pprint.pprint(list(cursor))
+# # 幫 distinct 加上查詢條件
+# cursor = db.AQI.distinct("County", {"County": {"$regex": "北"}})
+# pprint.pprint(list(cursor))
+
+# # 限制與忽略
+# # 只列出一筆資料
+# cursor = db.AQI.find(limit=1)
+# pprint.pprint(list(cursor))
+# # 列出從第三筆開始的連續五筆資料
+# cursor = db.AQI.find(skip=2,  limit=5)
+# pprint.pprint(list(cursor))
+# # 先將資料排序後再取最後兩筆資料
+# cursor = db.AQI.find().collation({"locale": "zh_Hant"}).sort("SiteName", -1).limit(2)
+# pprint.pprint(list(cursor))
