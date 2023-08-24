@@ -193,3 +193,99 @@ db_test = client.test
 # # 先將資料排序後再取最後兩筆資料
 # cursor = db.AQI.find().collation({"locale": "zh_Hant"}).sort("SiteName", -1).limit(2)
 # pprint.pprint(list(cursor))
+
+# # 查詢子文件
+# # 輸入兩筆資料
+# db_test.course.drop()
+# db_test.course.insert_many([
+#     {
+#         "student": "S1",
+#         "course": {
+#             "機率": 80,
+#             "音樂欣賞": 70
+#         }
+#     },
+#     {
+#         "student": "S2",
+#         "course": {
+#             "物理": 85,
+#             "機率": 70,
+#             "音樂欣賞": 50
+#         }
+#     },
+# ])
+# # 查詢音樂欣賞課程不及格的學生
+# cursor = db_test.course.find(
+#     {"course.音樂欣賞": {"$lt": 60}}, {"student": 1, "course.音樂欣賞": 1}
+# )
+# pprint.pprint(list(cursor))
+# # 查詢哪些學生修了物理課程
+# cursor = db_test.course.find({"course.物理": {"$exists": True}})
+# pprint.pprint(list(cursor))
+
+# # 修改資料
+# # 修改 SiteName 為淡水的 AQI 值
+# db.AQI.update_one(
+#     {"SiteName": "淡水"}, {"$set": {"AQI": "10"}}
+# )
+# # 修改 SiteName 為淡水的 AQI 與 Status 欄位值
+# db.AQI.update_one(
+#     {"SiteName": "淡水"},  {"$set": {"AQI": "60", "Status": "普通"}}
+# )
+# # 查看修改是否成功並顯示修改了幾筆資料
+# result = db.AQI.update_many({"County": "新北市"}, {"$set": {"AQI": "10"}})
+# if result.acknowledged:
+#     print("update {} documents".format(result.modified_count))
+
+# # 找不到修改對象就新增
+# # 在 AQI 資料表中修改一比 County 為臺中市且 SiteName 為我的家的這筆資料，
+# # 如果沒有這筆資料則透過 upsert 參數設定直接新增
+# db.AQI.update_one(
+#     {
+#         "County": "臺中市",
+#         "SiteName": "我的家"
+#     },
+#     {
+#         "$set": {
+#             "AQI": "10",
+#             "Status": "良好"
+#         }
+#     },
+#     upsert=True
+# )
+
+# # 新增與移除欄位
+# # 新增
+# db.AQI.update_one(
+#     {
+#         "County": "臺中市",
+#         "SiteName": "我的家"
+#     },
+#     {
+#         "$set": {
+#             "Longitude": "120",
+#             "Latitude": "24"
+#         }
+#     }
+# )
+# # 移除
+# db.AQI.update_one(
+#     {
+#         "County": "臺中市",
+#         "SiteName": "我的家"
+#     },
+#     {
+#         "$unset": {
+#             "Longitude": "",
+#             "Latitude": ""
+#         }
+#     }
+# )
+
+# # 刪除資料
+# # 將欄位 SiteName 為我的家的一筆資料刪除
+# db.AQI.delete_one({"SiteName": "我的家"})
+# # 查看刪除的狀態
+# result = db.AQI.delete_many({"County": "新北市"})
+# if result.acknowledged:
+#     print("delete {} documents".format(result.deleted_count))
