@@ -41,6 +41,7 @@
         ```
         ```
         -- 修改字段设定
+        
         ALTER TABLE Students 
         MODIFY COLUMN Name varchar(200);
         ```
