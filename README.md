@@ -34,7 +34,6 @@ Contents
 * ### 作業系統
     * ### Linux -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Linux)
 * ### 資料結構與演算法
-    * ### ProgrammationEfficace -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/ProgrammationEfficace)
     * ### DataStructuresAndAlgorithms -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DataStructuresAndAlgorithms)
 * ### 碩士成果
     * ### DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DiseaseTrajectoryAnalyticsAndRelativeRiskPrediction) ([影片](https://youtu.be/zDQRNE98Zi8)、[論文](http://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id=%22109TIT00392046%22.&searchmode=basic))
