@@ -25,10 +25,10 @@ Contents
     * ### SpringBoot -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SpringBoot)
     * ### SpringMVC -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SpringMVC)
 * ### 資料庫
-    * ### MongoDB -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MongoDB)
     * ### MySQLPrinciples -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MySQLPrinciples)
-    * ### SQL -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SQL)
+    * ### MongoDB -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MongoDB)
     * ### OracleDatabase -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/OracleDatabase)
+    * ### SQL -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SQL)
 * ### 工具
     * ### Docker -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Docker)
     * ### Git -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Git)
@@ -45,8 +45,8 @@ Contents
 * ### 區塊鏈
     * ### Blockchain -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Blockchain)
 * ### 面試大補帖
-    * ### PythonInterview -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/PythonInterview)
     * ### Questions -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions)
+    * ### PythonInterview -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/PythonInterview)
 <br />
 
 Note
