@@ -1,6 +1,5 @@
 import pymongo
 import pprint
-import gridfs
 
 client = pymongo.MongoClient()
 db = client.opendata
@@ -10,22 +9,22 @@ db_test = client.test
 # # 可以透過 list() 方法將其轉型為陣列。
 # for doc in db.AQI.find():
 #     pprint.pprint('{County}{SiteName}: {AQI}'.format(**doc))
-
+#
 # # 取得第一筆資料
 # first_doc = db.AQI.find()[0]
 # pprint.pprint('{County}{SiteName}: {AQI}'.format(**first_doc))
-
+#
 # # 將 Cursor 類別實例轉型為陣列並取得最後三筆資料
 # for doc in list(db.AQI.find())[-3:]:
 #     pprint.pprint('{County}{SiteName}: {AQI}'.format(**doc))
-
+#
 # # 只查詢一筆資料
 # info = db.AQI.find_one()
 # if info is None:
 #     print("no document found !")
 # else:
 #     pprint.pprint('{County}{SiteName}: {AQI}'.format(**info))
-
+#
 # # 顯示特定欄位
 # # projection 參數:
 # # 若 value 為 1 表示該欄位要顯示，為 0 表示該欄位不顯示。
@@ -34,13 +33,13 @@ db_test = client.test
 # # 可以透過 True 與 False 表示 1 與 0。
 # cursor = db.AQI.find({}, projection={"County": 1, "SiteName": 1, "AQI": 1, "_id": 0})
 # pprint.pprint(list(cursor))
-
+#
 # # 單一條件查詢
 # cursor = db.AQI.find({"SiteName": "淡水"})
 # pprint.pprint(list(cursor))
 # cursor = db.AQI.find_one({"SiteName": "淡水"})
 # pprint.pprint(cursor)
-
+#
 # # 多重條件查詢
 # # AND
 # cursor = db.AQI.find({"County": "新北市", "SiteName": "板橋"})
@@ -53,7 +52,7 @@ db_test = client.test
 #     ]
 # })
 # pprint.pprint(list(cursor))
-
+#
 # # 比較運算子
 # # 相等
 # cursor = db.AQI.find({
@@ -70,10 +69,10 @@ db_test = client.test
 #     "SiteName": {"$nin": ["板橋", "淡水"]}
 # })
 # pprint.pprint(list(cursor))
-
+#
 # # 刪除 Collection
 # db.AQI.drop()
-
+#
 # # 新增資料
 # db_test.weather.drop()
 # db_test.weather.insert_many([
@@ -81,7 +80,7 @@ db_test = client.test
 #     {"humidity": 55, "temperature": 28},
 #     {"humidity": 65, "temperature": 19},
 # ])
-
+#
 # # 查詢溫度低於 20 度的資料
 # cursor = db_test.weather.find({
 #     "temperature": {"$lt": 20}
@@ -92,14 +91,14 @@ db_test = client.test
 #     "temperature": {"$gte": 20, "$lt": 30}
 # })
 # pprint.pprint(list(cursor))
-
+#
 # # 存在運算子 (具有被指定為 True 的那個欄位)
 # db.AQI.insert_one({"weather": "晴天"})
 # cursor = db.AQI.find({
 #     "weather": {"$exists": True}
 # })
 # pprint.pprint(list(cursor))
-
+#
 # # 模糊查詢
 # # County 中有北字
 # cursor = db.AQI.find({
@@ -121,7 +120,7 @@ db_test = client.test
 #     "AQI": {"$regex": "1[5-9].|[2-9]."}
 # })
 # pprint.pprint(list(cursor))
-
+#
 # # 運用 where 語句
 # # 查詢 AQI 超過 100 的資料
 # cursor = db.AQI.find().where("parseInt(this.AQI) > 10")
@@ -129,7 +128,7 @@ db_test = client.test
 # # 查詢 AQI 大於 20 小於 25 的資料
 # cursor = db.AQI.find().where("parseInt(this.AQI) > 20 && parseInt(this.AQI) < 25")
 # pprint.pprint(list(cursor))
-
+#
 # # 查詢結果排序
 # # 將 test 資料庫中 weather 資料表的溫度做遞增排序
 # cursor = db_test.weather.find().sort("temperature")
@@ -145,7 +144,7 @@ db_test = client.test
 #     ("humidity", 1), ("temperature", 1)
 # ])
 # pprint.pprint(list(cursor))
-
+#
 # # 中文排序
 # # 按筆畫排序
 # cursor = db.AQI.find(
@@ -162,28 +161,28 @@ db_test = client.test
 #     {}, {"SiteName": 1, "_id": 0}
 # ).collation({"locale": "zh"}).sort("SiteName")
 # pprint.pprint(list(cursor))
-
-# 若覺得每次排序中文都要修改語系很麻煩:
-# 1. 建立特定語系的資料表後再輸入資料
-#     step 1. Create Collection
-#     step 2. Use Custom Collation
-#     step 3. locale: zh_Hant - Chinese (Traditional)
-# 2. 建立特定語系的 View
-
+#
+# # 若覺得每次排序中文都要修改語系很麻煩:
+# # 1. 建立特定語系的資料表後再輸入資料
+# #     step 1. Create Collection
+# #     step 2. Use Custom Collation
+# #     step 3. locale: zh_Hant - Chinese (Traditional)
+# # 2. 建立特定語系的 View
+#
 # # 計算查詢筆數
 # # 可以設定查詢條件
 # n1 = db.AQI.count_documents({"County": "臺北市"})
 # # 快速估算整個資料表且無法設定查詢條件
 # n2 = db.AQI.estimated_document_count()
 # print((n1, n2))
-
+#
 # # 去除重複資料
 # cursor = db.AQI.distinct("County")
 # pprint.pprint(list(cursor))
 # # 幫 distinct 加上查詢條件
 # cursor = db.AQI.distinct("County", {"County": {"$regex": "北"}})
 # pprint.pprint(list(cursor))
-
+#
 # # 限制與忽略
 # # 只列出一筆資料
 # cursor = db.AQI.find(limit=1)
@@ -194,7 +193,7 @@ db_test = client.test
 # # 先將資料排序後再取最後兩筆資料
 # cursor = db.AQI.find().collation({"locale": "zh_Hant"}).sort("SiteName", -1).limit(2)
 # pprint.pprint(list(cursor))
-
+#
 # # 查詢子文件
 # # 輸入兩筆資料
 # db_test.course.drop()
@@ -223,131 +222,3 @@ db_test = client.test
 # # 查詢哪些學生修了物理課程
 # cursor = db_test.course.find({"course.物理": {"$exists": True}})
 # pprint.pprint(list(cursor))
-
-# # 修改資料
-# # 修改 SiteName 為淡水的 AQI 值
-# db.AQI.update_one(
-#     {"SiteName": "淡水"}, {"$set": {"AQI": "10"}}
-# )
-# # 修改 SiteName 為淡水的 AQI 與 Status 欄位值
-# db.AQI.update_one(
-#     {"SiteName": "淡水"},  {"$set": {"AQI": "60", "Status": "普通"}}
-# )
-# # 查看修改是否成功並顯示修改了幾筆資料
-# result = db.AQI.update_many({"County": "新北市"}, {"$set": {"AQI": "10"}})
-# if result.acknowledged:
-#     print("update {} documents".format(result.modified_count))
-
-# # 找不到修改對象就新增
-# # 在 AQI 資料表中修改一比 County 為臺中市且 SiteName 為我的家的這筆資料，
-# # 如果沒有這筆資料則透過 upsert 參數設定直接新增
-# db.AQI.update_one(
-#     {
-#         "County": "臺中市",
-#         "SiteName": "我的家"
-#     },
-#     {
-#         "$set": {
-#             "AQI": "10",
-#             "Status": "良好"
-#         }
-#     },
-#     upsert=True
-# )
-
-# # 新增與移除欄位
-# # 新增
-# db.AQI.update_one(
-#     {
-#         "County": "臺中市",
-#         "SiteName": "我的家"
-#     },
-#     {
-#         "$set": {
-#             "Longitude": "120",
-#             "Latitude": "24"
-#         }
-#     }
-# )
-# # 移除
-# db.AQI.update_one(
-#     {
-#         "County": "臺中市",
-#         "SiteName": "我的家"
-#     },
-#     {
-#         "$unset": {
-#             "Longitude": "",
-#             "Latitude": ""
-#         }
-#     }
-# )
-
-# # 刪除資料
-# # 將欄位 SiteName 為我的家的一筆資料刪除
-# db.AQI.delete_one({"SiteName": "我的家"})
-# # 查看刪除的狀態
-# result = db.AQI.delete_many({"County": "新北市"})
-# if result.acknowledged:
-#     print("delete {} documents".format(result.deleted_count))
-
-# # 把 SiteName 為淡水的資料換成新的 JSON 格式
-# db.AQI.replace_one({"SiteName": "淡水"}, {"weather": "下雨"})
-# # 將 SiteName 為日月潭的資料換成水社馬頭 (找不到則新增)
-# db.AQI.replace_one(
-#     {"SiteName": "日月潭"},
-#     {"SiteName": "水社馬頭", "weather": "晴天"},
-#     upsert=True
-# )
-# # 由傳回值得知取代狀態
-# result = db.AQI.replace_one({"SiteName": "水社馬頭"}, {"weather": "下雨"})
-# if result.acknowledged:
-#     print("successful")
-
-# # 儲存檔案
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# with open(file_name, "rb") as f:
-#     fs.put(f, filename=file_name)
-# # 取出檔案
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# file = fs.find_one({"filename": file_name})
-# with open(file.filename, "wb") as f:
-#     f.write(file.read())
-# # 刪除檔案
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# file = fs.find_one({"filename": file_name})
-# if file is not None:
-#     fs.delete(file.id)
-# else:
-#     print("{} not found".format(file_name))
-# # 列出儲存的檔案
-# fs = gridfs.GridFS(db_test)
-# for filename in fs.list():
-#     print(filename)
-# # 列出檔案的詳細資訊
-# fs = gridfs.GridFS(db_test)
-# for file in fs.find():
-#     print("file name: {}".format(file.filename))
-#     print("upload date: {}".format(file.uploadDate))
-#     print("length: {}".format(file.length))
-
-# # 對儲存的檔案加上額外資訊
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# with open(file_name, "rb") as f:
-#     fs.put(f, filename=file_name, version=2.0)
-# # 取出 2.0 版本的老婆
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# file = fs.find_one({"filename": file_name, "version": 2.0})
-# with open(file.filename, "wb") as f:
-#     f.write(file.read())
-# # 使用 get_last_version() 函数取得最新版本的檔案
-# file_name = "avatar_winter.JPG"
-# fs = gridfs.GridFS(db_test)
-# file = fs.get_last_version(file_name)
-# with open(file.filename, "wb") as f:
-#     f.write(file.read())
