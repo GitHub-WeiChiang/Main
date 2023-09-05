@@ -1,5 +1,6 @@
 import pymongo
 import pprint
+import gridfs
 
 client = pymongo.MongoClient()
 db = client.opendata
@@ -289,3 +290,64 @@ db_test = client.test
 # result = db.AQI.delete_many({"County": "新北市"})
 # if result.acknowledged:
 #     print("delete {} documents".format(result.deleted_count))
+
+# # 把 SiteName 為淡水的資料換成新的 JSON 格式
+# db.AQI.replace_one({"SiteName": "淡水"}, {"weather": "下雨"})
+# # 將 SiteName 為日月潭的資料換成水社馬頭 (找不到則新增)
+# db.AQI.replace_one(
+#     {"SiteName": "日月潭"},
+#     {"SiteName": "水社馬頭", "weather": "晴天"},
+#     upsert=True
+# )
+# # 由傳回值得知取代狀態
+# result = db.AQI.replace_one({"SiteName": "水社馬頭"}, {"weather": "下雨"})
+# if result.acknowledged:
+#     print("successful")
+
+# # 儲存檔案
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# with open(file_name, "rb") as f:
+#     fs.put(f, filename=file_name)
+# # 取出檔案
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# file = fs.find_one({"filename": file_name})
+# with open(file.filename, "wb") as f:
+#     f.write(file.read())
+# # 刪除檔案
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# file = fs.find_one({"filename": file_name})
+# if file is not None:
+#     fs.delete(file.id)
+# else:
+#     print("{} not found".format(file_name))
+# # 列出儲存的檔案
+# fs = gridfs.GridFS(db_test)
+# for filename in fs.list():
+#     print(filename)
+# # 列出檔案的詳細資訊
+# fs = gridfs.GridFS(db_test)
+# for file in fs.find():
+#     print("file name: {}".format(file.filename))
+#     print("upload date: {}".format(file.uploadDate))
+#     print("length: {}".format(file.length))
+
+# # 對儲存的檔案加上額外資訊
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# with open(file_name, "rb") as f:
+#     fs.put(f, filename=file_name, version=2.0)
+# # 取出 2.0 版本的老婆
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# file = fs.find_one({"filename": file_name, "version": 2.0})
+# with open(file.filename, "wb") as f:
+#     f.write(file.read())
+# # 使用 get_last_version() 函数取得最新版本的檔案
+# file_name = "avatar_winter.JPG"
+# fs = gridfs.GridFS(db_test)
+# file = fs.get_last_version(file_name)
+# with open(file.filename, "wb") as f:
+#     f.write(file.read())

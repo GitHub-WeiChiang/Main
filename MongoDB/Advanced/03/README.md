@@ -10,6 +10,15 @@
     * ### "$lt": 小於。
     * ### "$lte": 小於等於。
     * ### "$ne": 不等於。
+* ### MongoDB 限制一份文件大小不能超過 16M bytes，若要儲存影片、WORD 文件、MP3 音樂、JPEG 與 PDF 等，需使用 GridFS。
+* ### GridFS (Grid File System)
+    * ### 以檔案為單位。
+    * ### 存放在指定的資料表 (Collection) 中，也就是說每一個資料表只會有一個獨立的 GridFS 儲存區。
+    * ### 完全獨立，不會與其它文件混在一起。
+* ### GridFS 的結構
+    * ### 使用兩個資料表儲存資料: fs.files + fs.chunks。
+    * ### fs.files: 記錄檔案資訊 (名稱、大小與上傳時間等)。
+    * ### fs.chunks: 檔案實際內容。
 <br />
 
 範例程式
