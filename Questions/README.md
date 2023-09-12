@@ -47,6 +47,7 @@ Questions
 * ### Question045 - B Tree 和 B+ Tree 的区别為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question045)
 * ### Question046 - Monolithic Architecture 與 Microservices Architecture 的差異為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question046)
 * ### Question047 - 為什麼模組 simdjson 速度比較快 ? SIMD 到底是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question047)
+* ### Question048 - Python 中 if \_\_name\_\_ == '\_\_main\_\_': 的作用為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question048)
 <br />
 
 Reference
