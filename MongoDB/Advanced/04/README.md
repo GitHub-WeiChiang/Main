@@ -5,7 +5,7 @@
     * ### Aggregation 可以對資料進行多次運算後才取得結果 (例如某 Collection 中特定的 Field 平均值)。
 * ### Aggregation 利用 Pipeline 的方式處理資料。
 * ### Pipeline 包含一或數個資料處理階段 Stage，每一個 Stage 會將上一個 Stage 輸出資料經過處理後傳給下一個 Stage，直到最後。
-* ### 若想計算 AQI 欄位的平均值，可以設計ｓ第一個 Stage 將 AQI 型態由字串轉為數字，第二個 Stage 進行分群後平均值計算。
+* ### 若想計算 AQI 欄位的平均值，可以設計，第一個 Stage 將 AQI 型態由字串轉為數字，第二個 Stage 進行分群後平均值計算。
 * ### 4_3.py: 生成各縣市平均 AQI 指標與 View 的讀取。
     * ### Stage 1: 將 AQI 欄位的字串型態轉成 Int 型態後放到 iAQI 欄位中，iAQI 是一個新增欄位，不會改變原始資料內容，且只暫存於記憶體中，執行完即棄用。
         * ### 開啟 Compass 的 Aggregation 分頁。
@@ -207,6 +207,68 @@
         * ### Stage 2 - $limit: 限制輸出的資料筆數。
             ```
             4
+            ```
+    * ### 外部尋找: 連結兩個資料表 (在驅動表上選擇 Aggregations 並設置相關 Stage)。
+        * ### Stage 1.1 - $lookup: 類似於關聯式資料庫的 left outer join。
+            ```
+            {
+              "from": "forecast",
+              "localField": "SiteName",
+              "foreignField": "SiteName",
+              "as": "result"
+            }
+            ```
+            * ### from: 要尋找的資料表 (外部資料表 or 被驅動表)。
+            * ### localField: 驅動表的欄位。
+            * ### foreignField: 被驅動表的欄位。
+            * ### as: 存放找到的資料。
+        * ### Stage 1.2 - $lookup - $pipeline: 可用於下一個 Stage 的 aggregation 前處理。
+            ```
+            {
+              "from": "forecast",
+              "localField": "SiteName",
+              "foreignField": "SiteName",
+              "as": "result",
+              "pipeline": [
+                {
+                  "$project": {
+                    "_id": 0, "Status": 1
+                  }
+                }
+              ]
+            }
+            ```
+        * ### Stage 2 - $match: 將區域限制在淡水、新店與萬里。
+            ```
+            {
+              "SiteName": {
+                "$in": ["新店", "淡水", "萬里"]
+              }
+            }
+            ```
+        * ### Stage 3 - $project: 去除不需要的欄位。
+            ```
+            {
+              "SiteName": 1, "result": 1, "_id": 0
+            }
+            ```
+        * ### 極端值查詢 Stage 1 - $group: 群組後找出 value 的最大值。
+            ```
+            {
+              "_id": "null",
+              "max_value": {
+                "$max": "$value"
+              }
+            }
+            ```
+        * ### 極端值查詢 Stage 2 - $lookup: 透過上一個 Stage 所輸出的最大值，至被驅動表中尋找符合的資料。
+            ```
+            {
+              "from": "color",
+              "localField": "max_value",
+              "foreignField": "value",
+              "as": "result"
+            }
             ```
 <br />
 
