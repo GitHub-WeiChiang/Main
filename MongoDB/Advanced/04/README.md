@@ -222,7 +222,7 @@
             * ### localField: 驅動表的欄位。
             * ### foreignField: 被驅動表的欄位。
             * ### as: 存放找到的資料。
-        * ### Stage 1.2 - $lookup - $pipeline: 可用於下一個 Stage 的 aggregation 前處理。
+        * ### Stage 1.2 - $lookup - pipeline: 可用於下一個 Stage 的 aggregation 前處理。
             ```
             {
               "from": "forecast",
@@ -270,6 +270,184 @@
               "as": "result"
             }
             ```
+    * ### 設定查詢條件: 用於 Aggregation 中的查詢條件設定。
+        * ### Stage 1 - $match: 限定 County 欄位只有臺中市。
+            ```
+            {
+              "County": "臺中市"
+            }
+            ```
+        * ### Stage 2 - $addFields: 產生整數型態的 iAQI 欄位。
+            ```
+            {
+              "iAQI": {
+                "$toInt": "$AQI"
+              }
+            }
+            ```
+        * ### Stage 3 - $group: 群組後算平均值。
+            ```
+            {
+              "_id": "$County",
+              "averageAQI": {
+                "$avg": "$iAQI"
+              }
+            }
+            ```
+        * ### 順序與執行效率
+            * ### 順序 1 (較高效): $match -> $addFields -> $group。
+            * ### 順序 2 (較低效): $addFields -> $match -> $group。
+            * ### 將 $match 放置於第一個 Stage 可以將資料量先縮小，減少後續 Stage 所需處理的資料量與記憶體佔用，進而提升處理速度。
+            * ### MongoDB 限制每一筆資料量最大記憶體使用量為 16 MB。
+            * ### 除了 $match 外，$project 與 $unset 也可以減少不需要的欄位，此類型的操作應盡可能放置於 Pipeline 的前幾個 Stage。
+        * ### 運算式結合: $match 可以透過 $expr 運算子執行一個布林運算式，$match 會透過迴圈檢視所有資料，當該筆資料的 $expr 傳回 true 就輸出，反之傳回 false 則不輸出。
+            * ### $match: 列出所有資料。
+                ```
+                {
+                  "$expr": true
+                }
+                ```
+            * ### $match: 列出 AQI 指數大於 100 的縣市資料。
+                ```
+                {
+                  "$expr": {
+                    "$gte": [{"$toInt": "AQI"}, 100]
+                  }
+                }
+                ```
+    * ### 輸出到新資料表: 將上一個 Stage 的結果複製到另外一個資料表中 (_id 相同的資料會被新的資料覆蓋，且新資料表或資料庫無需事先建立，若不存在 MongoDB 會自動建立)。
+        * ### $out: 複製到指定資料表。
+            ```
+            "AQI_backup"
+            ```
+        * ### $out: 複製到指定資料庫中的資料表。
+            ```
+            {
+              "db": "backup",
+              "coll": "AQI"
+            }
+            ```
+    * ### 文件修訂: 修剪文件內容 (根據一個判斷式來決定是否要將文件中的每個子文件都巡過一遍)。
+        * ### Sample 1 - $redact: 判斷式永遠回傳 true，文件中的所有子文件都會巡一遍，最後取得此文件的所有文件。
+            ```
+            {
+              "$cond": {
+                "if": "true",
+                "then": "$$DESCEND",
+                "else": "$$PRUNE"
+              }
+            }
+            ```
+            * ### $$DESCEND: 保留該子文件並且繼續檢查同曾與內部其它的子文件。
+            * ### $$PRUNE: 刪除這份子文件，然後繼續檢查同層的文件，但不會繼續檢查該層的子文件。
+            * ### $$KEEP: 保留該曾並且包含子文件所有內容，然後停止檢查子文件內容。
+        * ### Sample 2 - $redact: 使查詢結果只能看到 level 3 的文件。
+            ```
+            {
+              "$cond": {
+                "if": {"$eq": ["$level", 3]},
+                "then": "$$DESCEND",
+                "else": "$$PRUNE"
+              }
+            }
+            ```
+        * ### Sample 3 - $redact: 使查詢結果只能看到 level 1 的文件。
+            ```
+            {
+              "$cond": {
+                "if": {"$eq": ["$level", 1]},
+                "then": "$$DESCEND",
+                "else": "$$PRUNE"
+              }
+            }
+            ```
+        * ### Sample 4 - $redact: 使查詢結果只能看到 level 大於等於 1 的文件。
+            ```
+            {
+              "$cond": {
+                "if": {"$gte": ["$level", 1]},
+                "then": "$$DESCEND",
+                "else": "$$PRUNE"
+              }
+            }
+            ```
+        * ### 備註: 只要上曾被擋掉，即使內層有符合條件的子文件，也會一併修剪掉 (與全文檢索搜尋方式不同)。
+    * ### 文件取代: 將文件的內容由該文件中的某個子文件取代。
+        * ### Sample 1 - $replaceWith: 將該文件由其子文件 records 取代。
+            ```
+            "$records"
+            ```
+        * ### Sample 2 - $replaceRoot: 將該文件由其子文件 records 取代。
+            ```
+            {
+              "newRoot": "$records"
+            }
+            ```
+    * ### 新增與移除欄位: 功能與 $addFields 和 $project 相同。
+        * ### Sample 1 - $set: 將 AQI 的字串型態轉型為整數型態 (亦可透過 $addFields 達成)。
+            ```
+            {
+            	"AQI": {"$toInt": "$AQI"}
+            }
+            ```
+        * ### Sample 2 - $unset: 刪除 SiteName 欄位。
+            ```
+            "SiteName"
+            ```
+        * ### Sample 3 - 移除 _id、SiteName 與 Pollutant。
+            ```
+            ["_id", "SiteName", "Pollutant"]
+            ```
+        * ### 備註: 欄位很多輸出很少時使用 $project 較為方便。
+    * ### 與其它資料結合: 將目前的結果與另外一個資料表或另外一個 Aggregation 的結果結合起來後一起輸出。
+        * ### Stage 1 - $addFields: 將 AQI 的字串型態轉型為整數型態。
+            ```
+            {
+            	"iAQI": {"$toInt": "$AQI"}
+            }
+            ```
+        * ### Stage 2 - $sort: 根據 iAQI 值做順向排序。
+            ```
+            {
+              "iAQI": 1
+            }
+            ```
+        * ### Stage 3 - $limit: 取得第一筆 (AQI 最低那筆)。
+            ```
+            1
+            ```
+        * ### Stage 4 - $unionWith: 結合其 Pipeline 的計算結果，輸出 AQI 最低與最高的區域。
+            ```
+            {
+              "coll": "AQI",
+              "pipeline": [
+                {"$addFields": {"iAQI": {"$toInt": "$AQI"}}},
+                {"$sort": {"iAQI": -1}},
+                {"$limit": 1}
+              ]
+            }
+            ```
+            * ### coll: 集合（Collection）的名称。
+            * ### pipeline: 取得 AQI 最高的那筆資料。
+        * ### 備註: 合併另一個資料表的全部資料 ($unionWith)。
+            ```
+            "another_collection"
+            ```
+    * ### 陣列解構: 將陣列欄位解構。
+        * ### Sample 1 - $unwind: 解構 size 欄位，其資料在解構後將從一筆變成三筆。
+            ```
+            "$size"
+            ```
+            * ### 原始數據: {"name": "襯衫", "size": ["S", "M", "L"]}。
+            * ### size 欄位將從陣列變成陣列的內容 (各一筆，共三筆)。
+        * ### Sample 2 - $unwind - includeArrayIndex: 顯示解構後的資料是在原本陣列中的哪個位置。
+            ```
+            {
+              "path": "$size",
+              "includeArrayIndex": "index"
+            }
+            ```
+* ### 常用運算子
 <br />
 
 範例程式
