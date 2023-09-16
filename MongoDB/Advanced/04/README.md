@@ -126,7 +126,7 @@
         * ### $group: 計算每個縣市有多少空氣品質檢測站。
             ```
             {
-            	"_id": "$County",
+              "_id": "$County",
               "count": {
                 "$sum": 1
               }
@@ -502,6 +502,122 @@
         * ### newCurrent: current 欄位值與 -5.7 加總 (相當於減 5.7)。
         * ### 上方代碼自訂陣列為 ```["$current", -5.7]```。
     * ### $avg
+        * ### 用途: 計算陣列中各元素平均值或自訂陣列中各元素平均值。
+        * ### 資料
+            ```
+            [
+                {"name": "s1", "history": [25, 20, 31], "current": 21},
+                {"name": "s2", "history": [31, 35], "current": 27}
+            ]
+            ```
+        * ### $project
+            ```
+            {
+              "avgOfHistory": {"$avg": "$history"},
+              "newCurrent": {"$avg": ["$current", -10]},
+              "_id": 0
+            }
+            ```
+        * ### avgOfHistory: history 陣列內容平均。
+        * ### newCurrent: current 欄位值與 -10 平均。
+        * ### $project: 增加一個 Stage 使輸出四捨五入。
+            ```
+            {
+              "avgOfHistory": {"$round": ["$avgOfHistory", 1]},
+              "newCurrent": {"$round": ["$newCurrent", 0]},
+            }
+            ```
+    * ### $ceil、$floor
+        * ### 用途: 給定一個值。$ceil 傳回比給定值大的最小整數；$floor 傳回比給定值小的最大整數。
+        * ### 資料
+            ```
+            [
+                {"value": 4},
+                {"value": 2.3},
+                {"value": -5.4}
+            ]
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "value": 1,
+              "cellValue": {"$ceil": "$value"},
+              "floorValue": {"$floor": "$value"},
+            }
+            ```
+    * ### $strLenCP、$strLenBytes
+        * ### 用途: 字算字串中的字元數與位元組數。
+        * ### 資料
+            ```
+            {"s": "Hi，大家好"}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "strLenCP": {"$strLenCP": "$s"},
+              "strLenBytes": {"$strLenBytes": "$s"}
+            }
+            ```
+    * ### $trim、$ltrim、$rtrim
+        * ### 用途: 字串去空白 (前後、左、右)。
+        * ### 資料
+            ```
+            {"str": " \t abc \n "}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "ltrim": {"$ltrim": {"input": "$str"}},
+              "rtrim": {"$rtrim": {"input": "$str"}},
+              "trim": {"$trim": {"input": "$str"}},
+            }
+            ```
+            * ### 可以透過參數 chars 設定要刪除的字元集。
+    * ### $split
+        * ### 用途: 將字串分割成陣列。
+        * ### 資料
+            ```
+            {"s": "10,20,30"}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "result": {"$split": ["$s", ","]}
+            }
+            ```
+    * ### $substrCP
+        * ### 用途: 取子字串。
+        * ### 資料
+            ```
+            {"s": "Hi，大家好"}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "result": {"$substrCP": ["$s", 0, 3]}
+            }
+            ```
+            * ### $substrCP: ```[原始字串, 起始索引, 長度]```。
+    * ### $concat
+        * ### 用途: 字串合併。
+        * ### 資料
+            ```
+            {"s1": "hello", "s2": "world"}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "result": {"$concat": ["$s1", "<-->", "$s2"]}
+            }
+            ```
+            * ### 將 $concat 後的陣列內容全部合併。
+    * ### $cond
 <br />
 
 範例程式
