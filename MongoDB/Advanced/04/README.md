@@ -438,7 +438,10 @@
             ```
             "$size"
             ```
-            * ### 原始數據: {"name": "襯衫", "size": ["S", "M", "L"]}。
+            * ### 資料
+                ```
+                {"name": "襯衫", "size": ["S", "M", "L"]}
+                ```
             * ### size 欄位將從陣列變成陣列的內容 (各一筆，共三筆)。
         * ### Sample 2 - $unwind - includeArrayIndex: 顯示解構後的資料是在原本陣列中的哪個位置。
             ```
@@ -448,6 +451,57 @@
             }
             ```
 * ### 常用運算子
+    * ### $add、$subtract、$multiply、$divide
+        * ### 用途: 加減乘除。
+        * ### 資料
+            ```
+            {value: 10.3}
+            ```
+        * ### $project
+            ```
+            {
+              "newValue": {
+                "$add": ["$value", 5, 3]
+              }
+            }
+            ```
+    * ### $round
+        * ### 用途: 四捨五入。
+        * ### 資料
+            ```
+            [{"value": 1.52, "value": 3.27}]
+            ```
+        * ### $project
+            ```
+            {
+              "value": {
+                "$round": ["$value", 0]
+              },
+              "_id": 0
+            }
+            ```
+        * ### 0: 小數點第一位四捨五入。
+        * ### 1: 留下小數一位，且小數第二位四捨五入。
+    * ### $sum
+        * ### 用途: 陣列中各元素加總或自訂陣列中各元素加總。
+        * ### 資料
+            ```
+            [
+                {"name": "s1", "history": [25, 20, 31], "current": 21},
+                {"name": "s2", "history": [31, 35], "current": 27}
+            ]
+            ```
+        * ### $project
+            ```
+            {
+              "sumOfHistory": {"$sum": "$history"},
+              "newCurrent": {"$sum": ["$current", -5.7]},
+              "_id": 0
+            }
+            ```
+        * ### sumOfHistory: history 陣列內容加總。
+        * ### newCurrent: current 欄位值與 -5.7 加總 (相當於減 5.7)。
+        * ### 上方代碼自訂陣列為 ```["$current", -5.7]```。
 <br />
 
 範例程式
