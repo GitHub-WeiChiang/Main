@@ -460,23 +460,22 @@
         * ### $project
             ```
             {
-              "newValue": {
-                "$add": ["$value", 5, 3]
-              }
+              "newValue": {"$add": ["$value", 5, 3]}
             }
             ```
     * ### $round
         * ### 用途: 四捨五入。
         * ### 資料
             ```
-            [{"value": 1.52, "value": 3.27}]
+            [
+              {"value": 1.52},
+              {"value": 3.27}
+            ]
             ```
         * ### $project
             ```
             {
-              "value": {
-                "$round": ["$value", 0]
-              },
+              "value": {"$round": ["$value", 0]},
               "_id": 0
             }
             ```
@@ -502,6 +501,7 @@
         * ### sumOfHistory: history 陣列內容加總。
         * ### newCurrent: current 欄位值與 -5.7 加總 (相當於減 5.7)。
         * ### 上方代碼自訂陣列為 ```["$current", -5.7]```。
+    * ### $avg
 <br />
 
 範例程式
