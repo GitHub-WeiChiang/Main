@@ -618,6 +618,80 @@
             ```
             * ### 將 $concat 後的陣列內容全部合併。
     * ### $cond
+        * ### 用途: 為 if - then - else 形式的條件判斷式。
+        * ### 資料
+            ```
+            [
+              {"name": "s1", "score": 70},
+              {"name": "s2", "score": 93},
+              {"name": "s3", "score": 45}
+            ]
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "name": 1,
+              "score": 1,
+              "status": {
+                "$cond": {
+                  "if": {"$gte": ["$score", 60]},
+                  "then": "pass",
+                  "else": "fail"
+                }
+              }
+            }
+            ```
+    * ### $ifNull
+        * ### 用途: 若欄位內容為 null，輸出時可以用別的資料取代。
+        * ### 資料
+            ```
+            {"name": "Tom", "email": "null", "tel": "null"}
+            ```
+        * ### $project
+            ```
+            {
+              "_id": 0,
+              "name": 1,
+              "email": {"$ifNull": ["$email", "unknown"]},
+              "tel": {"$ifNull": ["$tel", "unknown"]}
+            }
+            ```
+    * ### $switch
+        * ### 用途: 多條件判斷，相當於許多程式語言中的 switch - case 語法。
+        * ### 資料
+            ```
+            [
+              {"cart": [100]},
+              {"cart": [200, 400]},
+              {"cart": [500, 200, 300]},
+              {"cart": [300, 700, 500, 500]}
+            ]
+            ```
+        * ### Stage 1 - $project: 計算陣列中元素個術後放到 amount 欄位。
+            ```
+            {
+              "_id": 0,
+              "cart": 1,
+              "amount": {"$size": "$cart"}
+            }
+            ```
+        * ### Stage 1 - $project: 根據陣列中的數值加總，並根據陣列中元素個數乘上一個比重。
+            ```
+            {
+              "amount": 1,
+              "origin": {"$sum": "$cart"},
+              "total": {
+                "$switch": {
+                  "branches": [
+                    {"case": {"$eq": ["$amount", 1]}, "then": {"$sum": "$cart"}},
+                    {"case": {"$eq": ["$amount", 2]}, "then": {"$multiply": [{"$sum": "$cart"}, 0.9]}},
+                    {"case": {"$gte": ["$amount", 3]}, "then": {"$multiply": [{"$sum": "$cart"}, 0.8]}}
+                  ]
+                }
+              }
+            }
+            ```
 <br />
 
 範例程式
