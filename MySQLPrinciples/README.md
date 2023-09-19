@@ -218,7 +218,7 @@ except Exception as e:
         WHERE ... = ...(local variable)
     END
     ```
-    * ### Query Hinting: Use the OPTIMIZE FOR query hint. This tells SQL Server to use a specified value when compiling the plan. If you can find a value that produces a “good enough” plan each time, and the performance is acceptable for each case, this is a good option for you. But the biggest drawback with OPTIMIZE FOR is on tables where the distribution of data changes.
+    * ### Query Hinting: Use the OPTIMIZE FOR query hint. This tells SQL Server to use a specified value when compiling the plan. If you can find a value that produces a "good enough" plan each time, and the performance is acceptable for each case, this is a good option for you. But the biggest drawback with OPTIMIZE FOR is on tables where the distribution of data changes.
     ```
     CREATE PROCEDURE ...
     AS
