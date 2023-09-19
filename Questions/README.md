@@ -49,6 +49,7 @@ Questions
 * ### Question047 - 為什麼模組 simdjson 速度比較快 ? SIMD 到底是什麼 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question047)
 * ### Question048 - Python 中 if \_\_name\_\_ == '\_\_main\_\_': 的作用為何 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question048)
 * ### Question049 - 有沒有什麼通用的高效序列化模組 ? JIT 是什麼概念 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question049)
+* ### Question050 - Docker environment for python variables: How can I create a env variable for username & password and pass dynamic values while running containers ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question050)
 <br />
 
 Reference
