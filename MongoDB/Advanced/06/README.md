@@ -146,10 +146,81 @@
           }
         }
         ```
+        * ### unit: year、quarter、week、month、day、hour、minute、second、millisecond。
+    * ### $group - $dateTrunc: 將時間去零頭 (透過 unit 指定計算單位)。
+        * ### 資料: 6_4.py。
+        ```
+        // 計算每季的 price 總和
+        
+        {
+          "_id": {
+            "quarter": {
+              "$dateTrunc": {
+                "date": "$date",
+                "unit": "quarter",
+                // 指定每個時間單位的大小，設置為 1 表示每季度一個時間單位。
+                "binSize": 1
+              }
+            }
+          },
+          "sumOfPrice": {
+            "$sum": "$price"
+          }
+        }
+        ```
+        ```
+        // 計算上半年與下半年的 price 總和
+        
+        {
+          "_id": {
+            "quarter": {
+              "$dateTrunc": {
+                "date": "$date",
+                "unit": "quarter",
+                "binSize": 2
+              }
+            }
+          },
+          "sumOfPrice": {
+            "$sum": "$price"
+          }
+        }
+        ```
+        * ### unit: year、quarter、week、month、day、hour、minute、second。
+        * ### 當 unit 被設定為 week 時: 可以透過參數 startOfWeek 決定每星期由星期幾開始。
+            * ### mon
+            * ### tue
+            * ### wed
+            * ### thu
+            * ### fri
+            * ### sat
+            * ### sun
+        ```
+        // 將 ObjectId 中的時間部分從 "月" 去零頭
+        
+        {
+        	"dd": {
+            "$dateTrunc": {
+              "date": ObjectId(),
+              "unit": "month"
+            }
+          }
+        }
+        ```
+* ### MongoDB 的时间戳 (timestamp) 由两个部分组成: 时间戳值 + 时间戳增量。
+    * ### 时间戳值 (Timestamp Value): 时间戳值表示一个特定时间点的信息，它通常是一个以秒为单位的整数，表示自 UNIX 纪元以来的秒数。
+    * ### 时间戳增量 (Timestamp Increment): 时间戳增量是一个表示事件发生在特定时间点内的顺序号或计数器，通常是一个整数，每次事件发生时都会增加，如果多个事件具有相同的时间戳值，时间戳增量允许对它们进行排序，以确定它们的发生顺序。
+    * ### 在 MongoDB 中，时间戳通常用于记录文档的创建时间或修改时间，例如: 如果两个文档具有相同的时间戳值，但不同的时间戳增量，那么可以根据时间戳增量来确定哪个文档先创建或修改。
+    * ### 时间戳对象表示特定事件发生的时间，而增量为 1 表示这个事件是这个时间点内的第一个事件，增量通常是自动增加的，以确保同一时间戳值的事件可以按顺序进行排序。
 <br />
 
 範例程式
 =====
 * ### 6_1_1.py: 在 Python 取得現在日期。
 * ### 6_2.py: 從 \_id 取得資料建立日期。
+* ### 6_4.py: "MongoDB 跟日期時間有關的函數" 中 "$group - $dateTrunc" 所需範例資料。
+* ### 6_5_1.py: 將字串轉成 Date 型態。
+* ### 6_5_2.py: Date 型態解析。
+* ### 6_5_3.py: BSON 的時間戳記。
+* ### 6_5_4.py: 儲存伺服器日期。
 <br />
