@@ -6,6 +6,7 @@ Advanced
 * ### 04 - Aggregation 進階查詢
 * ### 05 - 陣列查詢
 * ### 06 - 日期時間處理
+* ### 07 - 地理位置查詢
 <br />
 
 Reference
