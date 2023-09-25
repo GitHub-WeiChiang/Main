@@ -16,9 +16,9 @@ DC: Domain Component
 OU: Organizational Unit
 ```
 ```
-# 導入 ldap3 (Lightweight Directory Access Protocol ) 輕量級目錄訪問協議基礎模組
+# 導入 ldap3 (Lightweight Directory Access Protocol) 輕量級目錄訪問協議基礎模組
 from ldap3 import Server, Connection, ALL
-# 導入 ldap3 (Lightweight Directory Access Protocol ) 輕量級目錄訪問協議例外模組
+# 導入 ldap3 (Lightweight Directory Access Protocol) 輕量級目錄訪問協議例外模組
 from ldap3.core.exceptions import LDAPBindError, LdapSocketOpenError
 
 # AD 伺服器組態
