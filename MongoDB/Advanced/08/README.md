@@ -89,7 +89,105 @@
             }
         }
         ```
-    * ### 2dsphere 球體座標索引
+    * ### 2dsphere 球體座標索引: 用於格式符合 GeoJSON 的經緯度座標資料索引建立。
+        * ### 用於經緯度座標查詢指令功能
+            * ### 距離指定坐標最近的資料。
+            * ### 指定坐標範圍內所有資料。
+            * ### 指定坐標範圍內所有資料並按近遠排序。
+        * ### GeoJSON 格式範例
+            ```
+            "geometry": {
+                "type": "Point",
+                "coordinates": [..., ...]
+            }
+            ```
+            * ### type: 表示 coordinates 是代表點、線或區域。
+            * ### Point: 表示點。
+            * ### coordinates: 表示經緯度座標，先經度後緯度。
+            ```
+            # 表示直線
+            
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [..., ...], [..., ...]
+                ]
+            }
+            ```
+            ```
+            # 表示區域範圍: 以三角形區域為例，座標頭尾需重疊。
+            
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    # 第一個角的座標
+                    [..., ...],
+                    # 第二個角的座標
+                    [..., ...],
+                    # 第三個角的座標
+                    [..., ...],
+                    # 第一個角的座標
+                    [..., ...]
+                ]
+            }
+            ```
+            ```
+            # 表示多個座標點
+            
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [..., ...],
+                    [..., ...],
+                    [..., ...]
+                ]
+            }
+            ```
+    * ### 2d 平面座標索引: 用於非 GeoJSON 格式或座標並不在球體上時的座標資料 2d 類型索引建立。
+        ```
+        db.collection.create_index([("point", "2d")])
+        ```
+    * ### 特定語系索引 (針對中文的第一個字進行筆畫數排序)
+        * ### 左側選擇 Database。
+        * ### 左側選擇 Collection。
+        * ### 點擊 Indexes。
+        * ### 點擊 Create Index。
+        * ### 點擊 Options。
+        * ### 勾選 Use Custom Collation。
+        * ### 輸入 Collation Document:
+            ```
+            {
+               locale: <string>,
+               caseLevel: <boolean>,
+               caseFirst: <string>,
+               strength: <int>,
+               numericOrdering: <boolean>,
+               alternate: <string>,
+               maxVariable: <string>,
+               backwards: <boolean>
+            }
+            ```
+            ```
+            // 以針對中文的第一個字進行筆畫數排序為例
+            
+            {
+               "locale": "zh_Hant"
+            }
+            ```
+    * ### 萬用字元索引
+        * ### 透過 "$**" 表示針對該文件的所有欄位 (包含子文件中的所有欄位) 全部建立單一欄位索引。
+        * ### 可以透過勾選 Options 中的 Wildcard Projection 排除不需要建立索引的欄位。
+            ```
+            // 排除某些欄位
+            
+            {"...": 0, "...": 0, ...}
+            ```
+            ```
+            // 僅建立某些欄位
+            
+            {"...": 1, "...": 1, ...}
+            ```
+* ### 索引屬性
 <br />
 
 範例程式
