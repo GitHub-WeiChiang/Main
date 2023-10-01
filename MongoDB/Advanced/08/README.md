@@ -188,9 +188,77 @@
             {"...": 1, "...": 1, ...}
             ```
 * ### 索引屬性
+    * ### Unique
+        * ### 索引設定 Unique 屬性後，該欄位的值就不能重複。
+        * ### "_id" 欄位強制默認設定了 Unique 屬性。
+        * ### 在 MongoDB Compass 中透過勾選 Create Index 的 Options 選項 "Create unique index" 即可設置。
+        * ### 在 Python 中攔截 (Unique 索引) 資料重複錯誤: 8_4_1.py。
+        * ### 複合欄位索引也可以設定 Unique 屬性。
+    * ### TTL
+        * ### 設定到期期限 (以秒為單位)，超過期限的資料會被刪除。
+        * ### 此屬性的索引必須作用在 Date 型態的欄位。
+        * ### 在 MongoDB Compass 中透過勾選 Create Index 的 Options 選項 "Create TTL" 即可設置。
+        * ### The background task that removes expired documents runs every 60 seconds. As a result, documents may remain in a collection during the period between the expiration of the document and the running of the background task. MongoDB starts deleting documents 0 to 60 seconds after the index completes.
+    * ### Partial
+        * ### 針對指定範圍內的資料建立索引 (在相對不犧牲查詢效能的情況下節省硬碟空間)。
+        * ### 在 MongoDB Compass 中透過勾選 Create Index 的 Options 選項 "Partial Filter Expression" 即可設置。
+        ```
+        // 僅針對欄位值大於等於 100 的資料建立索引
+        
+        {
+          "FIELD_NAME": {
+            "$gte": 100
+          }
+        }
+        ```
+        ```
+        // 僅針對具有特定欄位的資料建立索引
+        
+        {
+          "FIELD_NAME": {
+            "$exists": true
+          }
+        }
+        ```
+    * ### Sparse
+        * ### 有間隙的索引 (稀疏索引): 索引涵蓋的範圍只包含有索引欄位的資料。
+        * ### 無法透過 MongoDB Compass 建立。
+        * ### 使用時必需明確設定查詢範圍會在索引範圍內，否則 MongoDB 不會自動使用這個索引 (可以透過 hint 函式指定索引觸發)。
+        * ### 示例代碼: 8_4_4.py (含使用 Partial 取代 Sparse)。
+    * ### Hidden
+        * ### 用於使指定索引失效 (disable)。
+        * ### 適用於需暫時進用當前索引並測試新索引效能的場景 (不能修改程式碼使用 hint 函式也不敢直接刪除既有索引時)。
+        ```
+        // MongoDB Shell
+        
+        // 隱藏索引
+        db.collection.hideIndex("index_name")
+        // 查看索引資訊
+        db.collection.getIndexes()
+        // 取消隱藏
+        db.collection.unhideIndex("index_name")
+        ```
+* ### 分析與指定索引
+    ```
+    // MongoDB Shell
+    
+    # 透過 explain() 函數確定指令是否用到索引: 下方兩種寫法皆可
+    db.collection.find().explain()
+    db.collection.explain().find()
+    ```
+    * ### queryPlanner -> winningPlan 中若 "出現" inputStage 欄位，其中將顯示所使用的索引。
+    * ### queryPlanner -> winningPlan 中若 "未出現" inputStage 欄位，表示該查詢沒有使用到索引。
+    * ### 透過 MongoDB Compass 查看
+        * ### 左側選擇 Database。
+        * ### 左側選擇 Collection。
+        * ### 在 Filter 中輸入查詢條件。
+        * ### 點擊 Explain。
+        * ### 可切換至 Raw Output 查看。
 <br />
 
 範例程式
 =====
 * ### 8_2.py: 在 Python 程式中建立索引。
+* ### 8_4_1.py: 在 Python 中攔截 (Unique 索引) 資料重複錯誤。
+* ### 8_4_4.py: Sparse 示例代碼 (含使用 Partial 取代 Sparse)。
 <br />
