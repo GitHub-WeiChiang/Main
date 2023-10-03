@@ -34,7 +34,7 @@
     * ### $project - $dateToPart: 將日期時間資料解包，可分離出年、月、日、時、分、秒與毫秒。
         ```
         {
-        	"datePart": {
+          "datePart": {
             "$dateToParts": {
               "date": "$$NOW"
               // "timezone": "+08"
@@ -45,7 +45,7 @@
     * ### $project - $year、$month、$dayOfYear、$dayOfMonth、$dayOfWeek、$hour、$minute、$seconds、$millisecond: 指定日期時間資料。
         ```
         {
-        	"year": {
+          "year": {
             "$year": {
               "date": "$$NOW",
               // "timezone": "+08"
@@ -56,7 +56,7 @@
     * ### $project - $dateFromParts: 組合日期時間數據並傳回 Date 物件 (year 為必要，其餘預設填入 1/1/0/0/0.000)。
         ```
         {
-        	"date": {
+          "date": {
             "$dateFromParts": {
               "year": 2022,
               "month": 3,
@@ -100,7 +100,7 @@
     * ### $project - $dateToString: 將日期轉成特定格式字串。
         ```
         {
-        	"dd": {
+          "dd": {
             "$dateToString": {
               "date": "$$NOW",
               "format": "%m月%d日"
@@ -199,7 +199,7 @@
         // 將 ObjectId 中的時間部分從 "月" 去零頭
         
         {
-        	"dd": {
+          "dd": {
             "$dateTrunc": {
               "date": ObjectId(),
               "unit": "month"
