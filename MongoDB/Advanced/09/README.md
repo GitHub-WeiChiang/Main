@@ -10,6 +10,13 @@
     * ### 理解更多 (11 - 交易) -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MongoDB/Advanced/11)
 * ### 複寫集成員
     * ### 三種角色: Primary (主要伺服器)、Secondary (次要伺服器)、Arbiter (仲裁者)。
+    * ### Primary: 提供客戶端完整存取服務。
+    * ### Secondary: 儲存並同步主要伺服器資料。
+    * ### Arbiter: 在選舉時出來投票給合適成為 Primary 的成員，沒有其它用處了，也不儲存 Primary 資料。
+    * ### 複寫集成員中只能有一個 Primary，可以有多個 Secondary，Arbiter 則可有可無 (若要配置 Arbiter 以一個為佳)。
+    * ### 複寫集成員數量最少為 1 員，最多為 50 員，正式上線系統以至少 3 員為佳。
+    * ### PSS (Primary - Secondary - Secondary) 三成員複寫集架構
+    * ### PSA (Primary - Secondary - Arbiter) 三成員複寫集架構
 <br />
 
 範例程式
