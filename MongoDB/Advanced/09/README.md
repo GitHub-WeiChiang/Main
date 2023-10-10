@@ -95,7 +95,7 @@
             ```
         * ### Step 3: 初始化複寫集。
             ```
-            // 終端機 4 號: 使用 MongoDB Shell 連線埠號 20000 Server
+            // 終端機 4 號: 使用 MongoDB Shell 連線埠號 20000 的 Server
             mongosh --port 20000
           
             // 初始化複寫集: 回傳 "ok: 1" 表示複寫集初始化成功，
@@ -122,6 +122,7 @@
             ```
             // MongoDB Shell: 連接到 Primary 使用以下命令來關閉伺服器
             
+            // 連線埠號 20000 的 Server
             mongosh --port 20000
             
             // db.shutdownServer() 命令需要在 admin 數據庫中執行，
@@ -134,8 +135,10 @@
             ```
             // MongoDB Shell
             
+            // 連線埠號 20001 的 Server
             mongosh --port 20001
             
+            // 查看複寫集狀態
             rs.status()
             ```
 <br />
