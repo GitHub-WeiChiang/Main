@@ -314,6 +314,71 @@
     | nearest            | 從評分項目最好的成員中隨機挑選一個作為資料讀取對象 (不區分 Primary 與 Secondary)，評分項目包含網路速度、硬碟 I/O 速度、CPU 效能等。 |
     * ### 透過 readPreference 參數設定讀取偏好: 9_3_3.py。
     * ### 註: "讀取偏好設定" 的修改 "僅對單一客戶端有效"。
+* ### 快速連進 Primary
+    ```
+    # MongoDB Shell
+    
+    # 將連線自動的改連到 Primary
+    db=connect(rs.isMaster().primary)
+    
+    # 顯示當前連線的伺服器
+    db.getMongo()
+    ```
+* ### 非 localhost 部署
+    * ### Step 1: 在 local 設定複寫集的第一個成員。
+        ```
+        # 啟動第一個 MongoDB Server
+        
+        mongod --dbpath ./data/db --replSet rs0 --bind_ip_all --port 27017
+        ```
+        * ### ```--dbpath ./data/db```: 表示 MongoDB 將儲存其資料庫文件的路徑。
+        * ### ```--replSet rs0```: 配置一個名為 "rs0" 的複製集 (Replica Set)。
+        * ### ```--bind_ip_all```: 表示 MongoDB 會綁定到所有可用的網絡介面 (例如: WiFi 連線、有線網路、實體或虛擬網卡等)，如果只想監聽特定通道，可以修改為 ```--bind_ip IP```。
+        * ### ```--port IP```: 指定 MongoDB 使用的端口號 (建議包含此選項避免造成分片操作執行相關問題)。
+    * ### Step 2: 加入其它主機成員。
+        ```
+        # MongoDB Shell
+        
+        rs.add("IP:PORT_NUMBER")
+        ```
+        * ### 若出現錯誤 ```Either all host names in a replica set configuration must be localhost references, or none must be; found 1 out of 2```，代表複寫集中 Primary 主機的 IP 記錄為 localhost，這樣好嗎，這樣不好，需執行 Step 3。
+    * ### Step 3: 解決 Step 2 問題。
+        ```
+        # MongoDB Shell
+        
+        # 檢查所有 IP 是否出現 localhost
+        rs.config()
+        ```
+        ```
+        # MongoDB Shell
+        
+        # 將 localhost 改為 IP
+        cfg = rs.config()
+        cfg.members[0].host = "IP"
+        rs.reconfig(cfg)
+        ```
+* ### mongod.conf
+    ```
+    # 以後台 (Daemonize) 方式運行 
+    processManagement:
+        fork: false
+    
+    # 指定 MongoDB 監聽的 IP 地址與端口號
+    net:
+        bindIp: 0.0.0.0,127.0.0.1
+        port: 20000
+    
+    # 配置 MongoDB 的存儲選項 (指定 MongoDB 數據庫文件的存儲路徑並啟用日誌)
+    storage:
+        dbPath: /data/0
+        journal:
+            enabled: true
+    
+    # 配置 MongoDB 複製集 (設置一個名為 "rs0" 的複製集)
+    replication:
+        replSetName: "rs0"
+    ```
+* ### 管理複寫集
 <br />
 
 範例程式
