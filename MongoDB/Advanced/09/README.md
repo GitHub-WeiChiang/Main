@@ -379,6 +379,63 @@
         replSetName: "rs0"
     ```
 * ### 管理複寫集
+    * ### 移除成員
+        ```
+        # MongoDB Shell
+        
+        rs.remove("IP:PORT_NUMBER")
+        ```
+        ```
+        # MongoDB Shell: 查看複寫集狀態
+        
+        rs.status()
+        rs.hello()
+        ```
+    * ### 指定 Primary: 透過優先權限設定 (預設所有成員皆為 1)。
+        * ### Step 1: 連線至當前 Primary 並查看期望成為 Primary 的 "_id" 編號 (成員陣列索引值)。
+            ```
+            mongosh --host IP:PORT_NUMBER
+            
+            rs.status()
+            ```
+        * ### Step 2: 修改優先權限。
+            ```
+            # MongoDB Shell: 這裡和 Step 1 是同一個終端機
+            
+            cfg = rs.conf()
+            cfg.members["填入 Step 1 所查詢到的那個 _id"].priority = 2
+            rs.reconfig(cfg)
+            ```
+    * ### 降級 Primary: 罷免當前 Primary 為 Secondary，使複寫集重新選出新的 Primary。
+        ```
+        # MongoDB Shell: 連線至當前 Primary
+        
+        rs.stepDown()
+        ```
+    * ### 取消投票資格
+        * ### 一個複寫集中最多只有 7 個成員可以投票，預設是前 7 個加入的成員。
+        ```
+        # MongoDB Shell: 透過 hello() 查看投票資格
+        
+        rs.hello()
+        ```
+        * ### 具投票權的成員會出現在 hosts 欄位，反之不具投票權的成員會出現在 passives 欄位，而 Arbiter 會出現在 arbiters 欄位。
+        * ### 當具投票權的成員數量已達 7 名時，將無法再加入 Arbiter (硬要 +1 會噴錯)。
+        * ### Step 1: 連線至當前 Primary 並查看期望取消投票資格成員的 "_id" 編號 (成員陣列索引值)。
+            ```
+            mongosh --host IP:PORT_NUMBER
+            
+            rs.hello()
+            ```
+        * ### Step 2: 取消投票資格。
+            ```
+            # MongoDB Shell: 這裡和 Step 1 是同一個終端機
+            
+            cfg = rs.conf()
+            cfg.members["填入 Step 1 所查詢到的那個 _id"].votes = 0
+            cfg.members["填入 Step 1 所查詢到的那個 _id"].priority = 0
+            rs.reconfig(cfg)
+            ```
 <br />
 
 範例程式
