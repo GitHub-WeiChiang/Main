@@ -61,7 +61,7 @@
     * ### Oplog 資料表大小固定，故新資料會覆蓋舊資料。
     * ### Oplog 預設大小基本滿足多數需求，但必要時還是可透過指令修改。
     ```
-    // mongosh
+    // MongoDB Shell
     
     // 查詢當前 Oplog 大小
     rs.printReplicationInfo()
@@ -78,10 +78,69 @@
     // 查詢結果中: {op: "i"} 表示 insert; {op: "u"} 表示 update。
     ```
 * ### 模擬部署演練
-    * ### 
+    * ### PSS 架構
+        * ### Step 1: 分別建立 data/0、data/1、data/2 三個目錄。
+        * ### Step 2: 啟動複寫集成員。
+            ```
+            // 終端機 1 號: 啟動第一個 MongoDB Server
+            mongod --port 20000 --dbpath ./data/0 --replSet rs0
+            ```
+            ```
+            // 終端機 2 號: 啟動第二個 MongoDB Server
+            mongod --port 20001 --dbpath ./data/1 --replSet rs0
+            ```
+            ```
+            // 終端機 3 號: 啟動第三個 MongoDB Server
+            mongod --port 20002 --dbpath ./data/2 --replSet rs0
+            ```
+        * ### Step 3: 初始化複寫集。
+            ```
+            // 終端機 4 號: 使用 MongoDB Shell 連線埠號 20000 Server
+            mongosh --port 20000
+          
+            // 初始化複寫集: 回傳 "ok: 1" 表示複寫集初始化成功，
+            // 且提示符從 "test>" 變為 "rs0 [direct: other] test>"，
+            // 按下 enter 後則變為 "rs0 [direct: primary] test>"。
+            rs.initiate()
+            ```
+        * ### Step 4: 增加複寫集成員。
+            ```
+            // 於終端機 4 號操作，成功後 PSS 架構的複寫集基本部署完成。
+            
+            rs.add("localhost:20001")
+            rs.add("localhost:20002")
+            ```
+        * ### Step 5: 查看複寫集狀態。
+            ```
+            // 於終端機 4 號操作
+            
+            rs.status()
+            ```
+        * ### Step 6: 讓 Python 自動連線 Primary (6_3_1.py)。
+        * ### Test - Step 1: 關閉 Primary。
+            * ### 先手動關閉終端機 1 號。
+            ```
+            // MongoDB Shell: 連接到 Primary 使用以下命令來關閉伺服器
+            
+            mongosh --port 20000
+            
+            // db.shutdownServer() 命令需要在 admin 數據庫中執行，
+            // 因為只有具有 shutdown 權限的用戶才能夠執行這個操作，
+            // 預設情況下只有 admin 數據庫中的管理員用戶才擁有這個權限。
+            use admin
+            db.shutdownServer()
+            ```
+        * ### Test - Step 2: 查看複寫集狀態。
+            ```
+            // MongoDB Shell
+            
+            mongosh --port 20001
+            
+            rs.status()
+            ```
 <br />
 
 範例程式
 =====
-* ### 
+* ### 6_3_1.py: 讓 Python 自動連線 Primary。
 <br />
