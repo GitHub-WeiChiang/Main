@@ -47,6 +47,38 @@
         * ### 複寫集初始化時。
         * ### 手動降級 Primary 或修改複寫集設定時 (例如調整得票優先權)。
         * ### Primary 未回應心跳協定時 (預設為 10 秒)。
+* ### 仲裁
+    * ### Arbiter 能做的事 Secondary 都能做，且 Secondary 還可以儲存 Primary 的資料，Arbiter 平常根本沒事做，跟我上班一樣。
+    * ### 為什麼複寫集中需要 Arbiter ? 唯一理由: 系統建置成本考量。
+* ### 心跳
+    * ### 心跳協定 (Heartbeat) 使複寫集成員可確認其它成員狀態。
+    * ### 預設心跳間隔時間為 2 秒，且對方必須在 10 秒內回應，沒回應表示無法連線。
+    * ### 當現行 Primary 因故無法在這定時間內回應心跳，複寫即將啟動選舉程序選出新的 Primary。
+* ### Oplog
+    * ### 當 Primary 資料異動時，該資料並不是同步複寫到所有成員，而是寫入 Primary 的 Oplog 資料表。
+    * ### Secondary 成員 (們) 會在每次心跳時間時順便檢查 Primary 的 Oplog，若有新指令則以非同步方式抓回到自己的 Oplog 並執行。
+    * ### 除 Arbiter 外，所有 Secondary 成員都有自己的 Oplog，故毋須每次都向 Primary 請求 Oplog，也可以向其它的 Secondary 取得新資料。
+    * ### Oplog 資料表大小固定，故新資料會覆蓋舊資料。
+    * ### Oplog 預設大小基本滿足多數需求，但必要時還是可透過指令修改。
+    ```
+    // mongosh
+    
+    // 查詢當前 Oplog 大小
+    rs.printReplicationInfo()
+    
+    // 查詢未被覆蓋的異動指令
+    // Oplog 資料表位於 local 資料庫中
+    use local
+    // 異動指令位於 Oplog 資料表的 rs 欄位
+    db.oplog.rs.find()
+    
+    // 查詢指定資料表的異動指令
+    // 要異動的資料表位於 ns 欄位
+    db.oplog.rs.find({"ns": "Database_Name.Collection_Name"})
+    // 查詢結果中: {op: "i"} 表示 insert; {op: "u"} 表示 update。
+    ```
+* ### 模擬部署演練
+    * ### 
 <br />
 
 範例程式
