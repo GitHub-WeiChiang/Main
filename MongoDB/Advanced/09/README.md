@@ -116,7 +116,7 @@
             
             rs.status()
             ```
-        * ### Step 6: 讓 Python 自動連線 Primary (6_3_1.py)。
+        * ### 自動連線 Primary: 6_3_1.py。
         * ### Test - Step 1: 關閉 Primary。
             * ### 先手動關閉終端機 1 號。
             ```
@@ -291,9 +291,33 @@
             // 並且在此之前，其它新的連線仍然可以建立。
             ```
 * ### 讀取偏好
+    * ### 預設客戶端 "存取" 資料都必須從 Primary 進行。
+    * ### 可以透過設定 (讀取偏好)，讓客戶端從 Secondary 讀取資料 (僅限)。
+    ```
+    # MongoDB Shell
+    
+    # 優先將讀取請求發送到從屬節點而不是主節點，
+    # 其設置了讀取偏好為 "secondary"，這意味著希望讀取操作在從屬節點上執行。
+    db.getMongo().setReadPref("secondary")
+    
+    # 要求读取操作优先发送到主节点 (Primary Node)。
+    db.getMongo().setReadPref("primary")
+    ```
+    * ### setReadPref("secondary"): 對分散讀取負載、提高性能和減少主節點的負載很有用，但需要注意從屬節點可能不總是具有最新的數據。
+    * ### setReadPref("primary"): 确保读取操作总是返回最新的数据，需要注意可能会增加主节点的负载，且在某些情况若主节点不可用，读取偏好设置为 "primary" 可能会导致读取操作失败。
+    | 偏好參數               | 說明                                                                                |
+    |--------------------|-----------------------------------------------------------------------------------|
+    | primary            | 只能從 Primary 讀取資料。                                                                 |
+    | primaryPreferred   | Primary 優先，若複寫集中沒有 Primary 則改由 Secondary 讀取。                                      |
+    | secondary          | 只能從 Secondary 讀取資料。                                                               |
+    | secondaryPreferred | Secondary 優先，若複寫集中沒有 Secondary 則改由 Primary 讀取。                                    |
+    | nearest            | 從評分項目最好的成員中隨機挑選一個作為資料讀取對象 (不區分 Primary 與 Secondary)，評分項目包含網路速度、硬碟 I/O 速度、CPU 效能等。 |
+    * ### 透過 readPreference 參數設定讀取偏好: 9_3_3.py。
+    * ### 註: "讀取偏好設定" 的修改 "僅對單一客戶端有效"。
 <br />
 
 範例程式
 =====
-* ### 6_3_1.py: 讓 Python 自動連線 Primary。
+* ### 6_3_1.py: 自動連線 Primary。
+* ### 9_3_3.py: 透過 readPreference 參數設定讀取偏好。
 <br />
