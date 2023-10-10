@@ -130,6 +130,13 @@
             // 預設情況下只有 admin 數據庫中的管理員用戶才擁有這個權限。
             use admin
             db.shutdownServer()
+          
+            // 當使用 db.shutdownServer() 指令關閉 MongoDB 伺服器時，
+            // 其會嘗試平滑地關閉伺服器，這意味著 MongoDB 會等待當前的操作完成，
+            // 然後再進行關閉，這樣做是為了確保不會丟失任何正在進行的寫入操作或其他重要的資料，
+            // 因此，即使執行了 db.shutdownServer()，連線仍然處於活動狀態，
+            // 直到當前的操作完成，而當前的操作完成，MongoDB 伺服器才會關閉，
+            // 並且在此之前，其它新的連線仍然可以建立。
             ```
         * ### Test - Step 2: 查看複寫集狀態。
             ```
@@ -141,6 +148,149 @@
             // 查看複寫集狀態
             rs.status()
             ```
+        * ### 關閉流程
+            ```
+            // MongoDB Shell
+            
+            // 連線指定埠號的 Server
+            mongosh --port PORT_NUMBER
+            
+            // db.shutdownServer() 命令需要在 admin 數據庫中執行，
+            // 因為只有具有 shutdown 權限的用戶才能夠執行這個操作，
+            // 預設情況下只有 admin 數據庫中的管理員用戶才擁有這個權限。
+            use admin
+            db.shutdownServer()
+          
+            // 當使用 db.shutdownServer() 指令關閉 MongoDB 伺服器時，
+            // 其會嘗試平滑地關閉伺服器，這意味著 MongoDB 會等待當前的操作完成，
+            // 然後再進行關閉，這樣做是為了確保不會丟失任何正在進行的寫入操作或其他重要的資料，
+            // 因此，即使執行了 db.shutdownServer()，連線仍然處於活動狀態，
+            // 直到當前的操作完成，而當前的操作完成，MongoDB 伺服器才會關閉，
+            // 並且在此之前，其它新的連線仍然可以建立。
+            ```
+    * ### PSA 架構
+        * ### MongoDB 5.0 開始，複寫集至少需要四個成員後才能加入 Arbiter。
+        * ### 上述限制是為了防止在三成員 PSA 架構中，Primary 或 Secondary 其一故障，各戶端寫入資料造成嚴重甚至無限期寫入延遲。
+        * ### 上述限制可透過指令解除。
+        * ### Step 1: 分別建立 data/0、data/1、data/2 三個目錄。
+        * ### Step 2: 啟動複寫集成員。
+            ```
+            // 終端機 1 號: 啟動第一個 MongoDB Server
+            mongod --port 20000 --dbpath ./data/0 --replSet rs0
+            ```
+            ```
+            // 終端機 2 號: 啟動第二個 MongoDB Server
+            mongod --port 20001 --dbpath ./data/1 --replSet rs0
+            ```
+            ```
+            // 終端機 3 號: 啟動第三個 MongoDB Server
+            mongod --port 20002 --dbpath ./data/2 --replSet rs0
+            ```
+            ```
+            // 終端機 4 號: 啟動第四個 MongoDB Server
+            mongod --port 20003 --dbpath ./data/3 --replSet rs0
+            ```
+        * ### Step 3: 初始化複寫集。
+            ```
+            // 終端機 5 號: 使用 MongoDB Shell 連線埠號 20000 的 Server
+            mongosh --port 20000
+          
+            // 初始化複寫集: 回傳 "ok: 1" 表示複寫集初始化成功，
+            // 且提示符從 "test>" 變為 "rs0 [direct: other] test>"，
+            // 按下 enter 後則變為 "rs0 [direct: primary] test>"。
+            rs.initiate()
+            ```
+        * ### Step 4: 增加複寫集成員。
+            ```
+            // 於終端機 5 號操作，成功後 PSS 架構的複寫集基本部署完成。
+            
+            rs.add("localhost:20001")
+            rs.add("localhost:20002")
+            ```
+        * ### Step 5: 查看複寫集狀態。
+            ```
+            // 於終端機 5 號操作
+            
+            rs.status()
+            ```
+        * ### Step 6: 修改系統預設限制 (解除三成員複寫集無法加入 Arbiter 的限制)。
+            ```
+            // MongoDB Shell: 於終端機 5 號操作
+            
+            use admin
+            ```
+            * ### 方法一
+                ```
+                // MongoDB Shell: 於終端機 5 號操作
+                
+                rs0 [direct: primary] admin> db.adminCommand({
+                ...     // 設置默認的讀取寫入關注 (1 表示使用默認的寫入關注設置)
+                ...     "setDefaultRWConcern": 1,
+                ...     // 指定默認的寫入關注設置 (寫入關注設置為 {"w": 1} 表示執行寫入操作時至少需確保一個節點已經成功接收該寫入操作)
+                ...     "defaultWriteConcern": {
+                ...         "w": 1
+                ...     }
+                ... })
+                ```
+                * ### 缺點: 資料異動寫入 Primary 後就會回傳確認通知給客戶端，不在乎 Secondary 是否同步，若尚未同步且 Primary 突然故障，此時會產生新的 Primary，而當故障 (舊) 的 Primary 恢復運作後，該筆在故障前尚未同步的資料會 Rollback，導致數據遺失。
+            * ### 方法二
+                ```
+                // MongoDB Shell: 於終端機 5 號操作
+                
+                rs0 [direct: primary] admin> db.adminCommand({
+                ...     "setDefaultRWConcern": 1,
+                ...     // 寫入關注設置為 {"w": "majority"} 表示執行寫入操作時需確保大多數 (majority) 節點成功接收到這些寫入操作。
+                ...     "defaultWriteConcern": {
+                ...         "w": "majority"
+                ...     }
+                ... })
+                ```
+                * ### 缺點: 資料異動寫入 Primary 後還需同步到大多數的 Secondary 後才會回傳確認給客戶端，但若 Secondary 剛好故障，客戶端將無法接收確認通知，導致進入無限期等待 (此為三成員架構預設無法加入 Arbiter 原因)。
+            * ### 方法三
+                ```
+                // MongoDB Shell: 於終端機 5 號操作
+                
+                rs0 [direct: primary] admin> db.adminCommand({
+                ...     "setDefaultRWConcern": 1,
+                ...     // 寫入關注設置為 {"w": "majority", "wtimeout": 2000} 表示執行寫入操作時，
+                ...     // 需確保大多數節點成功接收到這些寫入操作，同時設置了寫入操作的超時時間為 2 秒 (2000 毫秒)，
+                ...     // 如果在 2 秒內未能達到所需的寫入關注，則將引發超時錯誤。
+                ...     "defaultWriteConcern": {
+                ...         "w": "majority",
+                ...         "wtimeout": 2000
+                ...     }
+                ... })
+                ```
+                * ### 缺點: ```"wtimeout": 2000``` 用於確保客戶堆最晚會在 2 秒後收到確認通知，確保其不會進入無限期等待，但由於 2 秒的時間間隔，當客戶端高頻寫入資料時會造成寫入確認的延遲效果不斷累積。
+            * ### 註: "建議" 在 Primary 與 Secondary 都正常運作的情況下，採用 "方法三" 進行配置。
+        * ### Step 7: 在複寫集中加入 Arbiter 並查看結果狀態。
+            ```
+            // MongoDB Shell
+            
+            rs.addArb("localhost:20003")
+            rs.status()
+            ```
+        * ### 關閉流程
+            ```
+            // MongoDB Shell
+            
+            // 連線指定埠號的 Server
+            mongosh --port PORT_NUMBER
+            
+            // db.shutdownServer() 命令需要在 admin 數據庫中執行，
+            // 因為只有具有 shutdown 權限的用戶才能夠執行這個操作，
+            // 預設情況下只有 admin 數據庫中的管理員用戶才擁有這個權限。
+            use admin
+            db.shutdownServer()
+          
+            // 當使用 db.shutdownServer() 指令關閉 MongoDB 伺服器時，
+            // 其會嘗試平滑地關閉伺服器，這意味著 MongoDB 會等待當前的操作完成，
+            // 然後再進行關閉，這樣做是為了確保不會丟失任何正在進行的寫入操作或其他重要的資料，
+            // 因此，即使執行了 db.shutdownServer()，連線仍然處於活動狀態，
+            // 直到當前的操作完成，而當前的操作完成，MongoDB 伺服器才會關閉，
+            // 並且在此之前，其它新的連線仍然可以建立。
+            ```
+* ### 讀取偏好
 <br />
 
 範例程式
