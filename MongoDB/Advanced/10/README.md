@@ -54,6 +54,31 @@
         // 開啟平衡器
         sh.enableBalancing("<database>.<collector>")
         ```
+* ### 選擇片鍵 Shard Key
+    * ### 分片的目的是為了加快資料存取的時間，分散式資料庫並不希望資料存取都集中在某一部主機，最好是一半一半。
+    * ### 決定哪些資料儲存在哪不分片主機是依靠資料排序 (其為決定資料如何切開的重要依據)。
+    * ### 資料在資料庫中的排序方式憑藉的是索引。
+    * ### 一個資料表可以建立很多索引，但資料切割的方式只能有一種，在眾多排序方式中被選擇作為資料分割依據的排序方式就稱為 "片鍵 Shard Key"。
+    * ### 若所選 Shard Key 使得部分主機相當於備份用途，沒有負擔任何存取需求，則該 Shard Key 就是一個不好的 Shard Key，壞 Shard Key。
+    * ### 若找不到合適的 Shard Key，可以選擇一個欄位 (例如時間欄位或 _id 欄位) 新增一個 hashed 索引用於 Shard Key。
+    * ### 好的 Shard Key 在理想上要能夠平均分散存取目標於不同分片主機上，反之壞的 Shard Key 會使存取集中於某一分片主機。
+    * ### "_id" 欄位作為 Shard Key 本質上是合適的，因其內容不重複特性，使得內容相異數 (Cardinality) 會非常高。
+    * ### 因 "_id" 欄位由預設的 ObjectId() 函數生成，此函數為單調遞增函數，所以排序後的新值一定位於端點，若要使用 _id 為 Shard Key，應使用 Hashed Shard Key。
+    * ### Hashed Shard Key 必須先建立 hashed 索引，建立指令如下 (Compass 不支援)，索引建立完成後就可以使用 ```sh.shardCollection()``` 選擇 "_id" 欄位為 Shard Key。
+        ```
+        // MongoDB Shell
+        
+        // 在指定資料庫的集合中創建一個哈希索引，
+        // 索引的目標字段是 "_id" 並且使用 "hashed" 選項，
+        // 使 MongoDB 用哈希函數對 "_id" 字段的值進行哈希處理以便更好地支持分片操作，
+        // 哈希分片可以平均地分散數據有助於提高性能和擴展性。
+        db.collection.createIndex({"_id": "hashed"})
+        // 將指定資料庫的集合配置為分片集合，
+        // 通過使用哈希分片鍵 "_id" 使 MongoDB 根據 "_id" 字段的哈希值將數據分散到不同的分片上，
+        // 實現數據的平均分布 (理想) 以減少單一分片上的數據量，
+        // 從而提高性能和擴展性。
+        sh.shardCollection("db.collection", {"_id": "hashed"})
+        ```
 <br />
 
 範例程式
