@@ -79,6 +79,27 @@
         // 從而提高性能和擴展性。
         sh.shardCollection("db.collection", {"_id": "hashed"})
         ```
+    * ### 分片之後的資料查詢操作模式: 廣播操作 (Broadcast) 與目標操作 (Targeted Operations)。
+    * ### 廣播操作 (Broadcast)
+        * ### 查詢條件中 "不包含 Shard Key"。
+        * ### 因無法確定資料所在位置，僅能使用廣播方式詢問每一部分片主機。
+        * ### 需等待每部分片主機皆回應，才能將結果回傳，耗時較長。
+        * ### 若查詢條件又不包含被設定索引的欄位，各分片主機還需以線性搜尋方式遍歷各 Chunk 中的資料。
+    * ### 目標操作 (Targeted Operations)
+        * ### 查詢條件中 "包含 Shard Key"。
+        * ### 直接針對特定分片主機進行資料讀取。
+    * ### MongoDB 的 Shard Key 支援 "複合式片鍵" (搭配 "_id" 時，"_id" 需設定 hashed 索引並放在後面)。
+        ```
+        // MongoDB Shell
+        
+        // 創建一個包含字段 name 和 _id 的複合索引，
+        // name 字段使用升序索引，而 _id 字段使用哈希索引。
+        db.collection.createIndex({"name": 1, "_id": "hashed"})
+        // 將集合分片，分散數據存儲至多個 MongoDB 分片伺服器，實現水平擴展，
+        // {"name": 1, "_id": "hashed"} 為用於分片的鍵，
+        // MongoDB 將使用 name 字段和 _id 字段的值來確定文檔應該存儲在哪個分片上。
+        sh.shardCollection("db.collection", {"name": 1, "_id": "hashed"})
+        ```
 <br />
 
 範例程式
