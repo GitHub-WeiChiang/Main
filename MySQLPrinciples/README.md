@@ -1297,7 +1297,7 @@ mysql> select * from checkDemoTable;
         WHERE country_id = 103
         ORDER BY last_update DESC;
         ```
-    * ### We have a newly entry added to the ````city`` table.
+    * ### We have a newly entry added to the ```city``` table.
     * ### Finally, delete the entry that has been added through the ```usa_cities``` view.
         ```
         DELETE FROM usa_cities
