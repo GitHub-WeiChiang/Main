@@ -13,6 +13,7 @@ MySQLPrinciples
 * ### 更新篇: PostgreSQL 9.4 引入特性: FILTER 子句 (夜深了...)
 * ### 分頁篇: 有的時候總是會遇到要分頁的情況 (人生迷茫中...)
 * ### 正規篇: 資料庫正規化 (就像埋在霧區裡的地雷，只要誤踩瞬間便會粉身碎骨。)
+* ### 視圖篇: Creating PostgreSQL Updatable Views (MBTI 我是 ISFJ-T)
 * ### Chapter01 裝作自己是個小白 -- 初識 MySQL
 * ### Chapter02 MySQL 的調控按鈕 -- 啟動選項和系統變數
 * ### Chapter03 字元集和比較規則
@@ -1259,6 +1260,51 @@ mysql> select * from checkDemoTable;
     * ### 第一正規化 (First Normal Form): 一個欄位只能有單一值、消除意義上重複的欄位、決定主鍵。
     * ### 第二正規化 (Second Normal Form): 消除部分相依。
     * ### 第三正規化 (Third Normal Form): 消除遞移相依。
+<br />
+
+視圖篇: Creating PostgreSQL Updatable Views (MBTI 我是 ISFJ-T)
+=====
+* ### Summary: in this tutorial, we will discuss the requirements for updatable views and show you how to create updatable views in PostgreSQL.
+* ### A PostgreSQL view is updatable when it meets the following conditions:
+    * ### The defining query of the view must have exactly one entry in the ```FROM``` clause, which can be a table or another updatable view.
+    * ### The defining query must not contain one of the following clauses at the top level: GROUP BY, HAVING, LIMIT, OFFSET, DISTINCT, WITH, UNION, INTERSECT, and EXCEPT.
+    * ### The selection list must not contain any window function , any set-returning function, or any aggregate function such as SUM, COUNT, AVG, MIN, and MAX.
+* ### An updatable view may contain both updatable and non-updatable columns. If you try to insert or update a non-updatable column, PostgreSQL will raise an error.
+* ### When you execute an update operation such as INSERT, UPDATE or DELETE, PosgreSQL will convert this statement into the corresponding statement of the underlying table.
+* ### In case you have a WHERE condition in the defining query of a view, you still can update or delete the rows that are not visible through the view. However, if you want to avoid this, you can use CHECK OPTION when you define the view.
+* ### When you perform update operations, you must have corresponding privilege on the view, but you don’t need to have privilege on the underlying table. However, view owners must have the relevant privilege of the underlying table.
+* ### PosgreSQL updatable views example
+    * ### First, create a new updatable view name ```usa_cities``` using ```CREATE VIEW``` statement. This view contains all cities in the ```city``` table locating in the USA whose country id is 103.
+        ```
+        CREATE VIEW usa_cities AS
+        SELECT city, country_id
+        FROM city
+        WHERE country_id = 103;
+        ```
+    * ### Next, check the data in the ```usa_cities``` view by executing the following ```SELECT``` statement:
+        ```
+        SELECT *
+        FROM usa_cities;
+        ```
+    * ### Then, insert a new ```city``` to the city table through the ```usa_cities``` view using the following ```INSERT``` statement:
+        ```
+        INSERT INTO usa_cities (city, country_id) VALUES ('San Jose', 103);
+        ```
+    * ### After that, check the contents of the ```city``` table:
+        ```
+        SELECT city, country_id
+        FROM city
+        WHERE country_id = 103
+        ORDER BY last_update DESC;
+        ```
+    * ### We have a newly entry added to the ````city`` table.
+    * ### Finally, delete the entry that has been added through the ```usa_cities``` view.
+        ```
+        DELETE FROM usa_cities
+        WHERE city = 'San Jose';
+        ```
+    * ### The entry has been deleted from the ```city``` table through the ```usa_cities``` view.
+    * ### In this tutorial, we have shown how to create PostgreSQL updatable views and introduced you to conditions that views must satisfy to become automatically updatable
 <br />
 
 Reference
