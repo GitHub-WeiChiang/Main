@@ -88,6 +88,11 @@
     * ### 目標操作 (Targeted Operations)
         * ### 查詢條件中 "包含 Shard Key"。
         * ### 直接針對特定分片主機進行資料讀取。
+    * ### 思考: 當 "_id" 作 Shard Key，會頻繁地使用其為查詢條件嗎 (尤其該內容為 ObjectId 時)。
+        * ### 通常似乎是 "不會" (進而產生下方敘述)。
+        * ### 使用 "_id" 作 Shard Key 僅僅是讓資料有效地分散在各分片主機。
+        * ### 使用 "_id" 作 Shard Key 對於查詢效率上並沒有任何優勢。
+        * ### 因此 MongoDB 的 Shard Key 支援 "複合式片鍵"。 
     * ### MongoDB 的 Shard Key 支援 "複合式片鍵" (搭配 "_id" 時，"_id" 需設定 hashed 索引並放在後面)。
         ```
         // MongoDB Shell
