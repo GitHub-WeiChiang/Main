@@ -105,6 +105,10 @@
         // MongoDB 將使用 name 字段和 _id 字段的值來確定文檔應該存儲在哪個分片上。
         sh.shardCollection("db.collection", {"name": 1, "_id": "hashed"})
         ```
+* ### 模擬部署演練
+    * ### 分片叢集組成: 兩個分片主機、一個 Config Server 與兩個 Router。
+    * ### 複寫集架構: PSS。
+    * ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/master/MongoDB/Advanced/10/Architecture.png)
 <br />
 
 範例程式
