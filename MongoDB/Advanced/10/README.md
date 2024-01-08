@@ -112,66 +112,69 @@
     * ### Step 1: 分別建立 data/rs0/0、data/rs0/1、data/rs0/2 三個目錄。
     * ### Step 2: 啟動第一個分片主機 (rs0) 的複寫集。
         ```
+        // 終端機 1 號
         mongod --port 20000 --dbpath ./data/rs0/0 --replSet rs0 --shardsvr
         ```
         ```
+        // 終端機 2 號
         mongod --port 20001 --dbpath ./data/rs0/1 --replSet rs0 --shardsvr
         ```
         ```
+        // 終端機 3 號
         mongod --port 20002 --dbpath ./data/rs0/2 --replSet rs0 --shardsvr
         ```
     * ### Step 3: 分別建立 data/rs1/0、data/rs1/1、data/rs1/2 三個目錄。
     * ### Step 4: 啟動第二個分片主機 (rs1) 的複寫集。
         ```
-        // 終端機 1 號
+        // 終端機 4 號
         mongod --port 30000 --dbpath ./data/rs1/0 --replSet rs1 --shardsvr
         ```
         ```
-        // 終端機 2 號
+        // 終端機 5 號
         mongod --port 30001 --dbpath ./data/rs1/1 --replSet rs1 --shardsvr
         ```
         ```
-        // 終端機 3 號
+        // 終端機 6 號
         mongod --port 30002 --dbpath ./data/rs1/2 --replSet rs1 --shardsvr
         ```
     * ### Step 5: 分別建立 data/cfg/0、data/cfg/1、data/cfg/2 三個目錄。
     * ### Step 6: 啟動 Config Server 的複寫集。
         ```
-        // 終端機 4 號
+        // 終端機 7 號
         mongod --port 10000 --dbpath ./data/cfg/0 --replSet cfg --configsvr
         ```
         ```
-        // 終端機 5 號
+        // 終端機 8 號
         mongod --port 10001 --dbpath ./data/cfg/1 --replSet cfg --configsvr
         ```
         ```
-        // 終端機 6 號
+        // 終端機 9 號
         mongod --port 10002 --dbpath ./data/cfg/2 --replSet cfg --configsvr
         ```
     * ### Step 7: 初始化複寫集。
         ```
-        // 終端機 7 號
-        
+        // 終端機 10 號
         mongosh --port 20000
         rs.initiate()
         rs.add("localhost:20001")
         rs.add("localhost:20002")
         rs.status()
-        exit
-        
+        ```
+        ```
+        // 終端機 11 號
         mongosh --port 30000
         rs.initiate()
         rs.add("localhost:30001")
         rs.add("localhost:30002")
         rs.status()
-        exit
-        
+        ```
+        ```
+        // 終端機 12 號
         mongosh --port 10000
         rs.initiate()
         rs.add("localhost:10001")
         rs.add("localhost:10002")
         rs.status()
-        exit
         ```
     * ### 關閉流程
         ```
