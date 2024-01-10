@@ -32,9 +32,11 @@ APScheduler
         aScheduler.start()
     ```
     ```
-    Hello! The time is: 2024-01-10 19:59:58.202513
-    Hello! The time is: 2024-01-10 20:00:01.200105
-    Hello! The time is: 2024-01-10 20:00:04.201309
+    Hello! The time is: 2024-01-10 20:07:21.513073
+    Hello! The time is: 2024-01-10 20:07:24.512626
+    Hello! The time is: 2024-01-10 20:07:27.512850
+    Hello! The time is: 2024-01-10 20:07:30.512951
+    Hello! The time is: 2024-01-10 20:07:33.513207
     ```
     * ### BlockingScheduler 是阻塞性的调度器，调用 start 方法会阻塞当前进程。
     * ### my_clock 函数是需要定时调度的任务代码。
