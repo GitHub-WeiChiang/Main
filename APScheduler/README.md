@@ -53,4 +53,119 @@ APScheduler
         * ### interval (間隔): 觸發任務運行的時間間隔。
         * ### cron (週期): 觸發任務運行的週期。
     * ### 一個任務也可以設定多種觸發器 (複合觸發器)，例如可以設定同時滿足所有觸發器條件而觸發或者滿足一項即觸發。
+* ### 觸發器詳解
+    * ### date (在指定時間點觸發任務): data_demo.py
+        ```
+        from datetime import date
+        from apscheduler.schedulers.blocking import BlockingScheduler
+        
+        aBlockingScheduler = BlockingScheduler()
+        
+        
+        def my_job(text):
+            print(text)
+        
+        
+        # run at: 2024-01-15 00:00:00
+        aBlockingScheduler.add_job(
+            my_job,
+            'date',
+            run_date=date(2024, 1, 15),
+            args=['text']
+        )
+        
+        aBlockingScheduler.start()
+        ```
+        * ### run_date: 可以是 date 類型、datetime 類型或文本類型。
+            * ### datetime 類型 (用於精確時間)
+                ```
+                # 在 2024 年 1 月 1 日 00:00:00 執行
+                aBlockingScheduler.add_job(
+                    my_job,
+                    'date',
+                    run_date=datetime(2024, 1, 1, 00, 00, 00),
+                    args=['text']
+                )
+                ```
+            * ### 文本類型
+                ```
+                aBlockingScheduler.add_job(
+                    my_job,
+                    'date',
+                    run_date='2023-01-01 00:00:00',
+                    args=['text']
+                )
+                ```
+            * ### 未指定時間 (立即執行)
+                ```
+                aBlockingScheduler.add_job(my_job, args=['text'])
+                ```
+    * ### interval (週期觸發任務): interval_demo_1.py
+        ```
+        from apscheduler.schedulers.blocking import BlockingScheduler
+        
+        
+        def job_function():
+            print("Hello World")
+        
+        
+        aBlockingScheduler = BlockingScheduler()
+        
+        # 每 2 小時觸發
+        aBlockingScheduler.add_job(job_function, 'interval', hours=2)
+        
+        aBlockingScheduler.start()
+        ```
+        * ### 可以框定週期開始時間 start_date 和結束時間 end_date。
+            ```
+            # 將週期觸發的時間範圍設定在 2024-01-01 00:00:00 至 2024-01-02 00:00:00
+            aBlockingScheduler.add_job(job_function, 'interval', hours=2, start_date='2024-01-01 00:00:00', end_date='2024-01-02 00:00:00')
+            ```
+        * ### 可以通過 scheduled_job() 裝飾器實現: interval_demo_2.py
+            ```
+            from apscheduler.schedulers.blocking import BlockingScheduler
+            
+            aBlockingScheduler = BlockingScheduler()
+            
+            
+            @aBlockingScheduler.scheduled_job('interval', id='my_job_id', hours=2)
+            def job_function():
+                print("Hello World")
+            
+            
+            aBlockingScheduler.start()
+            ```
+        * ### jitter 振動參數: interval_demo_3.py
+            * ### 給每次觸發添加一個隨機浮動秒數，適用於多服務器，避免同時運行造成服務擁堵。
+    * ### cron (強大的類 crontab 表達式)
+        ```
+        class apscheduler.triggers.cron.CronTrigger(
+            year=None,
+            month=None,
+            day=None,
+            week=None,
+            day_of_week=None,
+            hour=None,
+            minute=None,
+            second=None,
+            start_date=None,
+            end_date=None,
+            timezone=None,
+            jitter=None
+        )
+        ```
+        * ### 當省略時間參數時，在顯式指定參數之前的參數會被設定爲 "*"，之後的參數會被設定爲最小值。
+        * ### week 和 day_of_week 的最小值爲 "*"。
+        * ### 例: 設定 ```day=1, minute=20``` 等同於設定 ```year='*', month='*', day=1, week='*', day_of_week='*', hour='*', minute=20, second=0```，即每個月的第一天，且當分鐘到達 20 時就觸發。
+        * ### 表達式類型
+            | 表達式    | 參數類型 | 描述                           |
+            |--------|------|------------------------------|
+            | *      | 所有   | 通配符 (例: "minutes=*" 即每分鐘觸發)。 |
+            | */a    | 所有   | 可被 a 整除的通配符。                 |
+            | a-b    | 所有   | 範圍 a-b 觸發。                   |
+            | a-b/c  | 所有   | 範圍 a-b 且可被 c 整除時觸發。          |
+            | xth y  | 日    | 第幾個星期幾觸發 (x 爲第幾個，y 爲星期幾)。    |
+            | last x | 日    | 一個月中最後個星期幾觸發。                |
+            | last   | 日    | 一個月的最後一天觸發。                  |
+            | x,y,z  | 所有   | 組合表達式，可以組合確定值或上方的表達式。        |
 <br />
