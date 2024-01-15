@@ -119,7 +119,13 @@ APScheduler
         * ### 可以框定週期開始時間 start_date 和結束時間 end_date。
             ```
             # 將週期觸發的時間範圍設定在 2024-01-01 00:00:00 至 2024-01-02 00:00:00
-            aBlockingScheduler.add_job(job_function, 'interval', hours=2, start_date='2024-01-01 00:00:00', end_date='2024-01-02 00:00:00')
+            aBlockingScheduler.add_job(
+                job_function,
+                'interval',
+                hours=2,
+                start_date='2024-01-01 00:00:00',
+                end_date='2024-01-02 00:00:00'
+            )
             ```
         * ### 可以通過 scheduled_job() 裝飾器實現: interval_demo_2.py
             ```
