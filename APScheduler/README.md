@@ -359,7 +359,7 @@ APScheduler
         
         aBackgroundScheduler = BackgroundScheduler()
         
-        # ..這裏可以添加任務
+        # 這裏可以添加任務...
         
         aBackgroundScheduler.configure(
             jobstores=jobstores,
