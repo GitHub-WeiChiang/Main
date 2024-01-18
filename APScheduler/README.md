@@ -386,4 +386,64 @@ APScheduler
         * ### MemoryJobStore 不會序列化任務；ProcessPoolExecutor 會序列化任務。
     * ### 在程序初始化時，若任務是從數據庫讀取，那麼必須爲每個任務定義一個明確的 ID，並且使用 ```replace_existing=True```，否則每次重啓程序，都會得到一份新的任務拷貝，也就意味着任務的狀態不會保存。
     * ### 若想要立刻運行任務，可以在添加任務時省略 trigger 參數。
+* ### 移除任務
+    * ### 如果想從調度器移除一個任務，需從相應的任務儲存器中移除它。
+    * ### 移除任務的方法
+        * ### 調用 remove_job() 方法，參數爲任務 ID。
+        * ### 在通過 add_job() 創建的任務實例上調用 remove() 方法。
+    * ### 第二種方法較方便，但必須在創建任務實例時將其保存在變量中。
+    * ### 對於通過 scheduled_job() 創建的任務則只能選擇第一種方式。
+    * ### 當任務調度結束時 (例如某個任務的觸發器不再產生下次運行的時間)，該任務就會自動移除。
+    ```
+    job = scheduler.add_job(myfunc, 'interval', minutes=2)
+    job.remove()
+    ```
+    ```
+    scheduler.add_job(myfunc, 'interval', minutes=2, id='my_job_id')
+    scheduler.remove_job('my_job_id')
+    ```
+* ### 暫停和恢復任務
+    * ### 通過任務實例或調度器，就能暫停和恢復任務。
+    * ### 如果一個任務被暫停了，那麼該任務的下一次運行時間就會被移除。
+    * ### 在恢復任務前，運行次數計數也不會被統計。
+    * ### 暫停任務的方法
+        ```
+        apscheduler.job.Job.pause()
+        ```
+        ```
+        apscheduler.schedulers.base.BaseScheduler.pause_job()
+        ```
+    * ### 恢復任務的方法
+        ```
+        apscheduler.job.Job.resume()
+        ```
+        ```
+        apscheduler.schedulers.base.BaseScheduler.resume_job()
+        ```
+* ### 獲取任務列表
+    * ### 通過 get_jobs() 方法可以獲得一個可修改的任務列表。
+    * ### get_jobs() 方法的第二個參數可以指定任務儲存器的名稱以獲得對應任務儲存器的任務列表。
+    * ### print_jobs() 方法可以快速打印格式化的任務列表 (含觸發器與下次運行時間等信息)。
+* ### 關閉調度器
+    ```
+    scheduler.shutdown()
+    ```
+    * ### 默認情況下調度器會先把正在執行的任務處理完才關閉任務儲存器和執行器。
+    * ### 若想強制關閉調度器可以透過指定 wait 參數值為 False 達成。
+        ```
+        scheduler.shutdown(wait=False)
+        ```
+* ### 暫停與恢復任務進程
+    * ### 調度器暫停正在執行的任務
+        ```
+        scheduler.pause()
+        ```
+    * ### 調度器恢復已被暫停的任務
+        ```
+        scheduler.resume()
+        ```
+    * ### 也可以在調度器啓動時默認所有任務設爲暫停狀態
+        ```
+        scheduler.start(paused=True)
+        ```
 <br />
