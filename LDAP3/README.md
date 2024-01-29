@@ -5,6 +5,29 @@ LDAP3
 pip install ldap3
 ```
 ```
+from ldap3 import Server, Connection, SIMPLE, SYNC, ALL
+from ldap3.core.exceptions import LDAPBindError, LdapSocketOpenError
+
+# AD 伺服器組態
+AD_HOST = "your_ad_server"
+SEARCH_BASE = "DC=...,DC=...,DC=..."
+
+user_name = "your_username"
+user_password = "your_password"
+
+# 實例化 Server 配置類別
+SERVER = Server(host=AD_HOST, get_info=ALL)
+
+# 以使用者身分進行連線 (透過遠端 AD 進行使用者密碼驗證)
+try:
+    user_conn = Connection(SERVER, user=user_name, password=user_password, auto_bind=True)
+    print("Authentication successful")
+except LDAPBindError:
+    print("Authentication failed: Invalid credentials or user not found.")
+except LdapSocketOpenError:
+    print("LDAP socket error: Unable to connect to the server.")
+```
+```
 # 查詢用戶對象
 dsquery user -name [user_name]
 
