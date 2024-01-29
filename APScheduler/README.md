@@ -446,4 +446,42 @@ APScheduler
         ```
         scheduler.start(paused=True)
         ```
+* ### 限制任務執行的實例並行數
+    * ### 默認情況下，在同一時間，一個任務只允許一個執行中的實例在運行。
+    * ### 比如說，一個任務是每 5 秒執行一次，但是這個任務在第一次執行的時候花了6秒，也就是說前一次任務還沒執行完，後一次任務又觸發了，由於默認一次只允許一個實例執行，所以第二次就丟失了。
+    * ### 爲了杜絕這種情況，可以在添加任務時，設置 max_instances 參數，爲指定任務設置最大實例並行數。
+* ### 丟失任務的執行與合併
+    * ### 有時，任務會由於一些問題沒有被執行。
+    * ### 最常見的情況就是，在數據庫裏的任務到了該執行的時間，但調度器被關閉了，那麼這個任務就成了 "啞彈任務"。
+    * ### 錯過執行時間後，調度器纔打開了，這時，調度器會檢查每個任務的 misfire_grace_time 參數 int 值，即啞彈上限，來確定是否還執行啞彈任務 (這個參數可以全局設定的或者是爲每個任務單獨設定)。
+    * ### 此時，一個啞彈任務，就可能會被連續執行多次。
+    * ### 但這就可能導致一個問題，有些啞彈任務實際上並不需要被執行多次。
+    * ### coalescing 合併參數就能把一個多次的啞彈任務揉成一個一次的啞彈任務。
+    * ### 也就是說，coalescing 爲 True 能把多個排隊執行的同一個啞彈任務，變成一個，而不會觸發啞彈事件。
+    * ### 如果是由於線程池 or 進程池滿了導致的任務延遲，執行器就會跳過執行。
+    * ### 要避免這個問題，可以添加進程或線程數來實現或把 misfire_grace_time 值調高。
+* ### 調度器事件
+    * ### 文檔 -> [click me](https://apscheduler.readthedocs.io/en/latest/modules/events.html#module-apscheduler.events)
+    * ### 調度器允許添加事件偵聽器。
+    * ### 部分事件會有特有的信息，比如當前運行次數等。
+    * ### add_listener(callback, mask) 中，第一個參數是回調對象，mask 是指定偵聽事件類型，mask 參數也可以是邏輯組合。
+    * ### 回調對象會有一個參數就是觸發的事件。
+    ```
+    def my_listener(event):
+        if event.exception:
+            print("The job crashed :(")
+        else:
+            print("The job worked :)")
+    
+    # 當任務執行完或任務出錯時調用 my_listener
+    scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+    ```
+* ### 異常捕獲
+    * ### 通過 logging 模塊，可以添加 apscheduler 日誌至 DEBUG 級別，這樣就能捕獲異常信息。
+    ```
+    import logging
+    
+    logging.basicConfig()
+    logging.getLogger('apscheduler').setLevel(logging.DEBUG)
+    ```
 <br />
