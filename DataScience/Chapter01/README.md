@@ -40,4 +40,7 @@ Chapter01 資料科學概論與開發環境建立
         * ### 探索性資料分析 (Exploratory Data Analysis)
     * ### 模型化資料 (Model the Data)
     * ### 溝通和視覺化結果 (Communicate and Visualize the Result)
+* ### Python 開發環境的建立
+    * ### Anaconda
+    * ### Spyder
 <br />
