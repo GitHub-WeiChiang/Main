@@ -99,11 +99,22 @@ LLMQuickStartGuide
     # Backup.
 
     docker run --rm -v VOLUME_NAME:/volume busybox sh -c 'tar -cOzf - /volume' > volume-export.tgz
+
+    # --rm: 在容器停止後刪除。
+    # -v VOLUME_NAME:/volume: 需匯出的卷之名稱及其在容器內的掛載點。
+    # busybox: 在容器中運行的 Image 名稱，busybox 是一個小型的 Linux 發行版，常用於輕量級的容器化任務。
+    # sh -c 'tar -cOzf - /volume: 容器內運行的命令，將指定的卷打包成壓縮的 tar 檔。
+    # > volume-export.tgz: 將容器內 tar 命令的輸出重定向至名為 volume-export.tgz 的本地檔案中。
     ```
     ```
     # Restore.
 
     docker run --rm -i -v VOLUME_NAME:/volume busybox sh -c "tar -xzvf - -C /" < volume-export.tgz
+
+    # -i: 讓容器內的進程可以從標準輸入讀取數據。
+    # -v VOLUME_NAME:/volume: 指定要匯入的卷之名稱以及它在容器內的掛載點。
+    # sh -c "tar -xzvf - -C /: 容器內運行的命令，其使用 tar 工具解壓縮標準輸入中的 tar 檔案到容器的根目錄 /。
+    # < volume-export.tgz: 將名為 volume-export.tgz 的本地 tar 檔案重定向到容器的標準輸入。
     ```
     * ### Note: Busybox is merely an intermediary image and container, theoretically replaceable with any similarly lightweight Docker application.
     * ### Note: Can achieve Volume Migration more conveniently using Volumes Backup & Share, refer to the reference below for more information.
