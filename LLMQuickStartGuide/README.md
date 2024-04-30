@@ -74,7 +74,7 @@ LLMQuickStartGuide
 
     docker exec -it ollama ollama run llama3:8b
     ```
-    * ### Note: To execute basic commands targeting the Ollama container running in Docker, need to prepend it with the prefix ```docker exec -it ollama ...``` ("..." stands for Basic commands for Ollama).
+    * ### Note: To execute basic commands targeting the Ollama container running in Docker, need to prepend it with the prefix ```docker exec -it ollama ...``` ("..." stands for basic commands of Ollama).
 * ### MaxKB Quick Start
     ```
     docker run -d --name=maxkb -p 8080:8080 -v ~/.maxkb:/var/lib/postgresql/data 1panel/maxkb
@@ -117,7 +117,7 @@ LLMQuickStartGuide
     # < volume-export.tgz: 將名為 volume-export.tgz 的本地 tar 檔案重定向到容器的標準輸入。
     ```
     * ### Note: Busybox is merely an intermediary image and container, theoretically replaceable with any similarly lightweight Docker application.
-    * ### Note: Can achieve Volume Migration more conveniently using Volumes Backup & Share, refer to the reference below for more information.
+    * ### Note: Can achieve "Volume Migration" more conveniently using ```Volumes Backup & Share```, refer to the reference below for more information.
 <br />
 
 Steps for Offline Deployment by Docker
