@@ -82,6 +82,7 @@ LLMQuickStartGuide
     # Account: admin
     # Password: MaxKB@123..
     # Access Ollama: http://host.docker.internal:11434
+    # 使用 -v 標記也可以指定掛載一個本地主機的目錄到容器中去。
     ```
 * ### Migration of Images in Docker
     ```
@@ -118,6 +119,10 @@ LLMQuickStartGuide
     ```
     * ### Note: Busybox is merely an intermediary image and container, theoretically replaceable with any similarly lightweight Docker application.
     * ### Note: Can achieve "Volume Migration" more conveniently using ```Volumes Backup & Share```, refer to the reference below for more information.
+* ### 複製運行中的容器資料夾
+    ```
+    docker cp <container_id>:/path/to/container/directory /path/to/host/directory
+    ```
 <br />
 
 Steps for Offline Deployment by Docker
