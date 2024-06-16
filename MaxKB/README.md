@@ -1,4 +1,4 @@
-LLMQuickStartGuide
+MaxKB
 =====
 * ### This is a Quick Start Guide that documents how to deploy a Knowledge Based QA (KBQA, Knowledge Base Question Answering) system based on the LLM (Large Language Model) in an offline environment using Docker.
 * ### Architecture: MaxKB -> Ollama -> Meta Llama 3 (8B)。
