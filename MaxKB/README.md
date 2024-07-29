@@ -33,6 +33,19 @@ MaxKB
 
     ollama serve
     ```
+    ```
+    # When requesting ollama api from another PC (Windows).
+
+    set OLLAMA_HOST=0.0.0.0
+    ollama serve
+    ```
+    ```
+    # Run ollama in cpu-mode.
+    $ ollama run mistral
+    >>> /set parameter num_gpu 0
+    Set parameter 'num_gpu' to '0'
+    >>> Hi
+    ```
 * ### Other commands for Ollama
     ```
     # Start the server.
@@ -119,6 +132,22 @@ MaxKB
     ```
     * ### Note: Busybox is merely an intermediary image and container, theoretically replaceable with any similarly lightweight Docker application.
     * ### Note: Can achieve "Volume Migration" more conveniently using ```Volumes Backup & Share```, refer to the reference below for more information.
+* ### Migration of Container in Docker
+    ```
+    # Docker container export.
+
+    # The following commands produce the same result.
+    docker export red_panda > latest.tar
+    docker export --output="latest.tar" red_panda
+    ```
+    ```
+    # Docker image import.
+
+    # Import from a remote location.
+    docker import https://example.com/exampleimage.tgz
+    # Import from a local file.
+    docker import /path/to/exampleimage.tgz
+    ```
 * ### To copy a running container's folder:
     ```
     docker cp <container_id>:/path/to/container/directory /path/to/host/directory
