@@ -41,7 +41,8 @@ MaxKB
     ```
     ```
     # Run ollama in cpu-mode.
-    $ ollama run mistral
+
+    $ ollama run MODEL_NAME
     >>> /set parameter num_gpu 0
     Set parameter 'num_gpu' to '0'
     >>> Hi
