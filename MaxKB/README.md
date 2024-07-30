@@ -59,15 +59,14 @@ MaxKB
     ./ollama run llama3
     ```
 * ### Ollama v0.1.33 - Experimental concurrency features
-    New concurrency features are coming soon to Ollama. They are available
-    * ### ```OLLAMA_NUM_PARALLEL```: Handle multiple requests simultaneously for a single model
-    * ### ```OLLAMA_MAX_LOADED_MODELS```: Load multiple models simultaneously
-    To enable these features, set the environment variables for ollama serve. For more info see [this guide](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-do-i-configure-ollama-server):
-    ```
-    OLLAMA_NUM_PARALLEL=4 OLLAMA_MAX_LOADED_MODELS=4 ollama serve
-    ```
-    Setting environment variables on Windows
-    * ### On Windows, Ollama inherits your user and system environment variables.
+    * ### New concurrency features are coming soon to Ollama. They are available
+        * ### ```OLLAMA_NUM_PARALLEL```: Handle multiple requests simultaneously for a single model
+        * ### ```OLLAMA_MAX_LOADED_MODELS```: Load multiple models simultaneously
+    * ### To enable these features, set the environment variables for ollama serve. For more info see [this guide](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-do-i-configure-ollama-server):
+        ```
+        OLLAMA_NUM_PARALLEL=4 OLLAMA_MAX_LOADED_MODELS=4 ollama serve
+        ```
+    * ### Setting environment variables on Windows: On Windows, Ollama inherits your user and system environment variables.
         * ### First Quit Ollama by clicking on it in the task bar.
         * ### Start the Settings (Windows 11) or Control Panel (Windows 10) application and search for environment variables.
         * ### Click on Edit environment variables for your account.
