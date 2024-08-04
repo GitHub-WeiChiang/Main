@@ -113,6 +113,12 @@ MaxKB
     # Access Ollama: http://host.docker.internal:11434
     # The "-v" flag can also be used to mount a local host directory into the container.
     ```
+    ```
+    docker run -d --name=maxkb -p 8080:8080 -v LOCAL_FOLDER_LOCATION:/var/lib/postgresql/data 1panel/maxkb
+    ```
+    ```
+    docker run -d --name=maxkb -p 8080:8080 -v LOCAL_FOLDER_LOCATION:/opt/maxkb/app -v LOCAL_FOLDER_LOCATION:/var/lib/postgresql/data 1panel/maxkb
+    ```
 * ### Migration of Images in Docker
     ```
     # Save.
