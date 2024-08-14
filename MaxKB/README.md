@@ -256,6 +256,7 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 * ### Issue
     * ### Question: ```Error: No module named 'fcntl'```
     * ### Answer: ```The problem is gunicorn. It doesn't support Windows.```
+* ### 別妄想了! 退坑!! -> [click me](https://blog.csdn.net/taotao_guiwang/article/details/140993737)
 <br />
 
 Reference
