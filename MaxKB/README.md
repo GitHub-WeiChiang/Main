@@ -202,6 +202,57 @@ Steps for Offline Deployment by Docker
     * ### Enjoy using it !
 <br />
 
+Deploy MaxKB in a Windows 11 environment (A mixed bag)
+=====
+* ### Python Version: 3.11.9 -> [click me](https://www.python.org/downloads/release/python-3119/)
+* ### PostgreSQL Version: 15.8 -> [click me](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+* ### PostgreSQL: Default username and password.
+    ```
+    username: postgres
+    password: 空
+    ```
+* ### Start the psql command line
+    ```
+    psql -U postgres
+    ```
+    * ### Issue
+        * ### Question: ```psql: 無法將 "psql" 識別為 cmdlet、函數、腳本文件.....```
+        * ### Answer: ```在文件資源管理器中進入 C:\Program Files\PostgreSQL\15\bin 資料夾路徑後開啟 cmd 輸入上方指令即可正常運行```
+* ### Add the vector plugin in PostgreSQL
+    * ### Ensure [C++ support in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170#download-and-install-the-tools) is installed, and run:
+        ```
+        call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+        ```
+        * ### Note: The exact path will vary depending on your Visual Studio version and edition.
+        * ### Issue
+            * ### Question: ```call: 無法將 "call" 識別為 cmdlet、函數、腳本文件......```
+            * ### Answer: ```請在 cmd 中運行，誤於 PowerShell 中運行```
+    * ### Then use nmake to build:
+        ```
+        set "PGROOT=C:\Program Files\PostgreSQL\16"
+        cd %TEMP%
+        git clone --branch v0.7.4 https://github.com/pgvector/pgvector.git
+        cd pgvector
+        nmake /F Makefile.win
+        nmake /F Makefile.win install
+        ```
+        * ### Note: Must be run as an "administrator".
+        * ### Note: ```%TEMP%``` can be any folder.
+        * ### Issue
+            * ### Question: ```"nmake" 不是內部或外部命令，也不是可運行的程序或批處理文件......```
+            * ### Answer:
+                ```
+                將 Visual Studio 中的 VC/bin 目錄添加到系統環境變量中，可按以下步驟進行操作:
+                1. 打開 "控制面板" -> "系統和安全" -> "系統" -> "高級系統設置" -> "環境變量"。
+                2. 在 "用戶變量 or 系統變量" 中找到 "Path" 並按下編輯。
+                3. 點擊 "新建" 後輸入 Visual Studio 的 VC/bin 目錄路徑 (例如: "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\Hostx64\x64")。
+                4. 按下 "確定" 保存修改後，關閉所有命令提示符窗口並重新打開一個新的命令提示符窗口，再次運行上述指令即可。
+                ```
+* ### Issue
+    * ### Question: ```Error: No module named 'fcntl'```
+    * ### Answer: ```The problem is gunicorn. It doesn't support Windows.```
+<br />
+
 Reference
 =====
 * ### Ollama -> [click me](https://ollama.com/)
@@ -209,4 +260,6 @@ Reference
 * ### Ollama Docker -> [click me](https://hub.docker.com/r/ollama/ollama)
 * ### MaxKB GitHub -> [click me](https://github.com/1Panel-dev/MaxKB)
 * ### Volumes Backup & Share -> [click me](https://hub.docker.com/extensions/docker/volumes-backup-extension)
+* ### MaxKB Documentation -> [click me](https://maxkb.cn/docs/dev_manual/dev_environment/)
+* ### pgvector -> [click me](https://github.com/pgvector/pgvector)
 <br />
