@@ -206,6 +206,10 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 =====
 * ### Python Version: 3.11.9 -> [click me](https://www.python.org/downloads/release/python-3119/)
 * ### PostgreSQL Version: 15.8 -> [click me](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+* ### Node.js ->[click me](https://nodejs.org/zh-cn)
+    * ### Issue
+        * ### Question: ```no such file or directory, open '......package.json'```
+        * ### Answer: ```進入路徑 MaxKB\ui 資料夾並運行，因為 npm install 就是在運行資料夾中尋找 package.json 檔案並下載當中所定義的 dependencies```
 * ### PostgreSQL: Default username and password.
     ```
     username: postgres
