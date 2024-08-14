@@ -218,6 +218,7 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
     * ### Issue
         * ### Question: ```psql: 無法將 "psql" 識別為 cmdlet、函數、腳本文件.....```
         * ### Answer: ```在文件資源管理器中進入 C:\Program Files\PostgreSQL\15\bin 資料夾路徑後開啟 cmd 輸入上方指令即可正常運行```
+        * ### Node: ```應該也可透過將上方目錄添加到環境變量中解決，操作步驟參考下方 Add the vector plugin in PostgreSQL -> Then use nmake to build -> Issue -> Answer```
 * ### Add the vector plugin in PostgreSQL
     * ### Ensure [C++ support in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170#download-and-install-the-tools) is installed, and run:
         ```
@@ -242,7 +243,7 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
             * ### Question: ```"nmake" 不是內部或外部命令，也不是可運行的程序或批處理文件......```
             * ### Answer:
                 ```
-                將 Visual Studio 中的 VC/bin 目錄添加到系統環境變量中，可按以下步驟進行操作:
+                將 Visual Studio 中的 VC/bin 目錄添加到環境變量中，可按以下步驟進行操作:
                 1. 打開 "控制面板" -> "系統和安全" -> "系統" -> "高級系統設置" -> "環境變量"。
                 2. 在 "用戶變量 or 系統變量" 中找到 "Path" 並按下編輯。
                 3. 點擊 "新建" 後輸入 Visual Studio 的 VC/bin 目錄路徑 (例如: "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\Hostx64\x64")。
