@@ -1,7 +1,7 @@
 DataScience
 =====
-* ### Part01 Jupyter: 更好用的 Python 開發環境
-    * ### Chapter01 IPython 和 Jupyter 入門
+* ### Part01 - Jupyter: 更好用的 Python 開發環境
+    * ### Chapter01 - IPython 和 Jupyter 入門
 <br />
 
 Reference
