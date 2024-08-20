@@ -22,4 +22,5 @@ Question040 - VMware 安裝與執行連網及分辨率問題如何解決 ?
     * ### setup (右鍵 "使用 PowerShell 運行")
     * ### 右鍵 -> 顯示設置
     * ### 修改分辨率
+* ### VMware Fusion -> [click me](https://www.youtube.com/watch?v=QTs9sHN6W5A)
 <br />

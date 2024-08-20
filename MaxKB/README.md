@@ -259,6 +259,12 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 * ### 別妄想了! 退坑!! -> [click me](https://blog.csdn.net/taotao_guiwang/article/details/140993737)
 <br />
 
+修改 VMware Fusion Virtual Machine Hard Disk
+===
+* ### Step 1: VMware Fusion Menu bar -> Virtual Machine -> Shut Down
+* ### Step 2: Virtual Machine -> Settings -> Hard Disk
+* ### Step 3: Done ~
+
 Reference
 =====
 * ### Ollama -> [click me](https://ollama.com/)
@@ -268,4 +274,5 @@ Reference
 * ### Volumes Backup & Share -> [click me](https://hub.docker.com/extensions/docker/volumes-backup-extension)
 * ### MaxKB Documentation -> [click me](https://maxkb.cn/docs/dev_manual/dev_environment/)
 * ### pgvector -> [click me](https://github.com/pgvector/pgvector)
+* ### VMware Fusion -> [click me](https://www.youtube.com/watch?v=QTs9sHN6W5A)
 <br />
