@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>大家好！</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-sm-offset-3 col-sm-5">
+
+        <!-- 開啟模態視窗的按鈕 -->
+        <input id="github-username" type="text" class="form-control" placeholder="在此輸入你的 github 使用者名稱" value="silviomoreto">
+        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#githubModal">
+          開啟模態視窗範例
+        </button>
+
+        <!-- 模態視窗 -->
+        <div class="modal fade" id="githubModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-success">儲存變更</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="carousel-notification" class="bootstrap-carousel" data-indicators="true" data-controls="true">
+            <img src="imgs/doge.jpg" data-title="大橘" data-content="哈囉，你好！">
+            <img src="imgs/laika.jpg" data-title="萊卡" data-content="嘿...！">
+            <img src="imgs/cat.jpg" data-title="貓咪">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      $('#myButton').on('click', function () {
+        var $btn = $(this).button('loading')
+        // 商業邏輯...
+        $btn.button('reset');
+      })
+    </script>
+  </body>
+</html>
