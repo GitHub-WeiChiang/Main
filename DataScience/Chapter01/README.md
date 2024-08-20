@@ -135,4 +135,33 @@ Chapter01 - IPython 和 Jupyter 入門
         str.find
         str.rfind
         ```
+* ### Keyboard Shortcuts in the IPython Shell
+    * ### Navigation Shortcuts
+        | Keystroke | Action |
+        | - | - |
+        | Ctrl-a | Move cursor to beginning of line |
+        | Ctrl-e | Move cursor to end of the line |
+        | Ctrl-b or the left arrow key | Move cursor back one character |
+        | Ctrl-f or the right arrow key | Move cursor forward one character |
+    * ### Text Entry Shortcuts
+        | Keystroke | Action |
+        | - | - |
+        | Backspace key |	Delete previous character in line |
+        | Ctrl-d | Delete next character in line |
+        | Ctrl-k | Cut text from cursor to end of line |
+        | Ctrl-u | Cut text from beginning of line to cursor |
+        | Ctrl-y | Yank (i.e., paste) text that was previously cut |
+        | Ctrl-t | Transpose (i.e., switch) previous two characters |
+    * ### Command History Shortcuts
+        | Keystroke | Action |
+        | - | - |
+        | Ctrl-p (or the up arrow key) | Access previous command in history |
+        | Ctrl-n (or the down arrow key) | Access next command in history |
+        | Ctrl-r | Reverse-search through command history |
+    * ### Miscellaneous Shortcuts
+        | Keystroke | Action |
+        | - | - |
+        | Ctrl-l | Clear terminal screen |
+        | Ctrl-c | Interrupt current Python command |
+        | Ctrl-d | Exit IPython session |
 <br />
