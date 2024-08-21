@@ -315,7 +315,7 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
     * ### 設定帳號和密碼。
     * ### 文章參考 -> [click me](https://ithelp.ithome.com.tw/articles/10312130)
 * ### Step 6: Done ~
-* ### WSL Linux 子系统与 Windows 文件互操作
+* ### Tips: WSL Linux 子系统与 Windows 文件互操作
     * ### 从 Windows 进入 WSL 目录的方式: 在文件资源管理器中输入 ```\\wsl$```。
     * ### 从 Linux 下进入 Windows 文件夹方式: 终端输入 ```cd /mnt/```。
 <br />
