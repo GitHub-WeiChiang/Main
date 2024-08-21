@@ -265,6 +265,61 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 * ### Step 2: Virtual Machine -> Settings -> Hard Disk
 * ### Step 3: Done ~
 
+VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
+===
+* ### Step 1: 到 Microsoft Store 中下載 Ubuntu 並安裝。
+    * ### Microsoft Store -> [click me](https://apps.microsoft.com/home?hl=zh-tw&gl=TW)
+    * ### Ubuntu -> [click me](https://apps.microsoft.com/search?query=ubuntu&hl=zh-tw&gl=TW)
+    * ### Ubuntu LTS (Long-Term Support) 是 Ubuntu 操作系统的一个特殊版本，旨在提供更长时间的支持和稳定性。与常规的 Ubuntu 版本相比，LTS 版本在以下几个方面有所不同:
+        * ### 支持周期更长: 桌面版可获得 3 年支持，服务器版可获得 5 年支持。
+        * ### 稳定性优先: LTS 版本主要关注稳定性和安全性，而不是引入最新功能。
+        * ### 软件包更新较少: 与常规版本相比，LTS 版本中的软件包更新较少 (常规版首先引入，测试后移植到 LTS)。
+        * ### 适合生产环境： 其稳定性和长期支持使 LTS 版本在服务器环境和企业生产环境中得到广泛应用。
+        * ### 默认应用版本较为保守： LTS 版本中倾向于选择相对保守的默认应用程序版本。
+        * ### 常规的 Ubuntu 約每 6 个月发布一次，其會包含最新的特性、改进和更新的软件包。
+* ### Step 2: 開啟 Ubuntu，然後就會遇到一連串的問題。
+* ### Step 3: WslRegisterDistribution failed with error: 0x8007019e
+    * ### 透過管理員模式開啟 PowerShell。
+    * ### 輸入 ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux``` 後再輸入 ```y```。
+    * ### 開啟 Ubuntu。
+    * ### 文章參考 -> [click me](https://blog.csdn.net/qq_37109456/article/details/109669455)
+* ### Step 4: WslRegisterDistribution failed with error: 0x800701bc
+    * ### 下载安装适用于 x64 计算机的最新 WSL2 Linux 内核更新包。
+    * ### 下载链接 -> [click me](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+    * ### 開啟 Ubuntu。
+    * ### 文章參考 -> [click me](https://blog.csdn.net/microsoft_mos/article/details/123627295)
+* ### Step 5-1: WslRegisterDistribution failed with error: 0x80370102
+    * ### 检查相关 Windows 功能是否开启
+        * ### 控制面板 -> 程序 -> 程序和功能 -> 啟動或關閉 Windows 功能。
+        * ### 檢查選項 ```適用於 Linux 的 Windows 子系統``` 是否勾選。
+    * ### 透過管理員模式開啟 PowerShell 並輸入下方指令
+        ```
+        # 启用适用于 Linux 的 Windows 子系统
+        dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+        # 启用虚拟机功能
+        dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        ```
+    * ### 下载 Linux 内核更新包並執行。
+    * ### 開啟 Ubuntu。
+    * ### 文章參考 -> [click me](https://blog.csdn.net/q20010619/article/details/120660346)
+* ### Step 5-2: WslRegisterDistribution failed with error: 0x80370102
+    * ### 透過管理員模式開啟 PowerShell。
+    * ### 輸入 ```wsl --set-default-version 1```。
+    * ### 若出現 ```the operation completed successfully``` 則恭喜老爺賀喜老爺。
+    ```
+    C:\Windows\System32> wsl --set-default-version 1
+    the operation completed successfuly
+    ```
+    * ### 開啟 Ubuntu。
+    * ### 設定帳號和密碼。
+    * ### 文章參考 -> [click me](https://ithelp.ithome.com.tw/articles/10312130)
+* ### Step 6: Done ~
+* ### WSL Linux 子系统与 Windows 文件互操作
+    * ### 从 Windows 进入 WSL 目录的方式: 在文件资源管理器中输入 ```\\wsl$```。
+    * ### 从 Linux 下进入 Windows 文件夹方式: 终端输入 ```cd /mnt/```。
+<br />
+
 Reference
 =====
 * ### Ollama -> [click me](https://ollama.com/)
