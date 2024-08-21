@@ -267,6 +267,10 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 
 VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
 ===
+* ### WSL 与 Ubuntu 的关系
+    * ### WSL: 是 Windows 提供的一种功能，允许在 Windows 上运行 Linux 环境。WSL 并不完全模拟一个 Linux 系统，而是直接调用 Linux 内核接口来运行 Linux 应用程序。
+    * ### Ubuntu: 是一种 Linux 发行版，可以在 WSL 上安装和运行。当在 WSL 中选择 Ubuntu 时，实际上是在 Windows 上安装和运行 Ubuntu 的 Linux 用户空间环境。
+    * ### 总结来说: WSL 是一个平台，使得在 Windows 上可以运行 Ubuntu (或其它 Linux 发行版) 变得可能。Ubuntu 则是在 WSL 上可以安装并使用的具体 Linux 发行版。
 * ### Step 1: 到 Microsoft Store 中下載 Ubuntu 並安裝。
     * ### Microsoft Store -> [click me](https://apps.microsoft.com/home?hl=zh-tw&gl=TW)
     * ### Ubuntu -> [click me](https://apps.microsoft.com/search?query=ubuntu&hl=zh-tw&gl=TW)
