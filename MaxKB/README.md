@@ -260,13 +260,13 @@ Deploy MaxKB in a Windows 11 environment (A mixed bag)
 <br />
 
 修改 VMware Fusion Virtual Machine Hard Disk
-===
-* ### Step 1: VMware Fusion Menu bar -> Virtual Machine -> Shut Down
+=====
+* ### Step 1: VMware Fusion Menu bar -> Virtual Machine -> Shut Down (趁虛擬機不注意)
 * ### Step 2: Virtual Machine -> Settings -> Hard Disk
 * ### Step 3: Done ~
 
 VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
-===
+=====
 * ### WSL 与 Ubuntu 的关系
     * ### WSL: 是 Windows 提供的一种功能，允许在 Windows 上运行 Linux 环境。WSL 并不完全模拟一个 Linux 系统，而是直接调用 Linux 内核接口来运行 Linux 应用程序。
     * ### Ubuntu: 是一种 Linux 发行版，可以在 WSL 上安装和运行。当在 WSL 中选择 Ubuntu 时，实际上是在 Windows 上安装和运行 Ubuntu 的 Linux 用户空间环境。
@@ -325,6 +325,30 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
 * ### Tips: WSL Linux 子系统与 Windows 文件互操作
     * ### 从 Windows 进入 WSL 目录的方式: 在文件资源管理器中输入 ```\\wsl$```。
     * ### 从 Linux 下进入 Windows 文件夹方式: 终端输入 ```cd /mnt/```。
+<br />
+
+Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
+=====
+* ### Python Version: 3.11.9
+    ```
+    # 更新系統軟體包：首先，更新你的系統軟體包列表。
+    sudo apt update
+
+    # 安裝依賴項：安裝必要的依賴項，以確保安裝 Python 時沒有問題。
+    sudo apt install -y software-properties-common
+
+    # 添加 deadsnakes PPA：這個 PPA（Personal Package Archive）提供了許多 Python 版本，包括 3.11。
+    sudo add-apt-repository ppa:deadsnakes/ppa
+
+    # 更新系統軟體包列表：再次更新軟體包列表以加載新的 PPA。
+    sudo apt update
+
+    # 安裝 Python 3.11.9：使用以下命令安裝指定的 Python 版本。
+    sudo apt install python3.11
+
+    # 檢查安裝版本：確認 Python 3.11.9 是否已成功安裝。
+    python3.11 --version
+    ```
 <br />
 
 Reference
