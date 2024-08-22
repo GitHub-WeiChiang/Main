@@ -305,6 +305,9 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         ```
     * ### 下载 Linux 内核更新包並執行。
+        ```
+        https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+        ```
     * ### 開啟 Ubuntu。
     * ### 文章參考 -> [click me](https://blog.csdn.net/q20010619/article/details/120660346)
 * ### Step 5-2: WslRegisterDistribution failed with error: 0x80370102
