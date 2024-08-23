@@ -401,6 +401,24 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 
     poetry install
     ```
+* ### Node.js
+    ```
+    # 添加 NodeSource 的 PPA
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+    # 安装 Node.js
+    sudo apt install -y nodejs
+
+    # 检查版本
+    node -v
+    npm -v
+
+    # 在 ui 資料夾执行安装前端需要的依赖
+    npm install
+
+    # 嘗試启动项目
+    npm run dev
+    ```
 <br />
 
 Reference
