@@ -283,7 +283,7 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
         * ### 常规的 Ubuntu 約每 6 个月发布一次，其會包含最新的特性、改进和更新的软件包。
 * ### Step 2: 開啟 Ubuntu，然後就會遇到一連串的問題。
 * ### Step 3: WslRegisterDistribution failed with error: 0x8007019e
-    * ### 透過管理員模式開啟 PowerShell。
+    * ### 透過管理員模式開啟 PowerShell 並啟用 Windows Subsystem for Linux (WSL)。
     * ### 輸入 ```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux``` 後再輸入 ```y```。
     * ### 開啟 Ubuntu。
     * ### 文章參考 -> [click me](https://blog.csdn.net/qq_37109456/article/details/109669455)
@@ -292,7 +292,22 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
     * ### 下载链接 -> [click me](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
     * ### 開啟 Ubuntu。
     * ### 文章參考 -> [click me](https://blog.csdn.net/microsoft_mos/article/details/123627295)
-* ### Step 5-1: WslRegisterDistribution failed with error: 0x80370102
+* ### Step 5: WslRegisterDistribution failed with error: 0x80370102
+    * ### 透過管理員模式開啟 PowerShell。
+    * ### 輸入 ```wsl --set-default-version 1```。
+    * ### 若出現 ```the operation completed successfully``` 則恭喜老爺賀喜老爺。
+    ```
+    C:\Windows\System32> wsl --set-default-version 1
+    the operation completed successfuly
+    ```
+    * ### 開啟 Ubuntu。
+    * ### 設定帳號和密碼。
+    * ### 文章參考 -> [click me](https://ithelp.ithome.com.tw/articles/10312130)
+* ### Step 6: Done ~
+* ### Tips: WSL Linux 子系统与 Windows 文件互操作
+    * ### 从 Windows 进入 WSL 目录的方式: 在文件资源管理器中输入 ```\\wsl$```。
+    * ### 从 Linux 下进入 Windows 文件夹方式: 终端输入 ```cd /mnt/```。
+* ### Tips: WslRegisterDistribution failed with error: 0x80370102 的其它可能解決方案
     * ### 检查相关 Windows 功能是否开启
         * ### 控制面板 -> 程序 -> 程序和功能 -> 啟動或關閉 Windows 功能。
         * ### 檢查選項 ```適用於 Linux 的 Windows 子系統``` 是否勾選。
@@ -310,21 +325,6 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
         ```
     * ### 開啟 Ubuntu。
     * ### 文章參考 -> [click me](https://blog.csdn.net/q20010619/article/details/120660346)
-* ### Step 5-2: WslRegisterDistribution failed with error: 0x80370102
-    * ### 透過管理員模式開啟 PowerShell。
-    * ### 輸入 ```wsl --set-default-version 1```。
-    * ### 若出現 ```the operation completed successfully``` 則恭喜老爺賀喜老爺。
-    ```
-    C:\Windows\System32> wsl --set-default-version 1
-    the operation completed successfuly
-    ```
-    * ### 開啟 Ubuntu。
-    * ### 設定帳號和密碼。
-    * ### 文章參考 -> [click me](https://ithelp.ithome.com.tw/articles/10312130)
-* ### Step 6: Done ~
-* ### Tips: WSL Linux 子系统与 Windows 文件互操作
-    * ### 从 Windows 进入 WSL 目录的方式: 在文件资源管理器中输入 ```\\wsl$```。
-    * ### 从 Linux 下进入 Windows 文件夹方式: 终端输入 ```cd /mnt/```。
 <br />
 
 Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
