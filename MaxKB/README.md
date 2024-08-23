@@ -366,6 +366,9 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # /home/你的用戶名
     git clone https://github.com/1Panel-dev/MaxKB.git
     ```
+* ### 最好是在 MaxKB 的根目錄內建立和使用虛擬環境，這樣可以確保虛擬環境包含所有 MaxKB 所需的依賴和設定。
+* ### 在 MaxKB 的根目錄內建立虛擬環境，也有助於避免與其他專案的依賴發生衝突。
+* ### 所以請進入 MaxKB 資料夾: ```cd MaxKB```。
 * ### pip
     ```
     # 下载 get-pip.py 脚本
