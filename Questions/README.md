@@ -51,6 +51,7 @@ Questions
 * ### Question049 - 有沒有什麼通用的高效序列化模組 ? JIT 是什麼概念 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question049)
 * ### Question050 - Docker environment for python variables: How can I create a env variable for username & password and pass dynamic values while running containers ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question050)
 * ### Question051 - 如何將 Microsoft Word 中的自動編號轉換成純文字 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question051)
+* ### Question052 - 遇到問題 error: externally-managed-environment 要如解決 ? [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions/Question052)
 <br />
 
 Reference

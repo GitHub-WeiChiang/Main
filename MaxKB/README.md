@@ -329,7 +329,8 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
 
 Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 =====
-* ### Python Version: 3.11.9
+* ### 開始前須知: 如果在安裝過程中遇到錯誤訊息 ```... are you root?```，請加上 ```sudo```。
+* ### Python
     ```
     # 更新系統軟體包：首先，更新你的系統軟體包列表。
     sudo apt update
@@ -348,6 +349,22 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 
     # 檢查安裝版本：確認 Python 3.11.9 是否已成功安裝。
     python3.11 --version
+    ```
+* ### Git
+    ```
+    # 更新包列表
+    sudo apt update
+
+    # 安装 Git
+    sudo apt install git
+
+    # 验证安装
+    git --version
+    ```
+* ### MaxKB
+    ```
+    # /home/你的用戶名
+    git clone https://github.com/1Panel-dev/MaxKB.git
     ```
 <br />
 
