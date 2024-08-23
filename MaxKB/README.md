@@ -419,6 +419,42 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # 嘗試启动项目
     npm run dev
     ```
+* ### PostgreSQL (記得回到 MaxKB 資料夾)
+    ```
+    # Import the repository signing key:
+    sudo apt install curl ca-certificates
+    sudo install -d /usr/share/postgresql-common/pgdg
+    sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+    # Create the repository configuration file:
+    sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+    # Update the package lists:
+    sudo apt update
+
+    # Install the latest version of PostgreSQL:
+    # If you want a specific version, use 'postgresql-15' or similar instead of 'postgresql'
+    sudo apt -y install postgresql-15
+    ```
+    ```
+    # 确认安装是否成功
+    dpkg -l | grep postgresql
+
+    # 检查安装的版本
+    psql --version
+
+    # 启动 PostgreSQL 数据库
+    sudo service postgresql start
+
+    # 检查 PostgreSQL 服务的状态
+    sudo service postgresql status
+
+    # 登录 PostgreSQL 数据库
+    sudo -u postgres psql
+
+    # 退出命令行界面
+    \q
+    ```
 <br />
 
 Reference
