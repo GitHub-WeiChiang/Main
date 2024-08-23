@@ -366,6 +366,38 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # /home/你的用戶名
     git clone https://github.com/1Panel-dev/MaxKB.git
     ```
+* ### pip
+    ```
+    # 下载 get-pip.py 脚本
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+    # 用 Python 3.11 来运行这个脚本
+    python3.11 get-pip.py
+
+    # 验证 pip 安装
+    python3.11 -m pip --version
+    ```
+* ### venv
+    ```
+    # 安装 Python 3.11 的虚拟环境模块
+    sudo apt install python3.11-venv
+
+    # 创建一个虚拟环境
+    python3.11 -m venv venv
+
+    # 激活虚拟环境
+    source venv/bin/activate
+
+    # 验证 Python 與 pip 版本是否正確
+    python -V
+    pip -V
+    ```
+* ### poetry (run in venv)
+    ```
+    pip install poetry
+
+    poetry install
+    ```
 <br />
 
 Reference
