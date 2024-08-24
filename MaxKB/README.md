@@ -552,7 +552,7 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     sudo service postgresql restart
 
     # 验证新用户设置
-    psql -U postgresql -W
+    psql -U postgres -W
     ```
     ```
     # Ubuntu 2: 在 MaxKB 資料夾中進行操作
