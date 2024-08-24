@@ -293,13 +293,15 @@ VMware Fusion Pro: 在 Windows 11 (VM) 上安裝 Ubuntu (WSL) 的奇幻歷險記
     * ### 開啟 Ubuntu。
     * ### 文章參考 -> [click me](https://blog.csdn.net/microsoft_mos/article/details/123627295)
 * ### Step 5: WslRegisterDistribution failed with error: 0x80370102
+    * ### 此錯誤通常表示虛擬機器平台功能 (Virtual Machine Platform) 或硬體虛擬化技術 (例如 Intel VT-x 或 AMD-V) 未啟用。這些功能對於 WSL 2 來說是必須的，但對於 WSL 1 則不是。
+    * ### 可將預設的 WSL 版本設為 WSL 1，而不是 WSL 2。由於 WSL 1 不需要虛擬機器平台功能，因此這個操作能夠成功解決問題。
     * ### 透過管理員模式開啟 PowerShell。
-    * ### 輸入 ```wsl --set-default-version 1```。
-    * ### 若出現 ```the operation completed successfully``` 則恭喜老爺賀喜老爺。
-    ```
-    C:\Windows\System32> wsl --set-default-version 1
-    the operation completed successfuly
-    ```
+        ```
+        C:\Windows\System32> wsl --set-default-version 1
+        the operation completed successfuly
+        ```
+        * ### 輸入 ```wsl --set-default-version 1```。
+        * ### 若出現 ```the operation completed successfully``` 則恭喜老爺賀喜老爺。
     * ### 開啟 Ubuntu。
     * ### 設定帳號和密碼。
     * ### 文章參考 -> [click me](https://ithelp.ithome.com.tw/articles/10312130)
