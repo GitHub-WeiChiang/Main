@@ -491,6 +491,7 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     \q
     ```
 * ### 原神 ~ 啟動 !!!
+    * ### 如果有 Visual Studio Code 會很好 -> [click me](https://code.visualstudio.com/)
     ```
     # Ubuntu 1: 在 ui 資料夾启动项目
 
