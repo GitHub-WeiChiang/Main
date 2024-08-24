@@ -579,6 +579,36 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     * ### ```ollama pull mxbai-embed-large```
 <br />
 
+* ### 将 WSL Ubuntu 分发打包并移植到離線电脑
+=====
+```
+# 列出所有 WSL 分发
+wsl --list --verbose
+
+# 停止 Ubuntu 分发
+wsl --terminate Ubuntu-24.04
+
+# 导出 Ubuntu 分发
+wsl --export Ubuntu-24.04 ubuntu.tar
+
+# 导入 Ubuntu 分发
+wsl --import Ubuntu Ubuntu-24.04 ubuntu.tar
+# wsl --import Ubuntu C:\WSL\Ubuntu ubuntu_backup.tar
+
+# 列出所有 WSL 分发
+wsl --list --verbose
+
+# 启动特定分发
+wsl -d Ubuntu-24.04
+
+# 设置默认分发
+wsl --set-default Ubuntu-24.04
+
+# 启动默认分发
+wsl
+```
+<br />
+
 Reference
 =====
 * ### Ollama -> [click me](https://ollama.com/)
