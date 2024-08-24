@@ -496,8 +496,55 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 
     \q
     ```
-* ### 原神 ~ 啟動 !!!
+* ### 啟動前準備
     * ### 如果有 Visual Studio Code 會很好 -> [click me](https://code.visualstudio.com/)
+    * ### 准备配置文件 (在 MaxKB 資料夾中進行操作)
+        ```
+        sudo mkdir -p /opt/maxkb/conf
+        sudo cp config_example.yml /opt/maxkb/conf
+        ```
+    * ### 配置 /opt/maxkb/conf/config_example.yml
+        ```
+        # 数据库配置
+        DB_NAME: maxkb
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: Aa123456
+        DB_ENGINE: django.db.backends.postgresql_psycopg2
+
+        # 模型相关配置
+        EMBEDDING_MODEL_PATH: /opt/maxkb/model/
+        # 模型名称
+        EMBEDDING_MODEL_NAME: /opt/maxkb/model/shibing624_text2vec-base-chinese
+        ```
+    * ### 幫 postgres 加上密碼
+        ```
+        # 登录 PostgreSQL 数据库
+        sudo -u postgres psql
+
+        # 修改密碼
+        ALTER USER postgres WITH PASSWORD 'Aa123456';
+
+        # 退出 PostgreSQL 命令行
+        \q
+        ```
+    * ### 配置 PostgreSQL 以使用密码进行身份验证
+        ```
+        # 找到
+        /etc/postgresql/{version}/main/pg_hba.conf
+        # 將
+        local   all             postgres                                peer
+        # 改
+        local   all             postgres                                md5
+
+        # 重新启动 PostgreSQL 服务
+        sudo service postgresql restart
+
+        # 验证新用户设置
+        psql -U postgres -W
+        ```
+* ### 原神 ~ 啟動 !!!
     ```
     # Ubuntu 1: 在 ui 資料夾启动项目
 
@@ -506,61 +553,11 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     ```
     # Ubuntu 2: 在 MaxKB 資料夾中進行操作
 
-    # 准备配置文件
-    sudo mkdir -p /opt/maxkb/conf
-    sudo cp config_example.yml /opt/maxkb/conf
-    ```
-    ```
-    # 配置 /opt/maxkb/conf/config_example.yml
-
-    # 数据库配置 
-    DB_NAME: maxkb
-    DB_HOST: localhost
-    DB_PORT: 5432
-    DB_USER: postgres
-    DB_PASSWORD: Aa123456
-    DB_ENGINE: django.db.backends.postgresql_psycopg2
-
-    # 模型相关配置
-    EMBEDDING_MODEL_PATH: /opt/maxkb/model/
-    # 模型名称
-    EMBEDDING_MODEL_NAME: /opt/maxkb/model/shibing624_text2vec-base-chinese
-    ```
-    ```
-    # 幫 postgres 加上密碼
-
-    # 登录 PostgreSQL 数据库
-    sudo -u postgres psql
-
-    # 修改密碼
-    ALTER USER postgres WITH PASSWORD 'Aa123456';
-
-    # 退出 PostgreSQL 命令行
-    \q
-    ```
-    ```
-    # 配置 PostgreSQL 以使用密码进行身份验证
-
-    # 找到
-    /etc/postgresql/{version}/main/pg_hba.conf
-    # 將
-    local   all             postgres                                peer
-    # 改
-    local   all             postgres                                md5
-
-    # 重新启动 PostgreSQL 服务
-    sudo service postgresql restart
-
-    # 验证新用户设置
-    psql -U postgres -W
-    ```
-    ```
-    # Ubuntu 2: 在 MaxKB 資料夾中進行操作
-
     # 原神 ~ 啟動 !!!
     source venv/bin/activate
     python main.py start
-
+    ```
+    ```
     # 訪問
     http://localhost:3000/ui/login
 
