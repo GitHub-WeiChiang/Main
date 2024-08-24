@@ -563,11 +563,12 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 
     # 訪問
     http://localhost:3000/ui/login
-    # 用户名
+
+    # 用户名與密码
     admin
-    # 密码
     MaxKB@123..
-    # 我改成
+
+    # 修改密碼
     Aa123456
     ```
 <br />
