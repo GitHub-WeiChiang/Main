@@ -554,6 +554,9 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # Ubuntu 2: 在 MaxKB 資料夾中進行操作
 
     # 原神 ~ 啟動 !!!
+    # 如果尚未啟動資料庫
+    sudo service postgresql start
+    # 啟動 MaxKB
     source venv/bin/activate
     python main.py start
     ```
@@ -568,6 +571,12 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # 修改密碼
     Aa123456
     ```
+* ### Note: 推薦使用 Ollama 支援 LLM 和 Embedding。
+    * ### ```ollama run phi3```
+    * ### ```ollama run gemma2```
+    * ### ```ollama run llama3.1```
+    * ### ```ollama pull nomic-embed-text```
+    * ### ```ollama pull mxbai-embed-large```
 <br />
 
 Reference
