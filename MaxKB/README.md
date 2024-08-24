@@ -540,6 +540,7 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     ```
     ```
     # 配置 PostgreSQL 以使用密码进行身份验证
+    
     # 找到
     /etc/postgresql/{version}/main/pg_hba.conf
     # 將
