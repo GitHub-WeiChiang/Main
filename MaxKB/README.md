@@ -370,13 +370,14 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # 克隆整个仓库
     git clone https://github.com/1Panel-dev/MaxKB.git
 
-    # 切换到特定标签
+    # 切换到特定标签 (對於開源項目，永遠記得使用發行版本運行)
+    cd MaxKB
     git tag
     git checkout v1.4.1
     ```
 * ### 最好是在 MaxKB 的根目錄內建立和使用虛擬環境，這樣可以確保虛擬環境包含所有 MaxKB 所需的依賴和設定。
 * ### 在 MaxKB 的根目錄內建立虛擬環境，也有助於避免與其他專案的依賴發生衝突。
-* ### 所以請進入 MaxKB 資料夾: ```cd MaxKB```。
+* ### 若尚未進入 MaxKB 資料夾，請滾進去: ```cd MaxKB```。
 * ### pip
     ```
     # 下载 get-pip.py 脚本
@@ -475,8 +476,11 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
 
     make
     # 遇到 "Command 'make' not found" 執行 "sudo apt install make"
+    make
     # 遇到 "make: gcc: No such file or directory" 執行 "sudo apt install gcc"
+    make
     # 遇到 "fatal error: postgres.h: No such file or directory" 執行 "sudo apt install postgresql-server-dev-15"
+    make
 
     sudo make install
     ```
