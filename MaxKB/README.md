@@ -560,6 +560,15 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     # 原神 ~ 啟動 !!!
     source venv/bin/activate
     python main.py start
+
+    # 訪問
+    http://localhost:3000/ui/login
+    # 用户名
+    admin
+    # 密码
+    MaxKB@123..
+    # 我改成
+    Aa123456
     ```
 <br />
 
