@@ -581,14 +581,17 @@ Windows 11 (VM): 在 Ubuntu (WSL) 上安裝 MaxKB 的奇幻歷險記
     1. ### 打开命令提示符: 以管理员身份运行命令提示符 (cmd)。
     2. ### 设置端口转发
         ```
-        netsh interface portproxy add v4tov4 listenaddress=173.0.0.120 listenport=8080 connectaddress=172.27.129.188 connectport=3000
+        netsh interface portproxy add v4tov4 listenaddress=173.0.0.120 listenport=8080 connectaddress=localhost connectport=3000
 
-        # 这将把外部访问 173.0.0.120:8080 的请求转发到 172.27.129.188:3000。
+        netsh interface portproxy add v4tov4 listenaddress=173.0.0.120 listenport=8080 connectaddress=127.0.0.1 connectport=3000
+
+        # 这将把外部访问 173.0.0.120:8080 的请求转发到 localhost or 127.0.0.1。
         ```
     3. ### 检查端口转发规则
         ```
         netsh interface portproxy show all
         ```
+        * ### 若要删除所有端口转发规则请执行 ```netsh interface portproxy reset```。
     4. ### 配置防火墙: 打开 Windows 防火墙，添加入站规则，允许访问 8080 端口。
         * ### 通常情况下，在设置端口转发时，只需要配置入站规则，因为这是为了允许外部流量进入你的计算机并访问指定的端口。输出规则通常在默认情况下已经允许所有流量出去，所以不需要特别配置。
         * ### 输入和输出规则主要控制的是主动发起的流量，而被动响应的流量通常不受这些规则的限制。
@@ -623,6 +626,71 @@ wsl --set-default Ubuntu-24.04
 wsl
 ```
 * ### 始終優先嘗試透過 WSL 2 執行所導入的分發: WSL 1 是一個將 Linux 系統調用翻譯為 Windows 系統調用的模擬環境，對於某些系統功能和文件系統的支持有限；而 WSL 2 則使用了真正的 Linux 核心，提供了一個完整的虛擬化環境，能夠更好地模擬和支持 Linux 系統的各種功能。
+* ### WSL Export Automation
+    ```
+    @echo off
+    rem 列出當前的 WSL 分發
+    wsl -l -v
+
+    rem 提示使用者是否要繼續執行下一步
+    set /p input1=是否要繼續停止 Ubuntu-24.04 分發 (y/n)? 
+    if /i "%input1%"=="n" goto :end
+
+    rem 停止 Ubuntu-24.04 分發
+    wsl --terminate Ubuntu-24.04
+
+    rem 再次列出當前的 WSL 分發
+    wsl -l -v
+
+    rem 提示使用者是否要繼續執行下一步
+    set /p input2=是否要繼續 export 出 Ubuntu-24.04 (y/n)? 
+    if /i "%input2%"=="n" goto :end
+
+    rem export 出 Ubuntu-24.04 分發並以日期命名 tar 檔案
+    set "datetime=%date:~0,4%%date:~5,2%%date:~8,2%"
+    wsl --export Ubuntu-24.04 %datetime%_Ubuntu-24.04.tar
+
+    :end
+    echo 程式已結束
+    pause
+    ```
+<br />
+
+簡體繁體轉換腳本
+=====
+```
+import os
+from opencc import OpenCC
+
+# 設置轉換為繁體的轉換器
+cc = OpenCC('s2twp')  # 's2twp' 是專門將簡體轉換為台灣正體（繁體）的轉換器，會包含一些台灣用詞習慣的轉換。
+
+# 設置要處理的資料夾
+src_folder = ''
+
+# 遍歷 src 資料夾下的所有文件
+for root, dirs, files in os.walk(src_folder):
+    for file_name in files:
+        file_path = os.path.join(root, file_name)
+
+        # 讀取文件內容
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+
+            # 將內容轉換為繁體
+            converted_content = cc.convert(content)
+
+            # 將轉換後的內容寫回文件
+            with open(file_path, 'w', encoding='utf-8') as file:
+                file.write(converted_content)
+
+            print(f"已轉換文件: {file_path}")
+
+        except Exception as e:
+            # 如果文件不是文本格式（例如二進制文件），可能會導致錯誤
+            print(f"跳過文件（無法轉換）: {file_path}，錯誤信息: {e}")
+```
 <br />
 
 Reference
