@@ -626,7 +626,7 @@ wsl --set-default Ubuntu-24.04
 wsl
 ```
 * ### 始終優先嘗試透過 WSL 2 執行所導入的分發: WSL 1 是一個將 Linux 系統調用翻譯為 Windows 系統調用的模擬環境，對於某些系統功能和文件系統的支持有限；而 WSL 2 則使用了真正的 Linux 核心，提供了一個完整的虛擬化環境，能夠更好地模擬和支持 Linux 系統的各種功能。
-* ### WSL Export Automation
+* ### WSL Export Automation (Batch file)
     ```
     @echo off
     rem 列出當前的 WSL 分發
