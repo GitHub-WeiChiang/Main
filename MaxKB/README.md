@@ -47,6 +47,14 @@ MaxKB
     Set parameter 'num_gpu' to '0'
     >>> Hi
     ```
+* ### 如何连接和使用 Ollama API
+    * ### 默认地址和端口: Ollama API 的默认地址是 http://localhost:11434，可以在安装 Ollama 的系统中直接调用。
+    * ### 修改 API 的侦听地址和端口: 如果要在网络中提供服务，可以修改 API 的侦听地址和端口。
+        1. ### 右击点击任务栏图标，选择「Quit Ollama」退出后台运行。
+        2. ### 使用 Windows + R 快捷键打开「运行」对话框，输入命令 ```sysdm.cpl```。
+        3. ### 系统属性 -> 环境变量 -> 用户变量 -> 新增变量记录。
+        4. ### 变量名設置為 ```OLLAMA_HOST```、变量值 (端口) 設置為 ```:11434```。
+        5. ### 重新运行 Ollama 后在浏览器中测试访问验证更改是否成功。
 * ### Other commands for Ollama
     ```
     # Start the server.
