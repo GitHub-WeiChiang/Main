@@ -47,14 +47,6 @@ MaxKB
     Set parameter 'num_gpu' to '0'
     >>> Hi
     ```
-* ### 如何连接和使用 Ollama API
-    * ### 默认地址和端口: Ollama API 的默认地址是 ```http://localhost:11434```，可以在安装 Ollama 的系统中直接调用。
-    * ### 修改 API 的侦听地址和端口: 如果要在网络中提供服务，可以修改 API 的侦听地址和端口。
-        1. ### 右击点击任务栏图标，选择「Quit Ollama」退出后台运行。
-        2. ### 使用 Windows + R 快捷键打开「运行」对话框，输入命令 ```sysdm.cpl```。
-        3. ### 系统属性 -> 环境变量 -> 用户变量 -> 新增变量记录。
-        4. ### 变量名設置為 ```OLLAMA_HOST```、变量值 (端口) 設置為 ```:11434```。
-        5. ### 重新运行 Ollama 后在浏览器中测试访问验证更改是否成功。
 * ### Other commands for Ollama
     ```
     # Start the server.
@@ -66,21 +58,6 @@ MaxKB
 
     ./ollama run llama3
     ```
-* ### Ollama v0.1.33 - Experimental concurrency features
-    * ### New concurrency features are coming soon to Ollama. They are available
-        * ### ```OLLAMA_NUM_PARALLEL```: Handle multiple requests simultaneously for a single model
-        * ### ```OLLAMA_MAX_LOADED_MODELS```: Load multiple models simultaneously
-    * ### To enable these features, set the environment variables for ollama serve. For more info see [this guide](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-do-i-configure-ollama-server):
-        ```
-        OLLAMA_NUM_PARALLEL=4 OLLAMA_MAX_LOADED_MODELS=4 ollama serve
-        ```
-    * ### Setting environment variables on Windows: On Windows, Ollama inherits your user and system environment variables.
-        * ### First Quit Ollama by clicking on it in the task bar.
-        * ### Start the Settings (Windows 11) or Control Panel (Windows 10) application and search for environment variables.
-        * ### Click on Edit environment variables for your account.
-        * ### Edit or create a new variable for your user account for OLLAMA_HOST, OLLAMA_MODELS, etc.
-        * ### Click OK/Apply to save.
-        * ### Start the Ollama application from the Windows Start menu.
 * ### REST API for Ollama
     ```
     # Generate a response.
@@ -100,6 +77,48 @@ MaxKB
         ]
     }'
     ```
+* ### 如何连接和使用 Ollama API
+    * ### 默认地址和端口: Ollama API 的默认地址是 ```http://localhost:11434```，可以在安装 Ollama 的系统中直接调用。
+    * ### 修改 API 的侦听地址和端口: 如果要在网络中提供服务，可以修改 API 的侦听地址和端口。
+        1. ### 右击点击任务栏图标，选择「Quit Ollama」退出后台运行。
+        2. ### 使用 Windows + R 快捷键打开「运行」对话框，输入命令 ```sysdm.cpl```。
+        3. ### 系统属性 -> 环境变量 -> 用户变量 -> 新增变量记录。
+        4. ### 变量名設置為 ```OLLAMA_HOST```、变量值 (端口) 設置為 ```:11434```。
+        5. ### 重新运行 Ollama 后在浏览器中测试访问验证更改是否成功。
+* ### Ollama v0.1.33 - Experimental concurrency features
+    * ### New concurrency features are coming soon to Ollama. They are available
+        * ### ```OLLAMA_NUM_PARALLEL```: Handle multiple requests simultaneously for a single model
+        * ### ```OLLAMA_MAX_LOADED_MODELS```: Load multiple models simultaneously
+    * ### To enable these features, set the environment variables for ollama serve. For more info see [this guide](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-do-i-configure-ollama-server):
+        ```
+        OLLAMA_NUM_PARALLEL=4 OLLAMA_MAX_LOADED_MODELS=4 ollama serve
+        ```
+    * ### Setting environment variables on Windows: On Windows, Ollama inherits your user and system environment variables.
+        * ### First Quit Ollama by clicking on it in the task bar.
+        * ### Start the Settings (Windows 11) or Control Panel (Windows 10) application and search for environment variables.
+        * ### Click on Edit environment variables for your account.
+        * ### Edit or create a new variable for your user account for OLLAMA_HOST, OLLAMA_MODELS, etc.
+        * ### Click OK/Apply to save.
+        * ### Start the Ollama application from the Windows Start menu.
+* ### Ollama Model File
+    * ### First, you need to create a file named ```Modelfile``` without any file extension.
+    * ### Basic Modelfile (An example of a Modelfile creating a mario blueprint)
+        ```
+        FROM llama3.1
+        # sets the temperature to 1 [higher is more creative, lower is more coherent]
+        PARAMETER temperature 1
+        # sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token
+        PARAMETER num_ctx 4096
+
+        # sets a custom system message to specify the behavior of the chat assistant
+        SYSTEM You are Mario from super mario bros, acting as an assistant.
+        ```
+        1. ### Save it as a file (e.g. Modelfile)
+        2. ### ollama create choose-a-model-name -f <location of the file e.g. ./Modelfile>'
+        3. ### ollama run choose-a-model-name
+        4. ### Start using the model!
+    * ### To view the Modelfile of a given model, use the ```ollama show --modelfile``` command.
+    * ### 參考 -> [click me](https://github.com/ollama/ollama/blob/main/docs/modelfile.md)
 * ### Ollama Docker Image
     ```
     # CPU only.
