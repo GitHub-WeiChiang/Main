@@ -198,9 +198,24 @@ MaxKB
     docker import /path/to/exampleimage.tgz
     ```
 * ### To copy a running container's folder:
-    ```
-    docker cp <container_id>:/path/to/container/directory /path/to/host/directory
-    ```
+    * ### 找到容器的名稱或 ID
+        ```
+        docker ps
+        ```
+    * ### 使用 ```docker cp``` 命令將檔案複製到主機
+        ```
+        # 命令格式
+
+        docker cp <容器 ID 或名稱>:<容器內要被複製出來的資料夾路徑> <主機資料夾路徑>
+
+        docker cp <container_id>:/path/to/container/directory /path/to/host/directory
+        ```
+        ```
+        # 命令示例: 將容器中的 opt 資料夾複製到主機當前工作目錄下的 opt 資料夾
+
+        docker cp <容器ID或名稱>:/opt ./opt
+        ```
+    * ### 如果遇到 ```A Required Privilege Is Not Held By a Client``` 錯誤，通常是由於缺乏適當的權限來執行該操作，打開「命令提示符」或「PowerShell」時，右鍵點擊並選擇「以管理員身份運行」即可。
 <br />
 
 Steps for Offline Deployment by Docker
