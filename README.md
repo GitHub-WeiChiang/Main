@@ -1,6 +1,7 @@
 Contents
 =====
 * ### 人工智慧
+    * ### LangChainRAG -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/LangChainRAG)
     * ### SimpleRAG -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SimpleRAG)
     * ### ~~DataScience -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DataScience)~~
     * ### MaxKB -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MaxKB)
