@@ -1,7 +1,8 @@
 Contents
 =====
 * ### 人工智慧
-    * ### DataScience -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DataScience)
+    * ### SimpleRAG -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/SimpleRAG)
+    * ### ~~DataScience -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/DataScience)~~
     * ### MaxKB -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/MaxKB)
 * ### 程式語言
     * ### Python -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Python)
@@ -50,7 +51,7 @@ Contents
 * ### 電腦網路
     * ### ComputerNetwork -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/ComputerNetwork)
 * ### 區塊鏈
-    * ### Blockchain -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Blockchain)
+    * ### ~~Blockchain -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Blockchain)~~
 * ### 面試大補帖
     * ### Questions -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/Questions)
     * ### PythonInterview -> [click me](https://github.com/GitHub-WeiChiang/main/tree/master/PythonInterview)
