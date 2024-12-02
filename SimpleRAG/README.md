@@ -1,5 +1,6 @@
 SimpleRAG
 =====
+* ### 基於 Python 3.11.7
 * ### 安裝步驟
     * ### 啟動 PGVector 容器
         1. #### 拉取並啟動 PGVector 容器
