@@ -1,5 +1,6 @@
 LangChainRAG
 =====
+* ### ![image](https://raw.githubusercontent.com/GitHub-WeiChiang/main/refs/heads/master/LangChainRAG/rag_case.png)
 * ### 基於 Python 3.11.7
 * ### 安裝步驟
     * ### 啟動 PGVector 容器
