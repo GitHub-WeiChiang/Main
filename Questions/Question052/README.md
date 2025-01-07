@@ -1,4 +1,4 @@
-Question052 - 遇到問題 error: externally-managed-environment 要如解決 ?
+Question052 - 遇到問題 error: externally-managed-environment 要如何解決 ?
 =====
 ```
 error: externally-managed-environment
@@ -24,5 +24,5 @@ hint: See PEP 668 for the detailed specification.
 ```
 * ### This is due to your distribution adopting PEP 668 – Marking Python base environments as "externally managed".
 * ### 这个错误是因为其在一个 "externally-managed (外部管理的)" Python 环境中尝试安装 Python 包，这种环境通常由操作系统的包管理器管理，如 apt，以避免系统包被破坏。
-* ### 解決法: ```使用虚拟环境安装 Python 包```。
+* ### 解決法: ```使用虚拟环境 (venv) 安装 Python 包```。
 <br />
